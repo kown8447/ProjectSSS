@@ -14,29 +14,33 @@
   					  http://www.springframework.org/schema/tx 
   					 http://www.springframework.org/schema/tx/spring-tx.xsd
   					 ">
- 
+
 	<mvc:annotation-driven />
 	<security:http>
 		<security:csrf disabled="true" />
-		<security:form-login login-page="/join/login.htm"
-			authentication-failure-url="/join/login.htm?error" />
+		<security:form-login login-page="/login/login.htm"
+			authentication-failure-url="/login/loginFail.htm" 
+			authentication-failure-handler-ref="loginFailHandler"
+			username-parameter="userid"
+			password-parameter="pwd" />
 		<security:logout logout-success-url="/index.htm" />
 
-		<security:intercept-url pattern="/notice/noticeDetail.htm" access="hasRole('ROLE_USER')"/>
-		<security:intercept-url pattern="/notice/noticeReg.htm" access="hasRole('ROLE_ADMIN')"/>
+		<!-- <security:intercept-url pattern="/notice/noticeDetail.htm" access="hasRole('ROLE_USER')"/> 
+			<security:intercept-url pattern="/notice/noticeReg.htm" access="hasRole('ROLE_ADMIN')"/> -->
 	</security:http>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="driverManagerDataSource"
-				users-by-username-query="select userid, pwd as password, 1 enabled from member where userid=?"
+				users-by-username-query="select userid, pwd, 1 enabled from membertest where userid=?"
 				authorities-by-username-query="select m.userid, r.ROLE_NAME 
-											from member m join roll r
+											from membertest m join role r
 											on m.userid = r.userid
 											where m.userid=?" />
 			<security:password-encoder ref="bCryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-
+	
+	<bean id="loginFailHandler" class="kr.or.initspring.handler.LoginFailHandler"/>
 </beans>
