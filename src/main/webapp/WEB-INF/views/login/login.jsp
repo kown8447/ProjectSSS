@@ -12,4 +12,6 @@
 		</tr>
 	</table>
 	<input type="submit" value="로그인">
-</form>
+</form><br>
+<a href="${pageContext.request.contextPath}/login/searchID.htm">아이디 찾기</a> || 
+<a href="${pageContext.request.contextPath}/login/searchPWD.htm">비밀번호 찾기</a> || 

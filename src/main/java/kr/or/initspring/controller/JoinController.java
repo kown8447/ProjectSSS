@@ -103,8 +103,7 @@ public class JoinController {
 			@RequestParam("randkey") String randkey,
 			@RequestParam("userid") String userid,
 			@RequestParam("code_type") int code_type
-			) throws Exception
-	{
+			) throws Exception{
 		boolean result = joinservice.confirmMember(userid, randkey, code_type);
 		String viewpage = "";
 		if(result){

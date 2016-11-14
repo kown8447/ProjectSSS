@@ -33,4 +33,17 @@ public class LoginService {
 		
 		return joinstate;
 	}
+	
+	public String searchID(String name, String email){
+		String userid = null;
+		
+		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
+		try{
+			userid = logindao.searchID(name, email);
+		}catch(Exception e){
+			System.out.println("LoginService / searchID : " + e.getMessage());
+		}
+		
+		return userid;
+	}
 }

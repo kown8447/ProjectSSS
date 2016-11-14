@@ -11,4 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getJoinstateByUserid" resultType="int">
 		select joinstate from membertest where userid = #{userid}
 	</select>
+	
+	<select id="searchID" resultType="String">
+		select userid from membertest where name=#{param1} and email=#{param2}
+	</select>
 </mapper>
