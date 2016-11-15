@@ -21,12 +21,10 @@
 		<security:form-login login-page="/login/login.htm"
 			authentication-failure-url="/login/loginFail.htm" 
 			authentication-failure-handler-ref="loginFailHandler"
+			authentication-success-handler-ref="loginSuccessHandler"
 			username-parameter="userid"
 			password-parameter="pwd" />
 		<security:logout logout-success-url="/index.htm" />
-
-		<!-- <security:intercept-url pattern="/notice/noticeDetail.htm" access="hasRole('ROLE_USER')"/> 
-			<security:intercept-url pattern="/notice/noticeReg.htm" access="hasRole('ROLE_ADMIN')"/> -->
 	</security:http>
 
 	<security:authentication-manager>
@@ -43,4 +41,5 @@
 	</security:authentication-manager>
 	
 	<bean id="loginFailHandler" class="kr.or.initspring.handler.LoginFailHandler"/>
+	<bean id="loginSuccessHandler" class="kr.or.initspring.handler.LoginSuccessHandler"/>
 </beans>

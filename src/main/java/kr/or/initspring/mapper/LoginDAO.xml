@@ -8,11 +8,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select role_name from role where userid = #{userid}
 	</select>
 	
-	<select id="getJoinstateByUserid" resultType="int">
-		select joinstate from membertest where userid = #{userid}
-	</select>
-	
 	<select id="searchID" resultType="String">
 		select userid from membertest where name=#{param1} and email=#{param2}
+	</select>
+	
+	<select id="getMemberTempByUserid" resultType="int">
+		select member_temp from membertest where userid=#{userid}	
+	</select>
+	
+	<select id="isValidID" resultType="int">
+		select count(*) from membertest where userid = #{userid}
+	</select>
+	
+	<select id="getPwdByUserid" resultType="String" >
+		select pwd from membertest where userid = #{userid}
+	</select>
+	
+	<update id="updatePwd">
+		update membertest set pwd = #{param2}, member_temp=1 where userid = #{param1}
+	</update>
+	
+	<select id="getEmailByUserid" resultType="String">
+		select email from membertest where userid = #{userid}
 	</select>
 </mapper>

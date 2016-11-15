@@ -5,28 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.JoinDAO">
 	<insert id="insertMember">
-		insert into membertest(userid,pwd,name,email,randkey)
-		values(#{userid},#{pwd},#{name},#{email},#{randkey})
+		insert into membertest(userid,pwd,name,email)
+		values(#{userid},#{pwd},#{name},#{email})
 	</insert>
-	
-	<select id="confirmMember" resultType="int">
-		select count(*) from membertest where userid = #{param1} and randkey = #{param2}
-	</select>
-	
-	<update id="updateJoinstate">
-		update membertest set joinstate=1 where userid = #{userid}
-	</update>
 	
 	<insert id="insertRole">
 		insert into role(role_name, userid) values(#{param1},#{param2})
 	</insert>
 	
-	<select id="getMemberByUserid" resultType="kr.or.initspring.dto.MemberTestDTO">
-		select * from membertest where userid = #{userid}
-	</select>
-	
 	<insert id="insertStudentTable">
 		insert into student(student_code, userid) values(#{param1},#{param2})
 	</insert>
 	
+	<select id="joinCheck1" parameterType="kr.or.initspring.dto.CodeMgDTO" resultType="int">
+		select count(*) from code_mg where code_name = #{code_name} and code = #{code} and code_birth = #{code_birth}
+	</select>
+	
+	<select id="checkID" resultType="String">
+		select userid from membertest where userid = #{userid}
+	</select>
 </mapper>

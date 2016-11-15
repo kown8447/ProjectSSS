@@ -1,8 +1,12 @@
 package kr.or.initspring.service;
 
+import java.sql.SQLException;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.initspring.dao.LoginDAO;
 
@@ -21,19 +25,6 @@ public class LoginService {
 		return role_name;
 	}
 	
-	public int getJoinstateByUserid(String userid){
-		int joinstate = -1;
-		
-		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
-		try{
-			
-		}catch(Exception e){
-			joinstate = logindao.getJoinstateByUserid(userid);
-		}
-		
-		return joinstate;
-	}
-	
 	public String searchID(String name, String email){
 		String userid = null;
 		
@@ -45,5 +36,28 @@ public class LoginService {
 		}
 		
 		return userid;
+	}
+	
+	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class})
+	public boolean updatePwd(String userid, String pwd) throws Exception{
+		boolean result = false;
+		int count = 0;
+		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
+		System.out.println("서비스 안에서의 아이디 비번 : " + userid +"/"+pwd);
+		try{
+			count = logindao.updatePwd(userid, pwd);
+		}catch(Exception e){
+			System.out.println("LoginService / updatePwd : " + e.getMessage());
+			throw e;
+		}
+		if(count > 0)	result = true;
+		return result;
+	}
+	
+	public String getEmailByUserid(String userid){
+		String email = "";
+		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
+		email = logindao.getEmailByUserid(userid);
+		return email;
 	}
 }

@@ -1,16 +1,23 @@
 package kr.or.initspring.dto;
 
+import java.util.Date;
+
 public class MemberTestDTO {
 	private String userid;
 	private String pwd;
 	private String name;
 	private String email;
-	private String randkey;
-	private int joinstate;
 	private String role_name;
 	private String code;
 	private int code_type;
+	private Date birth;
 	
+	public Date getBirth() {
+		return birth;
+	}
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
 	public int getCode_type() {
 		return code_type;
 	}
@@ -28,18 +35,6 @@ public class MemberTestDTO {
 	}
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
-	}
-	public String getRandkey() {
-		return randkey;
-	}
-	public void setRandkey(String randkey) {
-		this.randkey = randkey;
-	}
-	public int getJoinstate() {
-		return joinstate;
-	}
-	public void setJoinstate(int joinstate) {
-		this.joinstate = joinstate;
 	}
 	public String getUserid() {
 		return userid;
@@ -67,8 +62,8 @@ public class MemberTestDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberTestDTO [userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", randkey="
-				+ randkey + ", joinstate=" + joinstate + "]";
+		return "MemberTestDTO [userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", email=" + email
+				+ ", role_name=" + role_name + ", code=" + code + ", code_type=" + code_type + ", birth=" + birth + "]";
 	}
 
 }

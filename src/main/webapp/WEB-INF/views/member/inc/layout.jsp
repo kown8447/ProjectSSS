@@ -5,8 +5,7 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<script src="${pageContext.request.contextPath}/js/login/searchID.js"></script>
-<script src="${pageContext.request.contextPath}/js/login/searchPwd.js"></script>
+<script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
