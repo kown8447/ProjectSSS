@@ -22,8 +22,8 @@
 			authentication-failure-url="/login/loginFail.htm" 
 			authentication-failure-handler-ref="loginFailHandler"
 			authentication-success-handler-ref="loginSuccessHandler"
-			username-parameter="userid"
-			password-parameter="pwd" />
+			username-parameter="member_id"
+			password-parameter="member_pwd" />
 		<security:logout logout-success-url="/index.htm" />
 	</security:http>
 
@@ -31,11 +31,11 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="driverManagerDataSource"
-				users-by-username-query="select userid, pwd, 1 enabled from membertest where userid=?"
-				authorities-by-username-query="select m.userid, r.ROLE_NAME 
-											from membertest m join role r
-											on m.userid = r.userid
-											where m.userid=?" />
+				users-by-username-query="select member_id, member_pwd, 1 enabled from member where member_id=?"
+				authorities-by-username-query="select m.member_id, r.ROLE_NAME 
+											from member m join role r
+											on m.member_id = r.member_id
+											where m.member_id=?" />
 			<security:password-encoder ref="bCryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
