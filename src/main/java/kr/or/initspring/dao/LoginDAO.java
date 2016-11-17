@@ -1,14 +1,14 @@
 package kr.or.initspring.dao;
 
-import kr.or.initspring.dto.MemberTestDTO;
+import kr.or.initspring.dto.MemberDTO;
 
 public interface LoginDAO {
 	
-	public String getRoleByUserid(String userid);
-	public String searchID(String name, String email);
-	public Integer getMemberTempByUserid(String userid);
-	public Integer isValidID(String userid);
-	public String getPwdByUserid(String userid);
-	public Integer updatePwd(String userid, String pwd);
-	public String getEmailByUserid(String userid);
+	public String getRoleByUserid(String member_id);
+	public String searchID(String member_name, String member_email);
+	public Integer getMemberTempByUserid(String member_id);
+	public Integer isValidID(String member_id);
+	public String getPwdByUserid(String member_id);
+	public Integer updatePwd(String member_id, String member_pwd);
+	public String getEmailByUserid(String member_id);
 }

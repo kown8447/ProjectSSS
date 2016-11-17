@@ -5,6 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.MemberDAO">
 	<update id="updatePwdByUserid">
-		update membertest set pwd = #{param2}, member_temp = 0 where userid = #{param1}
+		update member set member_pwd = #{param2}, member_temp = 0 where member_id = #{param1}
 	</update>
 </mapper>

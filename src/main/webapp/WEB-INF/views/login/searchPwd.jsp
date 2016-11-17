@@ -5,11 +5,11 @@
 	<table>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="userid" id="userid" /></td>
+			<td><input type="text" name="member_id" id="member_id" /></td>
 		</tr>
 		<tr>
 			<td>이메일</td>
-			<td><input type="text" name="email" id="email" /></td>
+			<td><input type="text" name="member_email" id="member_email" /></td>
 		</tr>
 	</table>
 	<input type="button" id="searchPwdBtn" value="비밀번호 찾기">

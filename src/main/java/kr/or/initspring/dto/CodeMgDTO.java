@@ -1,6 +1,6 @@
 package kr.or.initspring.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CodeMgDTO {
 	private String code;

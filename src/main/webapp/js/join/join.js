@@ -1,3 +1,11 @@
+/*
+ * @JavaScript : join
+ * @Date : 2016.11.16
+ * @Author : 권기엽
+ * @Desc
+ * 회원 가입 시 유효성 검증 처리.
+ * 총 3단계 회원 가입에 대한 유효성 검증 정리.
+*/
 $(function() {
 	$('#step1btn').click(function() {
 		console.log('버튼 클릭되었다!!!');
@@ -30,7 +38,7 @@ $(function() {
 		$.ajax(
 			{
 				url:"authEmail.htm",
-				data:{email:$('#email').val()},
+				data:{member_email:$('#member_email').val()},
 				dataType:"json",
 				success:function(data){
 					if(data.mailresult == 'success'){
@@ -49,7 +57,7 @@ $(function() {
 			location.href="join3.htm";
 		}else{
 			alert('인증실패. 이메일 주소 또는 인증번호를 다시 확인 부탁드립니다.');
-			$('#email').focus();
+			$('#member_email').focus();
 		}
 	});
 	
@@ -59,7 +67,7 @@ $(function() {
 		$.ajax(
 				{
 					url:"checkID.htm",
-					data:{userid:$('#userid').val()},
+					data:{member_id:$('#member_id').val()},
 					dataType:"json",
 					success:function(data){
 						if(data.checkresult == 'fail'){

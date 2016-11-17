@@ -5,10 +5,10 @@
 <form name="f" action="${loginURL}" method="post">
 	<table>
 		<tr>
-			<td>아이디</td><td><input type="text" name="userid"></td>
+			<td>아이디</td><td><input type="text" name="member_id"></td>
 		</tr>
 		<tr>
-			<td>비밀번호</td><td><input type="password" name="pwd"></td>
+			<td>비밀번호</td><td><input type="password" name="member_pwd"></td>
 		</tr>
 	</table>
 	<input type="submit" value="로그인">
