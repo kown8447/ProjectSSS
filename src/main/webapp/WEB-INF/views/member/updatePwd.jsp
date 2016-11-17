@@ -5,11 +5,11 @@
 	<table>
 		<tr>
 			<td>변경할 비밀번호 :</td>
-			<td><input type="password" name="password" id="password"></td>
+			<td><input type="password" name="member_pwd" id="member_pwd"></td>
 		</tr>
 		<tr>
 			<td>비밀번호 확인 :</td>
-			<td><input type="password" name="password2" id="password2"></td>
+			<td><input type="password" name="member_pwd2" id="member_pwd2"></td>
 		</tr>
 	</table>
 	<input type="submit" value="비밀번호 변경" id="updatePwdBtn"/>

@@ -1,7 +1,14 @@
+/*
+ * @Class : LoginFailHandler
+ * @Date : 2016.11.16
+ * @Author : 권기엽
+ * @Desc
+ * Security 에서 Login 실패 커스텀을 관장하는 핸들러.
+*/
+
 package kr.or.initspring.handler;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,25 +30,31 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	/*
+	 * @method Name : onAuthenticationFailure
+	 * @Author : 권기엽
+	 * @description
+	 * 로그인 실패의 경우의 수에 따라, loginFail.jsp 에서 뿌려질 메시지를 지정하는 함수
+	*/
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth)
 			throws IOException, ServletException {
-		String userid = request.getParameter("userid");
-		String pwd = request.getParameter("pwd");
+		String member_id = request.getParameter("member_id");
+		String member_pwd = request.getParameter("member_pwd");
 		String encpwd = "";
-		System.out.println("핸들러에서 userid : " + userid);
+		System.out.println("핸들러에서 member_id : " + member_id);
 		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
 		String url = "login/loginFail.htm";
 		
 		int isValidId = 0;
-		isValidId = logindao.isValidID(userid);
+		isValidId = logindao.isValidID(member_id);
 		try{
 			if(isValidId == 0){
 				request.setAttribute("failmessage", "아이디가 없습니다. 회원가입 후 이용해 주세요.");
 			}else{
-				encpwd = logindao.getPwdByUserid(userid);
-				if(bCryptPasswordEncoder.matches(pwd, encpwd) == false){
+				encpwd = logindao.getPwdByUserid(member_id);
+				if(bCryptPasswordEncoder.matches(member_pwd, encpwd) == false){
 					request.setAttribute("failmessage", "비밀번호가 일치하지 않습니다. 다시 로그인 해 주세요.");
 				}
 			}

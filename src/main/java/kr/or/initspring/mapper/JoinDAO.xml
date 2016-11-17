@@ -5,16 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.JoinDAO">
 	<insert id="insertMember">
-		insert into membertest(userid,pwd,name,email)
-		values(#{userid},#{pwd},#{name},#{email})
+		insert into member(member_id,member_pwd,member_name,member_addr,member_birth,member_phone,
+		member_email, member_sex, member_picture)
+		values(#{member_id},#{member_pwd},#{member_name},#{member_addr},#{member_birth},#{member_phone},
+		#{member_email}, #{member_sex}, #{member_picture})
 	</insert>
 	
 	<insert id="insertRole">
-		insert into role(role_name, userid) values(#{param1},#{param2})
+		insert into role(role_name, member_id) values(#{param1},#{param2})
 	</insert>
 	
 	<insert id="insertStudentTable">
-		insert into student(student_code, userid) values(#{param1},#{param2})
+		insert into student(student_code, member_id) values(#{param1},#{param2})
 	</insert>
 	
 	<select id="joinCheck1" parameterType="kr.or.initspring.dto.CodeMgDTO" resultType="int">
@@ -22,6 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkID" resultType="String">
-		select userid from membertest where userid = #{userid}
+		select member_id from member where member_id = #{member_id}
 	</select>
 </mapper>

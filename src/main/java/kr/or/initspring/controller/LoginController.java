@@ -1,3 +1,12 @@
+/*
+ * @Class : LoginController
+ * @Date : 2016.11.16
+ * @Author : 권기엽
+ * @Desc
+ * 로그인과 관련된 로직을 처리하는 컨트롤러.
+ * 아이디 찾기, 비밀번호 찾기 기능 포함
+*/
+
 package kr.or.initspring.controller;
 
 import java.util.HashMap;
@@ -40,12 +49,23 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	
+	/*
+	 * @method Name : login
+	 * @Author : 권기엽
+	 * @description
+	 * 기본 로그인 Form으로 Spring security도 이 Form 을 로그인 Form 으로 지정함 
+	*/		
 	@RequestMapping(value = "login.htm", method = RequestMethod.GET)
 	public String login() {
 		return "login.login";
 	}
 
+	/*
+	 * @method Name : loginFail
+	 * @Author : 권기엽
+	 * @description
+	 * 로그인 실패시 보여줄 url 지정 
+	*/	
 	@RequestMapping("loginFail.htm")
 	public String loginFail() {
 		return "login.loginFail";
@@ -56,16 +76,22 @@ public class LoginController {
 		return "login.searchID";
 	}
 
+	/*
+	 * @method Name : searchID
+	 * @Author : 권기엽
+	 * @description
+	 * 비동기를 통한 유저 아이디 찾기.
+	*/	
 	@RequestMapping("searchIDajax.htm")
-	public View searchID(String name, String email, Model model) {
+	public View searchID(String member_name, String member_email, Model model) {
 
-		String userid = null;
+		String member_id = null;
 
-		System.out.println("비동기 요청 : " + email + "/" + name);
+		System.out.println("비동기 요청 : " + member_email + "/" + member_name);
 
-		userid = loginservice.searchID(name, email);
+		member_id = loginservice.searchID(member_name, member_email);
 
-		model.addAttribute("userid", userid);
+		model.addAttribute("member_id", member_id);
 
 		return jsonview;
 	}
@@ -75,18 +101,30 @@ public class LoginController {
 		return "login.searchPwd";
 	}
 
+	/*
+	 * @method Name : searchPwd
+	 * @Author : 권기엽
+	 * @description
+	 * 비동기를 통한 유저 비밀번호 찾기.
+	 * 사용자가 입력한 아이디와 이메일을 대조하여 유효한 메일인지 확인함.
+	 * 이메일이 유효할 경우, 15자리의 랜덤 숫자+문자+특수문자 조합 문자열을 생성하여 메일로 전송.
+	 * velocityEngine을 사용하여 html template를 이메일로 전송.
+	*/	
 	@RequestMapping(value = "searchPwd.htm", method = RequestMethod.POST)
-	public View searchPwd(String userid, String email, Model model) {
+	public View searchPwd(String member_id, String member_email, Model model) {
 
-		final String address = email;
+		final String address = member_email;
 		final String temp_pwd = getRandomPassword(15);
 		boolean result = false;
 		
-		String confirmEmail = loginservice.getEmailByUserid(userid);
+		String confirmEmail = loginservice.getEmailByUserid(member_id);
 		
-		if(email.equals(confirmEmail)){
+		System.out.println("member_email : " + member_email);
+		System.out.println("confirmEmail : " + confirmEmail);
+		
+		if(member_email.equals(confirmEmail)){
 			try {
-				result = loginservice.updatePwd(userid, bCryptPasswordEncoder.encode(temp_pwd));
+				result = loginservice.updatePwd(member_id, bCryptPasswordEncoder.encode(temp_pwd));
 				
 				if(result){
 					final MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -118,6 +156,12 @@ public class LoginController {
 		return jsonview;
 	}
 
+	/*
+	 * @method Name : getRandomPassword
+	 * @Author : 권기엽
+	 * @description
+	 * 이메일로 전송할 임시 비밀번호 생성
+	*/	
 	public String getRandomPassword(int length) {
 		char[] charaters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
 				's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '#',

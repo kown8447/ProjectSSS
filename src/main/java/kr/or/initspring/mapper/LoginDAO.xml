@@ -5,30 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.LoginDAO">
 	<select id="getRoleByUserid" resultType="String">
-		select role_name from role where userid = #{userid}
+		select role_name from role where member_id = #{member_id}
 	</select>
 	
 	<select id="searchID" resultType="String">
-		select userid from membertest where name=#{param1} and email=#{param2}
+		select member_id from member where member_name=#{param1} and member_email=#{param2}
 	</select>
 	
 	<select id="getMemberTempByUserid" resultType="int">
-		select member_temp from membertest where userid=#{userid}	
+		select member_temp from member where member_id=#{member_id}	
 	</select>
 	
 	<select id="isValidID" resultType="int">
-		select count(*) from membertest where userid = #{userid}
+		select count(*) from member where member_id = #{member_id}
 	</select>
 	
 	<select id="getPwdByUserid" resultType="String" >
-		select pwd from membertest where userid = #{userid}
+		select member_pwd from member where member_id = #{member_id}
 	</select>
 	
 	<update id="updatePwd">
-		update membertest set pwd = #{param2}, member_temp=1 where userid = #{param1}
+		update member set member_pwd = #{param2}, member_temp=1 where member_id = #{param1}
 	</update>
 	
 	<select id="getEmailByUserid" resultType="String">
-		select email from membertest where userid = #{userid}
+		select member_email from member where member_id = #{member_id}
 	</select>
 </mapper>

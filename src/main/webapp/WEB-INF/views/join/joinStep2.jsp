@@ -4,7 +4,7 @@
 <table>
 	<tr>
 		<td>이메일</td>
-		<td><input type="text" name="email" id="email"/></td>
+		<td><input type="text" name="member_email" id="member_email"/></td>
 		<td><input type="button" id="auth_email" value="인증요청하기"/></td>
 	</tr>
 	<tr>

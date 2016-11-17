@@ -1,10 +1,18 @@
+/*
+ * @Class : JoinController
+ * @Date : 2016.11.16
+ * @Author : 권기엽
+ * @Desc
+ * 회원 가입을 위한 컨트롤러.
+ * 회원 가입은 3단계로 진행하며, 2단계에서는 velocityEngine을 사용하여 이메일 인증 진행.
+*/
 package kr.or.initspring.controller;
 
-import java.util.Date;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,15 +27,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
 import kr.or.initspring.dto.CodeMgDTO;
-import kr.or.initspring.dto.MemberTestDTO;
+import kr.or.initspring.dto.MemberDTO;
 import kr.or.initspring.service.JoinService;
 
 import org.springframework.ui.Model;
-import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
 @Controller
@@ -38,16 +45,16 @@ public class JoinController {
 	private JoinService joinservice;
 	
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;	//암호화를 위한 인코더
 	
 	@Autowired
-	private JavaMailSender mailSender;
+	private JavaMailSender mailSender;	//Email 전송을 위한 클래스
 	
 	@Autowired
-	private VelocityEngine velocityEngine;
+	private VelocityEngine velocityEngine;	//HTML 파일을 통째로 전송하기 위한 velocity
 	
 	@Autowired
-	private View jsonview;
+	private View jsonview;	//비동기 처리를 위한 jsonview 객체
 	
 	
 	@RequestMapping(value="join1.htm", method=RequestMethod.GET)
@@ -55,6 +62,17 @@ public class JoinController {
 		return "join.joinStep1";
 	}
 	
+	
+	/*
+	 * @method Name : joinStep1
+	 * @Author : 권기엽
+	 * @description
+	 * 회원가입 1단계
+	 * Code_MG 테이블 과의 데이터를 비교.
+	 * code_type -> 학생/교수/관리자 비교
+	 * code_name -> code_mg 테이블에 있는 이름
+	 * code_birth -> code_mg 테이블에 있는 생년월일. yyyy-MM-dd 형식을 가지며, Java에서는 DATE Type으로 받음
+	*/	
 	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
 	public View joinStep1(int code_type, String code_name, @DateTimeFormat(pattern="yyyy-MM-dd") Date code_birth, String code, 
 			Model model, HttpServletRequest request){
@@ -68,14 +86,14 @@ public class JoinController {
 		codemg.setCode_birth(code_birth);
 		codemg.setCode_name(code_name);
 		
-		MemberTestDTO member = new MemberTestDTO();
+		MemberDTO member = new MemberDTO();
 		result = joinservice.joinCheck1(codemg);
 		
 		if(result){
 			member.setCode(codemg.getCode());
 			member.setCode_type(codemg.getCode_type());
-			member.setName(codemg.getCode_name());
-			member.setBirth(codemg.getCode_birth());
+			member.setMember_name(codemg.getCode_name());
+			member.setMember_birth(codemg.getCode_birth());
 			session.setAttribute("member", member);
 			model.addAttribute("result", "success");
 		}else{
@@ -89,14 +107,22 @@ public class JoinController {
 	public String joinStep2(){
 		return "join.joinStep2";
 	}
-	
+
+	/*
+	 * @method Name : authEmail
+	 * @Author : 권기엽
+	 * @description
+	 * 이메일 인증을 위한 함수.
+	 * 사용자로부터 입력받은 메일을 테이블과 대조하여, 유효한 메일인지 확인.
+	 * 확인이 된 메일은 인증번호(sessionID())를 html에 담아서 발송 -> 발송시에는 velocityEngine을 사용하여 통째로 전송
+	*/		
 	@RequestMapping("authEmail.htm")
-	public View authEmail(String email, HttpServletRequest request, Model model){
+	public View authEmail(String member_email, HttpServletRequest request, Model model){
 		
 		HttpSession session = request.getSession();
 		
 		final String sessionID = session.getId();
-		final String address = email;
+		final String address = member_email;
 		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			
@@ -115,9 +141,8 @@ public class JoinController {
 		};
 		this.mailSender.send(preparator);
 		
-		MemberTestDTO member = (MemberTestDTO)session.getAttribute("member");
-		member.setEmail(email);
-		
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		member.setMember_email(member_email);
 		System.out.println(member.toString());
 		
 		model.addAttribute("mailresult", "success");
@@ -129,17 +154,43 @@ public class JoinController {
 	public String joinStep3(){
 		return "join.joinStep3";
 	}
-	
+
+	/*
+	 * @method Name : joinStep3
+	 * @Author : 권기엽
+	 * @description
+	 * 회원가입 3단계.
+	 * MEMBER 테이블에 담길 나머지 정보를 받는 곳.
+	 * 암호는 bCryptPasswordEncoder 를 통해서 암호화 하여 DB에 저장.
+	*/	
 	@RequestMapping(value="join3.htm", method=RequestMethod.POST)
-	public String joinStep3(MemberTestDTO member_temp, HttpServletRequest request, Model model){
+	public String joinStep3(MemberDTO member_temp, HttpServletRequest request, Model model) throws IOException{
 		
 		boolean result = false;
 		String viewpage = "";
 		HttpSession session = request.getSession();
-		String pwd = bCryptPasswordEncoder.encode(member_temp.getPwd());
-		MemberTestDTO member = (MemberTestDTO)session.getAttribute("member");
-		member.setUserid(member_temp.getUserid());
-		member.setPwd(pwd);
+		String pwd = bCryptPasswordEncoder.encode(member_temp.getMember_pwd());
+		
+		CommonsMultipartFile file = member_temp.getFile();
+		String filename = file.getOriginalFilename();
+		String path = request.getServletContext().getRealPath("/images");
+		String fullpath = path + "\\" + filename;
+		
+		if (!filename.equals("")) {
+			// 서버에 파일 쓰기 작업
+			FileOutputStream fs = new FileOutputStream(fullpath);
+			fs.write(file.getBytes());
+			fs.close();
+		}
+		
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		member.setMember_id(member_temp.getMember_id());
+		member.setMember_pwd(pwd);
+		member.setMember_phone(member_temp.getMember_phone());
+		member.setMember_sex(member_temp.getMember_sex());
+		member.setMember_picture(filename);
+		member.setMember_addr(member_temp.getMember_addr());
 		
 		try {
 			result = joinservice.insertMember(member);
@@ -154,12 +205,18 @@ public class JoinController {
 		}
 		return viewpage;
 	}
-	
+
+	/*
+	 * @method Name : checkID
+	 * @Author : 권기엽
+	 * @description
+	 * 비동기화를 통한 ID 중복 체크
+	*/
 	@RequestMapping("checkID.htm")
-	public View checkID(String userid, Model model){
+	public View checkID(String member_id, Model model){
 		boolean result = false;
 		
-		result = joinservice.checkID(userid);
+		result = joinservice.checkID(member_id);
 		
 		if(result){
 			model.addAttribute("checkresult", "fail");
