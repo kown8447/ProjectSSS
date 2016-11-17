@@ -10,7 +10,7 @@ package kr.or.initspring.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.mail.internet.MimeMessage;
