@@ -1,7 +1,7 @@
 package kr.or.initspring.dao;
 
-import kr.or.initspring.dto.CodeMgDTO;
-import kr.or.initspring.dto.MemberDTO;
+import kr.or.initspring.dto.commons.CodeMgDTO;
+import kr.or.initspring.dto.join.MemberDTO;
 
 public interface JoinDAO {
 	

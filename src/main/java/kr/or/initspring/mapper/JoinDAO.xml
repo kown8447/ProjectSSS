@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into student(student_code, member_id) values(#{param1},#{param2})
 	</insert>
 	
-	<select id="joinCheck1" parameterType="kr.or.initspring.dto.CodeMgDTO" resultType="int">
+	<select id="joinCheck1" parameterType="kr.or.initspring.dto.commons.CodeMgDTO" resultType="int">
 		select count(*) from code_mg where code_name = #{code_name} and code = #{code} and code_birth = #{code_birth}
 	</select>
 	

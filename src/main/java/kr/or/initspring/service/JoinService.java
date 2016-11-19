@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kr.or.initspring.dao.JoinDAO;
-import kr.or.initspring.dto.CodeMgDTO;
-import kr.or.initspring.dto.MemberDTO;
+import kr.or.initspring.dto.commons.CodeMgDTO;
+import kr.or.initspring.dto.join.MemberDTO;
 
 @Service
 public class JoinService {
