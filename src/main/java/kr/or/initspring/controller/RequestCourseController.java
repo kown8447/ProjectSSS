@@ -12,6 +12,7 @@ package kr.or.initspring.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -120,8 +121,11 @@ public class RequestCourseController {
 	}
 	
 	@RequestMapping("preRegister.htm")
-	public String preRegisterForm(){
-		return "requestCourse.notRequestPeriod";
+	public String preRegisterForm(Principal principal){
+		String viewpage = "";
+		String member_id = principal.getName();
+		viewpage = requestCourseService.possiblePreRegister(member_id);
+		return viewpage;
 	}
 	
 }

@@ -14,7 +14,14 @@ public class ModifyTermScheduler {
 	private SqlSession sqlsession;
 	
 	@Scheduled(cron="${wait.startDate}")
-	public void waitStart() {	setEnrollActive(0, 2);	System.out.println("대기 시간..");}
+	public void waitStart() {	
+		setEnrollActive(0, 2);
+		setEnrollActive(1, 2);
+		setEnrollActive(2, 2);
+		setEnrollActive(3, 2);
+		setEnrollActive(4, 2);
+		System.out.println("대기 시간..");
+	}
 	
 	@Scheduled(cron="${firstGrade.startDate}")
 	public void firstGradeStart() {	setEnrollActive(1, 1);	System.out.println("1학년 시작");}

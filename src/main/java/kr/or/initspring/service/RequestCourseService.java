@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import kr.or.initspring.dao.RequestCourseDAO;
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
+import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 
 @Service
@@ -49,7 +50,6 @@ public class RequestCourseService {
 	public List<DepartmentDTO> viewDepartmentList(String college_code){
 		List<DepartmentDTO> department = new ArrayList<DepartmentDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
-		DepartmentDTO dto = new DepartmentDTO();
 		department = requestCourseDao.getDepartmentList(college_code);
 		return department;
 	}
@@ -67,5 +67,24 @@ public class RequestCourseService {
 		}
 		System.out.println(lists.toString());
 		return lists;
+	}
+	
+	public String possiblePreRegister(String member_id){
+		String viewpage="";
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		StStateDTO stStateDto;
+		int enroll_active;
+		try{
+			stStateDto = requestCourseDao.getStStateByMemberId(member_id);
+			enroll_active = requestCourseDao.getEnrollActiveByGrade(stStateDto.getGrade());
+			if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
+			else if(enroll_active==1) { viewpage = "requestCourse.preRegisterCourse";}
+			else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+		}catch(Exception e){
+			System.out.println("RequestCourseService / possiblePreRegister : "+ e.getMessage());
+			viewpage = "redirect:../index.htm";
+		}finally{
+			return viewpage;
+		}
 	}
 }

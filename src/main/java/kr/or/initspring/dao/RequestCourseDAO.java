@@ -7,6 +7,7 @@ import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
+import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 
 public interface RequestCourseDAO {
@@ -20,4 +21,6 @@ public interface RequestCourseDAO {
 	public List<DepartmentDTO> getDepartmentList(String college_code);	//학부.학과 전체 목록 가져오기
 	public List<OpenedLectureDTO> getOpenedLectureListByKeyword(HashMap<String, String> keyword); 	//검색에 의한 개설과목 가져오기
 	public int setErollStatus(HashMap<String, Integer> map);	//학년_시간에 따른 수강신청 활성 설정
+	public Integer getEnrollActiveByGrade(int enroll_grade);	//학년에 따른 수강 신청 기간 상태 가져오기
+	public StStateDTO getStStateByMemberId(String member_id);	//학번에 따른 학년 가져오기
 }

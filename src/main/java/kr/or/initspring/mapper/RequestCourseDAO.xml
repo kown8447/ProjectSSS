@@ -76,4 +76,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="setErollStatus" parameterType="hashmap">
 		update enroll_status set enroll_active=#{enroll_active} where enroll_grade=#{enroll_grade}
 	</update>
+	
+	<select id="getEnrollActiveByGrade" parameterType="int" resultType="int">
+		select enroll_active from enroll_status where enroll_grade=#{enroll_grade}
+	</select>
+	
+	<select id="getStStateByMemberId" resultType="kr.or.initspring.dto.commons.StStateDTO">
+		select * 
+		from (select * from student where member_id = #{memberid}) s join st_state t
+		on s.student_code = t.student_code
+	</select>
 </mapper>
