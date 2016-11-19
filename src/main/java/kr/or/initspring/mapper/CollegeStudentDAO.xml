@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.CollegeStudentDAO">
+	<select id="getStudent" resultType="kr.or.initspring.dto.StudentInfoDTO">
+		SELECT
+		s.STUDENT_CODE,sc.CODE_NAME,m.MEMBER_NAME,m.MEMBER_ADDR,m.MEMBER_BIRTH,m.MEMBER_PHONE,m.MEMBER_EMAIL,m.MEMBER_PICTURE
+		FROM MEMBER m join STUDENT s on m.member_id= s.MEMBER_ID join
+		ST_STATE_CODE sc on s.STATE_CODE=sc.STATE_CODE where
+		m.MEMBER_ID=#{param1}
+	</select>
+	<select id="getMajor" resultType="kr.or.initspring.dto.MajorDTO">
+		SELECT
+		m.mj_type,d.DEPARTMENT_NAME,c.COLLEGE_NAME FROM MJ_RECORD m join
+		DEPARTMENT d on m.department_code=d.DEPARTMENT_CODE join COLLEGE c on
+		d.college_code = c.COLLEGE_CODE where m.student_code=#{param1}
+	</select>
+	<select id="getStudentState" resultType="kr.or.initspring.dto.StudentStateDTO">
+		SELECT
+		grade,PERSONAL_SEMESTER,TOTAL_CREDIT FROM ST_STATE WHERE
+		STUDENT_CODE=#{param1}
+	</select>
+	<select id="semesterCount" resultType="Integer">
+		SELECT COUNT(*) FROM
+		SM_STATE WHERE STUDENT_CODE=#{param1}
+	</select>
+	<select id="absenceCount" resultType="Integer">
+		SELECT COUNT(*) FROM
+		ABSENCE WHERE STUDENT_CODE=#{param1}
+	</select>
+	<select id="getRecordFullList" resultType="kr.or.initspring.dto.RecordDTO">
+		SELECT
+		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
+		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
+		r.STUDENT_CODE=#{param1}
+	</select>
+	<select id="getRecordSelectList">SELECT
+		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
+		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
+		r.STUDENT_CODE=#{param1} and r.RECORD_GRADE=${param2} and
+		r.RECORD_SEMESTER=${param3}
+	</select>
+	<select id="majorEssentialCheck" resultType="Integer">SELECT
+		REQUIRED_CHOICE FROM MAJOR where
+		SUBJECT_CODE=#{param1}
+	</select>
+	<select id="liberalEssentialCheck" resultType="Integer">SELECT
+		REQUIRED_CHOICE FROM LIBERAL where
+		SUBJECT_CODE=#{param1}
+	</select>
+</mapper>

@@ -6,9 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+});
+</script>
+<style type="text/css">
+table, td, th {
+	border: 1px solid black;
+} </style>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+	
+	<tiles:insertAttribute name="aside"/>
 	
 	<tiles:insertAttribute name="content"/>
 	

@@ -9,5 +9,5 @@
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/logout">(${LoginUser})로그아웃</a> ||
 </se:authorize>
-<a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a>
+<a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">MY Page</a>
 <hr>
