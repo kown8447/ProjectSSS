@@ -18,5 +18,6 @@ public interface RequestCourseDAO {
 	public Integer getRequiredChoice(String subject_code, int subject_type); //매개변수의 subject_type에 따라 필수.선택 뽑는 동적 쿼리
 	public List<CollegeDTO> getCollegeList();	//단과 대학 전체 목록 가져오기
 	public List<DepartmentDTO> getDepartmentList(String college_code);	//학부.학과 전체 목록 가져오기
-	public List<OpenedLectureDTO> getOpenedLectureListByKeyword(HashMap<String, String> keyword); 
+	public List<OpenedLectureDTO> getOpenedLectureListByKeyword(HashMap<String, String> keyword); 	//검색에 의한 개설과목 가져오기
+	public int setErollStatus(HashMap<String, Integer> map);	//학년_시간에 따른 수강신청 활성 설정
 }

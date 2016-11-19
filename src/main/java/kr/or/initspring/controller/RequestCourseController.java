@@ -118,4 +118,10 @@ public class RequestCourseController {
 		fin.close();
 		sout.close();
 	}
+	
+	@RequestMapping("preRegister.htm")
+	public String preRegisterForm(){
+		return "requestCourse.notRequestPeriod";
+	}
+	
 }
