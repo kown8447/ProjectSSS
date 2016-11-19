@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.CodeMgDAO">
+	<insert id="insertCode">
+		insert into CODE_MG(code, code_type, code_name, code_birth) values(#{code}, #{code_type}, #{code_name}, #{code_birth})
+	</insert>
+	<select id="codelist" resultType="kr.or.initspring.dto.CodeMgDTO">
+		select * from CODE_MG
+	</select>
+	<select id="codeDetail" resultType="kr.or.initspring.dto.CodeMgDTO">
+		select * from CODE_MG where code = #{code}
+	</select>
+	<update id="editCode">
+		update CODE_MG set code_type = ${param2}, code_name = #{param3}, code_birth = #{param4} where code = #{param1}
+	</update>
+</mapper>

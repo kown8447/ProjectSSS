@@ -74,7 +74,7 @@ public class JoinController {
 	 * code_birth -> code_mg 테이블에 있는 생년월일. yyyy-MM-dd 형식을 가지며, Java에서는 DATE Type으로 받음
 	*/	
 	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
-	public View joinStep1(int code_type, String code_name, @DateTimeFormat(pattern="yyyy-MM-dd") Date code_birth, String code, 
+	public View joinStep1(int code_type, String code_name, Date code_birth, String code, 
 			Model model, HttpServletRequest request){
 
 		HttpSession session = request.getSession();

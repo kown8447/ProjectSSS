@@ -5,12 +5,13 @@
 <table>
 	<tr>
 		<td>교수 / 학생 선택</td>
-		<td><input type="radio" value="1" name="code_type" id="code_type">학생
-			<input type="radio" value="2" name="code_type" id="code_type">교수
+		<td><input type="radio" value="0" name="code_type" id="code_type">학생
+			<input type="radio" value="1" name="code_type" id="code_type">교수
+			<input type="radio" value="2" name="code_type" id="code_type">관리자
 		</td>
 	</tr>
 	<tr>
-		<td>학번 or 교수번호</td>
+		<td>학번 or 교수번호 or 관리자 번호</td>
 		<td><input type="text" name="code" id="code"></td>
 	</tr>
 	<tr>
