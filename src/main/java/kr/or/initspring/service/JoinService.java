@@ -42,12 +42,12 @@ public class JoinService {
 
 		try {
 			joindao.insertMember(member);
-			if (member.getCode_type() == 1) {
+			if (member.getCode_type() == 0) {
 				joindao.insertStudentTable(member.getCode(), member.getMember_id());
 				insertResult = joindao.insertRole("ROLE_STUDENT", member.getMember_id());
-			} else if (member.getCode_type() == 2) {
+			} else if (member.getCode_type() == 1) {
 				// 교수 table 삽입
-			} else if (member.getCode_type() == 3) {
+			} else if (member.getCode_type() == 2) {
 				// 관리자 table 삽입
 			} else {
 				// 졸업생 table 삽입
