@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.LectureMgDAO">
+	<select id="Request_List" resultType="kr.or.initspring.dto.SubjectDTO">
+		select subject_Type,subject_Name,subject_State from SUBJECT 
+	</select>
+	<insert id="Open_Subject">
+		insert into SUBJECT(subject_Code, professor_Code, subject_Name, subject_Credit, 
+                    grade_Limit, subject_state, subject_seats, subject_Type )
+					values(#{subject_Code},#{professor_Code},#{subject_Name},#{subject_Credit},
+					 #{grade_Limit},#{subject_state},#{subject_seats},#{subject_Type});                   
+	</insert>
+
+
+	
+	
+</mapper>
