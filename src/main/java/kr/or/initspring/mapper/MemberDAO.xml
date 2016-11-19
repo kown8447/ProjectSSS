@@ -7,7 +7,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatePwdByUserid">
 		update member set member_pwd = #{param2}, member_temp = 0 where member_id = #{param1}
 	</update>
-	<select id="getMember" resultType="kr.or.initspring.dto.MemberDTO">
-	SELECT * FROM MEMBER where MEMBER_ID = #{param1}
-	</select>
 </mapper>

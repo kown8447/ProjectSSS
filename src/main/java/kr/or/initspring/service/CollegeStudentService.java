@@ -84,11 +84,11 @@ public class CollegeStudentService {
 					majorCredit+=recordList.get(i).getSubject_credit();
 				}else{
 					for(int j=0;j<majorList.size();j++){
-						if(){
+						/*if(){
 							majorCredit+=recordList.get(i).getSubject_credit();
 						}else{
 							doubleCredit+=recordList.get(i).getSubject_credit();
-						}
+						}*/
 					}
 				}
 				
