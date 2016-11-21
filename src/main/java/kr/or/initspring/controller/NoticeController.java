@@ -51,12 +51,12 @@ public class NoticeController {
 		
 		System.out.println("실제 글 등록 처리 컨트롤러");
 		
-		cn.setAdmin_code(principal.getName());
+	
 		
 		String url = "redirect:notice.htm";
 		System.out.println(cn.toString());
 		try {
-			url = noticeservice.NoticeWrite(cn, request);
+			url = noticeservice.NoticeWrite(principal, cn, request);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

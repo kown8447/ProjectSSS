@@ -30,4 +30,7 @@ public interface NoticeDAO {
 
 	// 게시물 입력
 	public int insert(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
+	
+	//관리자 코드 뽑아와야해
+	public String selectAdmin(String amdinid);
 }
