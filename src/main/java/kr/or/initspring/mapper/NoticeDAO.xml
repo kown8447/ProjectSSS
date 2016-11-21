@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.initspring.dao.NoticeDAO">
+	<insert id="insert">
+	<!--  
+		insert into NOTICE(notice_Index, admin_Code, notice_Depth, notice_Step, notice_Refer, 
+                    notice_File, notice_Title, notice_Content)
+	-->
+	
+		<selectKey order="BEFORE" keyProperty="notice_index" resultType="String" >
+			SELECT MAX(TO_NUMBER(notice_Index))+1 FROM NOTICE
+		</selectKey>
+		INSERT INTO NOTICE(notice_Index, admin_Code, notice_Depth, notice_Step, notice_Refer, notice_File, notice_Title ,notice_Content, notice_Date )
+	    VALUES( #{notice_index}, #{admin_code}, 0, 0, #{notice_refer}, #{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
+	</insert>
+</mapper>
