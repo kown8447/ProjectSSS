@@ -4,22 +4,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.initspring.dao.CollegeStudentDAO">
-	<select id="getStudent" resultType="kr.or.initspring.dto.StudentInfoDTO">
+	<select id="getStudent" resultType="kr.or.initspring.dto.collegeRegister.StudentInfoDTO">
 		SELECT
 		s.STUDENT_CODE,sc.CODE_NAME,m.MEMBER_NAME,m.MEMBER_ADDR,m.MEMBER_BIRTH,m.MEMBER_PHONE,m.MEMBER_EMAIL,m.MEMBER_PICTURE
 		FROM MEMBER m join STUDENT s on m.member_id= s.MEMBER_ID join
 		ST_STATE_CODE sc on s.STATE_CODE=sc.STATE_CODE where
 		m.MEMBER_ID=#{param1}
 	</select>
-	<select id="getMajor" resultType="kr.or.initspring.dto.MajorDTO">
+	<select id="getMajor" resultType="kr.or.initspring.dto.collegeRegister.StudentMajorDTO">
 		SELECT
-		m.mj_type,d.DEPARTMENT_NAME,c.COLLEGE_NAME FROM MJ_RECORD m join
-		DEPARTMENT d on m.department_code=d.DEPARTMENT_CODE join COLLEGE c on
-		d.college_code = c.COLLEGE_CODE where m.student_code=#{param1}
+		m.mj_type,d.DEPARTMENT_NAME,d.DEPARTMENT_CODE,c.COLLEGE_NAME,c.COLLEGE_CODE
+		FROM MJ_RECORD m join DEPARTMENT d on
+		m.department_code=d.DEPARTMENT_CODE join COLLEGE c on d.college_code =
+		c.COLLEGE_CODE where m.student_code=#{param1}
 	</select>
-	<select id="getStudentState" resultType="kr.or.initspring.dto.StudentStateDTO">
+	<select id="getStudentState"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentStateDTO">
 		SELECT
-		grade,PERSONAL_SEMESTER,TOTAL_CREDIT FROM ST_STATE WHERE
+		grade,PERSONAL_SEMESTER,TOTAL_CREDIT FROM ST_STATE
+		WHERE
 		STUDENT_CODE=#{param1}
 	</select>
 	<select id="semesterCount" resultType="Integer">
@@ -30,20 +33,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM
 		ABSENCE WHERE STUDENT_CODE=#{param1}
 	</select>
-	<select id="getRecordFullList" resultType="kr.or.initspring.dto.RecordDTO">
+	<select id="getRecordFullList" resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO">
 		SELECT
 		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
 		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
 		r.STUDENT_CODE=#{param1}
 	</select>
-	<select id="getRecordSelectList">SELECT
+	<select id="getRecordSelectList" resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO" parameterType="kr.or.initspring.dto.collegeRegister.RecordRequestDTO">SELECT
 		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
 		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
-		r.STUDENT_CODE=#{param1} and r.RECORD_GRADE=${param2} and
-		r.RECORD_SEMESTER=${param3}
+		r.STUDENT_CODE=#{student_code} and r.RECORD_GRADE=${grade} and
+		r.RECORD_SEMESTER=${semester}
 	</select>
-	<select id="majorEssentialCheck" resultType="Integer">SELECT
-		REQUIRED_CHOICE FROM MAJOR where
+	<select id="majorEssentialCheck" resultType="kr.or.initspring.dto.collegeRegister.SubjectMajorDTO">SELECT
+		* FROM MAJOR
+		where
 		SUBJECT_CODE=#{param1}
 	</select>
 	<select id="liberalEssentialCheck" resultType="Integer">SELECT

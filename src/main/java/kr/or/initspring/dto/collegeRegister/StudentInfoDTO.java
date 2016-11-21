@@ -1,4 +1,4 @@
-package kr.or.initspring.dto;
+package kr.or.initspring.dto.collegeRegister;
 
 import java.sql.Date;
 

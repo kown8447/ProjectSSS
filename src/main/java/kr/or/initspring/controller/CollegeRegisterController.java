@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.collegeRegister.RecordRequestDTO;
 import kr.or.initspring.service.CollegeStudentService;
 
 
@@ -54,6 +55,14 @@ public class CollegeRegisterController {
 		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		collegestudentservice.viewStudentRecordInfo(principal.getName(),model);
 		return "collegeregister.studentRecord";
+	}
+	
+	
+	@RequestMapping(value="StudentRecordAjax.htm")
+	public  View viewStudentRecordAjax(RecordRequestDTO recordrequest,Principal principal, Model model){
+		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
+		collegestudentservice.viewStudentRecordAjax(recordrequest,principal.getName(),model);
+		return jsonview;
 	}
 	
 	@RequestMapping(value="register.htm")

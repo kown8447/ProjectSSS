@@ -1,6 +1,6 @@
-package kr.or.initspring.dto;
+package kr.or.initspring.dto.collegeRegister;
 
-public class RecordDTO {
+public class StudentRecordDTO {
 	private String subject_code;
 	private int record_grade;
 	private int record_semster;
