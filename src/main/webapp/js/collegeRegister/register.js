@@ -1,3 +1,3 @@
-$( function() {
-    $( "#studentRegisterTabs" ).tabs();
-  } );
+$(function() {
+    $('#studentRegisterTabs').tabs();
+  });

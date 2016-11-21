@@ -6,7 +6,7 @@ public class StudentRegisterDTO {
 	private String semester_Name;
 	private java.sql.Date semester_start;
 	private java.sql.Date semester_end;
-	private int register_Type;
+	private int register_type;
 	private int tuition;
 	private int register_state;
 	private String semesterYear;
@@ -52,12 +52,12 @@ public class StudentRegisterDTO {
 		this.semester_end = semester_end;
 	}
 
-	public int getRegister_Type() {
-		return register_Type;
+	public int getRegister_type() {
+		return register_type;
 	}
 
-	public void setRegister_Type(int register_Type) {
-		this.register_Type = register_Type;
+	public void setRegister_type(int register_type) {
+		this.register_type = register_type;
 	}
 
 	public int getTuition() {
@@ -96,7 +96,7 @@ public class StudentRegisterDTO {
 	public String toString() {
 		return "StudentRegisterDTO [student_code=" + student_code + ", semester_code=" + semester_code
 				+ ", semester_Name=" + semester_Name + ", semester_start=" + semester_start + ", semester_end="
-				+ semester_end + ", register_Type=" + register_Type + ", tuition=" + tuition + ", register_state="
+				+ semester_end + ", register_type=" + register_type + ", tuition=" + tuition + ", register_state="
 				+ register_state + ", semesterYear=" + semesterYear + ", semesterType=" + semesterType + "]";
 	}
 

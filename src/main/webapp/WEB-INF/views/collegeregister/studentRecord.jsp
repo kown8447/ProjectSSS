@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 성적조회
-
 <div>
 	<select class="recordSelect" id="recordGrade"><option
 			value="default">학년</option>
