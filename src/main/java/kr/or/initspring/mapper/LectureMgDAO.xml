@@ -4,17 +4,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.initspring.dao.LectureMgDAO">
-	<select id="Request_List" resultType="kr.or.initspring.dto.SubjectDTO">
-		select subject_Type,subject_Name,subject_State from SUBJECT 
+	<select id="request_List" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		
+	  select sub.subject_code,sub.subject_name,sel.required_choice,sub.subject_state,op.success_check 
+	  from SUBJECT sub join RECORD rec on sub.subject_code = rec.subject_code join OP_REQUEST op
+      on sub.subject_code = op.subject_code join <if test="required_choice == 0">LIBERAL</if>
+      <if test="required_choice != 0">MAJOR</if> sel on sub.subject_code = sel.subject_code
+		
 	</select>
-	<insert id="Open_Subject">
-		insert into SUBJECT(subject_Code, professor_Code, subject_Name, subject_Credit, 
-                    grade_Limit, subject_state, subject_seats, subject_Type )
-					values(#{subject_Code},#{professor_Code},#{subject_Name},#{subject_Credit},
-					 #{grade_Limit},#{subject_state},#{subject_seats},#{subject_Type});                   
+	
+	<select id="select_Professor">
+		select professor_code from professor where member_id=#{param1}
+	</select>
+	
+	<insert id="insert_Subject" parameterType="kr.or.initspring.dto.commons.SubjectDTO">
+	 	 insert into SUBJECT (subject_code,professor_code,subject_name,subject_credit,grade_limit,subject_state,subject_seats,subject_type)
+	 	  values (#{subject_code},(select professor_code from PROFESSOR where member_id = #{param1}),#{subject_name}
+	 	  ,#{subject_credit},#{grade_limit},#{subject_state},#{subject_seats},0);
 	</insert>
-
-
+	
+	<insert id="insert_BeforeCode">
+		insert into BEFORE_SUBJECT before_code values #{before_code}
+	</insert>
+	
+	<insert id="insert_Plan">
+		insert into PLAN subject_filesrc values #{subject_filesrc}
+	</insert>
 	
 	
 </mapper>

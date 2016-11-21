@@ -8,17 +8,21 @@
 </head>
 <body>
 	
-	구분 : <select name="value">
+	<form action="lectureRegister.htm" method="post" enctype="multipart/form-data">
+	구분 : <select id="subject_type" name="subject_type">
 			<option value=0>교양</option>
 			<option value=1>전공</option>
-		</select> <br>
-      선수과목 : <input type="text" id="before_Code" name="before_Code"><br>		
-	과목명 : <input type="text" id="subject_Name" name="subject_Name"><br>
+		 </select> <br>
+	과목코드 : <input type="text" id="subject_code" name="subject_code"><br>		 
+	선수과목 : <input type="text" id="before_code" name="before_code"><br>		
+	과목명 : <input type="text" id="subject_name" name="subject_name"><br>
 	정원 : <input type="text" id="subject_seats" name="subject_seats"><br>
-	학점 : <input type="text" id="subject_Credit" name="subject_Credit"><br>
-	수강대상 : <input type="text" id="grade_Limit" name="grade_Limit"><br>
+	학점 : <input type="text" id="subject_credit" name="subject_credit"><br>
+	수강대상 : <input type="text" id="grade_limit" name="grade_limit"><br>
+	강의계획서 : <input type="file" id="subject_filesrc" name="subject_filesrc">
+ 
+    <input type="submit" value="등록하기">
+	</form>
 	
-	<a href="lectureRegister.htm">등록하기</a>
-    	
 </body>
 </html>

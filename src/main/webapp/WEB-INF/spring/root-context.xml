@@ -57,9 +57,19 @@
 	
 	<task:scheduler id="scheduler" pool-size="10"/>
 	<task:executor id="executor" pool-size="10"/>
+	<!-- 어노테이션 사용하겠다.  -->
 	<task:annotation-driven scheduler="scheduler" executor="executor"/>
 	
 	<bean id="modifyTermScheduler" class="kr.or.initspring.scheduler.ModifyTermScheduler"/>
-
+<!-- 프로퍼티 속성 사용 가능  -->
 	<context:property-placeholder location="scheduler/registerTerm.properties"/>
+	
+	<bean
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>scheduler/registerTerm.properties</value>
+			</list>
+		</property>
+	</bean>
 </beans>

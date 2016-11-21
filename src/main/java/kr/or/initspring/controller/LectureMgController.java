@@ -7,6 +7,7 @@
 */
 package kr.or.initspring.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-import kr.or.initspring.dto.SubjectDTO;
+import kr.or.initspring.dto.commons.SubjectDTO;
+import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
 import kr.or.initspring.service.lectureService;
 
 @Controller
@@ -31,7 +34,7 @@ public class LectureMgController {
 	@Autowired
 	private lectureService lectureservice;
 	
-	@RequestMapping(value="lectureRegister.htm")
+	@RequestMapping(value="lectureRegister.htm",method=RequestMethod.GET)
     public String insertSubject(){
     	return "lecture.registersubject";
     }
@@ -50,10 +53,8 @@ public class LectureMgController {
 	@RequestMapping(value="lectureView.htm")
 	public String subjectList(Model model){
 		
-		List<SubjectDTO> subjectdto = new ArrayList<SubjectDTO>();
+		List<CustomLectureMgDTO> subjectdto = new ArrayList<CustomLectureMgDTO>();
 		
-		System.out.println("컨트롤러 서브젝트리스트");
-	
 		subjectdto = lectureservice.Request_List();
 		System.out.println(subjectdto.toString());
 		model.addAttribute("subjectlist",subjectdto);
@@ -61,4 +62,23 @@ public class LectureMgController {
 	}
 	
 	
+	@RequestMapping(value="lectureRegister.htm",method=RequestMethod.POST)
+	public String insertsubject(SubjectDTO dto,Model model,Principal principal) throws Exception{
+		System.out.println(dto.toString());
+		int result = 0;
+		result = lectureservice.insert_Subject(dto,principal);
+		System.out.println("타는거야뭐야 이건 "+result);
+		
+		if(result>0){
+			System.out.println("들어갓나봄");
+		}else{
+			System.out.println("시발");
+		}
+		
+		model.addAttribute("insertresult",result);
+		return "lecture.listview";
+	}
+
+
+
 }

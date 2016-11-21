@@ -15,13 +15,26 @@
 </script>
 </head>
 <body>
-	<table id="list" border=1px">
+	<table id="list" border="1px">
 		<tr>
 			<td>구분</td><td>학년</td><td>과목명</td><td>상태</td>
 		</tr>
 		<c:forEach items="${subjectlist}" var="subject">
 		<tr>
-		<td>${subject.subject_Type}</td><td>${subject.subject_Name}</td><td>${subject.subject_state}</td>
+		<td><c:choose>
+		<c:when test = "${subject.required_choice == '0'}"> 필수 </c:when>
+		<c:when test = "${subject.required_choice == '1'}"> 교양 </c:when>
+		</c:choose>
+		</td>
+		<td>${subject.record_grade}</td>
+		<td>${subject.subject_name}</td>
+		<td><c:choose>
+		<c:when test = "${subject.subject_state == 0}"> 등록 </c:when>
+		<c:when test = "${subject.subject_state == 1}"> 개설 </c:when>
+		<c:when test = "${subject.subject_state == 2}"> 개설신청 </c:when>
+		</c:choose>
+		</td>
+		
 		</tr>
 		</c:forEach>
 	
