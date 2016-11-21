@@ -7,7 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/collegeRegister/studentRecord.js"></script>
+<script src="${pageContext.request.contextPath}/js/collegeRegister/register.js"></script>
 <style type="text/css">
 table, td, th {
 	border: 1px solid black;

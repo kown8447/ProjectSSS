@@ -11,7 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ST_STATE_CODE sc on s.STATE_CODE=sc.STATE_CODE where
 		m.MEMBER_ID=#{param1}
 	</select>
-	<select id="getMajor" resultType="kr.or.initspring.dto.collegeRegister.StudentMajorDTO">
+	<select id="getMajor"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentMajorDTO">
 		SELECT
 		m.mj_type,d.DEPARTMENT_NAME,d.DEPARTMENT_CODE,c.COLLEGE_NAME,c.COLLEGE_CODE
 		FROM MJ_RECORD m join DEPARTMENT d on
@@ -33,19 +34,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM
 		ABSENCE WHERE STUDENT_CODE=#{param1}
 	</select>
-	<select id="getRecordFullList" resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO">
+	<select id="getRecordFullList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO">
 		SELECT
 		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
 		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
 		r.STUDENT_CODE=#{param1}
 	</select>
-	<select id="getRecordSelectList" resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO" parameterType="kr.or.initspring.dto.collegeRegister.RecordRequestDTO">SELECT
+	<select id="getRecordSelectList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO"
+		parameterType="kr.or.initspring.dto.collegeRegister.RecordRequestDTO">SELECT
 		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
 		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
 		r.STUDENT_CODE=#{student_code} and r.RECORD_GRADE=${grade} and
 		r.RECORD_SEMESTER=${semester}
 	</select>
-	<select id="majorEssentialCheck" resultType="kr.or.initspring.dto.collegeRegister.SubjectMajorDTO">SELECT
+	<select id="majorEssentialCheck"
+		resultType="kr.or.initspring.dto.collegeRegister.SubjectMajorDTO">SELECT
 		* FROM MAJOR
 		where
 		SUBJECT_CODE=#{param1}
@@ -53,5 +58,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="liberalEssentialCheck" resultType="Integer">SELECT
 		REQUIRED_CHOICE FROM LIBERAL where
 		SUBJECT_CODE=#{param1}
+	</select>
+	<select id="getStudentRegisterList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentRegisterDTO">
+		SELECT
+		r.STUDENT_CODE,r.SEMESTER_CODE,s.SEMESTER_START,s.SEMESTER_END,r.REGISTER_TYPE,r.TUITION,r.REGISTER_STATE
+		FROM REGISTER r join SEMESTER s on r.SEMESTER_CODE=s.SEMESTER_CODE
+		where r.STUDENT_CODE=#{param1}
+	</select>
+	<select id="getStudentSemesterList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentSemesterStateDTO">
+		SELECT
+		SEMESTER_CODE,STUDENT_CODE,STUDENT_SEMESTER,GET_CREDIT,REQUEST_CREDIT
+		FROM SM_STATE where STUDENT_CODE=#{param1}
+	</select>
+	<select id="getStudentScholarshipList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentScholarshipDTO">
+		SELECT rownum as
+		scholarshipindex,s.SEMESTER_CODE,scs.SCHOLASHIP_NAME,scs.SCHOLASHIP_AMOUNT,scs.SCHOLASHIP_STANDARD
+		FROM SCHOLARSHIP s join SC_SYSTEM scs on s.SYS_CODE=scs.SYS_CODE WHERE
+		s.STUDENT_CODE=#{param1} ORDER BY SCHOLARSHIP_PAYDAY asc
+	</select>
+	<select id="getStudentAbsenceList"
+		resultType="kr.or.initspring.dto.collegeRegister.StudentAbsenceDTO">
+		SELECT rownum as
+		absenceindex,ABSENCE_DATE,ABSENCE_TERM,ABSENCE_REASON,RETURN_DATE FROM
+		ABSENCE WHERE STUDENT_CODE=#{param1} ORDER BY ABSENCE_DATE asc
 	</select>
 </mapper>

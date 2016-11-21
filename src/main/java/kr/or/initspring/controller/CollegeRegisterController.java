@@ -68,6 +68,7 @@ public class CollegeRegisterController {
 	@RequestMapping(value="register.htm")
 	public String viewRegisterInfo(Principal principal, Model model){
 		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
+		collegestudentservice.viewRegisterInfo(principal.getName(),model);
 		return "collegeregister.register";
 	}
 }

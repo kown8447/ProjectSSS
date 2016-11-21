@@ -20,7 +20,11 @@ import kr.or.initspring.dao.CollegeStudentDAO;
 import kr.or.initspring.dto.collegeRegister.SubjectMajorDTO;
 import kr.or.initspring.dto.collegeRegister.StudentMajorDTO;
 import kr.or.initspring.dto.collegeRegister.StudentRecordDTO;
+import kr.or.initspring.dto.collegeRegister.StudentRegisterDTO;
+import kr.or.initspring.dto.collegeRegister.StudentScholarshipDTO;
+import kr.or.initspring.dto.collegeRegister.StudentSemesterStateDTO;
 import kr.or.initspring.dto.collegeRegister.RecordRequestDTO;
+import kr.or.initspring.dto.collegeRegister.StudentAbsenceDTO;
 import kr.or.initspring.dto.collegeRegister.StudentInfoDTO;
 import kr.or.initspring.dto.collegeRegister.StudentStateDTO;
 
@@ -171,7 +175,7 @@ public class CollegeStudentService {
 					recordList.get(i).setStringtype("전공 선택");
 				}
 
-				if (recordList.get(i).getRetake_check() == 0) {
+				if (recordList.get(i).getRetake_check() != 1 && !recordList.get(i).getRecord_level().equals("F")) {
 					if (doubleMajor) {
 						if (mainMajor.equals(major.getDepartment_code())) {
 							majorCredit += recordList.get(i).getSubject_credit();
@@ -190,7 +194,7 @@ public class CollegeStudentService {
 					recordList.get(i).setStringtype("교양 선택");
 				}
 
-				if (recordList.get(i).getRetake_check() == 0) {
+				if (recordList.get(i).getRetake_check() != 1 && !recordList.get(i).getRecord_level().equals("F")) {
 					liberalCredit += recordList.get(i).getSubject_credit();
 				}
 			}
@@ -212,6 +216,53 @@ public class CollegeStudentService {
 
 	public void viewRegisterInfo(String userid, Model model) {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
+
+		StudentInfoDTO student = collegestudentdao.getStudent(userid);
+
+		List<StudentRegisterDTO> registerList = collegestudentdao.getStudentRegisterList(student.getStudent_code());
+		for (int i = 0; i < registerList.size(); i++) {
+			String[] semesterparts = registerList.get(i).getSemester_code().split("_");
+			registerList.get(i).setSemesterYear(semesterparts[1] + "년");
+			if (semesterparts[2].equals("01")) {
+				registerList.get(i).setSemesterType("전반기");
+			} else if (semesterparts[2].equals("02")) {
+				registerList.get(i).setSemesterType("후반기");
+			}
+		}
+		List<StudentSemesterStateDTO> studentSemesterList = collegestudentdao
+				.getStudentSemesterList(student.getStudent_code());
+		for (int i = 0; i < studentSemesterList.size(); i++) {
+			String[] semesterparts = studentSemesterList.get(i).getSemester_code().split("_");
+			studentSemesterList.get(i).setSemesterYear(semesterparts[1] + "년");
+			if (semesterparts[2].equals("01")) {
+				studentSemesterList.get(i).setSemesterType("전반기");
+			} else if (semesterparts[2].equals("02")) {
+				studentSemesterList.get(i).setSemesterType("후반기");
+			}
+		}
+		List<StudentScholarshipDTO> scholarshipList = collegestudentdao
+				.getStudentScholarshipList(student.getStudent_code());
+		for (int i = 0; i < scholarshipList.size(); i++) {
+			String[] semesterparts = scholarshipList.get(i).getSemester_code().split("_");
+			scholarshipList.get(i).setSemesterYear(semesterparts[1] + "년");
+			if (semesterparts[2].equals("01")) {
+				scholarshipList.get(i).setSemesterType("전반기");
+			} else if (semesterparts[2].equals("02")) {
+				scholarshipList.get(i).setSemesterType("후반기");
+			}
+		}
+
+		List<StudentAbsenceDTO> absenceList = collegestudentdao.getStudentAbsenceList(student.getStudent_code());
+
+		System.out.println(registerList.get(0).toString());
+		System.out.println(studentSemesterList.get(0).toString());
+		System.out.println(scholarshipList.get(0).toString());
+		System.out.println(absenceList.get(0).toString());
+
+		model.addAttribute("registerList", registerList);
+		model.addAttribute("studentSemesterList", studentSemesterList);
+		model.addAttribute("scholarshipList", scholarshipList);
+		model.addAttribute("absenceList", absenceList);
 
 	}
 
@@ -246,7 +297,8 @@ public class CollegeStudentService {
 		if (totalScore == 0 || totalCredit == 0) {
 			return 0;
 		}
-		return totalScore / totalCredit;
+
+		return Math.round((totalScore / totalCredit) * 100f) / 100f;
 	}
 
 	public float creditCalculatorOutF(List<StudentRecordDTO> recordList) {
@@ -285,7 +337,7 @@ public class CollegeStudentService {
 		if (totalScore == 0 || totalCredit == 0) {
 			return 0;
 		}
-		return totalScore / totalCredit;
+		return Math.round((totalScore / totalCredit) * 100f) / 100f;
 	}
 
 }
