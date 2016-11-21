@@ -20,14 +20,20 @@ public class OpenedLectureDTO {
 	private int subject_credit;		//강의 배정 학점
 	private int grade_limit;		//수강 대상(학년 제한)
 	private int subject_state;		//과목 상태(0:개설안함, 1:개설신청, 2:개설)
-	private int subject_seats;
+	private int subject_seats;		//수강 정원
 	private int subject_type;
 	private List<PeriodDTO> period;	//과목 시간을 관리하기 위한 DTO(강의 시간은 복수이기 때문에 List)
 	private String professor_name;
 	private String subject_filesrc;	//강의 계획서 파일명
 	private int required_choice;	//과목 필수_선택 여부
+	private List<CustomClassRoomDTO> customClassroomDTO;
 	
-	
+	public List<CustomClassRoomDTO> getCustomClassroomDTO() {
+		return customClassroomDTO;
+	}
+	public void setCustomClassroomDTO(List<CustomClassRoomDTO> customClassroomDTO) {
+		this.customClassroomDTO = customClassroomDTO;
+	}
 	public int getRequired_choice() {
 		return required_choice;
 	}
@@ -119,6 +125,7 @@ public class OpenedLectureDTO {
 				+ subject_name + ", subject_credit=" + subject_credit + ", grade_limit=" + grade_limit
 				+ ", subject_state=" + subject_state + ", subject_seats=" + subject_seats + ", subject_type="
 				+ subject_type + ", period=" + period + ", professor_name=" + professor_name + ", subject_filesrc="
-				+ subject_filesrc + ", required_choice=" + required_choice + "]";
+				+ subject_filesrc + ", required_choice=" + required_choice + ", customClassroomDTO="
+				+ customClassroomDTO + "]";
 	}
 }
