@@ -13,5 +13,7 @@
 <se:authorize access="hasRole('ROLE_STUDENT')">
 	<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a> ||
 </se:authorize>
+<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 <a href="${pageContext.request.contextPath}/qnanotice/qnanotice.htm">QnA게시판</a>
+</se:authorize>
 <hr>
