@@ -5,7 +5,9 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/viewOpLecture.js"></script>
+<script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>

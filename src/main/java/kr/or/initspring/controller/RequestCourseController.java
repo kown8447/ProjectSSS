@@ -121,11 +121,39 @@ public class RequestCourseController {
 	}
 	
 	@RequestMapping("preRegister.htm")
-	public String preRegisterForm(Principal principal){
+	public String preRegisterForm(Principal principal, Model model){
 		String viewpage = "";
 		String member_id = principal.getName();
 		viewpage = requestCourseService.possiblePreRegister(member_id);
 		return viewpage;
+	}
+	
+	@RequestMapping("searchBykeword.htm")
+	public View searchBykeword(
+			@RequestParam(value="searchType", defaultValue="subject_name") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword,
+			Model model
+			){
+		System.out.println("searchType : " + searchType);
+		System.out.println("keyword : " + keyword);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		
+		List<OpenedLectureDTO> lists = requestCourseService.searchByKeyword(map);
+		model.addAttribute("lists",lists);
+		
+		return jsonview;
+	}
+	
+	@RequestMapping("getOpSubjectInfo.htm")
+	public View getOpSubjectInfo(
+			@RequestParam("subject_code") String subject_code, Model model
+			){
+		System.out.println("subject_code : " + subject_code);
+		OpenedLectureDTO subject_info = requestCourseService.getOpSubjectInfoBySubjectCode(subject_code);
+		model.addAttribute("subject_info", subject_info);
+		return jsonview;
 	}
 	
 }
