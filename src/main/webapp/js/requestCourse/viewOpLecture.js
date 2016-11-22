@@ -34,7 +34,7 @@ $(function(){
 					dataType:"json",
 					success:function(data){
 						console.log(data);
-						var text="<table border='1'><tr><th>구분</th><th>강의 이름</th><th>시간</th><th>지도 교수</th><th>강의 계획서</th><th>모집 인원</th></tr>";
+						var text="<table class='table table-bordered'><tr><th>구분</th><th>강의 이름</th><th>시간</th><th>지도 교수</th><th>강의 계획서</th><th>모집 인원</th></tr>";
 						$.each(data.lists, function(i, elt) {
 							var major="";
 							if(elt.subject_type=='0'){

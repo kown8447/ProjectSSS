@@ -3,20 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2>개설 강의 보기</h2>
 
-<select id="collegeList">
-	<option value="0">단과대학 선택</option>
-	<c:forEach items="${colleges}" var="college">
-		<option value="${college.college_code}">${college.college_name}</option>
-	</c:forEach>
-</select>
-<select id="departmentList">
-	<option value="1000">학부/학과 선택</option>
-</select>
-<input type="button" id="searchSubject" value="검색"/>
+<form class="form-inline">
+	<select id="collegeList" class="form-control col-3">
+		<option value="0">단과대학 선택</option>
+		<c:forEach items="${colleges}" var="college">
+			<option value="${college.college_code}">${college.college_name}</option>
+		</c:forEach>
+	</select> 
+	<select id="departmentList" class="form-control col-3">
+		<option value="1000">학부/학과 선택</option>
+	</select> 
+	<input type="button" class="btn btn-default" id="searchSubject" value="검색" />
+</form>
+
 
 <br>
 <div id="result">
-	<table border="1">
+	<table class="table table-bordered">
 		<tr>
 			<th>구분</th>
 			<th>강의 이름</th>

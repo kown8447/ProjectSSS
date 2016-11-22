@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
+
 	<select id="searchType">
 		<option value="subject_name">과목명</option>
 		<option value="subject_code">과목코드</option>
 	</select>
 	<input type="text" id="keyword"/>
 	<input type="button" id="searchBtn" value="검색">
-	<div id="result">
+	<span id="result">
 	
-	</div>
-</div>
+	</span>
+
 
 <!-- PR_MON_1 ~ PR_MON_20 -->
 
-<div>
+
 	<form action="" method="post">
 		<table id="timetable" border="1">
 			<tr>
@@ -36,8 +36,7 @@
 		<input type="radio" id="timetable_share" name="timetable_share" value="0" checked/>공유안함
 		<input type="button" id="requestBtn" value="수강 신청" />
 	</form>
-	
-</div>
+
 
 <div id="dialog">
 	<table border="1">
