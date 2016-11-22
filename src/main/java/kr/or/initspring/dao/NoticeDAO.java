@@ -17,16 +17,16 @@ public interface NoticeDAO {
 	public int getCount(String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 전체 게시물
-	public List<NoticeDTO> getNotices(int page, String field, String query) throws ClassNotFoundException, SQLException;
+	public List<CustomerNoticeDTO> getNotices(int page, String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 게시물 삭제
-	public int delete(String seq) throws ClassNotFoundException, SQLException;
+	public int delete(String notice_index) throws ClassNotFoundException, SQLException;
 
 	// 게시물 수정
-	public int update(NoticeDTO noticedto) throws ClassNotFoundException, SQLException;
+	public int update(CustomerNoticeDTO noticedto) throws ClassNotFoundException, SQLException;
 
 	// 게시물 상세
-	public NoticeDTO getNotice(String seq) throws ClassNotFoundException, SQLException;
+	public CustomerNoticeDTO getNotice(String notice_index) throws ClassNotFoundException, SQLException;
 
 	// 게시물 입력
 	public int insert(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;

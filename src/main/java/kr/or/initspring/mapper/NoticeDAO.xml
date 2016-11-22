@@ -3,17 +3,48 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.initspring.dao.NoticeDAO">
-<select id="selectAdmin" resultType="String">
-	SELECT admin_Code FROM admin WHERE member_Id = #{param1}
-</select>
+	<select id="getNotices" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		SELECT * FROM
+		(SELECT ROWNUM NUM, N.*
+		FROM ( SELECT * FROM NOTICE WHERE ${param2} LIKE '%${param3}%' ORDER BY Notice_Date DESC) N) 
+		WHERE NUM BETWEEN 1 + (${param1} - 1) * 5 AND 5 + (${param1} - 1) * 5
+	</select>
+
+	<select id="getNotice" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		SELECT * FROM NOTICE WHERE notice_index=#{notice_index}
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		SELECT Notice_Count(*) CNT
+		FROM NOTICE
+		WHERE ${param1} LIKE '%${param2}%'
+	</select>
+	
+	<delete id="delete">
+	 	DELETE NOTICE WHERE notice_index=#{notice_index}
+	</delete>
+	
+	<update id="update" >
+	UPDATE NOTICE
+	SET notice_title=#{notice_title}, 
+	    notice_content=#{notice_content}, 
+	    notice_file=#{notice_file,jdbcType=VARCHAR}
+	WHERE notice_index=#{notice_index}
+	</update>
+
+	<select id="selectAdmin" resultType="String">
+		SELECT admin_Code FROM admin WHERE member_Id = #{param1}
+	</select>
 	<insert id="insert" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
-	
-		 <selectKey order="BEFORE" keyProperty="notice_index" resultType="Integer">
-		 SELECT MAX(notice_Index)+1, MAX(notice_Refer)+1 FROM NOTICE
-      </selectKey>
-      
-		INSERT INTO NOTICE(notice_Index, admin_Code, notice_Depth, notice_Step, notice_Refer, notice_File, notice_Title ,notice_Content, notice_Date )
-	    VALUES( #{notice_index}, #{admin_code}, 0, 0, #{notice_refer}, #{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
-	
+
+		<selectKey order="BEFORE" keyProperty="notice_index"
+			resultType="Integer">
+			SELECT MAX(notice_Index)+1, MAX(notice_Refer)+1 FROM NOTICE
+		</selectKey>
+
+		INSERT INTO NOTICE(notice_Index, admin_Code, notice_Depth,
+		notice_Step, notice_Refer, notice_File, notice_Title ,notice_Content, notice_Date )
+		VALUES( #{notice_index}, #{admin_code}, 0, 0, #{notice_refer},
+		#{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
 </mapper>

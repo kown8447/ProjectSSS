@@ -8,6 +8,7 @@
 package kr.or.initspring.dto.notice;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -99,5 +100,6 @@ public class CustomerNoticeDTO {
 				+ notice_file + ", file=" + file + ", notice_title=" + notice_title + ", notice_content="
 				+ notice_content + ", notice_date=" + notice_date + ", notice_count=" + notice_count + "]";
 	}
+
 
 }
