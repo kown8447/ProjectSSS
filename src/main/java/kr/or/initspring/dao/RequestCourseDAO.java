@@ -1,13 +1,17 @@
 package kr.or.initspring.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
+import kr.or.initspring.dto.commons.StudentDTO;
+import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.requestCourse.CustomClassRoomDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 
@@ -30,4 +34,18 @@ public interface RequestCourseDAO {
 	public CustomClassRoomDTO getClassroomInfoByClassroomCode(String classroom_code);	//강의실 코드로 강의실 정보 가져오기
 	public List<PeriodDTO> getPeriodByClassroomCode(String classroom_code);	//강의실 코드로 해당 강의실의 강의 시간 가져오기
 	
+	public StudentDTO getStudentByMemberid(String member_id);	//학생의 학생테이블 정보(학번) 가져오기
+	public StStateDTO getStstateByStudentCode(String student_code);	//학생의 현재 재학 정보 가져오기
+	public SubjectDTO getSubjectBySubjectCode(String subject_code);	//교과목 코드로 과목 정보 가져오기(개설 과목아닌것도 포함)
+
+	public BeforeSubjectDTO getBeforeSubjectBySubjectCode(String subject_code);	//교과목 코드로 해당 과목의 선수강 과목 가져오기
+	public Integer checkBeforeSubjectByRecord(String before_code, String student_code);	//교과목 코드, 학번으로 해당 학생이 선수과목을 수강했는지 확인
+	
+	public Integer deleteReserveByStudentCode(String student_code);	//학번으로 예비수강 신청 테이블 데이터 삭제
+	public Integer insertReserve(HashMap<String, String> map);	//학번 + 과목코드 예비수강 신청 테이블 삽입
+	public Integer getSubjectCredit(String subject_code);	//과목번호로 배정학점 가져오기
+	public void updateTimetableShare(StudentDTO studentDto);	//멤버 아이디로 시간표 공유 여부 수정
+	public Integer getTimetableShareByMemberid(String memeber_id);	//멤버 아이디로 시간표 공유 여부 가져오기
+	
+	public List<OpenedLectureDTO> getPreTimetableByStudentCode(String student_code);	//학번으로 예비수강 신청 테이블 가져오기
 }

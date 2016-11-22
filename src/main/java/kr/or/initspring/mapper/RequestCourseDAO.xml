@@ -126,4 +126,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on l.period_code = p.period_code
 		where l.classroom_code = #{classroom_code}
 	</select>
+	
+	<select id="getStudentByMemberid" resultType="kr.or.initspring.dto.commons.StudentDTO">
+		select * from student where member_id = #{member_id}
+	</select>
+	
+	<select id="getStstateByStudentCode" resultType="kr.or.initspring.dto.commons.StStateDTO">
+		select * from st_state where student_code = #{student_code}
+	</select>
+	
+	<select id="getSubjectBySubjectCode" resultType="kr.or.initspring.dto.commons.SubjectDTO">
+		select * from subject where subject_code = #{subject_code}
+	</select>
+	
+	<select id="getBeforeSubjectBySubjectCode" resultType="kr.or.initspring.dto.commons.BeforeSubjectDTO">
+		select * from before_subject where subject_code = #{subject_code}
+	</select>
+	
+	<select id="checkBeforeSubjectByRecord" resultType="int">
+		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
+	</select>
+	
+	<update id="updateTimetableShare" parameterType="kr.or.initspring.dto.commons.StudentDTO">
+		update student set timetable_share = #{timetable_share} where member_id = #{member_id}
+	</update>
+	
+	<select id="getTimetableShareByMemberid" resultType="int">
+		select timetable_share from student where member_id = #{member_id}
+	</select>
+	
+	<delete id="deleteReserveByStudentCode">
+		delete from reserve where student_code = #{student_code}
+	</delete>
+	
+	<insert id="insertReserve" parameterType="hashmap">
+		insert into reserve(student_code, subject_code) values (#{student_code},#{subject_code})
+	</insert>
+	
+	<select id="getSubjectCredit" resultType="int">
+		select subject_credit from subject where subject_code = #{subject_code}
+	</select>
+	
+	<select id="getPreTimetableByStudentCode" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select * from
+		reserve r join subject s
+		on r.subject_code = s.subject_code
+		where r.student_code = #{student_code}
+	</select>
+
+	<update id="plusRegistedSeatBySubjectCode">
+		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
+	</update>
 </mapper>

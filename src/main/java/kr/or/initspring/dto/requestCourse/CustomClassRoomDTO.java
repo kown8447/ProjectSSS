@@ -1,3 +1,9 @@
+/*
+ * @Class : CustomClassRoomDTO
+ * @Date : 2016.11.22
+ * @Author : 권기엽
+ * @Desc : 강의실 정보와 강의실에 따른 강의 시간 확인을 위한 DTO
+*/
 package kr.or.initspring.dto.requestCourse;
 
 import java.util.List;
@@ -10,7 +16,7 @@ public class CustomClassRoomDTO {
 	private String classroom_name;
 	private int seat;
 	private int classroom_type;
-	private List<PeriodDTO> periodlist;
+	private List<PeriodDTO> periodlist;	//강의실이 가지는 교시코드의 리스트
 	
 	public String getClassroom_code() {
 		return classroom_code;
