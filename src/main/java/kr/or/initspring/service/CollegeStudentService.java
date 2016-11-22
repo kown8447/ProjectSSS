@@ -83,72 +83,8 @@ public class CollegeStudentService {
 
 		List<StudentRecordDTO> recordList = collegestudentdao.getRecordFullList(student.getStudent_code());
 		
-		StudentStateDTO state = collegestudentdao.getStudentState(student.getStudent_code());
-		model.addAttribute("state", state);
-
-		int majorCredit = 0;
-		int doubleCredit = 0;
-		int liberalCredit = 0;
-
-		List<StudentMajorDTO> majorList = collegestudentdao.getMajor(student.getStudent_code());
-
-		boolean doubleMajor = false;
-		String mainMajor = "";
-
-		if (majorList.size() > 1) {
-			for (int j = 0; j < majorList.size(); j++) {
-				if (majorList.get(j).getMj_type() == 0) {
-					mainMajor = majorList.get(j).getDepartment_code();
-				}
-			}
-			doubleMajor = true;
-		}
-
-		for (int i = 0; i < recordList.size(); i++) {
-			if (recordList.get(i).getSubject_type() == 0) {
-				MajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
-				if (major.getRequired_choice() == 0) {
-					recordList.get(i).setStringtype("전공 필수");
-				} else {
-					recordList.get(i).setStringtype("전공 선택");
-				}
-
-				if (recordList.get(i).getRetake_check() != 1 && !recordList.get(i).getRecord_level().equals("F")) {
-					if (doubleMajor) {
-						if (mainMajor.equals(major.getDepartment_code())) {
-							majorCredit += recordList.get(i).getSubject_credit();
-						} else {
-							doubleCredit += recordList.get(i).getSubject_credit();
-						}
-					} else {
-						majorCredit += recordList.get(i).getSubject_credit();
-					}
-				}
-
-			} else {
-				if (collegestudentdao.liberalEssentialCheck(recordList.get(i).getSubject_code()) == 0) {
-					recordList.get(i).setStringtype("교양 필수");
-				} else {
-					recordList.get(i).setStringtype("교양 선택");
-				}
-
-				if (recordList.get(i).getRetake_check() != 1 && !recordList.get(i).getRecord_level().equals("F")) {
-					liberalCredit += recordList.get(i).getSubject_credit();
-				}
-			}
-
-		}
-		float inF = creditCalculatorInF(recordList);
-		float outF = creditCalculatorOutF(recordList);
-
-		model.addAttribute("state", state);
-		model.addAttribute("recordList", recordList);
-		model.addAttribute("majorCredit", majorCredit);
-		model.addAttribute("liberalCredit", liberalCredit);
-		model.addAttribute("doubleCredit", doubleCredit);
-		model.addAttribute("totalCredit", majorCredit + liberalCredit + doubleCredit);
-		model.addAttribute("inF", inF);
-		model.addAttribute("outF", outF);
+		recordListModelSeting(collegestudentdao, model, recordList, student.getStudent_code());
+		
 	}
 
 	/*
@@ -162,17 +98,28 @@ public class CollegeStudentService {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
 
 		StudentInfoDTO student = collegestudentdao.getStudent(userid);
-
-		StudentStateDTO state = collegestudentdao.getStudentState(student.getStudent_code());
-		model.addAttribute("state", state);
 		recordrequest.setStudent_code(student.getStudent_code());
 
 		List<StudentRecordDTO> recordList = collegestudentdao.getRecordSelectList(recordrequest);
+		
+		recordListModelSeting(collegestudentdao, model, recordList, student.getStudent_code());
+	}
+
+	/*
+	 * @method Name : recordListModelSeting
+	 * @Author :  최준호
+	 * @description 
+	 * 비동기 요청과 일반 요청의 공통 로직을 분리하여 정리
+	 */
+	public void recordListModelSeting (CollegeStudentDAO collegestudentdao,Model model, List<StudentRecordDTO> recordList,String student_code ) {
+		StudentStateDTO state = collegestudentdao.getStudentState(student_code);
+		model.addAttribute("state", state);
+
 		int majorCredit = 0;
 		int doubleCredit = 0;
 		int liberalCredit = 0;
 
-		List<StudentMajorDTO> majorList = collegestudentdao.getMajor(student.getStudent_code());
+		List<StudentMajorDTO> majorList = collegestudentdao.getMajor(student_code);
 
 		boolean doubleMajor = false;
 		String mainMajor = "";
@@ -232,7 +179,6 @@ public class CollegeStudentService {
 		model.addAttribute("inF", inF);
 		model.addAttribute("outF", outF);
 	}
-
 	
 	/*
 	 * @method Name :  viewRegisterInfo
