@@ -9,28 +9,30 @@ package kr.or.initspring.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import kr.or.initspring.dto.commons.NoticeDTO;
 import kr.or.initspring.dto.notice.CustomerNoticeDTO;
 
 public interface NoticeDAO {
-	// 게시물 개수
+	// 게시물 갯수
 	public int getCount(String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 전체 게시물
 	public List<CustomerNoticeDTO> getNotices(int page, String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 게시물 삭제
-	public int delete(String notice_index) throws ClassNotFoundException, SQLException;
+	public int delete(int notice_index) throws ClassNotFoundException, SQLException;
 
 	// 게시물 수정
 	public int update(CustomerNoticeDTO noticedto) throws ClassNotFoundException, SQLException;
 
 	// 게시물 상세
-	public CustomerNoticeDTO getNotice(String notice_index) throws ClassNotFoundException, SQLException;
+	public CustomerNoticeDTO getNotice(int notice_index) throws ClassNotFoundException, SQLException;
 
 	// 게시물 입력
 	public int insert(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
 	
-	//관리자 코드 뽑아와야해
+	//관리자 코드 가져오기
 	public String selectAdmin(String amdinid);
+	
+	//게시물 조회수
+	public int increase(int notice_index) throws ClassNotFoundException, SQLException;
 }

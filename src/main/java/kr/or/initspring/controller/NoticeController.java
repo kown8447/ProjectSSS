@@ -80,7 +80,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 상세보기
 	 */
 	 @RequestMapping("noticeDetail.htm")
-	 public String noticeDetail(String notice_index , Model model ) throws ClassNotFoundException, SQLException{
+	 public String noticeDetail(int notice_index , Model model ) throws ClassNotFoundException, SQLException{
 		 CustomerNoticeDTO noticedto = noticeservice.noticeDetail(notice_index);
 		 model.addAttribute("notice", noticedto);
   	     return "notice.noticeDetail";
@@ -92,7 +92,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 삭제하기
 	 */
 	@RequestMapping("noticeDel.htm")
-	public String noticeDel(String notice_index) throws ClassNotFoundException, SQLException {
+	public String noticeDel(int notice_index) throws ClassNotFoundException, SQLException {
 		String url = noticeservice.noticeDel(notice_index);
 		return url;
 	}
@@ -105,7 +105,7 @@ public class NoticeController {
 	 * @description : 공지사항 글수정하기 (두가지 처리 : 화면(select) , 처리(update))
 	 */
 	@RequestMapping(value = "noticeEdit.htm", method = RequestMethod.GET)
-	public String noticeEdit(String notice_index, Model model) throws ClassNotFoundException, SQLException {
+	public String noticeEdit(int notice_index, Model model) throws ClassNotFoundException, SQLException {
 
 		CustomerNoticeDTO notice = noticeservice.noticeEdit(notice_index);
 		model.addAttribute("notice", notice);

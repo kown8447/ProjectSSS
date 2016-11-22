@@ -91,10 +91,12 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 상세보기 service
 	 */
-	public CustomerNoticeDTO noticeDetail(String notice_index) throws ClassNotFoundException, SQLException {
+	public CustomerNoticeDTO noticeDetail(int notice_index) throws ClassNotFoundException, SQLException {
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		noticedao.increase(notice_index);
 		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);
+		
 		return noticedto;
 	}
 
@@ -103,7 +105,7 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 삭제하기 service
 	 */
-	public String noticeDel(String notice_index) throws ClassNotFoundException, SQLException {
+	public String noticeDel(int notice_index) throws ClassNotFoundException, SQLException {
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		noticedao.delete(notice_index);
@@ -116,7 +118,7 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 수정하기 service
 	 */
-	public CustomerNoticeDTO noticeEdit(String notice_index) throws ClassNotFoundException, SQLException {
+	public CustomerNoticeDTO noticeEdit(int notice_index) throws ClassNotFoundException, SQLException {
 		System.out.println("글 수정하기 service");
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);

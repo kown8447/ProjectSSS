@@ -16,11 +16,11 @@
 </se:authorize>
 	<table border="1px">
 			<tr>
-				<th class="seq">번호</th>
-				<th class="title">제목</th>
-				<th class="writer">작성자</th>
-				<th class="regdate">작성일</th>
-				<th class="hit">조회수</th>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
 		<tbody>
 			<c:forEach items="${list}" var="n">
