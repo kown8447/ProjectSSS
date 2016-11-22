@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import kr.or.initspring.dao.CollegeStudentDAO;
-import kr.or.initspring.dto.collegeRegister.SubjectMajorDTO;
+import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.collegeRegister.StudentMajorDTO;
 import kr.or.initspring.dto.collegeRegister.StudentRecordDTO;
 import kr.or.initspring.dto.collegeRegister.StudentRegisterDTO;
@@ -33,6 +33,12 @@ public class CollegeStudentService {
 	@Autowired
 	private SqlSession sqlsession;
 
+	/*
+	 * @method Name : viewStudentInfo
+	 * @Author :  최준호
+	 * @description 
+	 * 학생이 자신의 개인정보 열람을 요청했을시 해당정보를 찾아주는 함수
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void viewStudentInfo(String userid, Model model) {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
@@ -54,7 +60,8 @@ public class CollegeStudentService {
 		StudentStateDTO state = collegestudentdao.getStudentState(student.getStudent_code());
 		model.addAttribute("state", state);
 
-		int semesterCount = collegestudentdao.semesterCount(student.getStudent_code());
+		int semesterCount = ((state.getGrade() - 1) * 2) + (state.getPersonal_semester() - 1);
+
 		model.addAttribute("semesterCount", semesterCount);
 
 		int absenceCount = collegestudentdao.absenceCount(student.getStudent_code());
@@ -62,15 +69,22 @@ public class CollegeStudentService {
 
 	}
 
+	/*
+	 * @method Name : viewStudentRecordInfo
+	 * @Author :  최준호
+	 * @description 
+	 * 학생이 자신의 성적정보 열람을 요청했을시 전체성적을 가져오는 함수
+	 */
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void viewStudentRecordInfo(String userid, Model model) {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
 
 		StudentInfoDTO student = collegestudentdao.getStudent(userid);
 
+		List<StudentRecordDTO> recordList = collegestudentdao.getRecordFullList(student.getStudent_code());
+		
 		StudentStateDTO state = collegestudentdao.getStudentState(student.getStudent_code());
 		model.addAttribute("state", state);
-
-		List<StudentRecordDTO> recordList = collegestudentdao.getRecordFullList(student.getStudent_code());
 
 		int majorCredit = 0;
 		int doubleCredit = 0;
@@ -92,7 +106,7 @@ public class CollegeStudentService {
 
 		for (int i = 0; i < recordList.size(); i++) {
 			if (recordList.get(i).getSubject_type() == 0) {
-				SubjectMajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
+				MajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
 				if (major.getRequired_choice() == 0) {
 					recordList.get(i).setStringtype("전공 필수");
 				} else {
@@ -127,7 +141,6 @@ public class CollegeStudentService {
 		float inF = creditCalculatorInF(recordList);
 		float outF = creditCalculatorOutF(recordList);
 
-		System.out.println(state.toString());
 		model.addAttribute("state", state);
 		model.addAttribute("recordList", recordList);
 		model.addAttribute("majorCredit", majorCredit);
@@ -138,6 +151,13 @@ public class CollegeStudentService {
 		model.addAttribute("outF", outF);
 	}
 
+	/*
+	 * @method Name : viewStudentRecordAjax
+	 * @Author :  최준호
+	 * @description 
+	 * 학생의 비동기 요청에 대해 학기별 성적정보를 찾아주는 함수
+	 */
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void viewStudentRecordAjax(RecordRequestDTO recordrequest, String userid, Model model) {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
 
@@ -168,7 +188,7 @@ public class CollegeStudentService {
 
 		for (int i = 0; i < recordList.size(); i++) {
 			if (recordList.get(i).getSubject_type() == 0) {
-				SubjectMajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
+				MajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
 				if (major.getRequired_choice() == 0) {
 					recordList.get(i).setStringtype("전공 필수");
 				} else {
@@ -209,11 +229,18 @@ public class CollegeStudentService {
 		model.addAttribute("liberalCredit", liberalCredit);
 		model.addAttribute("doubleCredit", doubleCredit);
 		model.addAttribute("totalCredit", majorCredit + liberalCredit + doubleCredit);
-		System.out.println(inF);
 		model.addAttribute("inF", inF);
 		model.addAttribute("outF", outF);
 	}
 
+	
+	/*
+	 * @method Name :  viewRegisterInfo
+	 * @Author :  최준호
+	 * @description 
+	 * 학생의 등록, 장학 정보를 열람하는 함수
+	 */
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void viewRegisterInfo(String userid, Model model) {
 		CollegeStudentDAO collegestudentdao = sqlsession.getMapper(CollegeStudentDAO.class);
 
@@ -266,6 +293,12 @@ public class CollegeStudentService {
 
 	}
 
+	/*
+	 * @method Name :  creditCalculatorInF
+	 * @Author :  최준호
+	 * @description 
+	 * F학점을 포함한 학점평균을 구하는 함수
+	 */
 	public float creditCalculatorInF(List<StudentRecordDTO> recordList) {
 		int totalCredit = 0;
 		float totalScore = 0.0f;
@@ -301,6 +334,12 @@ public class CollegeStudentService {
 		return Math.round((totalScore / totalCredit) * 100f) / 100f;
 	}
 
+	/*
+	 * @method Name :  creditCalculatorOutF
+	 * @Author :  최준호
+	 * @description 
+	 * F학점을 제외한 학점평균을 구하는 함수
+	 */
 	public float creditCalculatorOutF(List<StudentRecordDTO> recordList) {
 		int totalCredit = 0;
 		float totalScore = 0.0f;

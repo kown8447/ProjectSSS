@@ -1,9 +1,16 @@
 package kr.or.initspring.dto.collegeRegister;
 
+/*
+* @Class: StudentStateDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 학적상태
+* 
+*/
 public class StudentStateDTO {
-	private int grade;
-	private int personal_semester;
-	private int total_credit;
+	private int grade; // 현재 학년
+	private int personal_semester;// 학생 개인 학기
+	private int total_credit;// 총 이수 학점
 
 	public int getGrade() {
 		return grade;
@@ -34,7 +41,5 @@ public class StudentStateDTO {
 		return "StudentStateDTO [grade=" + grade + ", personal_semester=" + personal_semester + ", total_credit="
 				+ total_credit + "]";
 	}
-	
-	
 
 }

@@ -1,18 +1,24 @@
 package kr.or.initspring.dto.collegeRegister;
+/*
+* @Class: StudentInfoDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 학생,회원
+* 
+*/
 
 import java.sql.Date;
 
 public class StudentInfoDTO {
-	private String student_code;
-	private String code_name;
-	private String studentState;
-	private String member_name;
-	private String member_addr;
-	private Date member_birth;
-	private String member_phone;
-	private String member_email;
-	private String member_picture;
-	private int enterYear;
+	private String student_code; //학번
+	private String code_name; //학생상태
+	private String member_name;//회원 이름
+	private String member_addr;//회원 주소
+	private Date member_birth;//회원 생일
+	private String member_phone;//회원 연락처
+	private String member_email;//회원 이메일
+	private String member_picture;//회원 사진(파일명)
+	private int enterYear;//입학일
 
 	public String getStudent_code() {
 		return student_code;
@@ -28,14 +34,6 @@ public class StudentInfoDTO {
 
 	public void setCode_name(String code_name) {
 		this.code_name = code_name;
-	}
-
-	public String getStudentState() {
-		return studentState;
-	}
-
-	public void setStudentState(String studentState) {
-		this.studentState = studentState;
 	}
 
 	public String getMember_name() {
@@ -96,10 +94,12 @@ public class StudentInfoDTO {
 
 	@Override
 	public String toString() {
-		return "StudentInfoDTO [student_code=" + student_code + ", code_name=" + code_name + ", studentState="
-				+ studentState + ", member_name=" + member_name + ", member_addr=" + member_addr + ", member_birth="
-				+ member_birth + ", member_phone=" + member_phone + ", member_email=" + member_email
-				+ ", member_picture=" + member_picture + ", enterYear=" + enterYear + "]";
+		return "StudentInfoDTO [student_code=" + student_code + ", code_name=" + code_name + ", member_name="
+				+ member_name + ", member_addr=" + member_addr + ", member_birth=" + member_birth + ", member_phone="
+				+ member_phone + ", member_email=" + member_email + ", member_picture=" + member_picture
+				+ ", enterYear=" + enterYear + "]";
 	}
+
+	
 
 }

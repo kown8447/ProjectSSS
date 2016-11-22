@@ -1,13 +1,20 @@
 package kr.or.initspring.dto.collegeRegister;
 
+/*
+* @Class: StudentSemesterStateDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 재학기록
+* 
+*/
 public class StudentSemesterStateDTO {
-	private String semester_code;
-	private int student_grade;
-	private int student_semester;
-	private int get_credit;
-	private int request_credit;
-	private String semesterYear;
-	private String semesterType;
+	private String semester_code; // 학기코드
+	private int student_grade; // 학생학년
+	private int student_semester; // 학생개인학기
+	private int get_credit; //취득학점
+	private int request_credit; //신청학점
+	private String semesterYear; //학기년도
+	private String semesterType; //학기 분류
 
 	public String getSemester_code() {
 		return semester_code;

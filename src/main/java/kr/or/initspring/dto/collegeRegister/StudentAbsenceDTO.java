@@ -1,11 +1,18 @@
 package kr.or.initspring.dto.collegeRegister;
+/*
+* @Class: StudentAbsenceDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 휴학기록 테이블
+* 휴학 정보 테이블에서 rownum으로 구한 순번을 담기위한 변수를 추가한 DTO
+*/
 
 public class StudentAbsenceDTO {
-	private int absenceIndex;
-	private java.sql.Date absence_date;
-	private int absence_term;
-	private String absence_reason;
-	private java.sql.Date return_date;
+	private int absenceIndex;//휴학 순번
+	private java.sql.Date absence_date;//휴학신청일
+	private int absence_term;//휴학기간
+	private String absence_reason;//휴학사유
+	private java.sql.Date return_date;//복학예정일
 
 	public int getAbsenceIndex() {
 		return absenceIndex;

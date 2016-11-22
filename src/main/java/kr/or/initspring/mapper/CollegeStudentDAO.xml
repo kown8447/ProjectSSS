@@ -26,10 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 		STUDENT_CODE=#{param1}
 	</select>
-	<select id="semesterCount" resultType="Integer">
-		SELECT COUNT(*) FROM
-		SM_STATE WHERE STUDENT_CODE=#{param1}
-	</select>
 	<select id="absenceCount" resultType="Integer">
 		SELECT COUNT(*) FROM
 		ABSENCE WHERE STUDENT_CODE=#{param1}
@@ -39,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		r.SUBJECT_CODE,r.RECORD_GRADE,r.RECORD_SEMESTER,r.RETAKE_CHECK,r.RECORD_LEVEL,s.SUBJECT_NAME,s.SUBJECT_CREDIT,s.SUBJECT_TYPE
 		FROM RECORD r JOIN SUBJECT s on r.SUBJECT_CODE =s.SUBJECT_CODE where
-		r.STUDENT_CODE=#{param1}
+		r.STUDENT_CODE=#{param1} ORDER by r.RECORD_GRADE,r.RECORD_SEMESTER
 	</select>
 	<select id="getRecordSelectList"
 		resultType="kr.or.initspring.dto.collegeRegister.StudentRecordDTO"
@@ -50,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		r.RECORD_SEMESTER=${semester}
 	</select>
 	<select id="majorEssentialCheck"
-		resultType="kr.or.initspring.dto.collegeRegister.SubjectMajorDTO">SELECT
+		resultType="kr.or.initspring.dto.commons.MajorDTO">SELECT
 		* FROM MAJOR
 		where
 		SUBJECT_CODE=#{param1}
@@ -69,13 +65,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getStudentSemesterList"
 		resultType="kr.or.initspring.dto.collegeRegister.StudentSemesterStateDTO">
 		SELECT
-		SEMESTER_CODE,STUDENT_CODE,STUDENT_SEMESTER,GET_CREDIT,REQUEST_CREDIT
+		SEMESTER_CODE,STUDENT_CODE,STUDENT_GRADE,STUDENT_SEMESTER,GET_CREDIT,REQUEST_CREDIT
 		FROM SM_STATE where STUDENT_CODE=#{param1}
 	</select>
 	<select id="getStudentScholarshipList"
 		resultType="kr.or.initspring.dto.collegeRegister.StudentScholarshipDTO">
 		SELECT rownum as
-		scholarshipindex,s.SEMESTER_CODE,scs.SCHOLASHIP_NAME,scs.SCHOLASHIP_AMOUNT,scs.SCHOLASHIP_STANDARD
+		scholashipindex,s.SEMESTER_CODE,scs.SCHOLASHIP_NAME,scs.SCHOLASHIP_AMOUNT,scs.SCHOLASHIP_STANDARD
 		FROM SCHOLARSHIP s join SC_SYSTEM scs on s.SYS_CODE=scs.SYS_CODE WHERE
 		s.STUDENT_CODE=#{param1} ORDER BY SCHOLARSHIP_PAYDAY asc
 	</select>

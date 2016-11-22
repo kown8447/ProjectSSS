@@ -1,9 +1,15 @@
 package kr.or.initspring.dto.collegeRegister;
+/*
+* @Class: RecordRequestDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* 학생 성적적보 요청에 필요한 데이터를 받기 위한 DTO
+*/
 
 public class RecordRequestDTO {
-	private int grade;
-	private int semester;
-	private String student_code;
+	private int grade; //학생 학년
+	private int semester;//개인 학기
+	private String student_code;//학번
 
 	public int getGrade() {
 		return grade;

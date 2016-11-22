@@ -1,15 +1,22 @@
 package kr.or.initspring.dto.collegeRegister;
 
+/*
+* @Class: StudentRecordDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 성적, 과목
+* 
+*/
 public class StudentRecordDTO {
-	private String subject_code;
-	private int record_grade;
-	private int record_semster;
-	private int retake_check;
-	private String record_level;
-	private String subject_name;
-	private int subject_credit;
-	private int subject_type;
-	private String stringtype;
+	private String subject_code; // 과목코드
+	private int record_grade; // 수강당시 학년
+	private int record_semster; // 수강당시 학기
+	private int retake_check; // 재수강 체크
+	private String record_level; //성적 등급 (A~F)
+	private String subject_name; //과목명
+	private int subject_credit; //과목 학점
+	private int subject_type; //과목 타입(전공, 교양)
+	private String stringtype; //과목 타입, 문자 (전공필수, 전공선택, 교양필수, 교양선택)
 
 	public String getSubject_code() {
 		return subject_code;

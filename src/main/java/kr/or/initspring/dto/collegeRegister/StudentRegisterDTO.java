@@ -1,16 +1,24 @@
 package kr.or.initspring.dto.collegeRegister;
 
+/*
+* @Class: StudentRegisterDTO
+* @Date: 2016. 11. 21
+* @Author: 최준호
+* @Desc : 등록, 학기
+* 
+*/
+
 public class StudentRegisterDTO {
-	private String student_code;
-	private String semester_code;
-	private String semester_Name;
-	private java.sql.Date semester_start;
-	private java.sql.Date semester_end;
-	private int register_type;
-	private int tuition;
-	private int register_state;
-	private String semesterYear;
-	private String semesterType;
+	private String student_code; //학번
+	private String semester_code; //학기코드
+	private String semester_Name; //학기 이름
+	private java.sql.Date semester_start; //학기 시작일
+	private java.sql.Date semester_end; //학기 종료일
+	private int register_type; //등록유형 (일반, 계절학기, 졸업연기)
+	private int tuition; // 등록금액
+	private int register_state; //금액납부상태
+	private String semesterYear; //학기년도
+	private String semesterType; //학기구분(전반기, 후반기, 계절학기-여름, 계절학기-겨울)
 
 	public String getStudent_code() {
 		return student_code;
