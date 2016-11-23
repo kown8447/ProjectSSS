@@ -5,7 +5,7 @@
 <hr>
 <h3>
 	<a href="${pageContext.request.contextPath}/index.htm">헤더 입니다.(메인)</a>
-	</h3>
+</h3>
 <se:authorize
 	access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/join/join1.htm">회원가입</a>
@@ -23,9 +23,11 @@
 	<a href="${pageContext.request.contextPath}/logout">(${LoginUser})로그아웃</a>
 </se:authorize>
 
-<a
-	href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">MY
-	Page</a>
+<se:authorize access="hasRole('ROLE_STUDENT')">
+	<a
+		href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">MY
+		Page</a>
+</se:authorize>
 
 <se:authorize access="hasRole('ROLE_STUDENT')">
 	<a

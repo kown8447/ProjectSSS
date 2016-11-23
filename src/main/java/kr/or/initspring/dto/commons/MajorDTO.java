@@ -3,16 +3,13 @@ package kr.or.initspring.dto.commons;
 public class MajorDTO {
 	/*
 	 * @Class: MajorDTO
-	 * 
 	 * @Date: 2016. 11. 19
-	 * 
 	 * @Author: 김영빈
-	 * 
 	 * @Desc: 전공과목
 	 */
 	private String subject_code; // 과목코드
 	private String department_code; // 학과코드
-	private int required_choice; // 필수 or 선택
+	private String required_choice; // 필수 or 선택
 
 	public String getSubject_code() {
 		return subject_code;
@@ -30,11 +27,11 @@ public class MajorDTO {
 		this.department_code = department_code;
 	}
 
-	public int getRequired_choice() {
+	public String getRequired_choice() {
 		return required_choice;
 	}
 
-	public void setRequired_choice(int required_choice) {
+	public void setRequired_choice(String required_choice) {
 		this.required_choice = required_choice;
 	}
 

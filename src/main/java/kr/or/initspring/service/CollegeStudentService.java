@@ -55,7 +55,6 @@ public class CollegeStudentService {
 			} else {
 				model.addAttribute("doubleMajor", major.get(i));
 			}
-
 		}
 		StudentStateDTO state = collegestudentdao.getStudentState(student.getStudent_code());
 		model.addAttribute("state", state);
@@ -136,7 +135,7 @@ public class CollegeStudentService {
 		for (int i = 0; i < recordList.size(); i++) {
 			if (recordList.get(i).getSubject_type() == 0) {
 				MajorDTO major = collegestudentdao.majorEssentialCheck(recordList.get(i).getSubject_code());
-				if (major.getRequired_choice() == 0) {
+				if (major.getRequired_choice().equals('0')) {
 					recordList.get(i).setStringtype("전공 필수");
 				} else {
 					recordList.get(i).setStringtype("전공 선택");
@@ -226,11 +225,6 @@ public class CollegeStudentService {
 		}
 
 		List<StudentAbsenceDTO> absenceList = collegestudentdao.getStudentAbsenceList(student.getStudent_code());
-
-		System.out.println(registerList.get(0).toString());
-		System.out.println(studentSemesterList.get(0).toString());
-		System.out.println(scholarshipList.get(0).toString());
-		System.out.println(absenceList.get(0).toString());
 
 		model.addAttribute("registerList", registerList);
 		model.addAttribute("studentSemesterList", studentSemesterList);
