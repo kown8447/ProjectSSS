@@ -4,10 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.initspring.dao.NoticeDAO">
 	<select id="getNotices" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
-		select * from
-		(select rownum num, n.*
-		from ( select * from notice where ${param2} like '%${param3}%' order by notice_date desc) n) 
-		where num between 1 + (${param1} - 1) * 5 and 5 + (${param1} - 1) * 5
+		SELECT * FROM (SELECT trunc((ROWNUM-1)/${param1})+1 as pagenum, 
+		N.* FROM( SELECT * FROM notice where ${param3} LiKE '%${param4}%' ORDER BY notice_refer DESC,notice_step ASC) N)
+		where pagenum = ${param2}
 	</select>
 
 	<select id="getNotice" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
@@ -15,10 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getCount" resultType="Integer">
-		select Notice_Count(*) CNT
+		select notice_count(*) CNT
 		from NOTICE
 		where ${param1} LIKE '%${param2}%'
-	</select>
+	</select>	
 	
 	<delete id="delete">
 	 	delete notice where notice_index=#{notice_index}
@@ -33,18 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="selectAdmin" resultType="String">
-		select admin_Code FROM admin where member_Id = #{param1}
+		select admin_code FROM admin where member_Id = #{param1}
 	</select>
 	
 	<insert id="insert">
 
-		<selectKey order="BEFORE" keyProperty="notice_index" resultType="Integer">
-			select max(notice_Index)+1 from notice
+		<selectKey order="BEFORE" keyProperty="notice_refer" resultType="Integer">
+			select nvl(max(notice_refer), 0)+1 from notice
 		</selectKey>
 
 		insert into notice(notice_index, admin_code, notice_depth,
 		notice_step, notice_refer, notice_file, notice_title ,notice_content, notice_date )
-		values( #{notice_index}, #{admin_code}, 0, 0, #{notice_refer},
+		values( notice_index.nextval, #{admin_code}, 0, 0, #{notice_refer},
 		#{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
 	
@@ -54,10 +53,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where notice_index = #{notice_index}	
 	</update>
 
-	<update id="getDepth">
-		update notice set notice_depth = notice_depth + 1
-		where notice_index = #{notice_indx} and notice_depth > #{notice_depth}
+	<update id="addStep">
+		update notice set notice_step = notice_step + 1
+		where notice_refer = #{notice_refer} and notice_step > #{notice_step}
 	</update>
+
+	<insert id="replyWrite" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		
+		insert into notice(notice_index, admin_code, notice_depth, notice_step,
+		notice_refer, notice_file, notice_title ,notice_content, notice_date )
+		values( notice_index.nextval, #{admin_code}, #{notice_depth},
+		#{notice_step}, #{notice_refer},
+		#{notice_file,jdbcType=VARCHAR},
+		#{notice_title}, #{notice_content}, SYSDATE)
+	</insert>
 	
+	<select id="lastReplyStep" resultType="Integer" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+        SELECT nvl(max(notice_step),0) from notice where notice_refer=${notice_refer} and notice_depth=${notice_depth}+1
+   </select>
 	
+
 </mapper>

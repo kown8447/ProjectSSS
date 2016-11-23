@@ -11,9 +11,7 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <h3>공지사항</h3>
 <div id="content">
-<se:authorize access="hasAnyRole('ROLE_ADMIN')">
-	<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm"> 글쓰기</a>
-</se:authorize>
+
 	<table border="1px">
 			<tr>
 				<th>번호</th>
@@ -26,7 +24,16 @@
 			<c:forEach items="${list}" var="n">
 				<tr>
 					<td>${n.notice_index}</td>
-					<td><a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a></td>
+					<td>               
+                     <c:choose>
+                        <c:when test="${n.notice_depth != 0 }">
+                           <c:forEach var="depth"  begin="0" end="${n.notice_depth*2}" step="1">
+                              &nbsp;
+                           </c:forEach>                  
+                           <img src="../image/reply.png">&nbsp;   
+                        </c:when>
+                  </c:choose>
+              <a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a></td>
 					<td>관리자</td>
 					<td>${n.notice_date}</td>
 					<td>${n.notice_count}</td>
@@ -34,4 +41,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<se:authorize access="hasAnyRole('ROLE_ADMIN')">
+	<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm"> 글쓰기</a>
+</se:authorize>
 </div>

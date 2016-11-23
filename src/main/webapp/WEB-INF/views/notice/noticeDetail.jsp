@@ -1,3 +1,11 @@
+<%--
+@Project : InitSpring
+@File name : noticeDetail.jsp
+@Author : 송아름
+@Data : 2016.11.18
+@Desc : 게시판 공지사항 글상세보기 form
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -38,10 +46,10 @@
 
 		<p>
 		<a  href="notice.htm">목록</a> 
+		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 		<a  href="noticeEdit.htm?notice_index=${notice.notice_index}">수정</a>
 		<a  href="noticeDel.htm?notice_index=${notice.notice_index}">삭제</a>
-		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
-		<a  href="noticeDel.htm?notice_index=${notice.notice_index}">답글</a>
+		<a  href="replyWrite.htm?notice_index=${notice.notice_index}">답글</a>
 		</se:authorize>
 		
 		</p>

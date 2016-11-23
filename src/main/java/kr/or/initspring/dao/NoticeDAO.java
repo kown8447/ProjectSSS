@@ -16,7 +16,8 @@ public interface NoticeDAO {
 	public int getCount(String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 전체 게시물
-	public List<CustomerNoticeDTO> getNotices(int page, String field, String query) throws ClassNotFoundException, SQLException;
+	public List<CustomerNoticeDTO> getNotices(int pagesize, int pagenum, String field, String query)
+			throws ClassNotFoundException, SQLException;
 
 	// 게시물 삭제
 	public int delete(int notice_index) throws ClassNotFoundException, SQLException;
@@ -29,10 +30,20 @@ public interface NoticeDAO {
 
 	// 게시물 입력
 	public int insert(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
-	
-	//관리자 코드 가져오기
+
+	// 관리자 코드 가져오기
 	public String selectAdmin(String amdinid);
-	
-	//게시물 조회수
+
+	// 게시물 조회수
 	public int increase(int notice_index) throws ClassNotFoundException, SQLException;
+
+	//현재 답변의 단 게시물 보다 더 높은 스텝의 게시물이 있다면 스탭을 하나씩 상승시킴
+	public void addStep(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
+	
+	//답글 달기
+	public void replyWrite(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
+	
+	//마지막 스텝 찾기
+	public int lastReplyStep(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
+
 }

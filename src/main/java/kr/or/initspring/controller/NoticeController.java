@@ -38,9 +38,10 @@ public class NoticeController {
 	 * @description : 공지사항 글 목록보기
 	 */
 	@RequestMapping("notice.htm")
-	public String notices(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {
-		List<CustomerNoticeDTO> list = noticeservice.notices(pg, f, q);
+	public String notices(String ps, String pn, String f, String q, Model model) throws ClassNotFoundException, SQLException {
+		List<CustomerNoticeDTO> list = noticeservice.notices(ps, pn, f, q);
 		model.addAttribute("list", list);
+
 		return "notice.notice";
 	}
 
@@ -140,6 +141,37 @@ public class NoticeController {
 
 	}
 	
-	
+	/*
+	 * @method Name : replyWrite
+	 * @Author : 송아름
+	 * @description : 공지사항 게시물 상세보기에서 답변클릭시 처리화면 
+	 */
+	@RequestMapping(value = "replyWrite.htm", method = RequestMethod.GET)
+	public String replyWrite(int notice_index, Model model)throws ClassNotFoundException, SQLException {
 
+		CustomerNoticeDTO notice = noticeservice.replyWrite(notice_index);
+		model.addAttribute("notice", notice);
+		return "notice.replyWrite";
+	}
+	
+	/*
+	 * @method Name : replyWrite
+	 * @Author : 송아름
+	 * @description : 공지사항 실제 답글 등록 처리
+	 */
+	@RequestMapping(value = "replyWrite.htm", method = RequestMethod.POST)
+	public String replyWrite(Principal principal, CustomerNoticeDTO cn, HttpServletRequest request)
+			throws IOException, ClassNotFoundException, SQLException {
+		
+		
+		String url = "redirect:notice.htm";
+		
+		try {
+			url = noticeservice.replyWrite(principal, cn, request);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return url;
+	}
+	
 }

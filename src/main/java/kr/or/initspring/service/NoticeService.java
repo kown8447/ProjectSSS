@@ -50,28 +50,83 @@ public class NoticeService {
 
 		}
 		cn.setNotice_file(filenames);
-		System.out.println(cn.toString());
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		cn.setAdmin_code(noticedao.selectAdmin(principal.getName()));
-		noticedao.insert(cn);
+		noticedao.insert(cn);	
 
 		return "redirect:notice.htm";
 	}
+	
+	/*
+	 * @method Name : noticeWrite
+	 * @Author : 송아름
+	 * @description : 답글 등록 파일 업로드 service
+	 */
+	public String replyWrite(Principal principal, CustomerNoticeDTO cn, HttpServletRequest request)
+			throws IOException, ClassNotFoundException, SQLException {
+
+		CommonsMultipartFile file = cn.getFile();
+		String filenames = null;
+		if (file != null && file.getSize() > 0) {
+
+			String fname = file.getOriginalFilename(); // 파일명 얻기
+			String path = request.getServletContext().getRealPath("/files/notice");
+			String fullpath = path + "\\" + fname;
+
+			if (!fname.equals("")) {
+				FileOutputStream fs = new FileOutputStream(fullpath);
+				fs.write(file.getBytes());
+				fs.close();
+			}
+			filenames = fname;
+
+		}
+		cn.setNotice_file(filenames);
+
+		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		  int lastReplyStep =noticedao.lastReplyStep(cn);
+          if(lastReplyStep!=0){
+             cn.setNotice_step(lastReplyStep);
+          }
+          
+          noticedao.addStep(cn);
+		cn.setAdmin_code(noticedao.selectAdmin(principal.getName()));
+		cn.setNotice_step(cn.getNotice_step()+1);
+		cn.setNotice_depth(cn.getNotice_depth()+1);
+		
+		noticedao.replyWrite(cn);
+		
+
+		return "redirect:notice.htm";
+	}
+	
+	public CustomerNoticeDTO replyWrite(int notice_index) throws ClassNotFoundException, SQLException {
+		
+		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);
+		return noticedto;
+	}
+
+
 
 	/*
 	 * @method Name : notices
 	 * @Author : 송아름
 	 * @description : 글 목록 service
 	 */
-	public List<CustomerNoticeDTO> notices(String pg, String f, String q) throws ClassNotFoundException, SQLException {
+	public List<CustomerNoticeDTO> notices(String ps, String pn, String f, String q) throws ClassNotFoundException, SQLException {
 
-		int page = 1;
+		int pagesize = 10;
+		int pagenum = 1;
 		String field = "notice_title";
 		String query = "%%";
 
-		if (pg != null && pg.equals("")) {
-			page = Integer.parseInt(pg);
+		if (pn != null && pn.equals("")) {
+			pagenum = Integer.parseInt(pn);
+		}
+		if (ps != null && ps.equals("")) {
+			pagesize = Integer.parseInt(ps);
 		}
 		if (f != null && f.equals("")) {
 			field = f;
@@ -81,7 +136,7 @@ public class NoticeService {
 		}
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		List<CustomerNoticeDTO> list = noticedao.getNotices(page, field, query);
+		List<CustomerNoticeDTO> list = noticedao.getNotices(pagesize, pagenum, field, query);
 
 		return list;
 	}
@@ -119,7 +174,7 @@ public class NoticeService {
 	 * @description : 글 수정하기 service
 	 */
 	public CustomerNoticeDTO noticeEdit(int notice_index) throws ClassNotFoundException, SQLException {
-		System.out.println("글 수정하기 service");
+	
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);
 		return noticedto;
@@ -182,5 +237,5 @@ public class NoticeService {
 		fin.close();
 		sout.close();
 	}
-
+	
 }
