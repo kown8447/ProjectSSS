@@ -74,11 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="setErollStatus" parameterType="hashmap">
-		update enroll_status set enroll_active=#{enroll_active} where enroll_grade=#{enroll_grade}
+		update enroll_status set enroll_active=#{enroll_active} where enroll_grade=#{enroll_grade} and enroll_type=#{enroll_type}
 	</update>
 	
-	<select id="getEnrollActiveByGrade" parameterType="int" resultType="int">
-		select enroll_active from enroll_status where enroll_grade=#{enroll_grade}
+	<select id="getEnrollActive" parameterType="int" resultType="int">
+		select enroll_active from enroll_status where enroll_grade=#{param1} and enroll_type=#{param2}
 	</select>
 	
 	<select id="getStStateByMemberId" resultType="kr.or.initspring.dto.commons.StStateDTO">
@@ -197,4 +197,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
 		select * from period
 	</select>
+	
+	<select id="getReserveList" resultType="kr.or.initspring.dto.commons.ReserveDTO">
+		select * from reserve
+	</select>
+	
+	<select id="countRequestSeat" resultType="int">
+		select count(*) from reserve where subject_code = #{subject_code}
+	</select>
+	
+	<select id="setReserveCheck" parameterType="hashmap">
+		update reserve set reserve_check = #{result} where subject_code = #{subject_code}
+	</select>
+	
+	<update id="updateRequestSeat">
+		update opened set registed_seat = #{param1} where subject_code = #{param2}
+	</update>
+	
+	<select id="getFailedListByStudentCode" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select * from
+		reserve r join subject s
+		on r.subject_code = s.subject_code
+		where r.student_code = #{student_code} and r.reserve_check=1
+	</select>
+	
+	<select id="getRegistedSeat" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select *
+		from opened o join subject s
+		on o.subject_code = s.subject_code
+		where o.subject_code= #{subject_code}
+	</select>
+	
+	<update id="updateRegistedSeat">
+		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
+	</update>
+	
+	<select id="checkAlreadyExistSubject" resultType="int">
+		select count(*) from reserve where subject_code=#{param1} and student_code=#{param2} and reserve_check=1
+	</select>
+	
+	<insert id="copyFromReserveToEnrollment">
+		insert into enrollment select student_code, subject_code from reserve where reserve_check=0
+	</insert>
+	
+	<select id="getTableFromEnrollment" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select * from
+		enrollment e join subject s
+		on e.subject_code = s.subject_code
+		where e.student_code = #{student_code}
+	</select>
+	
+	<insert id="insertEnrollment" parameterType="hashmap">
+		insert into enrollment values(#{student_code},#{subject_code})
+	</insert>
 </mapper>

@@ -21,12 +21,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
@@ -127,7 +125,7 @@ public class RequestCourseController {
 	/*
 	 * @method Name : preRegisterForm
 	 * @Author : 권기엽
-	 * @description : 관리자가 설정한 시간 및 대상 학년에 따라 사용자에게 보여지는 페이지를 다르게 return 하는 함수
+	 * @description : 관리자가 설정한 시간 및 대상 학년에 따라 사용자에게 보여지는 페이지를 다르게 return 하는 함수(예비 수강 신청)
 	*/
 	@RequestMapping("preRegister.htm")
 	public String preRegisterForm(Principal principal, Model model){
@@ -136,6 +134,20 @@ public class RequestCourseController {
 		viewpage = requestCourseService.possiblePreRegister(member_id);
 		return viewpage;
 	}
+	
+	/*
+	 * @method Name : realRegiserForm
+	 * @Author : 권기엽
+	 * @description : 관리자가 설정한 시간 및 대상 학년에 따라 사용자에게 보여지는 페이지를 다르게 return 하는 함수(본 수강 신청)
+	*/
+	@RequestMapping("realRegiser.htm")
+	public String realRegiserForm(Principal principal, Model model){
+		String viewpage = "";
+		String member_id = principal.getName();
+		viewpage = requestCourseService.possibleRealRegister(member_id);
+		return viewpage;
+	}
+	
 	
 	/*
 	 * @method Name : searchBykeword
@@ -321,4 +333,35 @@ public class RequestCourseController {
 		model.addAttribute("periodList", periodList);
 		return jsonview;
 	}
+	
+	
+	/*
+	 * @method Name : getRealTimetable
+	 * @Author : 권기엽
+	 * @description : 본 수강 신청 페이지 로딩시 비동기 처리로 예비수강신청 시간표 보여주는 함수, 수강 신청 실패 과목은 시간표에서 제외시키고, 검색 폼 최상단에 출력
+	*/
+	@RequestMapping("getRealTimetable.htm")
+	public View getRealTimetable(Principal principal, Model model){
+		List<OpenedLectureDTO> lists = requestCourseService.getRealTimetable(principal.getName());
+		List<PeriodDTO> periodList = requestCourseService.getPeriodList();
+		List<OpenedLectureDTO> failedLists = requestCourseService.getFailedList(principal.getName());
+		model.addAttribute("lists", lists);
+		model.addAttribute("periodList", periodList);
+		model.addAttribute("failedLists", failedLists);
+		return jsonview;
+	}
+	
+	/*
+	 * @method Name : insertRealDbSubject
+	 * @Author : 권기엽
+	 * @description : 본 수강 신청에서 과목 등록 요청했을 때 처리. 정원 이상일 경우 DB에 Insert 할 수 없다.
+	*/
+	@RequestMapping("insertRealDbSubject.htm")
+	public View insertRealDbSubject(Principal principal, Model model,
+			@RequestParam("subject_code")String subject_code) throws Exception{
+		HashMap<String, String> map = requestCourseService.insertRealDbSubject(principal.getName(), subject_code);
+		model.addAttribute("map", map);
+		return jsonview;
+	}
+	
 }

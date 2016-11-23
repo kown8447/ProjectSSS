@@ -28,7 +28,15 @@ public class OpenedLectureDTO {
 	private int required_choice;	//과목 필수_선택 여부
 	private List<CustomClassRoomDTO> customClassroomDTO;	//강의실 정보(강의실이 가지고 있는 강의 시간정보도 포함)
 	private int retake_check;	//재수강 여부 확인
+	private int reserve_check;	//수강 신청 성공 실패 여부 확인
 	
+	
+	public int getReserve_check() {
+		return reserve_check;
+	}
+	public void setReserve_check(int reserve_check) {
+		this.reserve_check = reserve_check;
+	}
 	public int getRetake_check() {
 		return retake_check;
 	}
@@ -133,7 +141,6 @@ public class OpenedLectureDTO {
 				+ ", subject_state=" + subject_state + ", subject_seats=" + subject_seats + ", subject_type="
 				+ subject_type + ", period=" + period + ", professor_name=" + professor_name + ", subject_filesrc="
 				+ subject_filesrc + ", required_choice=" + required_choice + ", customClassroomDTO="
-				+ customClassroomDTO + ", retake_check=" + retake_check + "]";
+				+ customClassroomDTO + ", retake_check=" + retake_check + ", reserve_check=" + reserve_check + "]";
 	}
-
 }
