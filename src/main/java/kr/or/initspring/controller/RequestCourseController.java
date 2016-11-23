@@ -33,6 +33,7 @@ import org.springframework.web.servlet.View;
 
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.RequestCourseService;
 
@@ -166,10 +167,10 @@ public class RequestCourseController {
 	*/
 	@RequestMapping("getOpSubjectInfo.htm")
 	public View getOpSubjectInfo(
-			@RequestParam("subject_code") String subject_code, Model model
+			@RequestParam("subject_code") String subject_code, Model model, Principal principal
 			){
 		System.out.println("subject_code : " + subject_code);
-		OpenedLectureDTO subject_info = requestCourseService.getOpSubjectInfoBySubjectCode(subject_code);
+		OpenedLectureDTO subject_info = requestCourseService.getOpSubjectInfoBySubjectCode(subject_code, principal.getName());
 		model.addAttribute("subject_info", subject_info);
 		return jsonview;
 	}
@@ -242,9 +243,82 @@ public class RequestCourseController {
 	public View getPreTimetable(Principal principal, Model model){
 		List<OpenedLectureDTO> lists = requestCourseService.getPreTimetable(principal.getName());
 		int timetable_share = requestCourseService.getTimetableShare(principal.getName());
+		List<PeriodDTO> periodList = requestCourseService.getPeriodList();
 		model.addAttribute("lists", lists);
 		model.addAttribute("timetable_share", timetable_share);
+		model.addAttribute("periodList", periodList);
 		return jsonview;
 	}
 	
+	/*
+	 * @method Name : searchOtherTimetable
+	 * @Author : 권기엽
+	 * @description : 타학생 시간표 조회 화면 이동
+	*/
+	@RequestMapping("searchOtherTimetable.htm")
+	public String searchOtherTimetable(){
+		return "requestCourse.searchOtherTimetable";
+	}
+	
+	/*
+	 * @method Name : checkTimetableShare
+	 * @Author : 권기엽
+	 * @description : 사용자의 시간표 공유 여부 확인
+	*/
+	@RequestMapping("checkTimetableShare.htm")
+	public View checkTimetableShare(Principal principal, Model model){
+		int result = 0;
+		String value="";
+		result = requestCourseService.getTimetableShare(principal.getName());
+		if(result==0){value="no";}
+		else{value="yes";}
+		model.addAttribute("share", value);
+		return jsonview;
+	}
+	
+	/*
+	 * @method Name : checkStudentCode
+	 * @Author : 권기엽
+	 * @description : 조회할 학생의 학번이 유효한지 체크
+	*/
+	@RequestMapping("checkStudentCode.htm")
+	public View checkStudentCode(@RequestParam("student_code") String student_code, Model model){
+		boolean result = false;
+		result = requestCourseService.checkStudentCode(student_code);
+		String value="";
+		if(result==true){value="yes";}
+		else{value="no";}
+		model.addAttribute("check_code", value);
+		return jsonview;
+	}
+	
+	/*
+	 * @method Name : checkOthersShare
+	 * @Author : 권기엽
+	 * @description : 조회 대상의 학생이 시간표 공유를 허용했는지 확인
+	*/
+	@RequestMapping("checkOthersShare.htm")
+	public View checkOthersShare(@RequestParam("student_code") String student_code, Model model){
+		boolean result = false;
+		result = requestCourseService.checkOthersShare(student_code);
+		String value="";
+		if(result==true){value="approve";}
+		else{value="deny";}
+		model.addAttribute("check_share", value);
+		return jsonview;
+	}
+	
+	/*
+	 * @method Name : loadOtherTimetable
+	 * @Author : 권기엽
+	 * @description : 조회한 학생의 시간표 정보 가져오기
+	*/
+	@RequestMapping("loadOtherTimetable.htm")
+	public View loadOtherTimetable(@RequestParam("student_code") String student_code, Model model){
+		List<OpenedLectureDTO> lists = requestCourseService.loadOtherTimetable(student_code);
+		List<PeriodDTO> periodList = requestCourseService.getPeriodList();
+		model.addAttribute("otherTimetables", lists);
+		model.addAttribute("periodList", periodList);
+		return jsonview;
+	}
 }

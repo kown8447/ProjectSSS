@@ -177,4 +177,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="plusRegistedSeatBySubjectCode">
 		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
 	</update>
+	
+	<select id="getRetakeCheck" resultType="int">
+		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
+	</select>
+	
+	<select id="checkStudentCode" resultType="int">
+		select count(*) from student where student_code = #{student_code}	
+	</select>
+	
+	<select id="checkOthersShareByStudentCode" resultType="int">
+		select timetable_share from student where student_code = #{student_code}
+	</select>
+	
+	<select id="getStudentByStudentCode" resultType="kr.or.initspring.dto.commons.StudentDTO">
+		select * from student where student_code = #{student_code}
+	</select>
+	
+	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
+		select * from period
+	</select>
 </mapper>

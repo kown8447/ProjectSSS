@@ -1,6 +1,5 @@
 package kr.or.initspring.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,4 +47,13 @@ public interface RequestCourseDAO {
 	public Integer getTimetableShareByMemberid(String memeber_id);	//멤버 아이디로 시간표 공유 여부 가져오기
 	
 	public List<OpenedLectureDTO> getPreTimetableByStudentCode(String student_code);	//학번으로 예비수강 신청 테이블 가져오기
+
+	public int getRetakeCheck(String student_code, String subject_code);	//학번+과목코드로 성적 테이블을 검색해서 검색결과가 있을 경우 재수강으로 취급
+
+	public Integer checkStudentCode(String student_code);	//학번이 있는지 체크
+	public Integer checkOthersShareByStudentCode(String student_code);	//학번 기준으로 시간표 공유 여부 확인
+
+	public StudentDTO getStudentByStudentCode(String student_code);	//학번으로 학생테이블 정보 가져오기
+	
+	public List<PeriodDTO> getPeriodList();	//시간을 가져오기 위해서 period 테이블 리스트를 가져옴
 }

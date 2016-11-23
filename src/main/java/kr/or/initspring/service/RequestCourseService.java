@@ -21,6 +21,7 @@ import kr.or.initspring.dao.RequestCourseDAO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
 import kr.or.initspring.dto.commons.SubjectDTO;
@@ -138,7 +139,7 @@ public class RequestCourseService {
 	 * @Author : 권기엽
 	 * @description : 한과목의 상세 정보를 가져오는 함수
 	*/	
-	public OpenedLectureDTO getOpSubjectInfoBySubjectCode(String subject_code){
+	public OpenedLectureDTO getOpSubjectInfoBySubjectCode(String subject_code, String member_id){
 		OpenedLectureDTO subject_info = new OpenedLectureDTO();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		subject_info = requestCourseDao.getOpSubjectInfoBySubjectCode(subject_code);
@@ -161,6 +162,10 @@ public class RequestCourseService {
 			classroomInfo.get(i).setSeat(dto.getSeat());
 		}
 		subject_info.setCustomClassroomDTO(classroomInfo);
+		
+		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
+		
+		subject_info.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), subject_code));
 		
 		System.out.println(subject_info.toString());
 		return subject_info;
@@ -286,8 +291,67 @@ public class RequestCourseService {
 			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+			dto.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), dto.getSubject_code()));
 		}
 		return lists;
 	}
 	
+	/*
+	 * @method Name : checkStudentCode
+	 * @Author : 권기엽
+	 * @description : 입력한 학번의 존재 여부 확인. 존재하면 true, 없으면 false 반환
+	*/
+	public boolean checkStudentCode(String student_code){
+		boolean result = false;
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int count=0;
+		count = requestCourseDao.checkStudentCode(student_code);
+		if(count > 0) result =true;
+		return result;
+	}
+	
+	/*
+	 * @method Name : checkOthersShare
+	 * @Author : 권기엽
+	 * @description : 조회한 학번의 학생의 시간표 공유 여부 확인
+	*/
+	public boolean checkOthersShare(String student_code){
+		boolean result = false;
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int count=0;
+		count = requestCourseDao.checkOthersShareByStudentCode(student_code);
+		if(count==1) result = true;
+		return result;
+	}
+	
+	/*
+	 * @method Name : loadOtherTimetable
+	 * @Author : 권기엽
+	 * @description : 조회 대상의 학번 기준 시간표 출력
+	*/
+	public List<OpenedLectureDTO> loadOtherTimetable(String student_code){
+		List<OpenedLectureDTO> lists=null;
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		StudentDTO studentDto = requestCourseDao.getStudentByStudentCode(student_code);
+		lists = requestCourseDao.getPreTimetableByStudentCode(studentDto.getStudent_code());
+		for(OpenedLectureDTO dto : lists){
+			dto.setPeriod(requestCourseDao.getPeriodBySubjectCode(dto.getSubject_code()));
+			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
+			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
+			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+			dto.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), dto.getSubject_code()));
+		}
+		return lists;
+	}
+	
+	/*
+	 * @method Name : getPeriodList
+	 * @Author : 권기엽
+	 * @description : 시간표의 시간 구분을 위함
+	*/
+	public List<PeriodDTO> getPeriodList(){
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		List<PeriodDTO> periodList = requestCourseDao.getPeriodList();
+		return periodList;
+	}
 }
