@@ -92,6 +92,7 @@ public class CustomLectureMgDTO {
 	public void setDepartment_code(String department_code) {
 		this.department_code = department_code;
 	}
+	
 	public String getRequired_choice() {
 		return required_choice;
 	}

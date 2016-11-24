@@ -16,25 +16,24 @@
 </script>
 </head>
 <body>
-	<c:set value="${list}" var="list">
+	<c:forEach items="${list}" var="list">
 	
 	<table border=1px>
 		<tr>
-		<td>구분</td><td>${list.subject_type}</td><td>강의대상</td><td>${list.record_grade}</td></tr>
+		<td>구분</td><td><input type="text" value="${list.subject_type}"></td>
+		<td>강의대상</td><td><input type="text" value="${list.record_grade}"></td></tr>
 		<tr>
-		<td>선수과목</td><td colspan="3">${list.subject_state}</td></tr>
+		<td>선수과목</td><td colspan="3"><input type="text" value="${list.subject_state}"></td></tr>
 		<tr>
-		<td>과목명</td><td colspan="3">${list.subject_name}</td></tr>
+		<td>과목명</td><td colspan="3"><input type="text" value="${list.subject_name}"></td></tr>
 		<tr>
-		<td>학점</td><td>${list.subject_credit}</td><td>정원</td><td>${list.subject_seats}</td></tr>
+		<td>학점</td><td><input type="text" value="${list.subject_credit}"></td>
+		<td>정원</td><td><input type="text" value="${list.subject_seats}"></td></tr>
 		<tr>
-		<td>선수과목</td><td>${list.before_code }</td></tr>
-		</c:set>
+		</c:forEach>
 	</table>
 	
 	<button id="back">돌아가기</button>  
 	<a href="lectureEdit.htm">수정하기</a>
-	<a href="lectureDelete.htm">삭제하기</a>
-	<a href="lectureRequest.htm">개설신청</a>
 </body>
 </html>

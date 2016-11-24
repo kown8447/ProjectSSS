@@ -6,28 +6,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
+
 	$(function(){
-	
+		
 	})
 
 </script>
 </head>
 <body>
+	
 	<table id="list" border="1px">
 		<tr>
 			<td>구분</td><td>학년</td><td>과목명</td><td>상태</td>
 		</tr>
+		
 		<c:forEach items="${subjectlist}" var="subject">
 		<tr>
 		<td><c:choose>
-		<c:when test = "${subject.required_choice == '0'}"> 필수 </c:when>
-		<c:when test = "${subject.required_choice == '1'}"> 교양 </c:when>
+		<c:when test = "${subject.subject_type == '0'}"> 전공 </c:when>
+		<c:when test = "${subject.subject_type == '1'}"> 교양 </c:when>
 		</c:choose>
+		<c:choose>
+		<c:when test = "${subject.required_choice == '0' }">필수</c:when>
+		<c:when test = "${subject.required_choice == '1' }">선택</c:when>
+		</c:choose>
+
 		</td>
 		<td>${subject.record_grade}</td>
-		<td>${subject.subject_name}</td>
+		<td><a href="lectureDetail.htm?subject_name=${subject.subject_name}">${subject.subject_name}</td></a>
 		<td><c:choose>
 		<c:when test = "${subject.subject_state == 0}"> 등록 </c:when>
 		<c:when test = "${subject.subject_state == 1}"> 개설 </c:when>
@@ -37,9 +46,10 @@
 		
 		</tr>
 		</c:forEach>
-	
+		
 	</table>
-	
+		
+		
 	<a href="lectureRegister.htm">등록하기</a>
 </body>
 </html>

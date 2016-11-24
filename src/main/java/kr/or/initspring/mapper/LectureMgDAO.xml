@@ -4,32 +4,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.initspring.dao.LectureMgDAO">
-	<select id="request_List" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		
-	  select sub.subject_code,sub.subject_name,sel.required_choice,sub.subject_state,op.success_check 
-	  from SUBJECT sub join RECORD rec on sub.subject_code = rec.subject_code join OP_REQUEST op
-      on sub.subject_code = op.subject_code join <if test="required_choice == 0">LIBERAL</if>
-      <if test="required_choice != 0">MAJOR</if> sel on sub.subject_code = sel.subject_code
-		
+	<select id="request_liberal" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+	SELECT * FROM SUBJECT sub join RECORD rec on sub.subject_code = rec.subject_code join OP_REQUEST op 
+	on sub.subject_code = op.subject_code join LIBERAL lib on sub.subject_code = lib.subject_code
 	</select>
 	
-	<select id="select_Professor">
+	<select id="request_major" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+	SELECT * FROM SUBJECT sub join RECORD rec on sub.subject_code = rec.subject_code join OP_REQUEST op 
+	on sub.subject_code = op.subject_code join major m on sub.subject_code = m.subject_code
+	</select>
+
+	<select id="select_Professor" parameterType="String" resultType="String">
 		select professor_code from professor where member_id=#{param1}
 	</select>
 	
+	<select id="select_Before" parameterType="String" resultType="String">
+	SELECT sub.subject_name FROM MAJOR m join SUBJECT sub  on m.SUBJECT_CODE = sub.SUBJECT_CODE 
+	WHERE m.DEPARTMENT_CODE = #{param1}
+	</select>
+	
+	<select id="select_departmentcode" resultType="kr.or.initspring.dto.commons.PfMajorDTO">
+	SELECT m.PROFESSOR_CODE,m.DEPARTMENT_CODE FROM PROFESSOR p join PF_MAJOR m			
+	on p.PROFESSOR_CODE = m.PROFESSOR_CODE WHERE MEMBER_ID = #{param1}
+	</select>
+	
+	
 	<insert id="insert_Subject" parameterType="kr.or.initspring.dto.commons.SubjectDTO">
-	 	 insert into SUBJECT (subject_code,professor_code,subject_name,subject_credit,grade_limit,subject_state,subject_seats,subject_type)
-	 	  values (#{subject_code},(select professor_code from PROFESSOR where member_id = #{param1}),#{subject_name}
-	 	  ,#{subject_credit},#{grade_limit},#{subject_state},#{subject_seats},0);
+	 	insert into SUBJECT(subject_code,professor_code,subject_name,subject_credit,grade_limit,
+	 	subject_state,subject_seats,subject_type) values (#{subject_code},#{professor_code},#{subject_name},
+	 	#{subject_credit},#{grade_limit},0,#{subject_seats},0)
 	</insert>
 	
-	<insert id="insert_BeforeCode">
-		insert into BEFORE_SUBJECT before_code values #{before_code}
+	<insert id="insert_op" parameterType="String">
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{param1},#{param2},0)
 	</insert>
 	
-	<insert id="insert_Plan">
+	<insert id="insert_BeforeCode" parameterType="String">
+		insert into BEFORE_SUBJECT (subject_code,before_code) values (#{param1},
+		(select subject_code from SUBJECT where subject_name = #{param2}))
+	</insert>
+	
+	<insert id="insert_Liberal" parameterType="String">
+	 	insert into LIBERAL (subject_code,required_choice) values (#{param1},#{param2})
+	</insert>
+	
+	<insert id="insert_major" parameterType="String">
+	 	insert into MAJOR (subject_code,required_choice,department_code) values (#{param1},#{param2},#{param3})
+	</insert>
+	
+	<select id="subject_Detail" parameterType="String" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from subject s join major m on s.subject_code = m.subject_code join department d on 
+		m.department_choice = d.department_choice where subject_name = {#param1}
+	</select>
+	
+	
+	<delete id="delete_Subject" parameterType="String">
+		delete from SUBJECT where subject_name = #{param1}
+	</delete>
+	
+	
+	<insert id="insert_Plan" parameterType="String">
 		insert into PLAN subject_filesrc values #{subject_filesrc}
 	</insert>
 	
+	<update id="update_Subject" >
+	
+	</update>
 	
 </mapper>
