@@ -16,7 +16,7 @@ public interface NoticeDAO {
 	public int getCount(String field, String query) throws ClassNotFoundException, SQLException;
 
 	// 전체 게시물
-	public List<CustomerNoticeDTO> getNotices(int pagesize, int pagenum, String field, String query)
+	public List<CustomerNoticeDTO> getNotices(String field, String query, int start, int end)
 			throws ClassNotFoundException, SQLException;
 
 	// 게시물 삭제

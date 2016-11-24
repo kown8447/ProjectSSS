@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -115,18 +116,20 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 목록 service
 	 */
-	public List<CustomerNoticeDTO> notices(String ps, String pn, String f, String q) throws ClassNotFoundException, SQLException {
-
+	//public List<CustomerNoticeDTO> notices(String ps, String pn, String f, String q) throws ClassNotFoundException, SQLException {
+	public HashMap<String, Object> notices(String pg, String f, String q) throws ClassNotFoundException, SQLException {
+		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		int pagesize = 10;
 		int pagenum = 1;
 		String field = "notice_title";
-		String query = "%%";
-
-		if (pn != null && pn.equals("")) {
-			pagenum = Integer.parseInt(pn);
-		}
-		if (ps != null && ps.equals("")) {
-			pagesize = Integer.parseInt(ps);
+	    String query = "";
+		int start = (pagenum * pagesize) - (pagesize - 1); ////
+	    int end = pagenum * pagesize; ////
+		
+		if (pg != null && pg.equals("")) {
+			pagenum = Integer.parseInt(pg);
 		}
 		if (f != null && f.equals("")) {
 			field = f;
@@ -134,13 +137,38 @@ public class NoticeService {
 		if (q != null && q.equals("")) {
 			query = q;
 		}
+		System.out.println(pagesize +"/"+pagenum);
+		System.out.println("변환된 값 : " + field +"/"+query);
+		List<CustomerNoticeDTO> list = noticedao.getNotices(field, query, start, end);
+		
+		System.out.println("아마 여기가 에러??");
+		int total = noticedao.getCount(field, query); ///////////
+		System.out.println("total : " + total);
+		// ... 목록
+		int allPage = (int) Math.ceil(total / (double) pagesize); // 페이지수
+		System.out.println("페이지수 : " + allPage);
 
-		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		List<CustomerNoticeDTO> list = noticedao.getNotices(pagesize, pagenum, field, query);
+		int block = 10; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
+		// [10] >>
+		int fromPage = ((pagenum - 1) / block * block) + 1; // 보여줄 페이지의 시작
+		// ((1-1)/10*10)
+		int toPage = ((pagenum - 1) / block * block) + block; // 보여줄 페이지의 끝
+		if (toPage > allPage) { // 예) 20>17
+			toPage = allPage;
+		}
 
-		return list;
+		map.put("list", list);
+		map.put("pg", pagenum);
+		map.put("allPage", allPage);
+		map.put("block", block);
+		map.put("fromPage", fromPage);
+		map.put("toPage", toPage);
+		map.put("start", start);
+		map.put("end", end);
+		return map;
 	}
-
+	
+	
 	/*
 	 * @method Name : noticeDetail
 	 * @Author : 송아름
@@ -237,5 +265,6 @@ public class NoticeService {
 		fin.close();
 		sout.close();
 	}
-	
+
+
 }

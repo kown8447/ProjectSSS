@@ -11,6 +11,7 @@ package kr.or.initspring.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,10 +39,21 @@ public class NoticeController {
 	 * @description : 공지사항 글 목록보기
 	 */
 	@RequestMapping("notice.htm")
-	public String notices(String ps, String pn, String f, String q, Model model) throws ClassNotFoundException, SQLException {
-		List<CustomerNoticeDTO> list = noticeservice.notices(ps, pn, f, q);
-		model.addAttribute("list", list);
-
+	public String notices(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {	
+		
+		System.out.println(pg);
+		
+		HashMap<String, Object> map = noticeservice.notices(pg, f, q);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pg", map.get("pg"));
+		model.addAttribute("allPage", map.get("allPage"));
+		model.addAttribute("block", map.get("block"));
+		model.addAttribute("fromPage", map.get("fromPage"));
+		model.addAttribute("toPage", map.get("toPage"));
+		model.addAttribute("start", map.get("start"));
+		model.addAttribute("end", map.get("end"));
+		
 		return "notice.notice";
 	}
 

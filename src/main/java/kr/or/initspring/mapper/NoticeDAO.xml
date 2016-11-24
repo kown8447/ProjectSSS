@@ -3,10 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.initspring.dao.NoticeDAO">
-	<select id="getNotices" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
-		SELECT * FROM (SELECT trunc((ROWNUM-1)/${param1})+1 as pagenum, 
+	<select id="getNotices"  resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		<!-- SELECT * FROM (SELECT trunc((ROWNUM-1)/${param1})+1 as pagenum, 
 		N.* FROM( SELECT * FROM notice where ${param3} LiKE '%${param4}%' ORDER BY notice_refer DESC,notice_step ASC) N)
-		where pagenum = ${param2}
+		where pagenum = ${param2} -->
+		select * from 
+        (
+         select A.* ,ROWNUM r from (
+                   select * from notice where ${param1} like '%'||#{param2}||'%' order by notice_refer desc , notice_step 
+                                   ) A
+            
+        ) where r >= #{param3} and r &lt;= #{param4}
 	</select>
 
 	<select id="getNotice" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
@@ -14,9 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getCount" resultType="Integer">
-		select notice_count(*) CNT
+		select count(*) CNT
 		from NOTICE
-		where ${param1} LIKE '%${param2}%'
+	    where ${param1} LIKE '%'||#{param2}||'%'
 	</select>	
 	
 	<delete id="delete">
