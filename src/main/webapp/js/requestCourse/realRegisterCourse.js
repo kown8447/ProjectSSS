@@ -12,59 +12,8 @@
 var gradeSum=0;
 
 $(function(){
-	/*
-	 * @method Name : ajax
-	 * @Author : 권기엽
-	 * @description : 페이지 로딩 시 사용자가 가진 Reserve 테이블 내의 정보를 가져와서 시간표에 뿌림 + 수강 실패 과목을 최상단으로 보여줌
-	*/	
-	$.ajax(
-		{
-			url:"getRealTimetable.htm",
-			dataType:"json",
-			success:function(data){
-				console.log(data);
-				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
-				$('#fail_result').empty();
-				$.each(data.failedLists, function(i, elt) {
-					failText+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
-					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
-							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
-				});
-				$('#fail_result').append(failText);
-				
-				$.each(data.periodList, function(i, elt) {
-					$('#PERIOD_START_'+(i+1)+'_3').html(elt.period_start);
-				});
-				
-				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
-					var color="";
-					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
-					var hidden = "<input type='hidden' class='real_sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
-					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
-							$('#'+obj.period_code+'_3').html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_3').html(text+hidden);
-							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
-					});
-				});
-			}
-		}
-	);
 	
+	onloadRealtable();
 	
 	/*
 	 * @method Name : searchBtn.click(function()
@@ -134,6 +83,65 @@ $(document).on("click",".real_info",function(e){
 			}
 	);
 });
+
+/*
+ * @method Name : onloadRealtable
+ * @Author : 권기엽
+ * @description : 페이지 로딩 시 사용자가 가진 Enrollment 테이블 내의 정보를 가져와서 시간표에 뿌림 + 수강 실패 과목을 최상단으로 보여줌
+*/	
+function onloadRealtable(){
+	$.ajax(
+		{
+			url:"getRealTimetable.htm",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
+				$('#fail_result').empty();
+				$.each(data.failedLists, function(i, elt) {
+					failText+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
+							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
+					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
+				});
+				$('#fail_result').append(failText);
+				
+				$.each(data.periodList, function(i, elt) {
+					$('#PERIOD_START_'+(i+1)+'_3').html(elt.period_start);
+				});
+				
+				$.each(data.lists, function(i, elt) {
+					gradeSum+=elt.subject_credit;
+					var prev = 0;
+					var prevDay = "";
+					var color="";
+					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
+					var hidden = "<input type='hidden' class='real_sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
+					$.each(elt.period, function(i, obj) {
+						var str = obj.period_code.split("_");
+						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
+							if(elt.retake_check == 1){color="red";}
+							else{color="skyblue";}
+							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
+							$('#'+obj.period_code+'_3').html(hidden);
+						}else{
+							if(elt.retake_check == 1){color="red";}
+							else{color="skyblue";}
+							$('#'+obj.period_code+'_3').html(text+hidden);
+							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
+						}
+						prev = str[2];
+						prevDay = str[1];
+					});
+				});
+			}
+		}
+	);
+}
+
+
+
+
 
 /*
  * @method Name : $(document).on("click",".request", function(e)
@@ -276,7 +284,7 @@ $(document).on("click",".real_table_ele",function(e){
 										$('#PR_TUE_'+i+'_3').attr('style','background-color:white');
 									}
 									if($('#PR_WEN_'+i+"_3 .real_sub").val()==subject_code){
-										$('#PR_WEN_'+i+"_# .real_sub").val('');
+										$('#PR_WEN_'+i+"_3 .real_sub").val('');
 										$('#PR_WEN_'+i+'_3').html('');
 										$('#PR_WEN_'+i+'_3').attr('style','background-color:white');
 									}

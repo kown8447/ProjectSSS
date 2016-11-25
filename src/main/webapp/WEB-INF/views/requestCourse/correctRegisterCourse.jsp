@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h3>본수강 신청</h3>
+<h3>수강 정정 신청</h3>
 <div class="row">
 	<div class="col-md-6">
 		<div class="navbar-header">
@@ -10,12 +10,9 @@
 					<option value="subject_name">과목명</option>
 					<option value="subject_code">과목코드</option>
 				</select> 
-				<input type="text" class="form-control" id="real_keyword" /> 
-				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색">
-				<div id="fail_result" class="row">
-				
-				</div>
-				<span id="real_result" style="margin: 20px 20px 20px 20px"> </span>
+				<input type="text" class="form-control" id="correct_keyword" /> 
+				<input type="button" class="btn btn-default" id="correct_searchBtn" value="검색">
+				<span id="correct_result" style="margin: 20px 20px 20px 20px"> </span>
 			</form>
 		</div>
 	</div>
@@ -23,7 +20,7 @@
 
 	<div class="col-md-6">
 		<form action="" method="post">
-			<table id="real_timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
+			<table id="correct_timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
 				<tr>
 					<th>시간</th>
 					<th>월</th>
@@ -34,12 +31,12 @@
 				</tr>
 				<c:forEach var="i" begin="1" end="20">
 					<tr>
-						<td id="PERIOD_START_${i}_3" style="word-break: break-all;"></td>
-						<td id="PR_MON_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_TUE_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_WEN_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_THU_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_FRI_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PERIOD_START_${i}_4" style="word-break: break-all;"></td>
+						<td id="PR_MON_${i}_4" class="correct_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_TUE_${i}_4" class="correct_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_WEN_${i}_4" class="correct_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_THU_${i}_4" class="correct_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_FRI_${i}_4" class="correct_table_ele" height="auto" style="word-break: break-all;"></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -48,7 +45,7 @@
 </div>
 
 
-<div class="modal fade" id="real_layerpop">
+<div class="modal fade" id="correct_layerpop">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- header -->
@@ -74,15 +71,15 @@
 						<th>학점</th>
 					</tr>
 					<tr>
-						<td id="real_subject_name"></td>
-						<td id="real_subject_code"></td>
-						<td id="real_professor_name"></td>
-						<td id="real_classroom_name"></td>
-						<td id="real_period"></td>
-						<td id="real_grade_limit"></td>
-						<td id="real_required_choice"></td>
-						<td id="real_subject_seats"></td>
-						<td id="real_subject_credit"></td>
+						<td id="correct_subject_name"></td>
+						<td id="correct_subject_code"></td>
+						<td id="correct_professor_name"></td>
+						<td id="correct_classroom_name"></td>
+						<td id="correct_period"></td>
+						<td id="correct_grade_limit"></td>
+						<td id="correct_required_choice"></td>
+						<td id="correct_subject_seats"></td>
+						<td id="correct_subject_credit"></td>
 					</tr>
 				</table>
 			</div>

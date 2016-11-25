@@ -149,6 +149,14 @@ public class RequestCourseController {
 	}
 	
 	
+	@RequestMapping("correctRegiser.htm")
+	public String correctRegiserForm(Principal principal, Model model){
+		String viewpage = "";
+		String member_id = principal.getName();
+		viewpage = requestCourseService.possibleCorrectRegister(member_id);
+		return viewpage;
+	}
+	
 	/*
 	 * @method Name : searchBykeword
 	 * @Author : 권기엽
@@ -164,7 +172,7 @@ public class RequestCourseController {
 		System.out.println("keyword : " + keyword);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
-		map.put("keyword", keyword);
+		map.put("keyword", keyword.toUpperCase());
 		
 		List<OpenedLectureDTO> lists = requestCourseService.searchByKeyword(map);
 		model.addAttribute("lists",lists);
@@ -375,6 +383,21 @@ public class RequestCourseController {
 		
 		int subject_credit = requestCourseService.deleteSubject(principal.getName(), subject_code);
 		model.addAttribute("subject_credit", subject_credit);
+		return jsonview;
+	}
+	
+	
+	/*
+	 * @method Name : getRealTimetable
+	 * @Author : 권기엽
+	 * @description : 본 수강 신청 페이지 로딩시 비동기 처리로 예비수강신청 시간표 보여주는 함수, 수강 신청 실패 과목은 시간표에서 제외시키고, 검색 폼 최상단에 출력
+	*/
+	@RequestMapping("getCorrectTimetable.htm")
+	public View getCorrectTimetable(Principal principal, Model model){
+		List<OpenedLectureDTO> lists = requestCourseService.getRealTimetable(principal.getName());
+		List<PeriodDTO> periodList = requestCourseService.getPeriodList();
+		model.addAttribute("lists", lists);
+		model.addAttribute("periodList", periodList);
 		return jsonview;
 	}
 }

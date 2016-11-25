@@ -156,6 +156,32 @@ public class RequestCourseService {
 		}
 	}
 
+	
+	/*
+	 * @method Name : possibleCorrectRegister
+	 * @Author : 권기엽
+	 * @description : 수강 정정 관리자 수강정정 시간에 따른 viewpage 설정
+	*/	
+	public String possibleCorrectRegister(String member_id){
+		String viewpage="";
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int enroll_active;
+		try{
+			enroll_active = requestCourseDao.getEnrollActive(0, 2);
+			if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
+			else if(enroll_active==1) { viewpage = "requestCourse.correctRegisterCourse";}
+			else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+
+		}catch(Exception e){
+			System.out.println("RequestCourseService / possibleRealRegister : "+ e.getMessage());
+			viewpage = "redirect:../index.htm";
+		}finally{
+			return viewpage;
+		}
+	}
+	
+	
+	
 	public List<OpenedLectureDTO> searchByKeyword(HashMap<String, String> map){
 		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);

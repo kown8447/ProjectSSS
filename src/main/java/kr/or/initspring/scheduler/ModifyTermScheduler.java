@@ -204,11 +204,9 @@ public class ModifyTermScheduler {
 	
 	////////////// 수강 정정 24시간 전//////////////////
 		
-	@Scheduled(cron="${wait.after.firstStartDate}")
+	@Scheduled(cron="${wait.after.StartDate}")
 	public void waitAllAfterStart() {setEnrollActive(0, 2, 2);System.out.println("대기 시간..");}
-	
-	@Scheduled(cron="${wait.after.secondStartDate}")
-	public void waitAllAfterEnd() {setEnrollActive(0, 2, 2);System.out.println("대기 시간..");}
+
 	
 	
 	///////////////////수강 정정 기간 ///////////////////

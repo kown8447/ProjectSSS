@@ -15,6 +15,7 @@
 <script src="${pageContext.request.contextPath}/js/requestCourse/viewOpLecture.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
+<script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
 
 
