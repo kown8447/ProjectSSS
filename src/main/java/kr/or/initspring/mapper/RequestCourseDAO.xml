@@ -178,6 +178,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
 	</update>
 	
+	<update id="minusRegistedSeatBySubjectCode">
+		update opened set registed_seat = registed_seat - 1 where subject_code = #{subject_code}
+	</update>
+	
 	<select id="getRetakeCheck" resultType="int">
 		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
 	</select>
@@ -250,4 +254,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertEnrollment" parameterType="hashmap">
 		insert into enrollment values(#{student_code},#{subject_code})
 	</insert>
+	
+	<delete id="deleteFromEnrollment">
+		delete from enrollment where student_code = #{param1} and subject_code = #{param2}
+	</delete>
 </mapper>

@@ -452,32 +452,25 @@ public class RequestCourseService {
 		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
 		int count = 0;
 		
-		System.out.println("여기는 선언부....");
-		
 		try{
 			data = requestCourseDao.getRegistedSeat(subject_code);
-			if(data.getRegisted_seat() > data.getSubject_seats()){
+			if(data.getRegisted_seat() >= data.getSubject_seats()){
 				map.put("result", "over");
 				System.out.println("정원 초과 if 문....");
 				return map;
 			}else{
 				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());
-				System.out.println("과목 존재 여부 확인....");
 				if(count > 0){
 					HashMap<String, Object> temp = new HashMap<String, Object>();
 					temp.put("subject_code", subject_code);
 					temp.put("result", 0);
 					requestCourseDao.setReserveCheck(temp);
 					map.put("result", "success");
-					System.out.println("과목이 이미 있을 때 처리");
 				}else{
 					parameter.put("student_code", studentDto.getStudent_code());
 					parameter.put("subject_code", subject_code);
-					System.out.println("isnertEnrollment 들어가기 전");
 					requestCourseDao.insertEnrollment(parameter);
-					System.out.println("isnertEnrollment 들어간 후");
 					requestCourseDao.updateRegistedSeat(subject_code);
-					System.out.println("updateRegistedSeat 들어간 후");
 					map.put("result", "success");
 				}
 			}
@@ -487,5 +480,26 @@ public class RequestCourseService {
 			throw e;
 		}
 		return map;
+	}
+	
+	/*
+	 * @method Name : deleteSubject
+	 * @Author : 권기엽
+	 * @description : 과목의 배정 학점 확인 후 해당 과목 삭제. 두개의 query 는 트랜잭션 처리
+	*/
+	@Transactional(rollbackFor={Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class})
+	public int deleteSubject(String member_id, String subject_code) throws Exception{
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int subject_credit = 0;
+		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
+		try{
+			subject_credit = requestCourseDao.getSubjectCredit(subject_code);
+			requestCourseDao.deleteFromEnrollment(studentDto.getStudent_code(), subject_code);	//선택한 과목 삭제
+			requestCourseDao.minusRegistedSeatBySubjectCode(subject_code);	//수강 정원 감소
+		}catch(Exception e){
+			System.out.println("RequestCourseService / deleteSubject : " + e.getMessage());
+			throw e;
+		}
+		return subject_credit;
 	}
 }

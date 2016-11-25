@@ -364,4 +364,17 @@ public class RequestCourseController {
 		return jsonview;
 	}
 	
+	
+	/*
+	 * @method Name : deleteSubject
+	 * @Author : 권기엽
+	 * @description : 시간표를 클릭했을 때 과목을 삭제하고 해당 과목의 학점을 리턴하는 함수
+	*/
+	@RequestMapping("deleteSubject.htm")
+	public View deleteSubject(Model model, @RequestParam("subject_code") String subject_code, Principal principal) throws Exception{
+		
+		int subject_credit = requestCourseService.deleteSubject(principal.getName(), subject_code);
+		model.addAttribute("subject_credit", subject_credit);
+		return jsonview;
+	}
 }

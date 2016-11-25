@@ -30,7 +30,6 @@
 </se:authorize>
 
 <se:authorize access="hasRole('ROLE_STUDENT')">
-	<a
-		href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
+	<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
 </se:authorize>
 <hr>

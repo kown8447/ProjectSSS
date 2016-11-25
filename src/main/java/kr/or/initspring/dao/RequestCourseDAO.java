@@ -75,4 +75,6 @@ public interface RequestCourseDAO {
 	
 	public Integer updateRegistedSeat(String subject_code);	//enrollment Table에 삽입 성공한 과목에 대해서 수강신청인원 +1
 	public Integer checkAlreadyExistSubject(String subject_code, String student_code);	//예비 수강신청에서 실패했던 과목에 대해서 수강신청 할 경우를 확인
+	public void deleteFromEnrollment(String student_code, String subject_code);	//선택 과목 삭제
+	public void minusRegistedSeatBySubjectCode(String subject_code);	//정원 감소
 }

@@ -97,7 +97,7 @@ $(function(){
 });
 
 /*
- * @method Name : (document).on("click",".info",function(e)
+ * @method Name : (document).on("click","real_info",function(e)
  * @Author : 권기엽
  * @description : 과목의 상세 정보 확인
 */	
@@ -242,7 +242,7 @@ function insertRealDbSubject(e){
 
 
 /*
- * @method Name : $(document).on("click",".table_ele",function(e)
+ * @method Name : $(document).on("click",".real_table_ele",function(e)
  * @Author : 권기엽
  * @description : 시간표 내의 과목을 클릭할 경우, 과목이 시간표에서 제외됨
 */	
@@ -250,47 +250,54 @@ $(document).on("click",".real_table_ele",function(e){
 	var subject_code = $('#'+e.currentTarget.id+" .real_sub").val();
 	
 	if(subject_code){
-		$.ajax(
-				{
-					url:"getSubjectCredit.htm",
-					data:{subject_code:subject_code},
-					dataType:"json",
-					success:function(data){
-						if(data.subject_credit){
-							gradeSum -= data.subject_credit;
+		
+		var r = confirm("해당 과목을 수강 취소 하시겠습니까?");
+		
+		if(r==true){
+			$.ajax(
+					{
+						url:"deleteSubject.htm",
+						data:{subject_code:subject_code},
+						dataType:"json",
+						success:function(data){
+							if(data.subject_credit){
+								gradeSum -= data.subject_credit;
+							
+							
+								for(var i=1; i<=20; i++){
+									if($('#PR_MON_'+i+'_3 .real_sub').val()==subject_code){
+										$('#PR_MON_'+i+'_3 .real_sub').val('');
+										$('#PR_MON_'+i+'_3').html('');
+										$('#PR_MON_'+i+'_3').attr('style','background-color:white');
+									}
+									if($('#PR_TUE_'+i+'_3 .real_sub').val()==subject_code){
+										$('#PR_TUE_'+i+'_3 .real_sub').val('');
+										$('#PR_TUE_'+i+'_3').html('');
+										$('#PR_TUE_'+i+'_3').attr('style','background-color:white');
+									}
+									if($('#PR_WEN_'+i+"_3 .real_sub").val()==subject_code){
+										$('#PR_WEN_'+i+"_# .real_sub").val('');
+										$('#PR_WEN_'+i+'_3').html('');
+										$('#PR_WEN_'+i+'_3').attr('style','background-color:white');
+									}
+									if($('#PR_THU_'+i+"_3 .real_sub").val()==subject_code){
+										$('#PR_THU_'+i+"_3 .real_sub").val('');
+										$('#PR_THU_'+i+'_3').html('');
+										$('#PR_THU_'+i+'_3').attr('style','background-color:white');
+									}
+									if($('#PR_FRI_'+i+"_3 .real_sub").val()==subject_code){
+										$('#PR_FRI_'+i+"_3 .real_sub").val('');
+										$('#PR_FRI_'+i+'_3').html('');
+										$('#PR_FRI_'+i+'_3').attr('style','background-color:white');
+									}
+								}
+								location.href="realRegiser.htm";
+							}
 						}
+						
 					}
-					
-				}
-			);
-			
-			for(var i=1; i<=20; i++){
-				if($('#PR_MON_'+i+'_3 .real_sub').val()==subject_code){
-					$('#PR_MON_'+i+'_3 .real_sub').val('');
-					$('#PR_MON_'+i+'_3').html('');
-					$('#PR_MON_'+i+'_3').attr('style','background-color:white');
-				}
-				if($('#PR_TUE_'+i+'_3 .real_sub').val()==subject_code){
-					$('#PR_TUE_'+i+'_3 .real_sub').val('');
-					$('#PR_TUE_'+i+'_3').html('');
-					$('#PR_TUE_'+i+'_3').attr('style','background-color:white');
-				}
-				if($('#PR_WEN_'+i+"_3 .real_sub").val()==subject_code){
-					$('#PR_WEN_'+i+"_# .real_sub").val('');
-					$('#PR_WEN_'+i+'_3').html('');
-					$('#PR_WEN_'+i+'_3').attr('style','background-color:white');
-				}
-				if($('#PR_THU_'+i+"_3 .real_sub").val()==subject_code){
-					$('#PR_THU_'+i+"_3 .real_sub").val('');
-					$('#PR_THU_'+i+'_3').html('');
-					$('#PR_THU_'+i+'_3').attr('style','background-color:white');
-				}
-				if($('#PR_FRI_'+i+"_3 .real_sub").val()==subject_code){
-					$('#PR_FRI_'+i+"_3 .real_sub").val('');
-					$('#PR_FRI_'+i+'_3').html('');
-					$('#PR_FRI_'+i+'_3').attr('style','background-color:white');
-				}
-			}
+				);
+		}		
 	}else{
 		return false;
 	}
