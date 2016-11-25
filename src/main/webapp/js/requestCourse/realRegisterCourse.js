@@ -30,10 +30,10 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue'>검색 결과</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th></tr>"
+						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>검색 결과</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th></tr>"
 						$('#real_result').empty();
 						$.each(data.lists, function(i, elt) {
-							text+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 											"data-target='#real_layerpop' data-toggle='modal'/></td>" +
 									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
@@ -68,7 +68,7 @@ $(document).on("click",".real_info",function(e){
 						
 					});
 					$.each(data.subject_info.period, function(i, p) {
-						period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
+						period += p.period_day + " : " + p.period_start + " ~ " + p.period_end + "<br>";
 					})
 					$('#real_classroom_name').html(classroom);
 					$('#real_period').html(period);
@@ -95,10 +95,10 @@ function onloadRealtable(){
 			url:"getRealTimetable.htm",
 			dataType:"json",
 			success:function(data){
-				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
+				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
 				$('#fail_result').empty();
 				$.each(data.failedLists, function(i, elt) {
-					failText+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+					failText+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
 					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
