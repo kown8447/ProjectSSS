@@ -57,7 +57,6 @@ $(document).on("click",".real_info",function(e){
 				data:{subject_code:e.currentTarget.id},
 				dataType:"json",
 				success:function(data){
-					console.log(data.subject_info.subject_code);
 					$('#real_subject_name').html(data.subject_info.subject_name);
 					$('#real_subject_code').html(data.subject_info.subject_code);
 					$('#real_professor_name').html(data.subject_info.professor_name);
@@ -66,10 +65,11 @@ $(document).on("click",".real_info",function(e){
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
 						classroom+="<i>"+elt.classroom_name+"</i><br>";
-						$.each(elt.periodlist, function(i, p) {
-							period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
-						})
+						
 					});
+					$.each(data.subject_info.period, function(i, p) {
+						period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
+					})
 					$('#real_classroom_name').html(classroom);
 					$('#real_period').html(period);
 					$('#real_grade_limit').html(data.subject_info.grade_limit);
@@ -95,7 +95,6 @@ function onloadRealtable(){
 			url:"getRealTimetable.htm",
 			dataType:"json",
 			success:function(data){
-				console.log(data);
 				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
 				$('#fail_result').empty();
 				$.each(data.failedLists, function(i, elt) {
@@ -140,9 +139,6 @@ function onloadRealtable(){
 }
 
 
-
-
-
 /*
  * @method Name : $(document).on("click",".request", function(e)
  * @Author : 권기엽
@@ -185,7 +181,6 @@ function realBeforeSubject(e){
 }
 
 function realInsertTimeTable(e){
-	
 	$.ajax(
 			{
 				url:"getOpSubjectInfo.htm",
@@ -200,7 +195,6 @@ function realInsertTimeTable(e){
 						gradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
-							
 							if($('#'+elt.period_code+'_3').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
 								gradeSum-=data.subject_info.subject_credit;
@@ -209,7 +203,6 @@ function realInsertTimeTable(e){
 							}	
 						})
 						if(flag==true){
-							console.log('여기서 DB Insert 작업하고 location href시켜주는 function 호출');
 							insertRealDbSubject(data.subject_info.subject_code);
 						}
 					}

@@ -20,7 +20,7 @@
 
 	<div class="col-md-6">
 		<form action="" method="post">
-			<table id="timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
+			<table id="timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="20" align="center">
 				<tr>
 					<th>시간</th>
 					<th>월</th>

@@ -104,7 +104,6 @@ $(document).on("click",".info",function(e){
 				data:{subject_code:e.currentTarget.id},
 				dataType:"json",
 				success:function(data){
-					console.log(data.subject_info.subject_code);
 					$('#subject_name').html(data.subject_info.subject_name);
 					$('#subject_code2').html(data.subject_info.subject_code);
 					$('#professor_name').html(data.subject_info.professor_name);
@@ -113,9 +112,12 @@ $(document).on("click",".info",function(e){
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
 						classroom+="<i>"+elt.classroom_name+"</i><br>";
-						$.each(elt.periodlist, function(i, p) {
+						/*$.each(elt.periodlist, function(i, p) {
 							period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
-						})
+						})*/
+					});
+					$.each(data.subject_info.period, function(i, elt) {
+						period += elt.period_day + " / " + elt.period_start + " / " + elt.period_end + "<br>";
 					});
 					$('#classroom_name').html(classroom);
 					$('#period').html(period);
@@ -180,6 +182,7 @@ function insertTimeTable(e){
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
+					console.log(data);
 					var prev = 0;
 					var prevDay = "";
 					var color="";

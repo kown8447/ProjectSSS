@@ -82,7 +82,6 @@ public class RequestCourseService {
 	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력
 	*/	
 	public List<OpenedLectureDTO> searchSubject(HashMap<String, String> keyword){
-		System.out.println("keyword : " + keyword.get("department_code"));
 		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		lists = requestCourseDao.getOpenedLectureListByKeyword(keyword);
@@ -92,7 +91,6 @@ public class RequestCourseService {
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 		}
-		System.out.println(lists.toString());
 		return lists;
 	}
 	
@@ -193,7 +191,6 @@ public class RequestCourseService {
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 			dto.setReserve_seats(requestCourseDao.getReserveSeatsBySubjectCode(dto.getSubject_code()));
 		}
-		System.out.println(lists.toString());
 		return lists;
 	}
 	
@@ -230,7 +227,6 @@ public class RequestCourseService {
 		
 		subject_info.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), subject_code));
 		
-		System.out.println(subject_info.toString());
 		return subject_info;
 	}
 	
@@ -459,6 +455,8 @@ public class RequestCourseService {
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 			dto.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), dto.getSubject_code()));
+			OpenedLectureDTO temp = requestCourseDao.getRegistedSeat(dto.getSubject_code());
+			dto.setRegisted_seat(temp.getRegisted_seat());
 		}
 		return lists;
 	}
@@ -483,7 +481,6 @@ public class RequestCourseService {
 			data = requestCourseDao.getRegistedSeat(subject_code);
 			if(data.getRegisted_seat() >= data.getSubject_seats()){
 				map.put("result", "over");
-				System.out.println("정원 초과 if 문....");
 				return map;
 			}else{
 				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());

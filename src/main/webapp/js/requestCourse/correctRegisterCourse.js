@@ -22,7 +22,6 @@ $(function(){
 			url:"getCorrectTimetable.htm",
 			dataType:"json",
 			success:function(data){
-				console.log(data);
 
 				$.each(data.periodList, function(i, elt) {
 					$('#PERIOD_START_'+(i+1)+'_4').html(elt.period_start);
@@ -99,7 +98,6 @@ $(document).on("click",".correct_info",function(e){
 				data:{subject_code:e.currentTarget.id},
 				dataType:"json",
 				success:function(data){
-					console.log(data.subject_info.subject_code);
 					$('#correct_subject_name').html(data.subject_info.subject_name);
 					$('#correct_subject_code').html(data.subject_info.subject_code);
 					$('#correct_professor_name').html(data.subject_info.professor_name);
@@ -142,14 +140,14 @@ $(document).on("click",".correct_request", function(e){
 				if(data.result == true){
 					alert('수강 대상 학년이 아닙니다.');
 				}else{
-					realBeforeSubject(subject_code);
+					correctBeforeSubject(subject_code);
 				}
 			}
 		}
 	);
 });
 
-function realBeforeSubject(e){
+function correctBeforeSubject(e){
 	$.ajax(
 		{
 			url:"checkBeforeSubject.htm",
@@ -157,7 +155,7 @@ function realBeforeSubject(e){
 			dataType:"json",
 			success:function(data){
 				if(data.result == 0 || data.result == 1){
-					realInsertTimeTable(e);
+					correctInsertTimeTable(e);
 				}
 				else{
 					alert(data.subject_code+'는 선수강 과목이 필요합니다.');
@@ -167,7 +165,7 @@ function realBeforeSubject(e){
 	);
 }
 
-function realInsertTimeTable(e){
+function correctInsertTimeTable(e){
 	
 	$.ajax(
 			{
@@ -192,8 +190,7 @@ function realInsertTimeTable(e){
 							}	
 						})
 						if(flag==true){
-							console.log('여기서 DB Insert 작업하고 location href시켜주는 function 호출');
-							insertRealDbSubject(data.subject_info.subject_code);
+							insertCorrectDbSubject(data.subject_info.subject_code);
 						}
 					}
 				}
@@ -202,11 +199,11 @@ function realInsertTimeTable(e){
 }
 
 /*
- * @method Name : insertRealDbSubject()
+ * @method Name : insertCorrectDbSubject()
  * @Author : 권기엽
  * @description : 수강 등록 버튼을 눌렀을 경우, 시간표에 들어가기 이전 DB에서 Insert 작업을 먼저 해둔뒤에 시간표에 출력한다.
 */	
-function insertRealDbSubject(e){
+function insertCorrectDbSubject(e){
 	var subject_code = e;
 	
 	$.ajax(
