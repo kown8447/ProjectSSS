@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -76,7 +75,6 @@ public class JoinController {
 	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
 	public View joinStep1(int code_type, String code_name, Date code_birth, String code, 
 			Model model, HttpServletRequest request){
-
 		HttpSession session = request.getSession();
 		boolean result = false;
 		

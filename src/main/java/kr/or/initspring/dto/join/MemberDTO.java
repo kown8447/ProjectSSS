@@ -1,3 +1,10 @@
+/*
+ * @Class : MemberDTO
+ * @Date : 2016.11.19
+ * @Author : 권기엽
+ * @Desc : 회원 가입 시 사용하는 Custom DTO
+*/
+
 package kr.or.initspring.dto.join;
 
 import java.util.Date;
@@ -13,11 +20,11 @@ public class MemberDTO {
 	private String member_phone;
 	private String member_email;
 	private int member_sex;
-	private String member_picture;
-	private int member_temp;
+	private String member_picture;	//회원 사진 file 명
+	private int member_temp;		//임시 비밀번호 발급 상태
 	private CommonsMultipartFile file;
 	private String code;
-	private int code_type;
+	private int code_type;	//학생_교수_관리자 구분
 	
 	public String getCode() {
 		return code;
