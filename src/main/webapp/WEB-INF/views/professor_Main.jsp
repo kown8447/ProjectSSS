@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <!-- 
    @Project : InitSpring
-   @File name : welcome.jsp
+   @File name : Professor_Main.jsp
    @Author : 김영빈
    @Data : 2016.11.22
-   @Desc : 회원가입 성공화면 
+   @Desc : 교수 메인  view
 -->        
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h5>회원 가입을 진심으로 축하드립니다!!</h5><br>
-	<a href="../login.htm">메인으로 가기</a>
+나는 교수당
 </body>
 </html>

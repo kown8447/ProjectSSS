@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 
+   @Project : InitSpring
+   @File name : login.jsp
+   @Author : 김영빈
+   @Data : 2016.11.22
+   @Desc : 로그인  view
+-->
 <c:url value="/login" var="loginURL"/>
 <form name="f" action="${loginURL}" method="post">
 	<table>

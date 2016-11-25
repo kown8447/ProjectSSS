@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : searchID.jsp
+   @Author : 김영빈
+   @Data : 2016.11.22
+   @Desc : 아이디 찾기 view
+-->	
 
 <div>
 	<table>
