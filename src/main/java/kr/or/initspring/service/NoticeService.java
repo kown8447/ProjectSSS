@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dao.NoticeDAO;
@@ -121,7 +122,7 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 목록 service
 	 */
-	public HashMap<String, Object> notices(int pg, String f, String q) throws ClassNotFoundException, SQLException {
+	public HashMap<String, Object> notices(int pg, String f, String keyword) throws ClassNotFoundException, SQLException {
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
@@ -129,34 +130,30 @@ public class NoticeService {
 		int pagenum = pg;
 		String field = "notice_title";
 	    String query = "";
-		System.out.println("pg :" + pg);
 		
 
-		if (f != null && f.equals("")) {
+		if (f != null && !f.equals("")) {
 			field = f;
 		}
-		if (q != null && q.equals("")) {
-			query = q;
+		if (keyword != null && !keyword.equals("")) {
+			query = keyword;
 		}
-		System.out.println("pageNum : " + pagenum);
+
 		int start = (pagenum * pagesize) - (pagesize - 1); 
 	    int end = pagenum * pagesize; 
-	    System.out.println("start end : " + start +"/" + end);
 		List<CustomerNoticeDTO> list = noticedao.getNotices(field, query, start, end);
 		
 		int total = noticedao.getCount(field, query); 
 		
 		int allPage = (int) Math.ceil(total / (double) pagesize); // 페이지수
 
-		int block = 10; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
-		// [10] >>
+		int block = 10; 
 		int fromPage = ((pagenum - 1) / block * block) + 1; // 보여줄 페이지의 시작
-		// ((1-1)/10*10)
 		int toPage = ((pagenum - 1) / block * block) + block; // 보여줄 페이지의 끝
-		if (toPage > allPage) { // 예) 20>17
+		if (toPage > allPage) { 
 			toPage = allPage;
 		}
-
+	
 		map.put("list", list);
 		map.put("pg", pagenum);
 		map.put("allPage", allPage);
@@ -165,6 +162,7 @@ public class NoticeService {
 		map.put("toPage", toPage);
 		map.put("start", start);
 		map.put("end", end);
+		
 		return map;
 	}
 	
@@ -265,6 +263,5 @@ public class NoticeService {
 		fin.close();
 		sout.close();
 	}
-
 
 }

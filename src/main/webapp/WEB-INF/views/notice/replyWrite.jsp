@@ -41,7 +41,7 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-			<input type="submit" value="저장" /> <a href="notice.htm">취소</a>
+			<input type="submit" id="replyBtn" value="저장" /> <a href="notice.htm">취소</a>
 			</td>
 		</tr>
 	</table>

@@ -18,7 +18,7 @@ public interface NoticeDAO {
 	// 전체 게시물
 	public List<CustomerNoticeDTO> getNotices(String field, String query, int start, int end)
 			throws ClassNotFoundException, SQLException;
-
+	
 	// 게시물 삭제
 	public int delete(int notice_index) throws ClassNotFoundException, SQLException;
 

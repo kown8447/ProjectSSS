@@ -27,11 +27,11 @@
 		<tr>
 			<td width="20%" align="center"><b>제목</b></td>
 			<td colspan="3">
-			<input type="text" name="notice_title" value="${notice.notice_title}" size="40"></td>
+			<input type="text" name="notice_title" id="notice_title" value="${notice.notice_title}" size="40"></td>
 		</tr>
 		<tr height="100">
 			<td width="20%" align="center"><b>글내용</b></td>
-			<td colspan="3"><textarea rows="7" cols="50" name="notice_content">${notice.notice_content}</textarea>
+			<td colspan="3"><textarea rows="7" cols="50" id="notice_content" name="notice_content">${notice.notice_content}</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -42,7 +42,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><input type="submit" value="수정하기"><a href="noticeDetail.htm">취소</a>
+			<td colspan="4" align="center"><input type="submit" id="editBtn"value="수정하기"><a href="noticeDetail.htm">취소</a>
 			</td>
 		</tr>
 	</table>

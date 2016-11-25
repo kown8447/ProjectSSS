@@ -40,9 +40,9 @@ public class NoticeController {
 	 * @description : 공지사항 글 목록보기
 	 */
 	@RequestMapping("notice.htm")
-	public String notices(@RequestParam(value="pg",defaultValue="1") int pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {	
+	public String notices(@RequestParam(value="pg",defaultValue="1") int pg, String f, String keyword, Model model) throws ClassNotFoundException, SQLException {	
 		
-		HashMap<String, Object> map = noticeservice.notices(pg, f, q);
+		HashMap<String, Object> map = noticeservice.notices(pg, f, keyword);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pg", map.get("pg"));
@@ -76,7 +76,6 @@ public class NoticeController {
 			throws IOException, ClassNotFoundException, SQLException {
 		
 		String url = "redirect:notice.htm";
-		System.out.println(cn.toString());
 		
 		try {
 			url = noticeservice.noticeWrite(principal, cn, request);
@@ -85,6 +84,7 @@ public class NoticeController {
 		}
 		return url;
 	}
+	
 	 
 	/*
 	 * @method Name : noticeDetail

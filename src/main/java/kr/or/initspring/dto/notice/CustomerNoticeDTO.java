@@ -26,7 +26,6 @@ public class CustomerNoticeDTO {
 	private Date notice_date; // 날짜
 	private int notice_count; // 조회수
 	
-	
 	public int getNotice_index() {
 		return notice_index;
 	}

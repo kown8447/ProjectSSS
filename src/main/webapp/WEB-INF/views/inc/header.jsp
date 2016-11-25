@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="se"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <hr>
 <h3>
 	<a href="${pageContext.request.contextPath}/index.htm">헤더 입니다.(메인)</a>
