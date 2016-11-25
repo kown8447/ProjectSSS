@@ -1,7 +1,5 @@
 package kr.or.initspring.dao;
 
-import kr.or.initspring.dto.MemberDTO;
-
 public interface LoginDAO {
 	
 	public String getRoleByUserid(String member_id);

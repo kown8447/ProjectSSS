@@ -25,6 +25,9 @@
 			username-parameter="member_id"
 			password-parameter="member_pwd" />
 		<security:logout logout-success-url="/index.htm" />
+		<security:session-management>
+			<security:concurrency-control max-sessions="1"/>
+		</security:session-management>
 	</security:http>
 
 	<security:authentication-manager>
