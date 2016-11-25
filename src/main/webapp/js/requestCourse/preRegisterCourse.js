@@ -77,10 +77,10 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:40px'><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr>"
+						var text="<table class='table table-hover' style='margin-top:40px'><tr><th>과목코드</th><th>과목명</th><th>신청/정원</th><th>학점</th><th>정보</th><th>등록</th><tr>"
 						$('#result').empty();
 						$.each(data.lists, function(i, elt) {
-							text+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+							text+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.reserve_seats+"/"+elt.subject_seats+"</td>" +
 									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='info' id='"+elt.subject_code+"'" +
 											"data-target='#layerpop' data-toggle='modal'/></td>" +
 									"<td><input type='button' value='강의 신청' class='request' id='"+elt.subject_code+"'/></td></tr>";

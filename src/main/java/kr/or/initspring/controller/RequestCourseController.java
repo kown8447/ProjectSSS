@@ -148,7 +148,11 @@ public class RequestCourseController {
 		return viewpage;
 	}
 	
-	
+	/*
+	 * @method Name : correctRegiserForm
+	 * @Author : 권기엽
+	 * @description : 수강 정정 페이지 
+	*/
 	@RequestMapping("correctRegiser.htm")
 	public String correctRegiserForm(Principal principal, Model model){
 		String viewpage = "";

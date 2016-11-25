@@ -258,4 +258,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFromEnrollment">
 		delete from enrollment where student_code = #{param1} and subject_code = #{param2}
 	</delete>
+	
+	<select id="getReserveSeatsBySubjectCode" resultType="int">
+		select count(*) from reserve where subject_code=#{subject_code}	
+	</select>
 </mapper>

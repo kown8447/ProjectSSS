@@ -191,6 +191,7 @@ public class RequestCourseService {
 			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+			dto.setReserve_seats(requestCourseDao.getReserveSeatsBySubjectCode(dto.getSubject_code()));
 		}
 		System.out.println(lists.toString());
 		return lists;
