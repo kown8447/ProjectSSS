@@ -211,7 +211,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="setReserveCheck" parameterType="hashmap">
-		update reserve set reserve_check = #{result} where subject_code = #{subject_code}
+		update reserve set reserve_check = #{result} where subject_code = #{subject_code} and student_code = #{student_code}
 	</select>
 	
 	<update id="updateRequestSeat">

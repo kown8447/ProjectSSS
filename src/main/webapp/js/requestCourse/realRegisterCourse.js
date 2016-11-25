@@ -9,7 +9,7 @@
  * 정원 초과 과목에 대해서는 신청 불가능
 */
 
-var gradeSum=0;
+var realGradeSum=0;	//총학점
 
 $(function(){
 	
@@ -110,7 +110,7 @@ function onloadRealtable(){
 				});
 				
 				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
+					realGradeSum+=elt.subject_credit;
 					var prev = 0;
 					var prevDay = "";
 					var color="";
@@ -133,6 +133,7 @@ function onloadRealtable(){
 						prevDay = str[1];
 					});
 				});
+				console.log('첫 로딩시 가져오는 학점 : ' + realGradeSum);
 			}
 		}
 	);
@@ -188,16 +189,16 @@ function realInsertTimeTable(e){
 				dataType:"json",
 				success:function(data){
 					
-					gradeSum+=data.subject_info.subject_credit;
+					realGradeSum+=data.subject_info.subject_credit;
 					var flag=true;
-					if(gradeSum > 21){
+					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
-						gradeSum-=data.subject_info.subject_credit;
+						realGradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
 							if($('#'+elt.period_code+'_3').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
-								gradeSum-=data.subject_info.subject_credit;
+								realGradeSum-=data.subject_info.subject_credit;
 								flag=false;
 								return false;
 							}	
@@ -262,7 +263,7 @@ $(document).on("click",".real_table_ele",function(e){
 						dataType:"json",
 						success:function(data){
 							if(data.subject_credit){
-								gradeSum -= data.subject_credit;
+								realGradeSum -= data.subject_credit;
 							
 							
 								for(var i=1; i<=20; i++){

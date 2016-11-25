@@ -483,12 +483,18 @@ public class RequestCourseService {
 				map.put("result", "over");
 				return map;
 			}else{
-				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());
+				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());	//예비 수강 신청에서 실패한 과목 성공 시, 목록에서 안보이게 함
 				if(count > 0){
 					HashMap<String, Object> temp = new HashMap<String, Object>();
 					temp.put("subject_code", subject_code);
 					temp.put("result", 0);
+					temp.put("student_code", studentDto.getStudent_code());
 					requestCourseDao.setReserveCheck(temp);
+					
+					parameter.put("student_code", studentDto.getStudent_code());
+					parameter.put("subject_code", subject_code);
+					requestCourseDao.insertEnrollment(parameter);
+					requestCourseDao.updateRegistedSeat(subject_code);
 					map.put("result", "success");
 				}else{
 					parameter.put("student_code", studentDto.getStudent_code());

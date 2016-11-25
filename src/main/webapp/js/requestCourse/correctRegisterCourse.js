@@ -9,7 +9,7 @@
  * 정원 초과 과목에 대해서는 신청 불가능
 */
 
-var gradeSum=0;
+var correctGradeSum=0;
 
 $(function(){
 	/*
@@ -28,7 +28,7 @@ $(function(){
 				});
 				
 				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
+					correctGradeSum+=elt.subject_credit;
 					var prev = 0;
 					var prevDay = "";
 					var color="";
@@ -106,9 +106,12 @@ $(document).on("click",".correct_info",function(e){
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
 						classroom+="<i>"+elt.classroom_name+"</i><br>";
-						$.each(elt.periodlist, function(i, p) {
+						/*$.each(elt.periodlist, function(i, p) {
 							period += p.period_day + " : " + p.period_start + " ~ " + p.period_end + "<br>";
-						})
+						})*/
+					});
+					$.each(data.subject_info.period, function(i, p) {
+						period += p.period_day + " : " + p.period_start + " ~ " + p.period_end + "<br>";
 					});
 					$('#correct_classroom_name').html(classroom);
 					$('#correct_period').html(period);
@@ -174,17 +177,17 @@ function correctInsertTimeTable(e){
 				dataType:"json",
 				success:function(data){
 					
-					gradeSum+=data.subject_info.subject_credit;
+					correctGradeSum+=data.subject_info.subject_credit;
 					var flag=true;
-					if(gradeSum > 21){
+					if(correctGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
-						gradeSum-=data.subject_info.subject_credit;
+						correctGradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
 							
 							if($('#'+elt.period_code+'_4').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
-								gradeSum-=data.subject_info.subject_credit;
+								correctGradeSum-=data.subject_info.subject_credit;
 								flag=false;
 								return false;
 							}	
@@ -249,7 +252,7 @@ $(document).on("click",".correct_table_ele",function(e){
 						dataType:"json",
 						success:function(data){
 							if(data.subject_credit){
-								gradeSum -= data.subject_credit;
+								correctGradeSum -= data.subject_credit;
 							
 							
 								for(var i=1; i<=20; i++){

@@ -8,7 +8,7 @@
  * 사용자가 선택한 과목은 시간표로 옮겨지며, 시간표에 담겨진 과목을 클릭할 경우 시간표에서 제외됨
 */
 
-var gradeSum=0;
+var preGradeSum=0;
 
 $(function(){
 	/*
@@ -33,7 +33,7 @@ $(function(){
 				}
 				
 				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
+					preGradeSum+=elt.subject_credit;
 					var prev = 0;
 					var prevDay = "";
 					var color="";
@@ -186,16 +186,16 @@ function insertTimeTable(e){
 					var text=data.subject_info.subject_code+"<br>"+data.subject_info.subject_name+"<br>"+data.subject_info.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+data.subject_info.subject_code+"'/>";
 					
-					gradeSum+=data.subject_info.subject_credit;
-					if(gradeSum > 21){
+					preGradeSum+=data.subject_info.subject_credit;
+					if(preGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
-						gradeSum-=data.subject_info.subject_credit;
+						preGradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
 							
 							if($('#'+elt.period_code).html() != ''){
 								alert('먼저 등록된 시간표를 제거해 주세요.');
-								gradeSum-=data.subject_info.subject_credit;
+								preGradeSum-=data.subject_info.subject_credit;
 								return false;
 							}else{
 								var str = elt.period_code.split("_");
@@ -236,7 +236,7 @@ $(document).on("click",".table_ele",function(e){
 					dataType:"json",
 					success:function(data){
 						if(data.subject_credit){
-							gradeSum -= data.subject_credit;
+							preGradeSum -= data.subject_credit;
 						}
 					}
 					
@@ -310,5 +310,5 @@ $(document).on("click","#requestBtn",function(){
 		}
 	);
 	
-	console.log('총학점 : ' + gradeSum);
+	console.log('총학점 : ' + preGradeSum);
 });
