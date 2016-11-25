@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- 
+   @Project : InitSpring
+   @File name : updatePwd.jsp
+   @Author : 김영빈
+   @Data : 2016.11.22
+   @Desc : 비밀번호 변경 view
+-->   	
 <h3>새로운 비밀번호로 변경합니다.</h3>
 <form method="post">
 	<table>
