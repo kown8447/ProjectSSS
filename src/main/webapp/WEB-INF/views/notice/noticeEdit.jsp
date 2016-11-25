@@ -13,36 +13,37 @@
 	<h2>공지사항 수정</h2>
 
 <form method="POST" enctype="multipart/form-data">
-	<table border="1">
-		<tr>
-			<td width="20%" align="center"><b> 글번호 </b></td>
-			<td width="30%">${notice.notice_index}</td>
-			<td width="20%" align="center"><b>작성일</b></td>
+	<table class="table table-bordered" style="width:70%; margin: auto;" >
+		<tr style="width:20%">
+			<th style="text-align: center" >글번호</th>
+			<td style="text-align: center; width:30%;">${notice.notice_index}</td>
+			<th style="text-align: center">작성일</th>
 			<td>${notice.notice_date}</td>
 		</tr>
 		<tr>
-			<td width="20%" align="center"><b>글쓴이</b></td>
-			<td width="30%">관리자</td>
+			<th style="text-align: center">작성자</th>
+			<td colspan="3">관리자</td>
 		</tr>
 		<tr>
-			<td width="20%" align="center"><b>제목</b></td>
+			<th style="text-align: center">제목</th>
 			<td colspan="3">
-			<input type="text" name="notice_title" id="notice_title" value="${notice.notice_title}" size="40"></td>
+			<input type="text" name="notice_title" id="notice_title"  class="form-control" value="${notice.notice_title}"></td>
 		</tr>
-		<tr height="100">
-			<td width="20%" align="center"><b>글내용</b></td>
-			<td colspan="3"><textarea rows="7" cols="50" id="notice_content" name="notice_content">${notice.notice_content}</textarea>
+		<tr>
+			<th style="text-align: center">글내용</th>
+			<td colspan="3"><textarea rows="7" class="form-control" id="notice_content" name="notice_content">${notice.notice_content}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<td width="20%" align="center"><b>첨부파일</b></td>
+			<th style="text-align: center">첨부파일</th>
 			<td colspan="3">${notice.notice_file}
-			<br /> 
 			<input type="file" name="file">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><input type="submit" id="editBtn"value="수정하기"><a href="noticeDetail.htm">취소</a>
+			<td colspan="4" align="center">
+				<input type="submit" id="editBtn" value="수정하기"  class="btn btn-success">
+				<a  href="notice.htm" class="btn btn-success">취소</a>
 			</td>
 		</tr>
 	</table>

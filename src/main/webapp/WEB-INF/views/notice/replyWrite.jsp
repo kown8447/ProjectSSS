@@ -11,7 +11,7 @@
 <div id="content">
 	<h2>공지사항 답글</h2>
 	<form method="POST" enctype="multipart/form-data">
-	<table border="1">
+	<table class="table table-bordered" style="width:70%">
 	
 		<tr>
 			<td>

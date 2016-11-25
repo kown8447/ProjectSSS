@@ -185,4 +185,9 @@ public class NoticeController {
 		return url;
 	}
 	
+	@RequestMapping("/navereditor")
+    public String navereditor(){
+         
+        return "navereditor";
+    }
 }

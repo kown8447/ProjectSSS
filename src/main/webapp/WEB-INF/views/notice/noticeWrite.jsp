@@ -10,9 +10,29 @@
 <div id="content">
 	<h2>공지사항</h2>
 	<form method="post" action="" enctype="multipart/form-data">
-		제목<input type="text" name="notice_title" id="notice_title"/><br>
-		첨부파일<input type="file" id="file" name="file" /><br>
-		<textarea id="notice_content" name="notice_content"></textarea>
-		<br> <button type="submit" id="writeBtn">저장</button> <a href="notice.htm">취소</a>
+		<table class="table table-bordered" style="width: 70%; margin: auto;">
+			<tr>
+				<th style="text-align: center;width:120px">제목</th>
+				<td>
+					<input type="text" name="notice_title" id="notice_title" class="form-control"></td>
+			</tr>
+			<tr style="height: 45%">
+				<th style="text-align: center;">내용</th>
+				<td>
+					<textarea id="notice_content" style="height:180px;" name="notice_content" class="form-control"></textarea></td>
+			</tr>
+			<tr>
+				<th style="text-align: center;">첨부파일</th>
+				<td><input type="file" id="file" name="file"></td>	
+			</tr>
+			<tr>
+		</table>
+		
+		<br>
+
+		<div align="center">
+			<button type="submit" id="writeBtn" class="btn btn-success">저장</button>
+			<a href="notice.htm" class="btn btn-success">취소</a>
+		</div>
 	</form>
 </div>

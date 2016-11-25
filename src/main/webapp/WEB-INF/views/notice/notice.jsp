@@ -25,6 +25,7 @@
 	</form>
 
 	<br><br>
+	
 <div style="width:85%; text-align: center; margin: auto;">
 	<table class="table table-hover">
 		<tr>
@@ -48,7 +49,7 @@
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}"
 									step="1"> &nbsp;
                            		</c:forEach>
-								<img src="../image/reply.png">&nbsp;   
+								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>
 						</c:choose> 
 						<c:if test="${fn:length(n.notice_title) > 15}">
@@ -65,11 +66,16 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div style="margin-left: 90%">
+		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
+			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
+		</se:authorize>
+	</div>
 </div>
 	
 	<div align = "center">
 	 <ul class="pagination">
-	 <!-- 처음, 이전페이지 -->
+	 	<!-- 처음, 이전페이지 -->
      	<c:if test="${pg>fromPage}">
 			<li><a href="notice.htm?pg=1">◀◀</a></li>
 			<li><a href="notice.htm?pg=${pg-1}">◀</a></li>
@@ -81,28 +87,22 @@
 		 
 		 <!-- 블록 범위 찍기 -->
 		 <c:forEach begin="${fromPage}" end="${toPage}" var="i">
-					<li><c:if test="${i==pg}"><a href="#">${i}</a></c:if></li>	
-					<c:if test="${i!=pg}">
-						<li><a href="notice.htm?pg=${i}">${i}</a></li>
-					</c:if>
-				</c:forEach>
+			<li><c:if test="${i==pg}"><a href="#">${i}</a></c:if></li>	
+				<c:if test="${i!=pg}">
+					<li><a href="notice.htm?pg=${i}">${i}</a></li>
+				</c:if>
+		</c:forEach>
 		 
 		 <!-- 다음, 이후 -->
 		<c:if test="${pg<allPage}">
-				<li><a href="notice.htm?pg=${pg+1}">▶</a></li>
-				<li><a href="notice.htm?pg=${allPage}">▶▶</a></li>
+			<li><a href="notice.htm?pg=${pg+1}">▶</a></li>
+			<li><a href="notice.htm?pg=${allPage}">▶▶</a></li>
 		</c:if>
 		
 		<c:if test="${pg>=allPage}">
-				<li><span style="color: gray">▶</span></li>
-				<li><span style="color: gray">▶▶</span></li>
-		
+			<li><span style="color: gray">▶</span></li>
+			<li><span style="color: gray">▶▶</span></li>
 		</c:if>
-</ul>
-</div>
-<div align = "right">
-	<se:authorize access="hasAnyRole('ROLE_ADMIN')">
-		<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
-	</se:authorize>
+	</ul>
 	</div>
 </div>
