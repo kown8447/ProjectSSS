@@ -13,6 +13,6 @@
 		제목<input type="text" name="notice_title" id="notice_title"/><br>
 		첨부파일<input type="file" id="file" name="file" /><br>
 		<textarea id="notice_content" name="notice_content"></textarea>
-		<br> <input type="submit" value="저장" /> <a href="notice.htm">취소</a>
+		<br> <button type="submit" id="WriteBtn">저장</button> <a href="notice.htm">취소</a>
 	</form>
 </div>

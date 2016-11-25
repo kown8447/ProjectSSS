@@ -102,6 +102,11 @@ public class NoticeService {
 		return "redirect:notice.htm";
 	}
 	
+	/*
+	 * @method Name : replyWrite
+	 * @Author : 송아름
+	 * @description : 답글 화면처리(원본글 제목그대로 가져오기)
+	 */
 	public CustomerNoticeDTO replyWrite(int notice_index) throws ClassNotFoundException, SQLException {
 		
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
@@ -116,33 +121,32 @@ public class NoticeService {
 	 * @Author : 송아름
 	 * @description : 글 목록 service
 	 */
-	public HashMap<String, Object> notices(String pg, String f, String q) throws ClassNotFoundException, SQLException {
+	public HashMap<String, Object> notices(int pg, String f, String q) throws ClassNotFoundException, SQLException {
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int pagesize = 10;
-		int pagenum = 1;
+		int pagenum = pg;
 		String field = "notice_title";
 	    String query = "";
-		int start = (pagenum * pagesize) - (pagesize - 1); 
-	    int end = pagenum * pagesize; 
+		System.out.println("pg :" + pg);
 		
-		if (pg != null && pg.equals("")) {
-			pagenum = Integer.parseInt(pg);
-		}
+
 		if (f != null && f.equals("")) {
 			field = f;
 		}
 		if (q != null && q.equals("")) {
 			query = q;
 		}
-
+		System.out.println("pageNum : " + pagenum);
+		int start = (pagenum * pagesize) - (pagesize - 1); 
+	    int end = pagenum * pagesize; 
+	    System.out.println("start end : " + start +"/" + end);
 		List<CustomerNoticeDTO> list = noticedao.getNotices(field, query, start, end);
 		
 		int total = noticedao.getCount(field, query); 
 		
 		int allPage = (int) Math.ceil(total / (double) pagesize); // 페이지수
-		System.out.println("페이지수 : " + allPage);
 
 		int block = 10; // 한페이지에 보여줄 범위 << [1] [2] [3] [4] [5] [6] [7] [8] [9]
 		// [10] >>

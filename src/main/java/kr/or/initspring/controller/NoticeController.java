@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.initspring.dto.notice.CustomerNoticeDTO;
 import kr.or.initspring.service.NoticeService;
@@ -39,9 +40,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 목록보기
 	 */
 	@RequestMapping("notice.htm")
-	public String notices(String pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {	
-		
-		System.out.println(pg);
+	public String notices(@RequestParam(value="pg",defaultValue="1") int pg, String f, String q, Model model) throws ClassNotFoundException, SQLException {	
 		
 		HashMap<String, Object> map = noticeservice.notices(pg, f, q);
 		
