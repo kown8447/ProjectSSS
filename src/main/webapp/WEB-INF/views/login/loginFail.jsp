@@ -10,4 +10,4 @@
    @Desc : 로그인 실패  view
 -->
 <h3>로그인 실패 : ${failmessage}</h3><br>
-<a href="${pageContext.request.contextPath}/index.htm">메인으로 가기</a><br>
+<a href="${pageContext.request.contextPath}/login.htm">메인으로 가기</a><br>

@@ -74,8 +74,7 @@ public class MemberController {
 		
 		String member_id = principal.getName();
 		MemberDTO member = memberservice.getMember(member_id);
-		SimpleDateFormat sdf = new SimpleDateFormat(
-			    "yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String birth = sdf.format(member.getMember_birth());
 		int year = Integer.parseInt(birth.substring(0, 4));
 		int month =  Integer.parseInt(birth.substring(5, 7));

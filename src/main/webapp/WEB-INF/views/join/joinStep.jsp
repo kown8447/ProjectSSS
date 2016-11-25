@@ -13,4 +13,3 @@
 	</tr>
 
 </table>
-<input type="button" value="다음 단계" id="stepbtn">
