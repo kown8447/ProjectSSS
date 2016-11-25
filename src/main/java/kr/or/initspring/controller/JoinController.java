@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
-import kr.or.initspring.dto.CodeMgDTO;
-import kr.or.initspring.dto.MemberDTO;
+import kr.or.initspring.dto.commons.CodeMgDTO;
+import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.service.JoinService;
 
 import org.springframework.ui.Model;

@@ -7,13 +7,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertCode">
 		insert into CODE_MG(code, code_type, code_name, code_birth) values(#{code}, #{code_type}, #{code_name}, #{code_birth})
 	</insert>
-	<select id="codelist" resultType="kr.or.initspring.dto.CodeMgDTO">
+	<select id="codelist" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
 		select * from CODE_MG
 	</select>
-	<select id="codeDetail" resultType="kr.or.initspring.dto.CodeMgDTO">
+	<select id="codeDetail" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
 		select * from CODE_MG where code = #{code}
 	</select>
 	<update id="editCode">
 		update CODE_MG set code_type = ${param2}, code_name = #{param3}, code_birth = #{param4} where code = #{param1}
 	</update>
+	<insert id="insertExcel" parameterType="kr.or.initspring.dto.commons.CodeMgDTO">
+		insert into CODE_Mg(code_type, code, code_name, code_birth)
+		values
+		(${code_type}, #{code}, #{code_name}, #{code_birth})
+	</insert>
+	<delete id="deleteCode">
+		DELETE from CODE_MG where CODE = #{param1}
+	</delete>
 </mapper>

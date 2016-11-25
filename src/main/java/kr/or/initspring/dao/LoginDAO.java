@@ -1,6 +1,6 @@
 package kr.or.initspring.dao;
 
-import kr.or.initspring.dto.MemberDTO;
+import kr.or.initspring.dto.join.MemberDTO;
 
 public interface LoginDAO {
 	

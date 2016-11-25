@@ -9,29 +9,48 @@
 
 package kr.or.initspring.controller;
 
+import java.io.File;
 import java.security.Principal;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
-import kr.or.initspring.dto.CodeMgDTO;
+import kr.or.initspring.dto.commons.CodeMgDTO;
 import kr.or.initspring.service.CodeService;
 import kr.or.initspring.service.MemberService;
 
 @Controller
 @Secured({"ROLE_STUDENT", "ROLE_ADMIN", "ROLE_PROFESSOR"})
 @RequestMapping("/member/")
-public class MemberController {
+public class MemberController{
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -41,6 +60,9 @@ public class MemberController {
 	
 	@Autowired
 	private CodeService codeservice;
+	
+	@Autowired
+	private View jsonview;
 	
 	@RequestMapping(value="updatePwd.htm", method=RequestMethod.GET)
 	public String updatePwd(){
@@ -135,4 +157,47 @@ public class MemberController {
 		
 		return viewpage;
 	}
+	@RequestMapping("excel.htm")
+	public ModelAndView download(HttpServletRequest request, HttpServletResponse response){
+		
+		
+		System.out.println("액셀컨트롤러");
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+		
+		File downloadFile = new File(baseDir,"code_mg.xlsx");
+		
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+	}
+	
+	
+	@RequestMapping(value = "compExcelUpload.htm", method=RequestMethod.POST)
+	public View excelUpload(MultipartHttpServletRequest request, Model model){
+		System.out.println("exceForm 실행후 컨트롤러 실험");	
+		codeservice.insertExcelList(request, model);
+
+		return jsonview;
+	}
+	
+	@RequestMapping(value = "codeDelete.htm", method = RequestMethod.POST)
+	public View deleteCode(String code, Model model){
+		System.out.println("code =" + code);
+		System.out.println("삭제 컨트롤러!");
+		
+		boolean result=false;
+		
+		
+		int dbResult = codeservice.deleteCode(code,model);
+		
+		if(dbResult >0){
+			System.out.println("성공");
+			result = true;
+		}else if(dbResult==0){
+			model.addAttribute("reason", "삭제대상이 이미 제거 되어 있습니다");
+		}
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
 }

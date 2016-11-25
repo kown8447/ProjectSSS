@@ -1,13 +1,14 @@
-package kr.or.initspring.dto;
+package kr.or.initspring.dto.commons;
 
 import java.sql.Date;
+import java.util.List;
 
 public class CodeMgDTO {
 	private String code;
 	private int code_type;
 	private String code_name;
 	private Date code_birth;
-	
+
 	public String getCode() {
 		return code;
 	}

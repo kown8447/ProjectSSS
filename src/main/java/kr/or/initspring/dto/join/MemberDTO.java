@@ -1,4 +1,4 @@
-package kr.or.initspring.dto;
+package kr.or.initspring.dto.join;
 
 import java.util.Date;
 
