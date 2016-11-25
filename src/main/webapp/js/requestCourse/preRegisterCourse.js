@@ -8,7 +8,7 @@
  * 사용자가 선택한 과목은 시간표로 옮겨지며, 시간표에 담겨진 과목을 클릭할 경우 시간표에서 제외됨
 */
 
-var gradeSum=0;
+var preGradeSum=0;
 
 $(function(){
 	/*
@@ -33,7 +33,7 @@ $(function(){
 				}
 				
 				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
+					preGradeSum+=elt.subject_credit;
 					var prev = 0;
 					var prevDay = "";
 					var color="";
@@ -77,10 +77,10 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:40px'><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr>"
+						var text="<table class='table table-hover' style='margin-top:20px'><tr style='font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'><th>과목코드</th><th>과목명</th><th>신청/정원</th><th>학점</th><th>정보</th><th>등록</th><tr>"
 						$('#result').empty();
 						$.each(data.lists, function(i, elt) {
-							text+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.reserve_seats+"/"+elt.subject_seats+"</td>" +
 									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='info' id='"+elt.subject_code+"'" +
 											"data-target='#layerpop' data-toggle='modal'/></td>" +
 									"<td><input type='button' value='강의 신청' class='request' id='"+elt.subject_code+"'/></td></tr>";
@@ -104,7 +104,6 @@ $(document).on("click",".info",function(e){
 				data:{subject_code:e.currentTarget.id},
 				dataType:"json",
 				success:function(data){
-					console.log(data.subject_info.subject_code);
 					$('#subject_name').html(data.subject_info.subject_name);
 					$('#subject_code2').html(data.subject_info.subject_code);
 					$('#professor_name').html(data.subject_info.professor_name);
@@ -113,9 +112,9 @@ $(document).on("click",".info",function(e){
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
 						classroom+="<i>"+elt.classroom_name+"</i><br>";
-						$.each(elt.periodlist, function(i, p) {
-							period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
-						})
+					});
+					$.each(data.subject_info.period, function(i, elt) {
+						period += elt.period_day + " : " + elt.period_start + " ~ " + elt.period_end + "<br>";
 					});
 					$('#classroom_name').html(classroom);
 					$('#period').html(period);
@@ -180,22 +179,23 @@ function insertTimeTable(e){
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
+					console.log(data);
 					var prev = 0;
 					var prevDay = "";
 					var color="";
 					var text=data.subject_info.subject_code+"<br>"+data.subject_info.subject_name+"<br>"+data.subject_info.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+data.subject_info.subject_code+"'/>";
 					
-					gradeSum+=data.subject_info.subject_credit;
-					if(gradeSum > 21){
+					preGradeSum+=data.subject_info.subject_credit;
+					if(preGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
-						gradeSum-=data.subject_info.subject_credit;
+						preGradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
 							
 							if($('#'+elt.period_code).html() != ''){
 								alert('먼저 등록된 시간표를 제거해 주세요.');
-								gradeSum-=data.subject_info.subject_credit;
+								preGradeSum-=data.subject_info.subject_credit;
 								return false;
 							}else{
 								var str = elt.period_code.split("_");
@@ -236,7 +236,7 @@ $(document).on("click",".table_ele",function(e){
 					dataType:"json",
 					success:function(data){
 						if(data.subject_credit){
-							gradeSum -= data.subject_credit;
+							preGradeSum -= data.subject_credit;
 						}
 					}
 					
@@ -310,5 +310,5 @@ $(document).on("click","#requestBtn",function(){
 		}
 	);
 	
-	console.log('총학점 : ' + gradeSum);
+	console.log('총학점 : ' + preGradeSum);
 });

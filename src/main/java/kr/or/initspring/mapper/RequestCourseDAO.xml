@@ -178,6 +178,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
 	</update>
 	
+	<update id="minusRegistedSeatBySubjectCode">
+		update opened set registed_seat = registed_seat - 1 where subject_code = #{subject_code}
+	</update>
+	
 	<select id="getRetakeCheck" resultType="int">
 		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
 	</select>
@@ -207,7 +211,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="setReserveCheck" parameterType="hashmap">
-		update reserve set reserve_check = #{result} where subject_code = #{subject_code}
+		update reserve set reserve_check = #{result} where subject_code = #{subject_code} and student_code = #{student_code}
 	</select>
 	
 	<update id="updateRequestSeat">
@@ -250,4 +254,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertEnrollment" parameterType="hashmap">
 		insert into enrollment values(#{student_code},#{subject_code})
 	</insert>
+	
+	<delete id="deleteFromEnrollment">
+		delete from enrollment where student_code = #{param1} and subject_code = #{param2}
+	</delete>
+	
+	<select id="getReserveSeatsBySubjectCode" resultType="int">
+		select count(*) from reserve where subject_code=#{subject_code}	
+	</select>
 </mapper>

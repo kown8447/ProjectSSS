@@ -34,6 +34,7 @@ public interface RequestCourseDAO {
 	public List<CustomClassRoomDTO> getClassroomCodeBySubjectCode(String subject_code);	//교과목 코드로 중복제거된 강의실 정보 가져오기
 	public CustomClassRoomDTO getClassroomInfoByClassroomCode(String classroom_code);	//강의실 코드로 강의실 정보 가져오기
 	public List<PeriodDTO> getPeriodByClassroomCode(String classroom_code);	//강의실 코드로 해당 강의실의 강의 시간 가져오기
+	public Integer getReserveSeatsBySubjectCode(String subject_code);	//예비 수강 신청 시의 신청 인원 계산
 	
 	public StudentDTO getStudentByMemberid(String member_id);	//학생의 학생테이블 정보(학번) 가져오기
 	public StStateDTO getStstateByStudentCode(String student_code);	//학생의 현재 재학 정보 가져오기
@@ -75,4 +76,6 @@ public interface RequestCourseDAO {
 	
 	public Integer updateRegistedSeat(String subject_code);	//enrollment Table에 삽입 성공한 과목에 대해서 수강신청인원 +1
 	public Integer checkAlreadyExistSubject(String subject_code, String student_code);	//예비 수강신청에서 실패했던 과목에 대해서 수강신청 할 경우를 확인
+	public void deleteFromEnrollment(String student_code, String subject_code);	//선택 과목 삭제
+	public void minusRegistedSeatBySubjectCode(String subject_code);	//정원 감소
 }

@@ -8,6 +8,7 @@
 
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/requestCourse/layout.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/requestCourse/preRegisterCourse.css" rel="stylesheet">
 
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
@@ -15,6 +16,7 @@
 <script src="${pageContext.request.contextPath}/js/requestCourse/viewOpLecture.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
+<script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
 <script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
 
 
@@ -25,7 +27,7 @@
 
 	<tiles:insertAttribute name="header" />
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<div class="sidebar-nav">
 				<div class="navbar navbar-default" role="navigation">
 					<div class="navbar-header"></div>
@@ -36,7 +38,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-9">
+		<div class="col-sm-10">
 			<tiles:insertAttribute name="content" />
 		</div>
 	</div>
