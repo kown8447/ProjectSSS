@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -30,8 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
-import kr.or.initspring.dto.CodeMgDTO;
-import kr.or.initspring.dto.MemberDTO;
+import kr.or.initspring.dto.commons.CodeMgDTO;
+import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.service.JoinService;
 
 import org.springframework.ui.Model;
@@ -74,9 +73,8 @@ public class JoinController {
 	 * code_birth -> code_mg 테이블에 있는 생년월일. yyyy-MM-dd 형식을 가지며, Java에서는 DATE Type으로 받음
 	*/	
 	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
-	public View joinStep1(int code_type, String code_name, @DateTimeFormat(pattern="yyyy-MM-dd") Date code_birth, String code, 
+	public View joinStep1(int code_type, String code_name, Date code_birth, String code, 
 			Model model, HttpServletRequest request){
-
 		HttpSession session = request.getSession();
 		boolean result = false;
 		

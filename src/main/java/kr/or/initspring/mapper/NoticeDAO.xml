@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.initspring.dao.NoticeDAO">
+	<select id="getNotices"  resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		select * from 
+        (
+         select A.* ,ROWNUM r from (
+                   select * from notice where ${param1} like '%'||#{param2}||'%' order by notice_refer desc , notice_step 
+                                   ) A
+            
+        ) where r >= #{param3} and r &lt;= #{param4}
+	</select>
+
+	<select id="getNotice" resultType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		select * from notice where notice_index=#{notice_index}
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		select count(*) CNT
+		from NOTICE
+	    where ${param1} LIKE '%'||#{param2}||'%'
+	</select>	
+	
+	<delete id="delete">
+	 	delete notice where notice_index=#{notice_index}
+	</delete>
+	
+	<update id="update" >
+	update notice
+	set notice_title=#{notice_title}, 
+	    notice_content=#{notice_content}, 
+	    notice_file=#{notice_file,jdbcType=VARCHAR}
+	where notice_index=#{notice_index}
+	</update>
+
+	<select id="selectAdmin" resultType="String">
+		select admin_code FROM admin where member_Id = #{param1}
+	</select>
+	
+	<insert id="insert">
+
+		<selectKey order="BEFORE" keyProperty="notice_refer" resultType="Integer">
+			select nvl(max(notice_refer), 0)+1 from notice
+		</selectKey>
+
+		insert into notice(notice_index, admin_code, notice_depth,
+		notice_step, notice_refer, notice_file, notice_title ,notice_content, notice_date )
+		values( notice_index.nextval, #{admin_code}, 0, 0, #{notice_refer},
+		#{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
+	</insert>
+	
+	
+	<update id="increase">
+		update notice set notice_count = notice_count + 1
+		where notice_index = #{notice_index}	
+	</update>
+
+	<update id="addStep">
+		update notice set notice_step = notice_step + 1
+		where notice_refer = #{notice_refer} and notice_step > #{notice_step}
+	</update>
+
+	<insert id="replyWrite" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+		
+		insert into notice(notice_index, admin_code, notice_depth, notice_step,
+		notice_refer, notice_file, notice_title ,notice_content, notice_date )
+		values( notice_index.nextval, #{admin_code}, #{notice_depth},
+		#{notice_step}, #{notice_refer},
+		#{notice_file,jdbcType=VARCHAR},
+		#{notice_title}, #{notice_content}, SYSDATE)
+	</insert>
+	
+	<select id="lastReplyStep" resultType="Integer" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
+        SELECT nvl(max(notice_step),0) from notice where notice_refer=${notice_refer} and notice_depth=${notice_depth}+1
+   </select>
+	
+
+</mapper>

@@ -5,8 +5,8 @@
 <table>
 	<tr>
 		<td>교수 / 학생 선택</td>
-		<td><input type="radio" value="1" name="code_type" id="code_type">학생
-			<input type="radio" value="2" name="code_type" id="code_type">교수
+		<td><input type="radio" value="0" name="code_type" id="code_type">학생
+			<input type="radio" value="1" name="code_type" id="code_type">교수
 		</td>
 	</tr>
 	<tr>
