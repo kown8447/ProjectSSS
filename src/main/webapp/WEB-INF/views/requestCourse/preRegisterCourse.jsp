@@ -1,55 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-5">
 		<div class="navbar-header">
 			<form class="form-inline" onSubmit='return false'>
-				<select id="searchType" class="form-control">
+				<select id="searchType" class="form-control" style="font-size: small">
 					<option value="subject_name">과목명</option>
 					<option value="subject_code">과목코드</option>
-				</select> <input type="text" class="form-control" id="keyword" /> <input
-					type="button" class="btn btn-default" id="searchBtn" value="검색">
-				<span id="result" style="margin: 20px 20px 20px 20px"> </span>
+				</select> 
+				<input type="text" class="form-control" id="keyword" /> 
+				<input type="button" class="btn btn-default" id="searchBtn" style="font-size:small" value="검색">
+				<div id="result" style="overflow:auto;height:400px;"> </div>
 			</form>
 
 		</div>
 	</div>
-
-
-	<div class="col-md-6">
+	
+	<div class="col-md-7" style="overflow:auto;height:500px;">
 		<form action="" method="post">
-			<table id="timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
-				<tr>
-					<th>시간</th>
-					<th>월</th>
-					<th>화</th>
-					<th>수</th>
-					<th>목</th>
-					<th>금</th>
+			<table id="timetable" class="table table-condensed" style="table-layout: fixed;" cellpadding="5" align="center" width="200">
+				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);'>
+					<th style="text-align: center">시간</th>
+					<th style="text-align: center">월</th>
+					<th style="text-align: center">화</th>
+					<th style="text-align: center">수</th>
+					<th style="text-align: center">목</th>
+					<th style="text-align: center">금</th>
 				</tr>
 				<c:forEach var="i" begin="1" end="20">
-					<tr>
-						<td id="PERIOD_START_${i}" style="word-break: break-all;"></td>
-						<td id="PR_MON_${i}" class="table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_TUE_${i}" class="table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_WEN_${i}" class="table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_THU_${i}" class="table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_FRI_${i}" class="table_ele" height="auto" style="word-break: break-all;"></td>
+					<tr style="font-size:small; text-align: center" height="20px">
+						<td id="PERIOD_START_${i}" style="word-break: break-all; text-align: center"></td>
+						<td id="PR_MON_${i}" class="table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_TUE_${i}" class="table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_WEN_${i}" class="table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_THU_${i}" class="table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_FRI_${i}" class="table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
 					</tr>
 				</c:forEach>
 			</table>
-			시간표 공유 여부 : <input type="radio" class="" id="timetable_share" name="timetable_share" value="1" />
-			공유함 <input type="radio" id="timetable_share" name="timetable_share" value="0" checked />공유안함
-			<input type="button" id="requestBtn" class="btn btn-primary" value="수강 신청" />
+			<div class="row" style="text-align: center">
+				시간표 공유 여부 : <input type="radio" class="" id="timetable_share" name="timetable_share" value="1" />
+				공유함 <input type="radio" id="timetable_share" name="timetable_share" value="0" checked />공유안함 
+				<input type="button" id="requestBtn" class="btn btn-primary" value="수강 신청" />
+			</div>
 		</form>
 	</div>
 </div>
 
 
 <div class="modal fade" id="layerpop">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -62,7 +63,7 @@
 			<div class="modal-body">
 
 				<table class="table table-bordered">
-					<tr>
+					<tr style="text-align: center;font-size: samll;">
 						<th>과목명</th>
 						<th>과목코드</th>
 						<th>교수명</th>
@@ -73,16 +74,16 @@
 						<th>정원</th>
 						<th>학점</th>
 					</tr>
-					<tr>
-						<td id="subject_name"></td>
-						<td id="subject_code2"></td>
-						<td id="professor_name"></td>
-						<td id="classroom_name"></td>
-						<td id="period"></td>
-						<td id="grade_limit"></td>
-						<td id="required_choice"></td>
-						<td id="subject_seats"></td>
-						<td id="subject_credit"></td>
+					<tr style="text-align: center;font-size: x-samll;">
+						<td id="subject_name" style="text-align: center;font-size: x-samll;"></td>
+						<td id="subject_code2" style="text-align: center;font-size: x-samll;"></td>
+						<td id="professor_name" style="text-align: center;font-size: x-samll;"></td>
+						<td id="classroom_name" style="text-align: center;font-size: x-samll;"></td>
+						<td id="period" style="text-align: center;font-size: x-samll;"></td>
+						<td id="grade_limit" style="text-align: center;font-size: x-samll;"></td>
+						<td id="required_choice" style="text-align: center;font-size: x-samll;"></td>
+						<td id="subject_seats" style="text-align: center;font-size: x-samll;"></td>
+						<td id="subject_credit" style="text-align: center;font-size: x-samll;"></td>
 					</tr>
 				</table>
 			</div>

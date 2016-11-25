@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import kr.or.initspring.dto.notice.CustomerNoticeDTO;
 import kr.or.initspring.service.NoticeService;
 
 @Controller
+@Secured({"ROLE_STUDENT", "ROLE_PROFESSOR", "ROLE_ADMIN"})
 @RequestMapping("/notice/")
 public class NoticeController {
 
@@ -62,6 +64,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 등록 화면 처리
 	 */
 	@RequestMapping(value = "noticeWrite.htm", method = RequestMethod.GET)
+	@Secured({"ROLE_ADMIN"})
 	public String noticeWrite() {
 		return "notice.noticeWrite";
 	}
@@ -72,6 +75,7 @@ public class NoticeController {
 	 * @description : 공지사항 실제 글 등록 처리
 	 */
 	@RequestMapping(value = "noticeWrite.htm", method = RequestMethod.POST)
+	@Secured({"ROLE_ADMIN"})
 	public String noticeWrite(Principal principal, CustomerNoticeDTO cn, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
 		
@@ -104,6 +108,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 삭제하기
 	 */
 	@RequestMapping("noticeDel.htm")
+	@Secured({"ROLE_ADMIN"})
 	public String noticeDel(int notice_index) throws ClassNotFoundException, SQLException {
 		String url = noticeservice.noticeDel(notice_index);
 		return url;
@@ -117,6 +122,7 @@ public class NoticeController {
 	 * @description : 공지사항 글수정하기 (두가지 처리 : 화면(select) , 처리(update))
 	 */
 	@RequestMapping(value = "noticeEdit.htm", method = RequestMethod.GET)
+	@Secured({"ROLE_ADMIN"})
 	public String noticeEdit(int notice_index, Model model) throws ClassNotFoundException, SQLException {
 
 		CustomerNoticeDTO notice = noticeservice.noticeEdit(notice_index);
@@ -131,6 +137,7 @@ public class NoticeController {
 	 * @description : 공지사항 글 실제 수정 처리
 	 */
 	@RequestMapping(value = "noticeEdit.htm", method = RequestMethod.POST)
+	@Secured({"ROLE_ADMIN"})
 	public String noticeEdit(CustomerNoticeDTO cn, HttpServletRequest request)
 			throws ClassNotFoundException, SQLException, IOException {
 
@@ -158,6 +165,7 @@ public class NoticeController {
 	 * @description : 공지사항 게시물 상세보기에서 답변클릭시 처리화면 
 	 */
 	@RequestMapping(value = "replyWrite.htm", method = RequestMethod.GET)
+	@Secured({"ROLE_ADMIN"})
 	public String replyWrite(int notice_index, Model model)throws ClassNotFoundException, SQLException {
 
 		CustomerNoticeDTO notice = noticeservice.replyWrite(notice_index);
@@ -171,6 +179,7 @@ public class NoticeController {
 	 * @description : 공지사항 실제 답글 등록 처리
 	 */
 	@RequestMapping(value = "replyWrite.htm", method = RequestMethod.POST)
+	@Secured({"ROLE_ADMIN"})
 	public String replyWrite(Principal principal, CustomerNoticeDTO cn, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
 		
@@ -185,9 +194,4 @@ public class NoticeController {
 		return url;
 	}
 	
-	@RequestMapping("/navereditor")
-    public String navereditor(){
-         
-        return "navereditor";
-    }
 }
