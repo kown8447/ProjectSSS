@@ -8,17 +8,33 @@
    @Desc : 아이디 찾기 view
 -->	
 
-<div>
-	<table>
-		<tr>
-			<td>이름</td>
-			<td><input type="text" name="member_name" id="member_name" /></td>
-		</tr>
-		<tr>
-			<td>이메일</td>
-			<td><input type="text" name="member_email" id="member_email" /></td>
-		</tr>
-	</table>
-	<input type="button" id="searchIdBtn" value="아이디찾기">
+
+<div id="content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4>아이디 찾기</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="member_name" class="col-sm-2 control-label" style="width: 30%">이름</label>
+            <div class="col-sm-6">
+               <input type="text" class="form-control" id="member_name" name="member_name">
+            </div>
+         </div>
+         
+         <div class="form-group">
+            <label for="member_email" class="col-sm-2 control-label" style="width: 30%">이메일</label>
+            <div class="col-sm-6">
+               <input type="text" class="form-control" id="member_email" name="member_email">
+            </div>
+         </div>
+
+        </div>
+        <div class="modal-footer">
+          <input type="button" id="searchIdBtn" value="찾기" class="btn btn-success" data-dismiss="modal">
+        </div>
+      </div>
+
+<div id="result">
+
 </div>
-<div id="result"></div>
