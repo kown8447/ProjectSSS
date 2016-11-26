@@ -21,7 +21,12 @@ $(function(){
 		}
 	})
 	
-	$("#searchID").click(function(){
-        $('div.modal').modal({remote : '${pageContext.request.contextPath}/login/searchID.htm'});
-    })
+	
+	$('#searchID').click(function(){
+		$('div.modal').modal({
+            remote : '${pageContext.request.contextPath}/login/searchID.htm'
+          	  
+      })
+    });
+    
 });
