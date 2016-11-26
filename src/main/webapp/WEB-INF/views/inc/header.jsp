@@ -36,4 +36,8 @@
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/notice/notice.htm">게시판</a>
 </se:authorize>
+<se:authorize
+	access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
+	<a href="${pageContext.request.contextPath}/favorite/config.htm">즐겨찾기 설정</a>
+</se:authorize>
 <hr>

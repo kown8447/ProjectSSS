@@ -44,4 +44,5 @@
 			<td>평점(F제외):${outF}</td>
 		</tr>
 	</table>
+	<a id="pdfDownLoader" href="recordPdfRequest.htm">성적 PDF 파일 다운로드</a>
 </div>
