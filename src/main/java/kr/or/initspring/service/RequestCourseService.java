@@ -95,6 +95,44 @@ public class RequestCourseService {
 	}
 	
 	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 과목명 기준에 따라 정렬
+	*/	
+	public List<OpenedLectureDTO> searchOpLectureOrderbySubjectName(HashMap<String, String> keyword){
+		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		lists = requestCourseDao.searchOpLectureOrderbySubjectName(keyword);
+		for(OpenedLectureDTO dto : lists){
+			dto.setPeriod(requestCourseDao.getPeriodBySubjectCode(dto.getSubject_code()));
+			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
+			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
+			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+		}
+		return lists;
+	}
+	
+	/*
+	 * @method Name : searchOpLectureOrderbyProfessorName
+	 * @Author : 권기엽
+	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 교수명 기준에 따라 정렬
+	*/	
+	public List<OpenedLectureDTO> searchOpLectureOrderbyProfessorName(HashMap<String, String> keyword){
+		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		lists = requestCourseDao.searchOpLectureOrderbyProfessorName(keyword);
+		for(OpenedLectureDTO dto : lists){
+			dto.setPeriod(requestCourseDao.getPeriodBySubjectCode(dto.getSubject_code()));
+			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
+			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
+			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+		}
+		return lists;
+	}
+	
+	
+	
+	/*
 	 * @method Name : possiblePreRegister
 	 * @Author : 권기엽
 	 * @description : 학년, 관리자 수강신청 시간에 따른 viewpage 설정

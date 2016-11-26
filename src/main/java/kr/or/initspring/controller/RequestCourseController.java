@@ -98,6 +98,49 @@ public class RequestCourseController {
 		return jsonview;
 	}
 	
+	
+	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 과목 이름 정렬을 통한 개설과목 리스트 출력
+	*/
+	@RequestMapping("searchOpLectureOrderbySubjectName.htm")
+	public View searchOpLectureOrderbySubjectName(
+			@RequestParam(value="department_code", required=false) String department_code,
+			@RequestParam(value="order_by", required=false, defaultValue="asc") String order_by,
+			Model model
+			){		
+		HashMap<String, String> keyword = new HashMap<String, String>();
+		keyword.put("department_code", department_code.trim());
+		keyword.put("order_by", order_by.trim());
+		
+		List<OpenedLectureDTO> lists = requestCourseService.searchOpLectureOrderbySubjectName(keyword);
+		model.addAttribute("searchList", lists);
+		return jsonview;
+	}
+	
+	
+	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 교수명  정렬을 통한 개설과목 리스트 출력
+	*/
+	@RequestMapping("searchOpLectureOrderbyProfessorName.htm")
+	public View searchOpLectureOrderbyProfessorName(
+			@RequestParam(value="department_code", required=false) String department_code,
+			@RequestParam(value="order_by", required=false, defaultValue="asc") String order_by,
+			Model model
+			){
+		HashMap<String, String> keyword = new HashMap<String, String>();
+		keyword.put("department_code", department_code.trim());
+		keyword.put("order_by", order_by.trim());
+		
+		
+		List<OpenedLectureDTO> lists = requestCourseService.searchOpLectureOrderbyProfessorName(keyword);
+		model.addAttribute("searchList", lists);
+		return jsonview;
+	}
+	
 	/*
 	 * @method Name : download
 	 * @Author : 권기엽

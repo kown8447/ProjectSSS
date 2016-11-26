@@ -26,6 +26,11 @@ public interface RequestCourseDAO {
 	public List<CollegeDTO> getCollegeList();	//단과 대학 전체 목록 가져오기
 	public List<DepartmentDTO> getDepartmentList(String college_code);	//학부.학과 전체 목록 가져오기
 	public List<OpenedLectureDTO> getOpenedLectureListByKeyword(HashMap<String, String> keyword); 	//학과 검색에 의한 개설과목 가져오기
+	
+	
+	public List<OpenedLectureDTO> searchOpLectureOrderbySubjectName(HashMap<String, String> keyword); 	//과목명으로 정렬
+	public List<OpenedLectureDTO> searchOpLectureOrderbyProfessorName(HashMap<String, String> keyword);	//교수명으로 정렬
+	
 	public int setErollStatus(HashMap<String, Integer> map);	//학년_시간에 따른 수강신청 활성 설정
 	public Integer getEnrollActive(int enroll_grade, int enroll_type);	//학년_수강신청 타입에 따른 수강 신청 기간 상태 가져오기
 	public StStateDTO getStStateByMemberId(String member_id);	//학번에 따른 학년 가져오기
