@@ -25,6 +25,7 @@ public class FavoriteController {
 	@RequestMapping("config.htm")
 	public String favoriteConfigView(Principal principal,Model model) {
 		System.out.println("즐겨찾기 설정 페이지로");
+		System.out.println("수정 테스트");
 		favoriteservice.getFavariteConfigData(principal.getName(), model);
 		return "favorite.config";
 	}
