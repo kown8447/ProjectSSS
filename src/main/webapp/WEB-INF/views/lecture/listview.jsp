@@ -35,12 +35,12 @@
 		</c:choose>
 
 		</td>
-		<td>${subject.record_grade}</td>
-		<td><a href="lectureDetail.htm?subject_name=${subject.subject_name}">${subject.subject_name}</td></a>
+		<td>${subject.grade_limit}</td>
+		<td><a href="lectureDetail.htm?subject_code=${subject.subject_code}">${subject.subject_name}</td></a>
 		<td><c:choose>
-		<c:when test = "${subject.subject_state == 0}"> 등록 </c:when>
-		<c:when test = "${subject.subject_state == 1}"> 개설 </c:when>
-		<c:when test = "${subject.subject_state == 2}"> 개설신청 </c:when>
+		<c:when test = "${subject.success_check == 3}"> 등록 </c:when>
+		<c:when test = "${subject.success_check == 1}"> 개설 </c:when>
+		<c:when test = "${subject.success_check == 2}"> 개설신청 </c:when>
 		</c:choose>
 		</td>
 		

@@ -25,7 +25,32 @@ public class CustomLectureMgDTO {
 	private String buliding_addr;	//건물주소
 	private int record_grade;		//학년
 	private int success_check; 		//신청상태
+	private int grade_limit; //학년
+	private String before_name; //선수과목이름
 	
+	
+	
+	
+	
+	
+	public String getBefore_name() {
+		return before_name;
+	}
+	public void setBefore_name(String before_name) {
+		this.before_name = before_name;
+	}
+	public int getGrade_limit() {
+		return grade_limit;
+	}
+	public void setGrade_limit(int grade_limit) {
+		this.grade_limit = grade_limit;
+	}
+	public int getSuccess_check() {
+		return success_check;
+	}
+	public void setSuccess_check(int success_check) {
+		this.success_check = success_check;
+	}
 	public int getRecord_grade() {
 		return record_grade;
 	}
