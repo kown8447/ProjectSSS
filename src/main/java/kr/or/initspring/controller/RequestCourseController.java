@@ -90,7 +90,6 @@ public class RequestCourseController {
 			@RequestParam(value="department_code", required=false) String department_code,
 			Model model
 			){		
-		System.out.println("department_code : " + department_code);
 		HashMap<String, String> keyword = new HashMap<String, String>();
 		keyword.put("department_code", department_code);
 		List<OpenedLectureDTO> lists = requestCourseService.searchSubject(keyword);
@@ -150,10 +149,8 @@ public class RequestCourseController {
 	public void download(String f, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String fname = new String(f.getBytes("euc-kr"), "8859_1");
-		System.out.println(fname);
 		response.setHeader("Content-Disposition", "attachment;filename=" + fname + ";");
 		String fullpath = request.getServletContext().getRealPath("/files/lecturePlan/" + f);
-		System.out.println(fullpath);
 		FileInputStream fin = new FileInputStream(fullpath);
 		ServletOutputStream sout = response.getOutputStream();
 		byte[] buf = new byte[1024];
@@ -215,8 +212,6 @@ public class RequestCourseController {
 			@RequestParam(value="keyword", defaultValue="") String keyword,
 			Model model
 			){
-		System.out.println("searchType : " + searchType);
-		System.out.println("keyword : " + keyword);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword.toUpperCase());
@@ -236,7 +231,6 @@ public class RequestCourseController {
 	public View getOpSubjectInfo(
 			@RequestParam("subject_code") String subject_code, Model model, Principal principal
 			){
-		System.out.println("subject_code : " + subject_code);
 		OpenedLectureDTO subject_info = requestCourseService.getOpSubjectInfoBySubjectCode(subject_code, principal.getName());
 		model.addAttribute("subject_info", subject_info);
 		return jsonview;
