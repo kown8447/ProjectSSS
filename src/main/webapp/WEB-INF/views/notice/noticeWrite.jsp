@@ -18,8 +18,9 @@
 			</tr>
 			<tr style="height: 45%">
 				<th style="text-align: center;">내용</th>
-				<td>
-					<textarea id="notice_content" style="height:180px;" name="notice_content" class="form-control"></textarea></td>
+				<!-- <td>
+					<textarea id="notice_content" style="height:180px;" name="notice_content" class="form-control"></textarea></td> -->
+					<td><textarea name="notice_content" id="notice_content" rows="22" style="width:645px;"></textarea></td>
 			</tr>
 			<tr>
 				<th style="text-align: center;">첨부파일</th>

@@ -1,2 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<hr><h3>풋터 입니다.</h3>
+
+<div id="footer">
+	<br><img src="images/smLogo.png" style="margin-left:32%;width:12%;" align="left"><br>
+	<font size="3pt">&nbsp;&nbsp;Copyright ⓒ kosta.com All Right Reserved.</font>
+</div>

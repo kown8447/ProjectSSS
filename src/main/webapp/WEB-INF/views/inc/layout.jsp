@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
+
 <title>Insert title here</title>
 </head>
 <body>

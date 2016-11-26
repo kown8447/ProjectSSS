@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
-<se:authorize access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-<hr><h3><a href="${pageContext.request.contextPath}/login.htm">헤더 입니다.(메인)</a></h3>
-</se:authorize>
+
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-<hr><h3><a href="${pageContext.request.contextPath}/index.htm">헤더 입니다.(메인)</a></h3>
+<a href="${pageContext.request.contextPath}/index.htm"><img src="images/smLogo.png"></a>
 </se:authorize>
-
-<se:authorize access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-	<a href="${pageContext.request.contextPath}/join/join.htm">회원가입</a> || 
-</se:authorize>
-
 
 <se:authorize
 	access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
