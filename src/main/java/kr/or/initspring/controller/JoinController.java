@@ -117,35 +117,35 @@ public class JoinController {
 	    * joincheck1 -> code_mg에 등록된 회원인지 확인 등록-> return true
 	    * joincheck2 -> code_mg로 등록된 멤버가 있는지 확인 있으면  return false 
 	   */   
-	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
-	public View joinStep1( String code_name,String code_year, String code_month, String code_day, String code, 
-			Model model, HttpServletRequest request) throws ParseException{
+	@RequestMapping(value = "join1.htm", method = RequestMethod.POST)
+	public View joinStep1(String code_name, String code_year, String code_month, String code_day, String code,
+			Model model, HttpServletRequest request) throws ParseException {
 		HttpSession session = request.getSession();
 		boolean result = false;
 		boolean result2 = false;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	   java.util.Date parsed = format.parse(code_year+code_month+code_day);
-	   java.sql.Date code_birth = new java.sql.Date(parsed.getTime());
-		
+		java.util.Date parsed = format.parse(code_year + code_month + code_day);
+		java.sql.Date code_birth = new java.sql.Date(parsed.getTime());
+
 		CodeMgDTO codemg = new CodeMgDTO();
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
 		codemg.setCode(code);
 		codemg.setCode_type(member.getCode_type());
 		codemg.setCode_birth(code_birth);
 		codemg.setCode_name(code_name);
-		
+
 		result = joinservice.joinCheck1(codemg);
 		result2 = joinservice.joinCheck2(codemg);
-		if(result == true && result2 == true){
+		if (result == true && result2 == true) {
 			member.setCode(codemg.getCode());
 			member.setMember_name(codemg.getCode_name());
 			member.setMember_birth(codemg.getCode_birth());
 			session.setAttribute("member", member);
 			model.addAttribute("result", "success");
-		}else{
+		} else {
 			model.addAttribute("result", "fail");
 		}
-		
+
 		return jsonview;
 	}
 	

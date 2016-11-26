@@ -40,8 +40,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select admin_code from admin 
 	</select>
 	
-	
 	<select id="checkID" resultType="String">
 		select member_id from member where member_id = #{member_id}
 	</select>
+	
+	<insert id="insertStstateTable">
+		insert into st_state values(#{student_code}, 1, 1,0)
+	</insert>
 </mapper>

@@ -14,7 +14,6 @@ $(function(){
 					data:{college_code:$('#collegeList').val()},
 					dataType:"json",
 					success:function(data){
-						/*console.log(data);*/
 						$("#departmentList").find("option").remove();
 						$("#departmentList").append("<option value='1000'>학부/학과 선택</option>");
 						$("#departmentList").append("<option value='100'>교양과목</option>");
@@ -34,7 +33,7 @@ $(function(){
 					dataType:"json",
 					success:function(data){
 						console.log(data);
-						var text="<table class='table table-bordered'><tr><th>구분</th><th>강의 이름</th><th>시간</th><th>지도 교수</th><th>강의 계획서</th><th>모집 인원</th></tr>";
+						var text="<table class='table table-bordered table-hover'><tr style='background-color:gray'><th style='text-align: center'>구분</th><th style='text-align: center'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 						$.each(data.lists, function(i, elt) {
 							var major="";
 							if(elt.subject_type=='0'){
@@ -55,16 +54,16 @@ $(function(){
 							var period_day;
 							var period_start;
 							var period_end;
-							text+="<tr><td>"+major+"</td><td>"+elt.subject_name+"</td><td>";
+							text+="<tr><td style='text-align: center'>"+major+"</td><td style='text-align: center'>"+elt.subject_name+"</td><td style='text-align: center'>";
 							$.each(elt.period, function(i, period) {
 								period_day = period.period_day;
 								period_start = period.period_start;
 								period_end = period.period_end;
 								text += period_day+" "+period_start+" "+period_end+"<br>"
 							});
-							text += "</td><td>"+elt.professor_name+"</td>" +
-									"<td><a href='download.htm?f="+elt.subject_filesrc+"'>"+elt.subject_filesrc+"</a></td>" +
-											"<td>"+elt.subject_seats+"</td></tr>";
+							text += "</td><td style='text-align: center'>"+elt.professor_name+"</td>" +
+									"<td style='text-align: center'><a href='download.htm?f="+elt.subject_filesrc+"'>"+elt.subject_filesrc+"</a></td>" +
+											"<td style='text-align: center'>"+elt.subject_seats+"</td></tr>";
 						});
 						text += "</table>";
 						console.log(text);

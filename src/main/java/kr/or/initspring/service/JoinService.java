@@ -33,7 +33,7 @@ public class JoinService {
 	 * member table 삽입 -> student/admin/professor 중 하나의 table 삽입 -> 권한 지정 까지를 하나의 트랜잭션으로 처리.
 	 * 하나의 Query가 실패할 시 모든 Query는 Rollback 됨
 	*/	
-	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class })
 	public boolean insertMember(MemberDTO member) throws Exception {
 
 		int insertResult = 0;
@@ -45,7 +45,8 @@ public class JoinService {
 			joindao.insertMember(member);
 			if (member.getCode_type() == 0) {
 				joindao.insertStudentTable(member.getCode(), member.getMember_id());
-				insertResult = joindao.insertRole("ROLE_STUDENT", member.getMember_id());
+				joindao.insertRole("ROLE_STUDENT", member.getMember_id());
+				insertResult = joindao.insertStstateTable(member.getCode());
 			} else if (member.getCode_type() == 1) {
 				joindao.insertProfessorTable(member.getCode(), member.getMember_id());
 				insertResult = joindao.insertRole("ROLE_PROFESSOR", member.getMember_id());

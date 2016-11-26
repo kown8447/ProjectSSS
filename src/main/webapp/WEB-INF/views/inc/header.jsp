@@ -39,7 +39,6 @@
 <se:authorize access="hasRole('ROLE_STUDENT')">
 	<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
 </se:authorize>
-<a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a> ||
 
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/notice/notice.htm">게시판</a>
