@@ -33,4 +33,8 @@
 	<a
 		href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
 </se:authorize>
+<se:authorize
+	access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
+	<a href="${pageContext.request.contextPath}/favorite/config.htm">즐겨찾기 설정</a>
+</se:authorize>
 <hr>

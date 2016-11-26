@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/js/collegeRegister/studentRecord.js"></script>
-<script src="${pageContext.request.contextPath}/js/collegeRegister/register.js"></script>
+<script src="${pageContext.request.contextPath}/js/favorite/favorite.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/favorite/favorite.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 table, td, th {
@@ -21,9 +21,7 @@ table, td, th {
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
-
-	<tiles:insertAttribute name="aside" />
-
+	
 	<tiles:insertAttribute name="content" />
 
 	<tiles:insertAttribute name="footer" />
