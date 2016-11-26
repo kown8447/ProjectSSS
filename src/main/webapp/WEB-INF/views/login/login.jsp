@@ -38,11 +38,19 @@
 			</se:authorize>
 
 		</p>
-		
+
 		<p style="text-align: center; font-size: 8pt">
-			<a href="${pageContext.request.contextPath}/login/searchID.htm">아이디 찾기</a> / 
-			<a href="${pageContext.request.contextPath}/login/searchPwd.htm">비밀번호 찾기</a>
-		</p>
+			<a href="${pageContext.request.contextPath}/login/searchID.htm" id="searchID">아이디 찾기</a> / 
+			<div class="modal fade">
+				<div class="modal-dialog">
+   					 <div class="modal-content">
+        			<!-- remote ajax call이 되는영역 -->
+    				</div>
+ 				 </div>
+			</div>
+			
+			<a href="${pageContext.request.contextPath}/login/searchPwd.htm" id="searchPW">비밀번호 찾기</a>
+		
 	</form>
 	
 </div>
