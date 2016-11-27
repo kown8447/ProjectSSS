@@ -18,7 +18,7 @@ $(function(){
 				success:function(data){
 					if(data.pwdresult == 'success'){
 						alert('임시 비밀번호를 발급하였습니다. 등록하신 메일을 확인해 주세요.');
-						location.href="../index.htm";
+						location.href="../login.htm";
 					}else if(data.pwdresult == 'fail' || data.pwdresult == 'error'){
 						alert('임시 비밀번호 발급에 실패하였습니다. 다시 시도해 주세요.');
 						location.href="searchPwd.htm";

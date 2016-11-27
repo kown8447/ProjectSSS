@@ -12,7 +12,15 @@ public class EnrollStatusDTO {
 
 	private int enroll_grade;	//학년
 	private int enroll_active;	//수강신청 활성
+	private int enroll_type;	//수강신청 상태(예비, 본, 정정)
 	
+	
+	public int getEnroll_type() {
+		return enroll_type;
+	}
+	public void setEnroll_type(int enroll_type) {
+		this.enroll_type = enroll_type;
+	}
 	public int getEnroll_grade() {
 		return enroll_grade;
 	}
@@ -27,10 +35,8 @@ public class EnrollStatusDTO {
 	}
 	@Override
 	public String toString() {
-		return "Enroll_StatusDTO [enroll_grade=" + enroll_grade + ", enroll_active=" + enroll_active + "]";
+		return "EnrollStatusDTO [enroll_grade=" + enroll_grade + ", enroll_active=" + enroll_active + ", enroll_type="
+				+ enroll_type + "]";
 	}
-	
-	
-	
-	
+
 }

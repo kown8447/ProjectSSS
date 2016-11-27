@@ -16,15 +16,26 @@
   					 ">
 
 	<mvc:annotation-driven />
-	<security:http>
+	<security:http auto-config="true" use-expressions="true" >
+		<security:access-denied-handler error-page="/index.htm" />
+		<security:session-management>
+			<security:concurrency-control max-sessions="1"  expired-url="/login.htm"/>
+		</security:session-management> 
 		<security:csrf disabled="true" />
+		 
 		<security:form-login login-page="/login/login.htm"
 			authentication-failure-url="/login/loginFail.htm" 
 			authentication-failure-handler-ref="loginFailHandler"
 			authentication-success-handler-ref="loginSuccessHandler"
 			username-parameter="member_id"
 			password-parameter="member_pwd" />
-		<security:logout logout-success-url="/index.htm" />
+
+		<security:logout logout-success-url="/login.htm" />
+
+		<security:session-management>
+			<security:concurrency-control max-sessions="1"/>
+		</security:session-management>
+
 	</security:http>
 
 	<security:authentication-manager>

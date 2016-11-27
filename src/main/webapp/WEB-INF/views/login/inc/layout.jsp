@@ -7,14 +7,18 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/login/searchID.js"></script>
 <script src="${pageContext.request.contextPath}/js/login/searchPwd.js"></script>
+<script src="${pageContext.request.contextPath}/js/login/login.js"></script>
+<link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
 	
 	<tiles:insertAttribute name="content"/>
-	
+
 	<tiles:insertAttribute name="footer"/>
 </body>
 </html>

@@ -14,7 +14,7 @@ public class SubjectDTO {
 	private int grade_limit;  //수강대상
 	private int subject_state;  //과목상태
 	private int subject_type;  //과목유형
-	private int subject_seats;
+	private int subject_seats;	//과목 정원
 
 	
 	public int getSubject_seats() {
@@ -70,9 +70,8 @@ public class SubjectDTO {
 	public String toString() {
 		return "SubjectDTO [subject_code=" + subject_code + ", professor_code=" + professor_code + ", subject_name="
 				+ subject_name + ", subject_credit=" + subject_credit + ", grade_limit=" + grade_limit
-				+ ", subject_state=" + subject_state + ", subject_type="
-				+ subject_type + "]";
+				+ ", subject_state=" + subject_state + ", subject_type=" + subject_type + ", subject_seats="
+				+ subject_seats + "]";
 	}
-	
 	
 }
