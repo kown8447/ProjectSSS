@@ -26,8 +26,8 @@
 		<c:when test = "${list.subject_type == '1'}"> 교양 </c:when>
 		</c:choose>
 		<c:choose>
-		<c:when test = "${list.required_choice == '0' }">필수</c:when>
-		<c:when test = "${list.required_choice == '1' }">선택</c:when>
+		<c:when test = "${list.required_choice == '0'}">필수</c:when>
+		<c:when test = "${list.required_choice == '1'}">선택</c:when>
 		</c:choose>
 		</td><td>강의대상</td><td>${list.grade_limit}</td></tr>
 		<tr>

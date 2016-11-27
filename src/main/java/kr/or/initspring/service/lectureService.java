@@ -60,7 +60,7 @@ public class lectureService {
 	 */
 
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int insert_Subject(SubjectDTO dto, String before_code, Principal principal, String required_choice,
+	public int insert_Subject(SubjectDTO dto, String subject_name, Principal principal, String required_choice,
 			BeforeSubjectDTO beforedto, MajorDTO majordto, LiberalDTO liberdto, String department_code) {
 
 		int result = 0;
@@ -75,23 +75,30 @@ public class lectureService {
 
 			String subject_code = dto.getSubject_code();
 			int subject_type = dto.getSubject_type();
+		
 			
 
-			if (!before_code.equals("0")) {
-				before = lecturedao.insert_BeforeCode(subject_code, before_code);
-			} 
 			int required_select = 5; // 신경 ㄴㄴ염 숫자 5를좋아함 바이날둠이 5번임
 
 			department_code = lecturedao.select_departmentcode(principalid).getDepartment_code();
+			System.out.println("등록 departmentcode : "+department_code);
 
 			if (subject_type == 0) {
 				required_select = lecturedao.insert_major(subject_code, required_choice, department_code);
+
+				if (!subject_name.equals("0")) {
+					before = lecturedao.insert_BeforeName(subject_code, subject_name);
+				} 
 			} else if (subject_type == 1) {
 				required_select = lecturedao.insert_Liberal(subject_code, required_choice);
+
+				if (!subject_name.equals("0")) {
+					before = lecturedao.insert_BeforeName(subject_code, "없음");
+				} 
 			}
 
 		} catch (Exception e) {
-			System.out.println("장현 트랜잭션 오류 : " + e.getMessage());
+			System.out.println("장현 등록 트랜잭션 오류 : " + e.getMessage());
 			try {
 				throw e;
 			} catch (Exception e1) {
@@ -113,7 +120,7 @@ public class lectureService {
 
 	}
 	
-	
+	//상세보기
 	public CustomLectureMgDTO subjectDetail(String subject_code) {
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
@@ -122,12 +129,15 @@ public class lectureService {
 		
 		
 		CustomLectureMgDTO detail = lecturedao.subject_Detail(subject_code);
+		
 		if(detail.getSubject_type() == 0){
-			detail = lecturedao.detail_major(subject_code);			
-			String beforecode = lecturedao.detail_beforecode(subject_code);
-			String beforename = lecturedao.detail_beforename(beforecode);
+			detail = lecturedao.detail_major(subject_code);	
+			if(detail.getBefore_name() == null || detail.getBefore_name().equals("")){
+				detail.setBefore_name("없음");
+			}else{
+			String beforename = lecturedao.detail_beforename(subject_code);
 			detail.setBefore_name(beforename);
-			
+			}
 		}else if(detail.getSubject_type() == 1){
 			detail = lecturedao.detail_liberal(subject_code);
 			detail.setBefore_name("없음");
@@ -147,5 +157,30 @@ public class lectureService {
 		return building;
 	}
 	
-	
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	public int updatesubject(String subject_code){
+		
+		System.out.println("업데이트 서비스입니다 고갱님 코드받아가세요"+subject_code);
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		CustomLectureMgDTO dto = lecturedao.subject_Detail(subject_code);
+		
+		try{
+		  
+			 
+		} catch (Exception e) {
+			System.out.println("장현 수정 트랜잭션 오류 : " + e.getMessage());
+			try {
+				throw e;
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		return 0;
+
+	}
 }

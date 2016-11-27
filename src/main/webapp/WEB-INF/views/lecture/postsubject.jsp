@@ -10,6 +10,7 @@
 <script type="text/javascript">
 	$(function(){
 		$("#building").select(function(){
+			console.log("빌딩새꺄빌딩");
 			alert("빌딩고르셧셈");
 
 			
@@ -48,7 +49,7 @@
 		<!-- 건물  -->
 		<select id="building" name="building">
 			<option id="B_001" name="B_001">본부동</option>
-			<option id="B_002" name="B_002">장현동(아직없음)</option>
+			<option id="B_002" name="B_002">장현동</option>
 		</select>
 		
 		<p id="jjg"></p>

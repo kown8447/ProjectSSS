@@ -25,9 +25,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select professor_code from professor where member_id=#{param1}
 	</select>
 	
+	<!-- 중복없는 선수과목리스트 -->
+	<select id="select_distinct_before">
+		SELECT DISTINCT(SUBJECT_NAME) FROM SUBJECT;
+	</select>
+
+	<!-- 선수강과목 등록 이것은 중복된 이름 처리가능함 -->
+	<select id="">
+		SELECT SUBJECT_CODE FROM SUBJECT where SUBJECT_NAME='#{subject_name}';
+	</select>
+	
+	
 	<!-- 과목등록할때 선수과목 불러옴 -->
 	<select id="select_Before" parameterType="String" resultType="String">
-	SELECT sub.subject_name FROM MAJOR m join SUBJECT sub on m.SUBJECT_CODE = sub.SUBJECT_CODE 
+	SELECT DISTINCT(sub.subject_name) FROM MAJOR m join SUBJECT sub on m.SUBJECT_CODE = sub.SUBJECT_CODE 
 	WHERE m.DEPARTMENT_CODE = #{param1}
 	</select>
 	
@@ -47,9 +58,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{param1},#{param2},0)
 	</insert>
 	
-	<insert id="insert_BeforeCode" parameterType="String">
-		insert into BEFORE_SUBJECT (subject_code,before_code) values (#{param1},
-		(select subject_code from SUBJECT where subject_name = #{param2}))
+	<insert id="insert_BeforeName" parameterType="String">
+		insert into BEFORE_SUBJECT (subject_code,before_name) values (#{param1},
+		(select subject_name from SUBJECT where subject_name = #{param2}))
 	</insert>
 	
 	<insert id="insert_Liberal" parameterType="String">
@@ -77,12 +88,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         join major m on s.subject_code = m.subject_code where s.subject_code = #{param1}	
 	</select>
 	
-	<!-- 비포코드받아옴 -->
-	<select id="detail_beforecode" resultType="String">
-		select b.before_code from subject s join before_subject b on
-		 s.subject_code = b.subject_code where s.subject_code = #{param1}
-	</select>
-	
 	<!-- 비포코드로 그 비포코드에 맞는 과목명 가져옴 -->
 	<select id="detail_beforename" resultType="String">
 		select subject_name from subject where subject_code = #{param1}
@@ -93,15 +98,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from SUBJECT where subject_name = #{param1}
 	</delete>
 	
-	
-	<insert id="insert_Plan" parameterType="String">
-		insert into PLAN subject_filesrc values #{subject_filesrc}
-	</insert>
-	
-	<update id="update_Subject">
-		
+	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name},subject_credit=#{subject_credit}
+		,subject_seats=#{subject_code} where subject_code=#{subject_code}
   
 	</update>
+	
+	<!-- 선수과목을 수정하는 쿼리 -->
+	<update id="update_before_subject">
+		update BEFORE_SUBJECT set before_code=#{before_code} where subject_code = #{subject_code}
+	</update>
+	
 	<!-- 이거는 이미 들어가있는 건물,시간표 조회 -->
 	<select id="select_period_build" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		select * from ASK_TIME a join subject s on a.subject_code = s.subject_code where subject_code = #{param1}

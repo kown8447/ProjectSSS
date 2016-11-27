@@ -58,6 +58,7 @@ public class LectureMgController {
 	
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
 		System.out.println("서비스통과후컨트롤러");
+		System.out.println("상세보기 비포네임 : "+list.getBefore_name());
 		model.addAttribute("list",list);
 		System.out.println(list.toString());
 		
@@ -68,10 +69,18 @@ public class LectureMgController {
 	public String updateSubject(Model model,String subject_code){
 		System.out.println("수정컨트롤러 임수정님ㅠㅠ");
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
-		System.out.println("수정서비스돌고와습니다");
+		System.out.println("수정값돌고와습니다");
 		model.addAttribute("list",list);
 		
 		return "lecture.subjectupdate";
+	}
+	
+	@RequestMapping(value="lectureEditOk.htm")
+	public String EditComplete(String subject_code){
+			
+		
+		
+		return "11";
 	}
     
 

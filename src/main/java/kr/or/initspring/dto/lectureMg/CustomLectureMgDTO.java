@@ -12,7 +12,6 @@ public class CustomLectureMgDTO {
 	private Integer subject_seats;	//정원
 	private Integer subject_type;	//과목유형
 	private CommonsMultipartFile subjcet_filesrc;	//강의계획서
-	private String before_code;		//선수과목
 	private String department_code;	//학과코드  전공과목일시 생김
 	private String required_choice;	//필수/선택
 	private String semester_code;	//학기코드
@@ -104,12 +103,6 @@ public class CustomLectureMgDTO {
 	}
 	public void setSubjcet_filesrc(CommonsMultipartFile subjcet_filesrc) {
 		this.subjcet_filesrc = subjcet_filesrc;
-	}
-	public String getBefore_code() {
-		return before_code;
-	}
-	public void setBefore_code(String before_code) {
-		this.before_code = before_code;
 	}
 	public String getDepartment_code() {
 		return department_code;
