@@ -5,8 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.LectureMgDAO">
 	<select id="select_list" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		
-    select s.subject_code, nvl(o.success_check,3) as success_check,s.GRADE_LIMIT,s.subject_name,s.subject_type 
+	 select s.subject_code, nvl(o.success_check,3) as success_check,s.GRADE_LIMIT,s.subject_name,s.subject_type 
     from SUBJECT s LEFT OUTER join OP_REQUEST o 
     on s.subject_code = o.subject_code where s.professor_code = #{param1}
 	
@@ -24,17 +23,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_Professor" parameterType="String" resultType="String">
 		select professor_code from professor where member_id=#{param1}
 	</select>
-	
-	<!-- 중복없는 선수과목리스트 -->
-	<select id="select_distinct_before">
-		SELECT DISTINCT(SUBJECT_NAME) FROM SUBJECT;
-	</select>
-
-	<!-- 선수강과목 등록 이것은 중복된 이름 처리가능함 -->
-	<select id="">
-		SELECT SUBJECT_CODE FROM SUBJECT where SUBJECT_NAME='#{subject_name}';
-	</select>
-	
 	
 	<!-- 과목등록할때 선수과목 불러옴 -->
 	<select id="select_Before" parameterType="String" resultType="String">
@@ -93,20 +81,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select subject_name from subject where subject_code = #{param1}
 	</select>
 	
+	<!-- 삭제쿼리모음집 -->
 	
-	<delete id="delete_Subject" parameterType="String">
-		delete from SUBJECT where subject_name = #{param1}
+	<delete id="delete_Subject">
+		delete from SUBJECT where subject_code = #{param1}
 	</delete>
+	
+	<delete id="delete_Liberal">
+		delete from LIBERAL where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Major">
+		delete from MAJOR where subject_code =  #{param1}
+	</delete>
+	
+	<delete id="delete_Ask_Time">
+		delete from ASK_TIME where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Before">
+		delete from BEFORE_SUBJECT where subject_code = #{param1}
+	</delete>	
+	
+	<delete id="delete_Plan">
+		delete from PLAN where subject_code=  #{param1}
+	</delete>
+	
+	
+	
 	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name},subject_credit=#{subject_credit}
-		,subject_seats=#{subject_code} where subject_code=#{subject_code}
-  
+		,subject_seats=#{subject_seats} where subject_code=#{subject_code}
 	</update>
 	
 	<!-- 선수과목을 수정하는 쿼리 -->
-	<update id="update_before_subject">
-		update BEFORE_SUBJECT set before_code=#{before_code} where subject_code = #{subject_code}
+	<update id="update_before_subject"  parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		update BEFORE_SUBJECT set before_name=#{before_name} where subject_code = #{subject_code}
 	</update>
 	
 	<!-- 이거는 이미 들어가있는 건물,시간표 조회 -->
@@ -114,6 +125,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from ASK_TIME a join subject s on a.subject_code = s.subject_code where subject_code = #{param1}
 	</select>
 	
-	
+	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
+	<select id="maxSubject_code" resultType="String">
+		 SELECT nvl(max(subject_code),'SJ_0') FROM SUBJECT s ORDER BY s.SUBJECT_CODE desc
+	</select>
 	
 </mapper>

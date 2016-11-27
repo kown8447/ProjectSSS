@@ -16,7 +16,7 @@
 </script>
 </head>
 <body>
-	<form>s
+	<form action="lectureEditOk.htm">
 	<table border=1px>
 		<tr>
 		<td>구분</td>
@@ -25,6 +25,7 @@
 		 <c:when test="${list.subject_type == '0'}">전공</c:when>
 		 <c:when test="${list.subject_type == '1'}">교양</c:when>
 		 </c:choose>
+		 <input type="hidden" name="subject_type" value=${list.subject_type }>
 			<select id="required_choice" name="required_choice">
 			<option value=0>필수</option>
 			<option value=1>선택</option>
@@ -38,6 +39,7 @@
 		<tr>
 		<td>학점</td><td><input type="number" name="subject_credit" value="${list.subject_credit}"></td>
 		<td>정원</td><td><input type="number" name="subject_seats" value="${list.subject_seats}"></td></tr>
+		<input type="hidden" name="subject_code" value="${list.subject_code }">
 		<tr>
 		
 	</table>

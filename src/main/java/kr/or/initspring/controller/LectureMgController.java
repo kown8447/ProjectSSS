@@ -59,6 +59,7 @@ public class LectureMgController {
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
 		System.out.println("서비스통과후컨트롤러");
 		System.out.println("상세보기 비포네임 : "+list.getBefore_name());
+		System.out.println("상세보그 서브젝트코드 : "+list.getSubject_code());
 		model.addAttribute("list",list);
 		System.out.println(list.toString());
 		
@@ -68,6 +69,7 @@ public class LectureMgController {
 	@RequestMapping(value="lectureEdit.htm")
 	public String updateSubject(Model model,String subject_code){
 		System.out.println("수정컨트롤러 임수정님ㅠㅠ");
+		System.out.println(subject_code);
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
 		System.out.println("수정값돌고와습니다");
 		model.addAttribute("list",list);
@@ -76,11 +78,14 @@ public class LectureMgController {
 	}
 	
 	@RequestMapping(value="lectureEditOk.htm")
-	public String EditComplete(String subject_code){
-			
+	public String EditComplete(CustomLectureMgDTO dto){
+		System.out.println("에디드컴플리트들어왓슴니당");
+		System.out.println(dto.getBefore_name());
+		System.out.println("에디트컨트롤러 서브젝트코드:"+dto.getSubject_code());
+		lectureservice.updatesubject(dto);
+		System.out.println("수정끝");
 		
-		
-		return "11";
+		return "redirect:lectureView.htm";
 	}
     
 
@@ -103,7 +108,7 @@ public class LectureMgController {
 		System.out.println("디티오:"+dto.toString());
 		int result = 0;
 		System.out.println("컨틀로러매핑임니다");
-	
+		
 		System.out.println("비포어코드비비비"+before_code);
 		result = lectureservice.insert_Subject(dto,before_code ,principal,required_choice, beforedto, majordto, liberdto ,department_code);
 		
@@ -113,12 +118,12 @@ public class LectureMgController {
 	}
 	
 	@RequestMapping(value="lectureDelete.htm")
-	public int deleteSubject(String subject_name){
+	public String deleteSubject(String subject_code){
+		System.out.println("삭제 서브젝트 코드:"+subject_code);
+		System.out.println("삭제컨트롤러");
+		lectureservice.deleteSubject(subject_code);
 		
-		int result = 0;
-		
-		
-		return 0;
+		return "redirect:lectureView.htm";
 	}
 	
 	@RequestMapping(value="lecturePost.htm")

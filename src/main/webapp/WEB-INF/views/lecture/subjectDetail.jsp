@@ -20,11 +20,12 @@
 	
 	<table border=1px>
 		<tr>
-		<td>구분</td><td>
+		<td>구분</td><td name="subject_type">
 		<c:choose>
 		<c:when test = "${list.subject_type == '0'}"> 전공 </c:when>
 		<c:when test = "${list.subject_type == '1'}"> 교양 </c:when>
 		</c:choose>
+		<input type="hidden" name="subject_type" value="${list.subject_type }">
 		<c:choose>
 		<c:when test = "${list.required_choice == '0'}">필수</c:when>
 		<c:when test = "${list.required_choice == '1'}">선택</c:when>
@@ -36,12 +37,12 @@
 		<td>과목명</td><td colspan="3">${list.subject_name}</td></tr>
 		<tr>
 		<td>학점</td><td>${list.subject_credit}</td><td>정원</td><td>${list.subject_seats}</td></tr>
-		
+		<input type="hidden" value="${list.subject_code }">
 	</table>
 	
 	<button id="back">돌아가기</button>  
 	<a href="lectureEdit.htm?subject_code=${list.subject_code}">수정하기</a>
-	<a href="lectureDelete.htm">삭제하기</a>
+	<a href="lectureDelete.htm?subject_code=${list.subject_code }">삭제하기</a>
 	<a href="lecturePost.htm?subject_code=${list.subject_code}">신청하기</a>
 </body>
 </html>

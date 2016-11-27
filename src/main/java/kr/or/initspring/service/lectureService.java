@@ -60,28 +60,39 @@ public class lectureService {
 	 */
 
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int insert_Subject(SubjectDTO dto, String subject_name, Principal principal, String required_choice,
+	public synchronized int insert_Subject(SubjectDTO dto, String subject_name, Principal principal, String required_choice,
 			BeforeSubjectDTO beforedto, MajorDTO majordto, LiberalDTO liberdto, String department_code) {
 
 		int result = 0;
 		int before = 0;
 		String principalid = principal.getName();
+		System.out.println(principalid);
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+
+		String subject_code = lecturedao.maxSubject_code();
+
+		String code[] = subject_code.split("_");
+		String first = code[0];
+		String second = code[1];
+		
+		System.out.println(first+"/"+second);
+		
+		int change = Integer.parseInt(second);
+		change += 1;
+
+		subject_code = first+"_"+change;
+		dto.setSubject_code(subject_code);
+		
 		
 		try {
 			String insertparam = lecturedao.select_Professor(principalid);
 			dto.setProfessor_code(insertparam);
 			lecturedao.insert_Subject(dto);
-
-			String subject_code = dto.getSubject_code();
-			int subject_type = dto.getSubject_type();
 		
-			
-
-			int required_select = 5; // 신경 ㄴㄴ염 숫자 5를좋아함 바이날둠이 5번임
+			int subject_type = dto.getSubject_type();
+			int required_select = 5; 
 
 			department_code = lecturedao.select_departmentcode(principalid).getDepartment_code();
-			System.out.println("등록 departmentcode : "+department_code);
 
 			if (subject_type == 0) {
 				required_select = lecturedao.insert_major(subject_code, required_choice, department_code);
@@ -126,23 +137,17 @@ public class lectureService {
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		System.out.println("subjectDetail service subect_code :"+subject_code);
 	
-		
-		
 		CustomLectureMgDTO detail = lecturedao.subject_Detail(subject_code);
 		
 		if(detail.getSubject_type() == 0){
 			detail = lecturedao.detail_major(subject_code);	
 			if(detail.getBefore_name() == null || detail.getBefore_name().equals("")){
 				detail.setBefore_name("없음");
-			}else{
-			String beforename = lecturedao.detail_beforename(subject_code);
-			detail.setBefore_name(beforename);
 			}
+
 		}else if(detail.getSubject_type() == 1){
 			detail = lecturedao.detail_liberal(subject_code);
 			detail.setBefore_name("없음");
-			System.out.println("교양탓다");
-			System.out.println(detail.toString());
 		}
 	
 			return detail;
@@ -157,16 +162,20 @@ public class lectureService {
 		return building;
 	}
 	
+	
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int updatesubject(String subject_code){
-		
-		System.out.println("업데이트 서비스입니다 고갱님 코드받아가세요"+subject_code);
-		
+	public int updatesubject(CustomLectureMgDTO dto){
+	
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		CustomLectureMgDTO dto = lecturedao.subject_Detail(subject_code);
 		
+		System.out.println(dto.toString());
 		try{
-		  
+				
+				lecturedao.update_Subject(dto);
+				System.out.println("1번수정");
+				
+				lecturedao.update_before_subject(dto);
+				System.out.println("이거타니?");
 			 
 		} catch (Exception e) {
 			System.out.println("장현 수정 트랜잭션 오류 : " + e.getMessage());
@@ -176,11 +185,33 @@ public class lectureService {
 				e1.printStackTrace();
 			}
 		}
-		
-		
-		
-		
+			
 		return 0;
 
 	}
+	
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	public void deleteSubject(String subject_code){
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		
+		try{
+			lecturedao.delete_Before(subject_code);
+			lecturedao.delete_Liberal(subject_code);
+			lecturedao.delete_Major(subject_code);
+			lecturedao.delete_Plan(subject_code);
+			lecturedao.delete_Ask_Time(subject_code);
+			lecturedao.delete_Subject(subject_code);
+		 
+	} catch (Exception e) {
+		System.out.println("장현 삭제 트랜잭션 오류 : " + e.getMessage());
+		try {
+			throw e;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	}
+	
 }

@@ -21,7 +21,6 @@
 			<option value=1>선택</option>
 		</select>
 		 <br> 
-		 과목코드 : <input type="text" id="subject_code" name="subject_code"><br> 
 		선수과목 : <select id="before_code" name="before_code">
 				<option value="0">없음</option>
 				<c:forEach items="${before}" var="i">

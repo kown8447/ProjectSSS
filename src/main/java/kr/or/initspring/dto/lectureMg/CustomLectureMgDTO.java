@@ -165,6 +165,18 @@ public class CustomLectureMgDTO {
 	public void setBuliding_addr(String buliding_addr) {
 		this.buliding_addr = buliding_addr;
 	}
+	@Override
+	public String toString() {
+		return "CustomLectureMgDTO [subject_code=" + subject_code + ", professor_code=" + professor_code
+				+ ", subject_name=" + subject_name + ", subject_credit=" + subject_credit + ", subject_state="
+				+ subject_state + ", subject_seats=" + subject_seats + ", subject_type=" + subject_type
+				+ ", subjcet_filesrc=" + subjcet_filesrc + ", department_code=" + department_code + ", required_choice="
+				+ required_choice + ", semester_code=" + semester_code + ", classroom_code=" + classroom_code
+				+ ", period_code=" + period_code + ", buliding_code=" + buliding_code + ", seat=" + seat
+				+ ", classroom_type=" + classroom_type + ", buliding_name=" + buliding_name + ", buliding_addr="
+				+ buliding_addr + ", record_grade=" + record_grade + ", success_check=" + success_check
+				+ ", grade_limit=" + grade_limit + ", before_name=" + before_name + "]";
+	}
 	
 	
 	

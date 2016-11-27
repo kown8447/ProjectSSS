@@ -52,7 +52,7 @@
 			<option id="B_002" name="B_002">장현동</option>
 		</select>
 		
-		<p id="jjg"></p>
+	
 		
 		
 	
