@@ -13,7 +13,7 @@
 
 <div class="container">
 <div align = "center" style="margin-top: 5%;">
-<img src="images/mainLogo.png" class="img-responsive">
+<img src="${pageContext.request.contextPath}/images/mainLogo.png" class="img-responsive">
 </div>
 
 		
@@ -46,16 +46,16 @@
 
 		<p style="text-align: center; font-size: 8pt">
 			<a href="#" id="searchID" data-toggle="modal">아이디 찾기</a> / 
-			<a href="${pageContext.request.contextPath}/login/searchPwd.htm" id="searchPW" data-toggle="modal">비밀번호 찾기</a>
+			<a href="#" id="searchPW" data-toggle="modal">비밀번호 찾기</a>
 		</p>
-			<div class="modal fade">
+		</form>
+	</div>
+	</div>
+	
+	<div class="modal fade">
 				<div class="modal-dialog">
    					 <div class="modal-content">
         			<!-- remote ajax call이 되는영역 -->
     				</div>
  				 </div>
 			</div>
-		
-		</form>
-	</div>
-	</div>

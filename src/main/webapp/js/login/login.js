@@ -24,9 +24,17 @@ $(function(){
 	
 	$('#searchID').click(function(){
 		$('div.modal').modal({
-            remote : '${pageContext.request.contextPath}/login/searchID.htm'
+            remote : 'login/searchID.htm'
           	  
-      })
+      });
     });
+	
+	$('#searchPW').click(function(){
+		$('div.modal').modal({
+            remote : 'login/searchPwd.htm'
+          	  
+      });
+    });
+
     
 });

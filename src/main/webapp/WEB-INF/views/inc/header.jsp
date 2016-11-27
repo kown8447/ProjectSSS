@@ -2,7 +2,7 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-<a href="${pageContext.request.contextPath}/index.htm"><img src="images/smLogo.png"></a>
+<a href="${pageContext.request.contextPath}/index.htm"><img src="${pageContext.request.contextPath}/images/smLogo.png"></a>
 </se:authorize>
 
 <se:authorize
