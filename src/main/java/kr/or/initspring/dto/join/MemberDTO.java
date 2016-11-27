@@ -9,15 +9,21 @@ package kr.or.initspring.dto.join;
 
 import java.util.Date;
 
+
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class MemberDTO {
 	private String member_id;
 	private String member_pwd;
 	private String member_name;
+	private String addr_num;
 	private String member_addr;
+	private String member_addr_detail;
 	private Date member_birth;
 	private String member_phone;
+	private String admin_code;
+	private String student_code;
+	private String professor_code;
 	private String member_email;
 	private int member_sex;
 	private String member_picture;	//회원 사진 file 명
@@ -25,7 +31,40 @@ public class MemberDTO {
 	private CommonsMultipartFile file;
 	private String code;
 	private int code_type;	//학생_교수_관리자 구분
+	private int timetable_share;
 	
+	public int getTimetable_share() {
+		return timetable_share;
+	}
+
+	public void setTimetable_share(int timetable_share) {
+		this.timetable_share = timetable_share;
+	}
+
+	public String getAdmin_code() {
+		return admin_code;
+	}
+
+	public void setAdmin_code(String admin_code) {
+		this.admin_code = admin_code;
+	}
+
+	public String getStudent_code() {
+		return student_code;
+	}
+
+	public void setStudent_code(String student_code) {
+		this.student_code = student_code;
+	}
+
+	public String getProfessor_code() {
+		return professor_code;
+	}
+
+	public void setProfessor_code(String professor_code) {
+		this.professor_code = professor_code;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -129,13 +168,30 @@ public class MemberDTO {
 	public void setCode_type(int code_type) {
 		this.code_type = code_type;
 	}
+	public String getAddr_num() {
+		return addr_num;
+	}
 
+	public void setAddr_num(String addr_num) {
+		this.addr_num = addr_num;
+	}
+
+	public String getMember_addr_detail() {
+		return member_addr_detail;
+	}
+
+	public void setMember_addr_detail(String member_addr_detail) {
+		this.member_addr_detail = member_addr_detail;
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
-				+ ", member_addr=" + member_addr + ", member_birth=" + member_birth + ", member_phone=" + member_phone
+				+ ", addr_num=" + addr_num + ", member_addr=" + member_addr + ", member_addr_detail="
+				+ member_addr_detail + ", member_birth=" + member_birth + ", member_phone=" + member_phone
 				+ ", member_email=" + member_email + ", member_sex=" + member_sex + ", member_picture=" + member_picture
 				+ ", member_temp=" + member_temp + ", file=" + file + ", code=" + code + ", code_type=" + code_type
 				+ "]";
 	}
+
+	
 }

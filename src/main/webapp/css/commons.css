@@ -1,0 +1,36 @@
+#footer {
+	
+	height: 80px;
+	clear: both;
+	position: center;
+	margin: 0 auto;
+}
+
+
+
+#header {
+	height: 100px;	
+}
+
+#content {	
+	float: both;
+	padding-top:45px;
+	padding-bottom:50px;
+	position:relative;
+	vertical-align:middle;
+	margin: 0 auto;
+
+}
+
+
+#content {	
+	float: both;
+	width: 720px; /*755-35*/
+	padding-left:35px;
+	padding-top:45px;
+	padding-bottom:50px;
+	position:relative;	
+}
+
+
+

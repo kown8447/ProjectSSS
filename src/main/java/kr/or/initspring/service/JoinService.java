@@ -9,6 +9,7 @@
 package kr.or.initspring.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class JoinService {
 	 * member table 삽입 -> student/admin/professor 중 하나의 table 삽입 -> 권한 지정 까지를 하나의 트랜잭션으로 처리.
 	 * 하나의 Query가 실패할 시 모든 Query는 Rollback 됨
 	*/	
-	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class })
 	public boolean insertMember(MemberDTO member) throws Exception {
 
 		int insertResult = 0;
@@ -44,11 +45,14 @@ public class JoinService {
 			joindao.insertMember(member);
 			if (member.getCode_type() == 0) {
 				joindao.insertStudentTable(member.getCode(), member.getMember_id());
-				insertResult = joindao.insertRole("ROLE_STUDENT", member.getMember_id());
+				joindao.insertRole("ROLE_STUDENT", member.getMember_id());
+				insertResult = joindao.insertStstateTable(member.getCode());
 			} else if (member.getCode_type() == 1) {
-				// 교수 table 삽입
+				joindao.insertProfessorTable(member.getCode(), member.getMember_id());
+				insertResult = joindao.insertRole("ROLE_PROFESSOR", member.getMember_id());
 			} else if (member.getCode_type() == 2) {
-				// 관리자 table 삽입
+				joindao.insertAdminTable(member.getCode(), member.getMember_id());
+				insertResult = joindao.insertRole("ROLE_ADMIN", member.getMember_id());
 			} else {
 				// 졸업생 table 삽입
 			}
@@ -78,6 +82,46 @@ public class JoinService {
 		if (count > 0)
 			result = true;
 
+		return result;
+	}
+	/*
+	    * @method Name : joinCheck2
+	    * @Author : 김영빈
+	    * @description
+	    * 이미 회원가입한 회원인지 확인
+	   */
+	public boolean joinCheck2(CodeMgDTO codemg) {
+		boolean result = false;
+		JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
+		int count =0;
+		if(codemg.getCode_type()==0){
+			List<String> check = joindao.studentConfirm();
+			for(int i=0; i<check.size() ; i++){
+				if(check.get(i).equals(codemg.getCode())){
+					count=0;
+					break;
+				}else {count =1;}
+			}
+			
+		}else if(codemg.getCode_type()==1){
+			List<String> check  = joindao.professorConfirm();
+			for(int i=0; i<check.size() ; i++){
+				if(check.get(i).equals(codemg.getCode())){
+					count=0;
+					break;
+				}else {count =1;}
+			}
+		}else{
+			List<String> check  = joindao.adminConfirm();
+			for(int i=0; i<check.size() ; i++){
+				if(check.get(i).equals(codemg.getCode())){
+					count=0;
+					break;
+				}else {count =1;}
+			}
+		}
+		if (count > 0)
+			result = true;
 		return result;
 	}
 

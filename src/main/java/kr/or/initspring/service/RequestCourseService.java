@@ -82,7 +82,6 @@ public class RequestCourseService {
 	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력
 	*/	
 	public List<OpenedLectureDTO> searchSubject(HashMap<String, String> keyword){
-		System.out.println("keyword : " + keyword.get("department_code"));
 		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		lists = requestCourseDao.getOpenedLectureListByKeyword(keyword);
@@ -92,9 +91,46 @@ public class RequestCourseService {
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 		}
-		System.out.println(lists.toString());
 		return lists;
 	}
+	
+	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 과목명 기준에 따라 정렬
+	*/	
+	public List<OpenedLectureDTO> searchOpLectureOrderbySubjectName(HashMap<String, String> keyword){
+		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		lists = requestCourseDao.searchOpLectureOrderbySubjectName(keyword);
+		for(OpenedLectureDTO dto : lists){
+			dto.setPeriod(requestCourseDao.getPeriodBySubjectCode(dto.getSubject_code()));
+			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
+			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
+			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+		}
+		return lists;
+	}
+	
+	/*
+	 * @method Name : searchOpLectureOrderbyProfessorName
+	 * @Author : 권기엽
+	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 교수명 기준에 따라 정렬
+	*/	
+	public List<OpenedLectureDTO> searchOpLectureOrderbyProfessorName(HashMap<String, String> keyword){
+		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		lists = requestCourseDao.searchOpLectureOrderbyProfessorName(keyword);
+		for(OpenedLectureDTO dto : lists){
+			dto.setPeriod(requestCourseDao.getPeriodBySubjectCode(dto.getSubject_code()));
+			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
+			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
+			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+		}
+		return lists;
+	}
+	
+	
 	
 	/*
 	 * @method Name : possiblePreRegister
@@ -156,6 +192,32 @@ public class RequestCourseService {
 		}
 	}
 
+	
+	/*
+	 * @method Name : possibleCorrectRegister
+	 * @Author : 권기엽
+	 * @description : 수강 정정 관리자 수강정정 시간에 따른 viewpage 설정
+	*/	
+	public String possibleCorrectRegister(String member_id){
+		String viewpage="";
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int enroll_active;
+		try{
+			enroll_active = requestCourseDao.getEnrollActive(0, 2);
+			if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
+			else if(enroll_active==1) { viewpage = "requestCourse.correctRegisterCourse";}
+			else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+
+		}catch(Exception e){
+			System.out.println("RequestCourseService / possibleRealRegister : "+ e.getMessage());
+			viewpage = "redirect:../index.htm";
+		}finally{
+			return viewpage;
+		}
+	}
+	
+	
+	
 	public List<OpenedLectureDTO> searchByKeyword(HashMap<String, String> map){
 		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
@@ -165,8 +227,8 @@ public class RequestCourseService {
 			dto.setProfessor_name(requestCourseDao.getProfessorNameByPfCode(dto.getProfessor_code()));
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
+			dto.setReserve_seats(requestCourseDao.getReserveSeatsBySubjectCode(dto.getSubject_code()));
 		}
-		System.out.println(lists.toString());
 		return lists;
 	}
 	
@@ -203,7 +265,6 @@ public class RequestCourseService {
 		
 		subject_info.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), subject_code));
 		
-		System.out.println(subject_info.toString());
 		return subject_info;
 	}
 	
@@ -432,6 +493,8 @@ public class RequestCourseService {
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 			dto.setRetake_check(requestCourseDao.getRetakeCheck(studentDto.getStudent_code(), dto.getSubject_code()));
+			OpenedLectureDTO temp = requestCourseDao.getRegistedSeat(dto.getSubject_code());
+			dto.setRegisted_seat(temp.getRegisted_seat());
 		}
 		return lists;
 	}
@@ -452,32 +515,30 @@ public class RequestCourseService {
 		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
 		int count = 0;
 		
-		System.out.println("여기는 선언부....");
-		
 		try{
 			data = requestCourseDao.getRegistedSeat(subject_code);
-			if(data.getRegisted_seat() > data.getSubject_seats()){
+			if(data.getRegisted_seat() >= data.getSubject_seats()){
 				map.put("result", "over");
-				System.out.println("정원 초과 if 문....");
 				return map;
 			}else{
-				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());
-				System.out.println("과목 존재 여부 확인....");
+				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code());	//예비 수강 신청에서 실패한 과목 성공 시, 목록에서 안보이게 함
 				if(count > 0){
 					HashMap<String, Object> temp = new HashMap<String, Object>();
 					temp.put("subject_code", subject_code);
 					temp.put("result", 0);
+					temp.put("student_code", studentDto.getStudent_code());
 					requestCourseDao.setReserveCheck(temp);
+					
+					parameter.put("student_code", studentDto.getStudent_code());
+					parameter.put("subject_code", subject_code);
+					requestCourseDao.insertEnrollment(parameter);
+					requestCourseDao.updateRegistedSeat(subject_code);
 					map.put("result", "success");
-					System.out.println("과목이 이미 있을 때 처리");
 				}else{
 					parameter.put("student_code", studentDto.getStudent_code());
 					parameter.put("subject_code", subject_code);
-					System.out.println("isnertEnrollment 들어가기 전");
 					requestCourseDao.insertEnrollment(parameter);
-					System.out.println("isnertEnrollment 들어간 후");
 					requestCourseDao.updateRegistedSeat(subject_code);
-					System.out.println("updateRegistedSeat 들어간 후");
 					map.put("result", "success");
 				}
 			}
@@ -487,5 +548,26 @@ public class RequestCourseService {
 			throw e;
 		}
 		return map;
+	}
+	
+	/*
+	 * @method Name : deleteSubject
+	 * @Author : 권기엽
+	 * @description : 과목의 배정 학점 확인 후 해당 과목 삭제. 두개의 query 는 트랜잭션 처리
+	*/
+	@Transactional(rollbackFor={Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class})
+	public int deleteSubject(String member_id, String subject_code) throws Exception{
+		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
+		int subject_credit = 0;
+		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
+		try{
+			subject_credit = requestCourseDao.getSubjectCredit(subject_code);
+			requestCourseDao.deleteFromEnrollment(studentDto.getStudent_code(), subject_code);	//선택한 과목 삭제
+			requestCourseDao.minusRegistedSeatBySubjectCode(subject_code);	//수강 정원 감소
+		}catch(Exception e){
+			System.out.println("RequestCourseService / deleteSubject : " + e.getMessage());
+			throw e;
+		}
+		return subject_credit;
 	}
 }

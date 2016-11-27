@@ -7,4 +7,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatePwdByUserid">
 		update member set member_pwd = #{param2}, member_temp = 0 where member_id = #{param1}
 	</update>
+	<select id="getStudent" resultType="kr.or.initspring.dto.join.MemberDTO">
+		select m.MEMBER_ADDR,m.MEMBER_BIRTH, m.MEMBER_EMAIL, m.MEMBER_ID,m.MEMBER_NAME,m.MEMBER_PHONE,m.MEMBER_PICTURE,m.MEMBER_SEX,s.student_CODE from member m,student s where m.MEMBER_ID= s.MEMBER_ID and m.member_id= #{member_id}
+	</select>
+	<select id="getProfessor" resultType="kr.or.initspring.dto.join.MemberDTO">
+		select m.MEMBER_ADDR,m.MEMBER_BIRTH, m.MEMBER_EMAIL, m.MEMBER_ID,m.MEMBER_NAME,m.MEMBER_PHONE,m.MEMBER_PICTURE,m.MEMBER_SEX,p.professor_CODE from member m,professor p where m.MEMBER_ID= p.MEMBER_ID and m.member_id= #{member_id}
+	</select>
+	<select id="getAdmin" resultType="kr.or.initspring.dto.join.MemberDTO">
+		select m.MEMBER_ADDR,m.MEMBER_BIRTH, m.MEMBER_EMAIL, m.MEMBER_ID,m.MEMBER_NAME,m.MEMBER_PHONE,m.MEMBER_PICTURE,m.MEMBER_SEX,a.ADMIN_CODE from member m,admin a where m.MEMBER_ID= a.MEMBER_ID and m.member_id= #{member_id}
+	</select>
+		<select id="getRole" resultType="String">
+		select role_Name from ROLE where member_id = #{member_id}
+	</select>
+	<update id="updateMemberInfo" parameterType="kr.or.initspring.dto.join.MemberDTO">
+		update member  set member_addr =  #{param3} , member_pwd = #{param2} , member_phone = #{param4} 
+, member_email = #{param5}, member_picture =#{param6}  where member_id = #{param1}
+	</update>
+	<select id="getFileName" resultType="String">
+		select member_picture from member where member_id= #{member_id}
+	</select>
+	<update id="updateStudentTimeShare" >
+		update student set timetable_share=#{param2} where member_id = #{param1}
+	</update>
+	
 </mapper>
