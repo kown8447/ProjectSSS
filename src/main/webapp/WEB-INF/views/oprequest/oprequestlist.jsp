@@ -18,14 +18,20 @@
 				<td>상태</td>
 			</tr>
 		</thead>
-		<c:forEach items="${oprequestlist}" var="oplist">
+		<c:forEach items="${oprequest}" var="oplist">
 		<tbody>
 			<tr>
-				<td>${oplist.subject_type} </td>
+				<td>${oplist.required_choice}</td>
 				<td>${oplist.grade_limit}</td>
-				<td>${oplist.subject_name }</td>
+				<td><a href="requestDetail.htm?code=${oplist.subject_code}">${oplist.subject_name}</a></td>
 				<td>${oplist.code_name}</td>
-				<td>${oplist.success_check}</td>
+				<td>
+				<c:choose>
+					<c:when test="${oplist.success_check == 0}">대기</c:when>
+					<c:when test="${oplist.success_check == 1}">승인</c:when>
+					<c:otherwise>거절</c:otherwise>
+				</c:choose>	
+				</td>
 			</tr>
 		</tbody>
 		</c:forEach>

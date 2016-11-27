@@ -240,7 +240,7 @@ public class RequestCourseService {
 		try{
 			beforeSubjectDto = requestCourseDao.getBeforeSubjectBySubjectCode(subject_code);
 			studentDto = requestCourseDao.getStudentByMemberid(member_id);
-			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_code(), studentDto.getStudent_code());
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
 		}catch(NullPointerException e){
 			System.out.println("RequestCourseService / checkBeforeSubject : " + e.getMessage());
 			if(beforeSubjectDto == null){

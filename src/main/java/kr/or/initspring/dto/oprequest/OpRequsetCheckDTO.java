@@ -9,7 +9,7 @@ public class OpRequsetCheckDTO {
 	private int subject_type;
 	private int grade_limit;
 	private String code_name;
-	private int required_choice;
+	private String required_choice;
 	
 	public String getSubject_code() {
 		return subject_code;
@@ -53,10 +53,10 @@ public class OpRequsetCheckDTO {
 	public void setCode_name(String code_name) {
 		this.code_name = code_name;
 	}
-	public int getRequired_choice() {
+	public String getRequired_choice() {
 		return required_choice;
 	}
-	public void setRequired_choice(int required_choice) {
+	public void setRequired_choice(String required_choice) {
 		this.required_choice = required_choice;
 	}
 	@Override

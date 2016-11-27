@@ -91,13 +91,23 @@ public class MemberController{
 		}
 		return viewpage;
 	}
-	
+	/*
+	 * @method Name : codeMg
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 코드 관리뷰로 이동
+	*/
 	@RequestMapping("code.htm")
 	public String codeMg(){
 		return "codemg.code";
 		
 	}
-	
+	/*
+	 * @method Name : registerCode
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 코드 등록
+	*/
 	@RequestMapping(value="codeRegister.htm", method=RequestMethod.POST)
 	public String registerCode(CodeMgDTO code){
 		System.out.println("코드 등록 컨트롤");
@@ -112,7 +122,12 @@ public class MemberController{
 		
 		return viewpage;
 	}
-	
+	/*
+	 * @method Name : viewCodeList
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 코드 리스트 출력
+	*/
 	@RequestMapping("codelist.htm")
 	public String viewCodeList(Model model){
 		System.out.println("코드 리스트 보여주기 컨트롤");
@@ -122,7 +137,12 @@ public class MemberController{
 		model.addAttribute("codelist", codelist);
 		return "codemg.codelist";
 	}
-	
+	/*
+	 * @method Name : detailCode
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 코드 상세보기
+	*/
 	@RequestMapping("codedetail.htm")
 	public String detailCode(Model model, String code){
 		System.out.println("코드 상세보기 컨트롤");
@@ -132,7 +152,12 @@ public class MemberController{
 		model.addAttribute("code", codeDTO);
 		return "codemg.codedetail";
 	}
-	
+	/*
+	 * @method Name : updateCode
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 코드 수정
+	*/
 	@RequestMapping(value = "updateCode.htm", method=RequestMethod.POST)
 	public String updateCode(Model model,  String code, int code_type, String code_name, Date code_birth){
 		System.out.println("코드 수정하기 컨트롤");
@@ -157,6 +182,12 @@ public class MemberController{
 		
 		return viewpage;
 	}
+	/*
+	 * @method Name : download
+	 * @Author : 성홍모
+	 * @description
+	 * 코드 등록 양식을 액셀로 다운로드 받는 매소드
+	*/
 	@RequestMapping("excel.htm")
 	public ModelAndView download(HttpServletRequest request, HttpServletResponse response){
 		
@@ -168,8 +199,12 @@ public class MemberController{
 		
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-	
-	
+	/*
+	 * @method Name : excelUpload
+	 * @Author : 성홍모
+	 * @description
+	 * 액셀로 코드 등록을 일괄처리하는 매소드
+	*/
 	@RequestMapping(value = "compExcelUpload.htm", method=RequestMethod.POST)
 	public View excelUpload(MultipartHttpServletRequest request, Model model){
 		System.out.println("exceForm 실행후 컨트롤러 실험");	
@@ -177,14 +212,18 @@ public class MemberController{
 
 		return jsonview;
 	}
-	
+	/*
+	 * @method Name : deleteCode
+	 * @Author : 성홍모
+	 * @description
+	 * 코드를 삭제하는 매소드
+	*/
 	@RequestMapping(value = "codeDelete.htm", method = RequestMethod.POST)
 	public View deleteCode(String code, Model model){
 		System.out.println("code =" + code);
 		System.out.println("삭제 컨트롤러!");
 		
 		boolean result=false;
-		
 		
 		int dbResult = codeservice.deleteCode(code,model);
 		
