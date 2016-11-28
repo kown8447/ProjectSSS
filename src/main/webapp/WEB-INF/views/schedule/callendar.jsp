@@ -21,7 +21,7 @@
 		<div id='calendar'></div>
 	</div>
 	<!-- 캘린더  일정추가 모달-->
-
+	<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 		<div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
 			aria-labelledby="basicModal" aria-hidden="true">
 			<div class="modal-dialog">
@@ -51,8 +51,9 @@
 				</div>
 			</div>
 		</div>
-	
+	</se:authorize>
 <!-- 캘린더 클릭시 모달   -->
+	
 	<div id="fullCalModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -65,10 +66,10 @@
 				<div id="modalBody" class="modal-body"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					
+					<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<button class="btn btn-primary" id="update">학사 일정 수정</button>
 						<button class="btn btn-primary" id="delete">학사 일정 삭제</button>
-				
+				</se:authorize>
 				</div>
 			</div>
 		</div>
