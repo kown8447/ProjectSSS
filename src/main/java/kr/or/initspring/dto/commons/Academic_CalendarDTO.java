@@ -15,7 +15,7 @@ public class Academic_CalendarDTO {
 	private String calendar_title;		//제목
 	private String calendar_content;	//내용
 	private Date calendar_start;		//시작일
-	private Date calednar_end;			//종료일
+	private Date calendar_end;			//종료일
 
 	public String getCalendar_code() {
 		return calendar_code;
@@ -41,17 +41,17 @@ public class Academic_CalendarDTO {
 	public void setCalendar_start(Date calendar_start) {
 		this.calendar_start = calendar_start;
 	}
-	public Date getCalednar_end() {
-		return calednar_end;
+	public Date getCalendar_end() {
+		return calendar_end;
 	}
-	public void setCalednar_end(Date calednar_end) {
-		this.calednar_end = calednar_end;
+	public void setCalendar_end(Date calendar_end) {
+		this.calendar_end = calendar_end;
 	}
 	@Override
 	public String toString() {
 		return "Academic_CalendarDTO [calendar_code=" + calendar_code + ", calendar_title=" + calendar_title
-				+ ", calendar_content=" + calendar_content + ", calendar_start=" + calendar_start + ", calednar_end="
-				+ calednar_end + "]";
+				+ ", calendar_content=" + calendar_content + ", calendar_start=" + calendar_start + ", calendar_end="
+				+ calendar_end + "]";
 	}
 	
 	

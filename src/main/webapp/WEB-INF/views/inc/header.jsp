@@ -40,4 +40,8 @@
 <se:authorize access="hasRole('ROLE_STUDENT')">
 	<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
 </se:authorize>
+<se:authorize access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
+	<a href="${pageContext.request.contextPath}/schedule/schedule.htm">(${LoginUser})학사일정</a> ||
+</se:authorize>
+
 <hr>
