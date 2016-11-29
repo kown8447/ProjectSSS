@@ -3,7 +3,7 @@
     <!-- 
    @Project : InitSpring
    @File name : joinStep2.jsp
-   @Author : 김영빈
+   @Author : 송아름
    @Data : 2016.11.22
    @Desc :  회원가입 step2 view 이메일 인증 
 -->
