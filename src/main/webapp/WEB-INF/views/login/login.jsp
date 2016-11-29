@@ -42,13 +42,13 @@
 				Not a member?
 				<se:authorize
 					access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-					<a href="${pageContext.request.contextPath}/join/join.htm">Sing UP</a>
+					<a href="${pageContext.request.contextPath}/join/join.htm" style="color:#FF5E00;">Sing UP</a>
 				</se:authorize>
 			</p>
 
 			<p style="text-align: center; font-size: 8pt">
-				<a href="#" id="searchID" data-toggle="modal">아이디 찾기</a> / 
-				<a href="#" id="searchPW" data-toggle="modal">비밀번호 찾기</a>
+				<a href="#" id="searchID" data-toggle="modal" style="color:#5F00FF;">아이디 찾기</a> / 
+				<a href="#" id="searchPW" data-toggle="modal" style="color:#5F00FF;">비밀번호 찾기</a>
 			</p>
 		</form>
 	</div>
