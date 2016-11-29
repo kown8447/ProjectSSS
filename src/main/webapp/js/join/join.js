@@ -91,20 +91,20 @@ $(function() {
    */
    $('#step1btn').click(function() {
       if ($("#code").val() == "") {
-            alert("코드번호를 꼭 입력하세요!");
+            alert("코드번호를 입력해주세요.");
             $("#code").focus();
       }else if ($("#code_name").val() == "") {
-          alert("이름을 꼭 입력하세요!");
+          alert("이름을입력해주세요.");
               $("#code_name").focus();
-      }else if($("#year option:selected").val() == 0 ){
-         alert('년도 체크가 안됬습니다');
+      }else if($("#year option:selected").val() == 0 && $("#month option:selected").val() == 0 && $("#day option:selected").val() == 0 ){
+         alert('생년월일을 체크해주세요.');
          $("select[name='year']:eq(0)").focus();
-      }else if($("#month option:selected").val() == 0 ){
+   /*   }else if($("#month option:selected").val() == 0 ){
          alert('월 체크가 안됬습니다');
          $("select[name='month']:eq(0)").focus();
       }else if($("#day option:selected").val() == 0 ){
          alert('day 체크가 안됬습니다');
-         $("select[name='day']:eq(0)").focus();
+         $("select[name='day']:eq(0)").focus();*/
       }
       else{
          var month= $('#month option:selected').val()  ;
@@ -153,7 +153,7 @@ $(function() {
       var re_mail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; 
       var mail = $('#member_email');
       if ($("#member_email").val() == "") {
-            alert("이메일을 꼭 입력해주세용 !");
+            alert("이메일을 입력해주세요.");
             $("#member_email").focus();
       }else if(re_mail.test(mail.val()) != true){
          alert('[Email 입력 오류] 유효한 이메일 주소를 입력해 주세요.');
@@ -173,8 +173,6 @@ $(function() {
                }   
             );
       }
-      
-      
    });
    /*
     * @JavaScript : join
@@ -187,10 +185,10 @@ $(function() {
       if($('#auth_key').val() == sessionid){
          location.href="join3.htm";
       }else if($('#member_email').val() == ""){
-          alert("이메일을 꼭 입력해주세용 !");
+          alert("이메일을 입력해주세요.");
                $("#member_email").focus();
       }else if($('#auth_key').val() == ""){
-          alert("인증번호를 꼭 입력해주세용 !");
+          alert("인증번호를 입력해주세요.");
                $("#auth_key").focus();
       }else{
          alert('인증실패. 이메일 주소 또는 인증번호를 다시 확인 부탁드립니다.');
@@ -233,63 +231,104 @@ $(function() {
     * @Desc
     * 유효성 검증
    */
-   $('#complete').click(function() {
-	   var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
-	   var password = $("#member_pwd").val();
-	   if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
-		   alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-		   $("#member_pwd").focus();
-		   return false;
-	   }
-	   
-      if($("#member_id").val() == "") {
-          alert("아이디를 꼭 입력하세요!");
-          $("#member_id").focus();
-          return false;
-      }else if(checkid == false){
-          alert('아이디 중복 체크를 해주세요');
-          return false;
-      }else if($("#member_pwd").val() == "") {
-        alert("비밀번호을 꼭 입력하세요!");
-            $("#member_pwd").focus();
-            return false;
-      }else if($("#member_pwd_confirm").val() == "") {
-          alert("비밀번호 확인을 꼭 입력하세요!");
-              $("#member_pwd_confirm").focus();
-              return false;
-      }else if($('#member_pwd').val() != $('#member_pwd_confirm').val()){
-          alert('비밀번호 체크를 해주세요');
-          return false;
-      }else if($('#sample6_postcode').val() == ""){
-    	  alert("주소입력해주세요 !");
-    	  $("#sample6_postcode").focus();
-          return false;
-      }else if($("#member_phone").val() == "") {
-          alert("휴대폰 번호를 꼭 입력하세요!");
-          $("#member_phone").focus();
-          return false;
-      }else if( !regExp.test( $("#member_phone").val() ) ) {
-          alert("잘못된 휴대폰 번호입니다. 숫자, - 를 포함한 숫자만 입력하세요.");
-          return false;
-      }else if($(":input:radio[name=member_sex]:checked").length < 1) {
-          alert("성별 선택해 !");
-          $("#member_sex").focus();
-          return false;
-      }else if($('#files').val() == ""){
-    	  alert("파일 꼭 선택해 !");
-    	  $("#files").focus();
-          return false;
-      }else if($('#files').val() != "") {
-    	  pathMiddle = $('#files').val().lastIndexOf(".");
-          pathEnd = $('#files').val().length;
-          extName = $('#files').val().substring(pathMiddle+1, pathEnd);
-          if(extName != "png" && extName != "jpg"){
-        	  alert("그림 파일 입력 양식에 맞지 않는 파일입니다.");
+   $(function(){
+	   var idcheck =1;
+       var reg_pw = /^.*(?=.{6,15})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+       var reg_phone = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+       var reg_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+       
+       $('#member_pwd').keyup(function(){
+           if(!reg_pw.test($('#member_pwd').val())){
+              $("#p-error").html("<div style='color:red'>비밀번호 형식을 맞춰주세요</div>");
+           }else{
+        	   $("#p-error").empty();
+           }    
+        });
+    
+        $('#member_pwd_confirm').keyup(function(){
+           if($("#member_pwd").val() !=$("#member_pwd_confirm").val()){ 
+         	  $("#p2-error").html("<div style='color:red'>비밀번호가 일치하지 않습니다</div>");
+           } else{
+        	   $("#p2-error").empty();
+           }   
+        }); 
+     
+
+ 	    $('#member_phone').keyup(function() {
+ 	    	if (!reg_phone.test($('#member_phone').val())) {
+ 				$("#ph-error").html("<div style='color:red'>핸드폰번호 형식을 맞춰주세요</div>");
+ 			}else{
+         	   $("#ph-error").empty();
+            }   
+ 		});   
+   });  
+       
+       $('#complete').click(function(){
+          if($("#member_id").val() == ""){ 
+             alert('아이디를 입력해주세요');
+             $('#member_id').focus();
+             return false;
+          } 
+   
+          if(checkid == false){
+             alert('아이디중복체크를 해주세요'); 
+             $('#idc-error').html("<div style='color:red'>아이디 중복 체크 해주세요</div>");
+             $('#member_id').focus();
+             return false;
+          }
+              
+          if($("#member_pwd").val() == ""){ 
+             alert('비밀번호를 입력해주세요');
+             $('#member_pwd').focus();
+             return false;
+          }
+             
+          if($('#member_pwd_confirm').val()!=$('#member_pwd_confirm').val()){
+             $('#member_pwd_confirm').focus();
+             return false;
+          } 
+          
+           
+           if($(':radio[name="member_sex"]:checked').length < 1){
+               alert('성별을 선택해주세요');                  
+               $('#member_sex').focus();
+               return false;
+            }
+             
+          if($("#member_phone").val() == ""){ 
+             alert('핸드폰을 입력해주세요');
+             $('#member_phone').focus();
+             return false;
+          }
+
+          if($('#sample6_postcode').val()==""){
+             alert('주소를 입력해주세요');
+             $('#sample6_postcode').focus();
+             return false;
+          }
+               
+          if($('#sample6_address').val()==""){
+             $('#sample6_address').focus();
+             return false;
+          }              
+          if($('#files').val() == ""){
+        	  alert("파일 꼭 선택해 !");
         	  $("#files").focus();
               return false;
           }
-      }
-   });
+          if($('#files').val() != "") {
+        	  pathMiddle = $('#files').val().lastIndexOf(".");
+              pathEnd = $('#files').val().length;
+              extName = $('#files').val().substring(pathMiddle+1, pathEnd);
+              if(extName != "png" && extName != "jpg"){
+            	  alert("사진파일이 유효하지 않습니다.");
+            	  $("#files").focus();
+                  return false;
+              }
+          }
+        $('#memberjoin').submit();
+        alert("회원가입이 완료되었습니다.")
+       });
    
    
 });
@@ -379,3 +418,25 @@ function handleFileSelect(evt) {
 window.onload=function(){
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
   }
+
+
+
+/*
+ * @JavaScript : join
+ * @Date : 2016.11.28
+ * @Author : 송아름
+ * @Desc
+ * 회원가입 취소버튼을 클릭했을 경우 이벤트  
+*/
+$(function() {
+	$('#cancel').click(function() {
+		var con = confirm("정말 취소하겠습니까?");
+		if (con == true) {
+			location.href = "../login.htm";
+		}
+	});
+
+});
+
+
+

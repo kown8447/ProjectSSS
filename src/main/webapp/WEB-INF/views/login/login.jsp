@@ -36,7 +36,7 @@
 			<input class="btn btn-block" type="submit" value="LOGIN" id="loginBtn"
 				style="background: linear-gradient(to right, #35c3c1, #47C83E)";>
 			<br>
-			<p style="text-align: center; color: white; font-size: 10pt">
+			<p style="text-align: center; font-size: 10pt">
 				Not a member?
 				<se:authorize
 					access="!hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">

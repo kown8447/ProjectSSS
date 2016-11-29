@@ -15,5 +15,5 @@ public interface JoinDAO {
 	public List<String> studentConfirm(); //등록된 학생인지 확인
 	public List<String> professorConfirm(); //등록된 교수인지 확인
 	public List<String>  adminConfirm(); //등록된 관리자인지 확인
-	public String checkID(String userid); // 아이디 중복 검사
+	public int checkID(String userid); // 아이디 중복 검사
 }

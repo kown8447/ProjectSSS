@@ -3,36 +3,34 @@ body {
 	font-family: 'Roboto', helvetica, arial, sans-serif;
 	background-image: url("../images/back.jpg");
 	background-repeat: no-repeat;
-	background-size: 100% 60%;
+	background-size: 95% 50%;
 	background-position: bottom center;
-
 }
 
-.wrapper{
-    margin-top: 35px;
+.wrapper {
+	margin-top: 35px;
 }
 
 .form-signin:before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(to right, #35c3c1, #47C83E);
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: 0;
+	height: 7px;
+	width: 100%;
+	background: linear-gradient(to right, #35c3c1, #47C83E);
 }
 
 .form-signin {
-	max-width: 360px;
+	max-width: 300px;
 	padding: 2em;
 	margin: 0 auto;
-	border: 1px solid #cccccc;
 	background: rgba(0, 0, 0, 0.10);
 	outline: none;
-	-webkit-transition: -webkit-transform .10s ease;
-	transition: -webkit-transform .10s ease;
-	transition: transform .10s ease;
-	transition: transform .10s ease, -webkit-transform .10s ease;
+	-webkit-transition: -webkit-transform .15s ease;
+	transition: -webkit-transform .15s ease;
+	transition: transform .15s ease;
+	transition: transform .15s ease, -webkit-transform .10s ease;
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
 }
@@ -54,16 +52,16 @@ body {
 }
 
 .btn-block {
-display: block;
-  padding: 4%;
-  width: 100%;
-  border: 0;
-  color: #fff;
-  cursor: pointer;
-  font-size: 15pt;
-  font-weight: 600;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-  margin-bottom: -10px;
+	display: block;
+	padding: 4%;
+	width: 100%;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+	font-size: 15pt;
+	font-weight: 600;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	margin-bottom: -10px;
 }
 
 .btn-block:hover {

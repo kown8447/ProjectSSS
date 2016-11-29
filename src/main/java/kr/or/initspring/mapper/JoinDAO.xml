@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="checkID" resultType="String">
-		select member_id from member where member_id = #{member_id}
+	<select id="checkID" resultType="Integer">
+		select count(member_id) from member where member_id = #{member_id}
 	</select>
 </mapper>
