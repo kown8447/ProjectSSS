@@ -6,14 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  .thumb {
-    height: 75px;
-    border: 1px solid #000;
-    margin: 10px 5px 0 0;
-  }
-</style>
-
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/join/join.js"></script>
 <link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
@@ -26,9 +18,7 @@
 
 <title>Insert title here</title>
 </head>
-<body>
-	<tiles:insertAttribute name="header"/>
-	
+<body>	
 	<tiles:insertAttribute name="content"/>
 	
 	<tiles:insertAttribute name="footer"/>

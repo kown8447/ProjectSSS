@@ -9,8 +9,8 @@
    @Desc : 관리자 회원가입 step1 view
 -->
 
-<a href="${pageContext.request.contextPath}/login.htm"><img
-	src="${pageContext.request.contextPath}/images/smLogo.png"></a>
+<a href="${pageContext.request.contextPath}/login.htm">
+	<img src="${pageContext.request.contextPath}/images/smLogo.png"></a>
 
 <div class="container" style="margin-top: 5%; width: 70%;">
 	<div class="row">
@@ -85,6 +85,7 @@
 		</div>
 	</div>
 </div>
+
 <br>
 <div align="center">
 	<input type="button" value="취소" id="cancel" class="btn btn-default">

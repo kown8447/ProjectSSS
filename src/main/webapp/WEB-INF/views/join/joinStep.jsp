@@ -10,7 +10,6 @@
 
 <div align="center">
 	<img src="${pageContext.request.contextPath}/images/joinheader.jpg" style="margin-bottom: 5%;">
-
 	<table>
 		<tr>
 			<td>
