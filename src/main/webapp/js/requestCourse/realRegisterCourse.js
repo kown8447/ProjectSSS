@@ -11,6 +11,8 @@
 
 var realGradeSum=0;	//총학점
 
+
+
 $(function(){
 	
 	onloadRealtable();
@@ -36,20 +38,21 @@ $(function(){
 							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 											"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
+									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"' data-target='#wait_layerpop' data-toggle='modal'/></td></tr>";
 						});
 						$('#real_result').append(text);
 					}
 				}
 		);
 	});	
+
 });
 
+
 /*
- * @method Name : (document).on("click","real_info",function(e)
- * @Author : 권기엽
+ * @method Name : (document).on("click","real_info",function(e) @Author : 권기엽
  * @description : 과목의 상세 정보 확인
-*/	
+ */	
 $(document).on("click",".real_info",function(e){
 	$.ajax(
 			{
@@ -101,7 +104,7 @@ function onloadRealtable(){
 					failText+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
+					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"' data-target='#wait_layerpop' data-toggle='modal'/></td></tr>";
 				});
 				$('#fail_result').append(failText);
 				
@@ -155,6 +158,7 @@ $(document).on("click",".real_request", function(e){
 			success:function(data){
 				if(data.result == true){
 					alert('수강 대상 학년이 아닙니다.');
+					$('#wait_layerpop').modal('toggle');
 				}else{
 					realBeforeSubject(subject_code);
 				}
@@ -175,6 +179,7 @@ function realBeforeSubject(e){
 				}
 				else{
 					alert(data.subject_code+'는 선수강 과목이 필요합니다.');
+					$('#wait_layerpop').modal('toggle');
 				}
 			}
 		}
@@ -182,30 +187,33 @@ function realBeforeSubject(e){
 }
 
 function realInsertTimeTable(e){
+
 	$.ajax(
 			{
 				url:"getOpSubjectInfo.htm",
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
-					
-					realGradeSum+=data.subject_info.subject_credit;
 					var flag=true;
+					realGradeSum+=data.subject_info.subject_credit;
 					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
 						realGradeSum-=data.subject_info.subject_credit;
+						$('#wait_layerpop').modal('toggle');
 					}else{
+						
 						$.each(data.subject_info.period, function(i, elt) {
 							if($('#'+elt.period_code+'_3').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
 								realGradeSum-=data.subject_info.subject_credit;
+								$('#wait_layerpop').modal('toggle');
 								flag=false;
 								return false;
 							}	
 						})
-						if(flag==true){
-							insertRealDbSubject(data.subject_info.subject_code);
-						}
+					}
+					if(flag==true){
+						insertRealDbSubject(data.subject_info.subject_code, data.subject_info.subject_credit);
 					}
 				}
 			}
@@ -216,11 +224,26 @@ function realInsertTimeTable(e){
  * @method Name : insertRealDbSubject()
  * @Author : 권기엽
  * @description : 수강 등록 버튼을 눌렀을 경우, 시간표에 들어가기 이전 DB에서 Insert 작업을 먼저 해둔뒤에 시간표에 출력한다.
-*/	
-function insertRealDbSubject(e){
+*/
+
+var socket1 = null;	//소켓
+
+function insertRealDbSubject(e,c){
 	var subject_code = e;
+	var subject_credit = c;
 	
-	$.ajax(
+	socket1 = new WebSocket("ws://192.168.1.103:8090/initspring/wait.htm");
+	
+	socket1.onmessage = function(evt) {
+		if(evt.data=='-1'){
+			$('#wait_layerpop').modal('toggle');
+		}else{
+			$('#waitlist').empty();
+			$('#waitlist').append('신청 대기자열 : <font style="color:blue"><b>' + evt.data + '</b></font> 명');
+		}
+	};
+	
+	var ajax = $.ajax(
 		{
 			url:"insertRealDbSubject.htm",
 			data:{subject_code:subject_code},

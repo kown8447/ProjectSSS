@@ -11,7 +11,8 @@
 					<option value="subject_code">과목코드</option>
 				</select> 
 				<input type="text" class="form-control" id="real_keyword" /> 
-				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색">
+				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색"/>
+
 				<div id="fail_result" class="row">
 				
 				</div>
@@ -88,6 +89,27 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="wait_layerpop">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+				<!-- header title -->
+				<h4 class="modal-title">강의 정보</h4>
+			</div>
+			<!-- body -->
+			<div class="modal-body" id="waitlist">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">닫기</button>
 			</div>
 		</div>
 	</div>

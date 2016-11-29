@@ -20,6 +20,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -181,10 +182,12 @@ public class RequestCourseController {
 	 * @description : 관리자가 설정한 시간 및 대상 학년에 따라 사용자에게 보여지는 페이지를 다르게 return 하는 함수(본 수강 신청)
 	*/
 	@RequestMapping("realRegiser.htm")
-	public String realRegiserForm(Principal principal, Model model){
+	public String realRegiserForm(Principal principal, Model model, HttpServletRequest request){
+		HttpSession session = request.getSession();
 		String viewpage = "";
 		String member_id = principal.getName();
 		viewpage = requestCourseService.possibleRealRegister(member_id);
+		session.setAttribute("member_id", principal.getName());
 		return viewpage;
 	}
 	
@@ -441,4 +444,5 @@ public class RequestCourseController {
 		model.addAttribute("periodList", periodList);
 		return jsonview;
 	}
+	
 }
