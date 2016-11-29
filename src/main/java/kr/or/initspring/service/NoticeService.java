@@ -154,6 +154,7 @@ public class NoticeService {
 			toPage = allPage;
 		}
 	
+		map.put("query", query);
 		map.put("list", list);
 		map.put("pg", pagenum);
 		map.put("allPage", allPage);

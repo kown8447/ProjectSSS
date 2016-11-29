@@ -77,8 +77,8 @@
 	 <ul class="pagination">
 	 	<!-- 처음, 이전페이지 -->
      	<c:if test="${pg>fromPage}">
-			<li><a href="notice.htm?pg=1">◀◀</a></li>
-			<li><a href="notice.htm?pg=${pg-1}">◀</a></li>
+			<li><a href="notice.htm?pg=1&keyword=${query}">◀◀</a></li>
+			<li><a href="notice.htm?pg=${pg-1}&keyword=${query}">◀</a></li>
 		</c:if>
 		<c:if test="${pg<=fromPage}">
 			<li><span style="color: gray">◀◀</span></li>
@@ -89,14 +89,14 @@
 		 <c:forEach begin="${fromPage}" end="${toPage}" var="i">
 			<li><c:if test="${i==pg}"><a href="#">${i}</a></c:if></li>	
 				<c:if test="${i!=pg}">
-					<li><a href="notice.htm?pg=${i}">${i}</a></li>
+					<li><a href="notice.htm?pg=${i}&keyword=${query}">${i}</a></li>
 				</c:if>
 		</c:forEach>
 		 
 		 <!-- 다음, 이후 -->
 		<c:if test="${pg<allPage}">
-			<li><a href="notice.htm?pg=${pg+1}">▶</a></li>
-			<li><a href="notice.htm?pg=${allPage}">▶▶</a></li>
+			<li><a href="notice.htm?pg=${pg+1}&keyword=${query}">▶</a></li>
+			<li><a href="notice.htm?pg=${allPage}&keyword=${query}">▶▶</a></li>
 		</c:if>
 		
 		<c:if test="${pg>=allPage}">
