@@ -6,6 +6,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+
+
 <script src="${pageContext.request.contextPath}/js/login/login.js"></script>
 <link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">

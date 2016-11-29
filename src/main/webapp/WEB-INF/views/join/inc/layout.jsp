@@ -6,19 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+</style>
+
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/join/join.js"></script>
 <link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/join.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
 </head>
-<body>	
+<body>
+	<tiles:insertAttribute name="header"/>
+	
 	<tiles:insertAttribute name="content"/>
 	
 	<tiles:insertAttribute name="footer"/>

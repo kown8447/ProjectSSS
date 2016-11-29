@@ -16,6 +16,7 @@
 		<img src="${pageContext.request.contextPath}/images/mainLogo.png" class="img-responsive">
 	</div>
 
+
 	<c:url value="/login" var="loginURL" />
 	<div class="wrapper">
 		<form class="form-signin" name="f" action="${loginURL}" method="post">
@@ -34,8 +35,9 @@
 			</div>
 
 			<input class="btn btn-block" type="submit" value="LOGIN" id="loginBtn"
-				style="background: linear-gradient(to right, #35c3c1, #47C83E)";>
+				style="background: linear-gradient(to right, #35c3c1, #47C83E)">
 			<br>
+
 			<p style="text-align: center; font-size: 10pt">
 				Not a member?
 				<se:authorize
@@ -51,7 +53,6 @@
 		</form>
 	</div>
 </div>
-
 
 <div class="modal fade">
 	<div class="modal-dialog">

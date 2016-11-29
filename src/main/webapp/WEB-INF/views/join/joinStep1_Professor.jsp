@@ -4,9 +4,9 @@
 <!-- 
    @Project : InitSpring
    @File name : joinStep1_Professor.jsp
-   @Author : 김영빈
+   @Author : 송아름
    @Data : 2016.11.22
-   @Desc : 교수 회원가입 2번째 view
+   @Desc : 교수 회원가입 step1 view
 -->
 
 <a href="${pageContext.request.contextPath}/login.htm"><img

@@ -5,7 +5,7 @@
    @File name : joinStep2.jsp
    @Author : 김영빈
    @Data : 2016.11.22
-   @Desc :  회원가입 3번째 view 이메일 인증 
+   @Desc :  회원가입 step2 view 이메일 인증 
 -->
 
 <a href="${pageContext.request.contextPath}/login.htm"><img src="${pageContext.request.contextPath}/images/smLogo.png"></a>

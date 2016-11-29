@@ -3,9 +3,9 @@
    <!-- 
    @Project : InitSpring
    @File name : joinStep3.jsp
-   @Author : 김영빈
+   @Author : 송아름
    @Data : 2016.11.22
-   @Desc : 회원가입 마지막 단계 나머지정보 입력 
+   @Desc : 회원가입 step3 단계 기타개인정보 입력 
 -->	
 
 <a href="${pageContext.request.contextPath}/login.htm"><img src="${pageContext.request.contextPath}/images/smLogo.png"></a>
