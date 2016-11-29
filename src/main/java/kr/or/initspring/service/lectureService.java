@@ -18,6 +18,7 @@ import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.LiberalDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
 import kr.or.initspring.dto.commons.PlanDTO;
 import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
@@ -156,9 +157,7 @@ public class lectureService {
 	public CustomLectureMgDTO selectperiod(String subject_code){
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		
 		CustomLectureMgDTO building = lecturedao.select_period_build(subject_code);
-		System.out.println("빌딩코드:"+building.getBuliding_code());
 		return building;
 	}
 	
@@ -170,13 +169,9 @@ public class lectureService {
 		
 		System.out.println(dto.toString());
 		try{
-				
 				lecturedao.update_Subject(dto);
-				System.out.println("1번수정");
-				
 				lecturedao.update_before_subject(dto);
-				System.out.println("이거타니?");
-			 
+		
 		} catch (Exception e) {
 			System.out.println("장현 수정 트랜잭션 오류 : " + e.getMessage());
 			try {
@@ -212,6 +207,57 @@ public class lectureService {
 		}
 	}
 	
+	}
+	
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	public int RequestSubject(CustomLectureMgDTO dto){
+		
+	LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		
+		try{
+			System.out.println(dto.getSubject_filesrc());
+			lecturedao.insert_Plan(dto);
+			System.out.println("강의계획서 등록");
+			
+			//시간표 등록
+			//강의 실 등록
+		 
+	} catch (Exception e) {
+		System.out.println("장현 삭제 트랜잭션 오류 : " + e.getMessage());
+		try {
+			throw e;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	 return 0;
+		
+	}
+	
+	
+	public List<CustomLectureMgDTO> viewtimetable(String classroom_code){
+
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		
+		List<CustomLectureMgDTO> dto = lecturedao.viewtimetable(classroom_code);
+		return dto; 
+	}
+	
+	public List<CustomLectureMgDTO> selectBuilding(String building_code){
+		System.out.println(building_code);
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		List<CustomLectureMgDTO> dto = lecturedao.selectAllBuilding(building_code);
+		System.out.println(dto.toString());
+
+		return dto;
+	}
+	
+	public List<PeriodDTO> getPeriodList(){
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		List<PeriodDTO> dto = lecturedao.getPeriodList();
+		
+		return dto;
 	}
 	
 }

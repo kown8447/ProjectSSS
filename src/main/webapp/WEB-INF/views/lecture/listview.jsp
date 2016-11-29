@@ -17,8 +17,8 @@
 </script>
 </head>
 <body>
-	
-	<table id="list" border="1px">
+	<div class="container">
+	<table id="list" border="1px" class="table">
 		<tr>
 			<td>구분</td><td>학년</td><td>과목명</td><td>상태</td>
 		</tr>
@@ -48,7 +48,7 @@
 		</c:forEach>
 		
 	</table>
-		
+		</div>
 		
 	<a href="lectureRegister.htm">등록하기</a>
 </body>

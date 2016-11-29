@@ -7,6 +7,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
 import kr.or.initspring.dto.commons.PlanDTO;
 import kr.or.initspring.dto.commons.ProfessorDTO;
@@ -53,6 +54,10 @@ public interface LectureMgDAO {
 	
 	public CustomLectureMgDTO select_period_build(String subject_code);
 	
-	
+	//신청히기
+	public List<CustomLectureMgDTO> viewtimetable(String classroom_code);
+	public String insert_Plan(CustomLectureMgDTO dto);
+	public List<CustomLectureMgDTO> selectAllBuilding(String building_code); 
+	public List<PeriodDTO> getPeriodList();
 
 }

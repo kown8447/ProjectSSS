@@ -17,8 +17,8 @@
 </head>
 <body>
 	
-	
-	<table border=1px>
+	<div class="container">
+	<table border=1px class="table table-striped">
 		<tr>
 		<td>구분</td><td name="subject_type">
 		<c:choose>
@@ -39,7 +39,7 @@
 		<td>학점</td><td>${list.subject_credit}</td><td>정원</td><td>${list.subject_seats}</td></tr>
 		<input type="hidden" value="${list.subject_code }">
 	</table>
-	
+	</div>
 	<button id="back">돌아가기</button>  
 	<a href="lectureEdit.htm?subject_code=${list.subject_code}">수정하기</a>
 	<a href="lectureDelete.htm?subject_code=${list.subject_code }">삭제하기</a>

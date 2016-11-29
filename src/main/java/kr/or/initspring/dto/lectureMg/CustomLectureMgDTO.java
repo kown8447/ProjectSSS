@@ -11,7 +11,7 @@ public class CustomLectureMgDTO {
 	private Integer subject_state;	//과목상태
 	private Integer subject_seats;	//정원
 	private Integer subject_type;	//과목유형
-	private CommonsMultipartFile subjcet_filesrc;	//강의계획서
+	private CommonsMultipartFile subject_filesrc;	//강의계획서
 	private String department_code;	//학과코드  전공과목일시 생김
 	private String required_choice;	//필수/선택
 	private String semester_code;	//학기코드
@@ -26,12 +26,32 @@ public class CustomLectureMgDTO {
 	private int success_check; 		//신청상태
 	private int grade_limit; //학년
 	private String before_name; //선수과목이름
+	private String classroom_name;
+	private String member_id;
+	private String member_name;
 	
 	
 	
 	
 	
-	
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public String getClassroom_name() {
+		return classroom_name;
+	}
+	public void setClassroom_name(String classroom_name) {
+		this.classroom_name = classroom_name;
+	}
 	public String getBefore_name() {
 		return before_name;
 	}
@@ -98,11 +118,11 @@ public class CustomLectureMgDTO {
 	public void setSubject_type(Integer subject_type) {
 		this.subject_type = subject_type;
 	}
-	public CommonsMultipartFile getSubjcet_filesrc() {
-		return subjcet_filesrc;
+	public CommonsMultipartFile getSubject_filesrc() {
+		return subject_filesrc;
 	}
-	public void setSubjcet_filesrc(CommonsMultipartFile subjcet_filesrc) {
-		this.subjcet_filesrc = subjcet_filesrc;
+	public void setSubject_filesrc(CommonsMultipartFile subjcet_filesrc) {
+		this.subject_filesrc = subjcet_filesrc;
 	}
 	public String getDepartment_code() {
 		return department_code;
@@ -165,19 +185,6 @@ public class CustomLectureMgDTO {
 	public void setBuliding_addr(String buliding_addr) {
 		this.buliding_addr = buliding_addr;
 	}
-	@Override
-	public String toString() {
-		return "CustomLectureMgDTO [subject_code=" + subject_code + ", professor_code=" + professor_code
-				+ ", subject_name=" + subject_name + ", subject_credit=" + subject_credit + ", subject_state="
-				+ subject_state + ", subject_seats=" + subject_seats + ", subject_type=" + subject_type
-				+ ", subjcet_filesrc=" + subjcet_filesrc + ", department_code=" + department_code + ", required_choice="
-				+ required_choice + ", semester_code=" + semester_code + ", classroom_code=" + classroom_code
-				+ ", period_code=" + period_code + ", buliding_code=" + buliding_code + ", seat=" + seat
-				+ ", classroom_type=" + classroom_type + ", buliding_name=" + buliding_name + ", buliding_addr="
-				+ buliding_addr + ", record_grade=" + record_grade + ", success_check=" + success_check
-				+ ", grade_limit=" + grade_limit + ", before_name=" + before_name + "]";
-	}
-	
-	
+
 	
 }

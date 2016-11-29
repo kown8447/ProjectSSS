@@ -107,12 +107,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from PLAN where subject_code=  #{param1}
 	</delete>
 	
-	
-	
-	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name},subject_credit=#{subject_credit}
-		,subject_seats=#{subject_seats} where subject_code=#{subject_code}
+		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
 	</update>
 	
 	<!-- 선수과목을 수정하는 쿼리 -->
@@ -128,6 +125,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
 	<select id="maxSubject_code" resultType="String">
 		 SELECT nvl(max(subject_code),'SJ_0') FROM SUBJECT s ORDER BY s.SUBJECT_CODE desc
+	</select>
+	
+	<!-- 개설신청 -->
+	<insert id="insert_Plan" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into Plan subject_filesrc values #{subject_filesrc} where subject_code = #{subject_code}
+	</insert>
+	
+	
+	<select id="viewtimetable" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		    select * from ASK_TIME a join subject s on a.SUBJECT_CODE = s.subject_code join professor p on
+		    s.professor_code = p.professor_code join member m on p.member_id = m.member_id
+		     where a.classroom_code = #{param1}
+	</select>
+	
+	<select id="select_semester">
+			select * from semester
+	</select>
+	
+	<select id="selectAllBuilding" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+			select *  from classroom where building_code = #{param1}
+	</select>
+	
+	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
+		select * from Period
 	</select>
 	
 </mapper>
