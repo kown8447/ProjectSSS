@@ -5,15 +5,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.FavoriteDAO">
 	<select id="getAllLinkList" resultType="kr.or.initspring.dto.favorite.LinkDataDTO">
-	SELECT l.LINK_CODE,l.LINK_NAME,l.LINK_ADDR,l.LINK_TYPE,lt.TYPE_NAME FROM Link l join LINK_TYPE lt on l.LINK_TYPE=lt.LINK_TYPE
+		SELECT
+		l.LINK_CODE,l.LINK_NAME,l.LINK_ADDR,l.LINK_TYPE,lt.TYPE_NAME FROM
+		Link
+		l join LINK_TYPE lt on l.LINK_TYPE=lt.LINK_TYPE
 	</select>
 	<select id="getUserFavoriteList" resultType="kr.or.initspring.dto.favorite.LinkDataDTO">
-	SELECT l.LINK_CODE,l.LINK_NAME,l.LINK_ADDR,l.LINK_TYPE,lt.TYPE_NAME FROM FAVORITE f join Link l on f.LINK_CODE=l.LINK_CODE join LINK_TYPE lt on l.LINK_TYPE=lt.LINK_TYPE where f.MEMBER_ID=#{param1}
+		SELECT
+		l.LINK_CODE,l.LINK_NAME,l.LINK_ADDR,l.LINK_TYPE,lt.TYPE_NAME FROM
+		FAVORITE f join Link l on f.LINK_CODE=l.LINK_CODE join LINK_TYPE lt on
+		l.LINK_TYPE=lt.LINK_TYPE where f.MEMBER_ID=#{param1}
 	</select>
 	<select id="getUserRole" resultType="String">
-	SELECT ROLE_NAME FROM ROLE where MEMBER_ID=#{param1}
+		SELECT ROLE_NAME FROM ROLE
+		where MEMBER_ID=#{param1}
 	</select>
 	<select id="getRoleList" resultType="String">
-	SELECT ROLE_NAME FROM LINK_ROLE where LINK_CODE=#{param1}
+		SELECT ROLE_NAME FROM
+		LINK_ROLE where LINK_CODE=#{param1}
 	</select>
+	<insert id="favoriteAppend" parameterType="kr.or.initspring.dto.favorite.LinkDataDTO">
+		INSERT INTO
+		FAVORITE(LINK_CODE,MEMBER_ID) VALUES
+		(#{link_code},#{member_id})
+	</insert>
+	<delete id="favoriteDelete" parameterType="kr.or.initspring.dto.favorite.LinkDataDTO">
+		DELETE FROM FAVORITE
+		where LINK_CODE=#{link_code} and MEMBER_ID=#{member_id}
+	</delete>
 </mapper>

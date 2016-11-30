@@ -39,7 +39,6 @@ public class CollegeRegisterController {
 	 */
 	@RequestMapping(value = "viewmember.htm")
 	public String viewMemberInfo(Principal principal) {
-		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		return "collegeregister.memberInfo";
 	}
 
@@ -52,7 +51,6 @@ public class CollegeRegisterController {
 	 */
 	@RequestMapping(value = "viewstudent.htm")
 	public String viewStudentInfo(Principal principal, Model model) {
-		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		collegestudentservice.viewStudentInfo(principal.getName(), model);
 
 		return "collegeregister.studentInfo";
@@ -67,7 +65,6 @@ public class CollegeRegisterController {
 	 */
 	@RequestMapping(value = "record.htm")
 	public String viewStudentRecordInfo(Principal principal, Model model) {
-		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		collegestudentservice.viewStudentRecordInfo(principal.getName(), model);
 		return "collegeregister.studentRecord";
 	}
@@ -81,7 +78,6 @@ public class CollegeRegisterController {
 	 */
 	@RequestMapping(value = "StudentRecordAjax.htm")
 	public View viewStudentRecordAjax(RecordRequestDTO recordrequest, Principal principal, Model model) {
-		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		collegestudentservice.viewStudentRecordAjax(recordrequest, principal.getName(), model);
 		return jsonview;
 	}
@@ -95,7 +91,6 @@ public class CollegeRegisterController {
 	 */
 	@RequestMapping(value = "register.htm")
 	public String viewRegisterInfo(Principal principal, Model model) {
-		System.out.println("principal을 통한 userid 추출 : " + principal.getName());
 		collegestudentservice.viewRegisterInfo(principal.getName(), model);
 		return "collegeregister.register";
 	}

@@ -16,6 +16,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
 import com.sun.prism.paint.Color;
 
@@ -63,7 +64,8 @@ public class RecordPdfView extends AbstractPdfView {
 		studentTable.addCell(new Cell(new Paragraph("이름", font)));
 		studentTable.addCell(new Cell(new Paragraph(student.getMember_name(), font)));
 		studentTable.addCell(new Cell(new Paragraph("전공", font)));
-		Cell majorcell = new Cell(new Paragraph(major.getCollege_name() + " " + major.getDepartment_name()+" 학과", font));
+		Cell majorcell = new Cell(
+				new Paragraph(major.getCollege_name() + " " + major.getDepartment_name() + " 학과", font));
 		majorcell.setColspan(3);
 		studentTable.addCell(majorcell);
 
@@ -125,6 +127,10 @@ public class RecordPdfView extends AbstractPdfView {
 		calDataTable.addCell(outFcell);
 
 		document.add(calDataTable);
+
+		writer.getDirectContentUnder().addImage(
+				Image.getInstance(request.getSession().getServletContext().getRealPath("/images") + "/pdfLogo3.png"),
+				500, 0, 0, 350, 25, 290);
 
 	}
 

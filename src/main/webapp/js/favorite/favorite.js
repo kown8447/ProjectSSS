@@ -1,17 +1,11 @@
 $(function() {
 
-	/*$.ajax({
-		url : "listCall.htm",
-		method : "post",
-		dataType : "json",
-		success : function(data) {
-			console.log(data);
-		}
-	});*/
+	var $gallery = $("#gallery");
+	var $box = $("#box");
 
-	var $gallery = $("#gallery"), $box = $("#box");
+	$gallery.tabs();
 
-	$("li", $gallery).draggable({
+	$("#allUserList li").draggable({
 		cancel : "a.ui-icon",
 		revert : "invalid",
 		containment : "document",
@@ -19,57 +13,113 @@ $(function() {
 		cursor : "move",
 	});
 
+	$("#studentInfoList li").draggable({
+		cancel : "a.ui-icon",
+		revert : "invalid",
+		containment : "document",
+		helper : "clone",
+		cursor : "move",
+	});
+
+	$("#enrollList li").draggable({
+		cancel : "a.ui-icon",
+		revert : "invalid",
+		containment : "document",
+		helper : "clone",
+		cursor : "move",
+	});
+
+	$("#profSubjectList li").draggable({
+		cancel : "a.ui-icon",
+		revert : "invalid",
+		containment : "document",
+		helper : "clone",
+		cursor : "move",
+	});
+
+	$("#adminList li").draggable({
+		cancel : "a.ui-icon",
+		revert : "invalid",
+		containment : "document",
+		helper : "clone",
+		cursor : "move",
+	});
+
+	$("#box li").draggable({
+		cancel : "a.ui-icon",
+		revert : "invalid",
+		containment : "document",
+		helper : "clone",
+		cursor : "move",
+	});
 	$box.droppable({
-		accept : "#gallery > li",
+		accept : "#gallery li",
 		drop : function(event, ui) {
-			deleteImage(ui.draggable);
+			var eventLiID = ui.draggable[0].id;
+			appendFavorite(eventLiID.trim());
 		}
 	});
 
 	$gallery.droppable({
 		accept : "#box li",
 		drop : function(event, ui) {
-			recycleImage(ui.draggable);
+			var eventLiID = ui.draggable[0].id;
+			removeFavorite(eventLiID.trim());
 		}
 	});
 
 	// Image deletion function
-	function deleteImage($item) {
-		$item.fadeOut(function() {
-			var $list = $("ul", $box).length ? $("ul", $box) : $(
-					"<ul class='gallery ui-helper-reset'/>").appendTo($box);
+	function appendFavorite(item) {
 
-			$item.appendTo($list).fadeIn(function() {
-				$item.animate({}).find("button").animate({});
-			});
-		});
-	}
+		var str = item.split('_');
+		$
+				.ajax({
+					url : "favoriteAppend.htm?link_code=" + str[1] + '_'
+							+ str[2],
+					method : "post",
+					dataType : "json",
+					success : function(data) {
+						if (data.result) {
+							$("#" + item).toggle("blind", {}, 300);
+							var btn = '<li id="'
+									+ item
+									+ '_favorite" style="display: none;"><button class="btn btn-success">'
+									+ $('#' + item + '_btn').text()
+									+ '</button></li>'
+							$('#gallery_favorite').append(btn);
 
-	// Image recycle function
-	var box_icon = "<a href='link/to/box/script/when/we/have/js/off'></a>";
-	function recycleImage($item) {
-		$item.fadeOut(function() {
-			$item.find("a").remove().end().append(box_icon).find("button")
-					.end().appendTo($gallery).fadeIn();
-		});
-	}
-
-	// Image preview function, demonstrating the ui.dialog used as a modal
-	// window
-	function viewLargerImage($link) {
-		var src = $link.attr("href"), title = $link.siblings("button");
-
-		if ($modal.length) {
-			$modal.dialog("open");
-		} else {
-			setTimeout(function() {
-				img.dialog({
-					title : title,
-					width : 400,
-					modal : true
+							$("#" + item + '_favorite')
+									.toggle("blind", {}, 300);
+							$("#" + item + "_favorite").draggable({
+								cancel : "a.ui-icon",
+								revert : "invalid",
+								containment : "document",
+								helper : "clone",
+								cursor : "move",
+							});
+							favoriteRenew();
+						}
+					}
 				});
-			}, 1);
-		}
+
+	}
+	function removeFavorite(item) {
+		var str = item.split('_');
+
+		$.ajax({
+			url : "favoriteDelete.htm?link_code=" + str[1] + '_' + str[2],
+			method : "post",
+			dataType : "json",
+			success : function(data) {
+				if (data.result) {
+					$("#" + item).toggle("blind", {}, 300);
+					setTimeout($('#' + item).remove(), 300);
+					$('#' + str[0] + '_' + str[1] + '_' + str[2]).toggle(300);
+					favoriteRenew();
+				}
+			}
+		});
+
 	}
 
 });

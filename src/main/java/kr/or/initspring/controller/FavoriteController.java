@@ -24,10 +24,29 @@ public class FavoriteController {
 
 	@RequestMapping("config.htm")
 	public String favoriteConfigView(Principal principal,Model model) {
-		System.out.println("즐겨찾기 설정 페이지로");
-		System.out.println("수정 테스트");
 		favoriteservice.getFavariteConfigData(principal.getName(), model);
 		return "favorite.config";
 	}
+	
+	@RequestMapping("favoriteAppend.htm")
+	public View appendFavorite(Principal principal,String link_code,Model model) {
+		boolean result=favoriteservice.appendFavorite(principal.getName(), link_code);
+		model.addAttribute("result", result);
+		return jsonview;
+	}
+	
+	@RequestMapping("favoriteDelete.htm")
+	public View deleteFavorite(Principal principal,String link_code,Model model) {
+		boolean result=favoriteservice.deleteFavarite(principal.getName(), link_code);
+		model.addAttribute("result", result);
+		return jsonview;
+	}
+	
+	@RequestMapping("favoriteCall.htm")
+	public View getFavoriteList(Principal principal,Model model) {
+		favoriteservice.getFavariteList(principal.getName(), model);
+		return jsonview;
+	}
+	
 	
 }
