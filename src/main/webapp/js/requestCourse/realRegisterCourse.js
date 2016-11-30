@@ -38,7 +38,7 @@ $(function(){
 							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 											"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"' data-target='#wait_layerpop' data-toggle='modal'/></td></tr>";
+									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
 						});
 						$('#real_result').append(text);
 					}
@@ -104,7 +104,7 @@ function onloadRealtable(){
 					failText+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"' data-target='#wait_layerpop' data-toggle='modal'/></td></tr>";
+					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
 				});
 				$('#fail_result').append(failText);
 				
@@ -158,7 +158,6 @@ $(document).on("click",".real_request", function(e){
 			success:function(data){
 				if(data.result == true){
 					alert('수강 대상 학년이 아닙니다.');
-					$('#wait_layerpop').modal('toggle');
 				}else{
 					realBeforeSubject(subject_code);
 				}
@@ -179,7 +178,6 @@ function realBeforeSubject(e){
 				}
 				else{
 					alert(data.subject_code+'는 선수강 과목이 필요합니다.');
-					$('#wait_layerpop').modal('toggle');
 				}
 			}
 		}
@@ -199,14 +197,11 @@ function realInsertTimeTable(e){
 					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
 						realGradeSum-=data.subject_info.subject_credit;
-						$('#wait_layerpop').modal('toggle');
 					}else{
-						
 						$.each(data.subject_info.period, function(i, elt) {
 							if($('#'+elt.period_code+'_3').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
 								realGradeSum-=data.subject_info.subject_credit;
-								$('#wait_layerpop').modal('toggle');
 								flag=false;
 								return false;
 							}	
@@ -231,16 +226,12 @@ var socket1 = null;	//소켓
 function insertRealDbSubject(e,c){
 	var subject_code = e;
 	var subject_credit = c;
-	
+
 	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
 	
 	socket1.onmessage = function(evt) {
-		if(evt.data=='-1'){
-			$('#wait_layerpop').modal('toggle');
-		}else{
-			$('#waitlist').empty();
-			$('#waitlist').append('신청 대기자열 : <font style="color:blue"><b>' + evt.data + '</b></font> 명');
-		}
+		$('#waitlist').empty();
+		$('#waitlist').append('신청 대기자열 : <font style="color:blue"><b>' + evt.data + '</b></font> 명');
 	};
 	
 	var ajax = $.ajax(
@@ -248,17 +239,20 @@ function insertRealDbSubject(e,c){
 			url:"insertRealDbSubject.htm",
 			data:{subject_code:subject_code},
 			dataType:"json",
+			beforeSend:function(){
+				$('#wait_layerpop').modal('toggle')
+			},
 			success:function(data){
 				if(data.map.result=='success'){
 					alert('강의 신청에 성공하였습니다.');
-					location.href="realRegiser.htm";
 				}else if(data.map.result=='over'){
 					alert('수강 정원이 넘었습니다.');
-					return false;
 				}else{
 					alert('일시적인 장애가 발생하였습니다. 지속될 경우 관리자에게 문의해주세요.');
-					return false;
 				}
+			},
+			complete:function(){
+				location.href="realRegiser.htm";
 			}
 		}	
 	);
