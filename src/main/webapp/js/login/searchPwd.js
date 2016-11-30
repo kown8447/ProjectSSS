@@ -7,7 +7,6 @@
  * 비동기 처리 후, 성공할 경우 메인으로 / 실패할 경우 다시 비밀번호 찾기 창으로 이동
 */
 $(function(){
-	$('#dialog').hide();
 	$('#searchPwdBtn').click(function() {
 		console.log('버튼 클릭되었다!!!');
 		console.log($('#modal_member_id').val()+' / ' + $('#modal_member_email').val());

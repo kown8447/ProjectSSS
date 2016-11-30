@@ -39,15 +39,22 @@
 	<input type="button" id="searchPwdBtn" value="찾기" class="btn btn-success" style="width: 20%;">
 </div>
 
+
 <div class="modal fade" id="pwdEmail_layerpop">
 	<div class="modal-dialog">
-		<div class="character">
-			<div class="head">
-				<div class="eyes">. .</div>
+
+
+		<div id="mail-container">
+			<div id="line-container">
+				<div class="line line-1"></div>
+				<div class="line line-4"></div>
+				<div class="line line-2"></div>
+				<div class="line line-5"></div>
+				<div class="line line-3"></div>
 			</div>
-			<div class="body"></div>
-			<img src="https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/439/aiga_mail-512.png" />
-			<div class="shadow"></div>
-		</div>	
+			<div id="mail"></div>
+		</div>
+
+
 	</div>
 </div>
