@@ -1,9 +1,9 @@
 <!-- 
-	@Project : InitSpring
-	@File name : authMail.html
-	@Author : 권기엽
-	@Data : 2016.11.09
-	@Desc : 회원 가입 시 발송되는 인증 메일 Template
+   @Project : InitSpring
+   @File name : authMail.html
+   @Author : 권기엽
+   @Data : 2016.11.09
+   @Desc : 회원 가입 시 발송되는 인증 메일 Template
 -->
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,52 @@
 <title>SSS 가입 인증 메일</title>
 </head>
 <body>
-	<h3>아래의 인증키를 홈페이지에 입력해주세요.<h3></h3><br>
-	<h3 style="color:blue">${authkey}</h3>
+
+<div style="border:1px solid green; padding:3%; border-radius: 1em;width:70%;margin: auto;">
+   <form class="form-horizontal">
+    <div class="form-group">
+      <div style=" text-align: center;">
+         <img src="http://i65.tinypic.com/111068o.png" border="0" alt="Image and video hosting by TinyPic"><br>
+         <h1>InitSpring 이메일 인증 진행</h1> <br>
+         <p style="font-size: 11px;">고객님의 소중한 개인정보 보호를 위해서 이메일 인증을 받아주시기 바랍니다.<p>
+         <br>
+         <br>
+         
+         <hr>
+      </div>
+   </div>
+   <div class="form-group">
+      <h3 style="color:#8A2BE2">안녕하세요, 고객님</h3>
+      InitSpring 이메일 인증을 위한 인증번호가 발급되었습니다.<br>
+      <b style="color:green">아래의 인증번호를 복사하여 이메일 인증</b>을 완료 해주세요.   
+   </div>
+   <br>
+   <div class="form-group" style="background-color: lavender ;border-radius: 1em;">
+   <br>
+      <table>
+         <tr>
+            <th> &nbsp;<b style="font-size: 15px;">&nbsp;이메일 인증번호</b></th>
+            <th> &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" value="&nbsp;&nbsp;${authkey}" size="50" style="font-size: 15px;font-weight: bold;" readonly></th>
+         </tr> 
+      </table>
+   <br> 
+   </div>
+   <br> 
+   <div class="form-group">
+   <p>> 인증번호를 드래그하여 복사하거나 직접 입력해주세요.</p><br>
+   <p>> 감사합니다. 궁금하신 사항은 InitSpring고객센터로 문의하시기 바랍니다.</p><br>
+   </div>
+   <br>   
+    <div class="form-group" style="background-color: lavender ;border-radius: 1em;">
+    <br>
+       &nbsp; &nbsp;InitSpring   (주)InitSpring 대표이사:권기엽 주소:경기도 성남시 분당구 판교로 256번길 7
+         <br>
+       &nbsp; &nbsp;이메일: kown8447@google.co.kr<br>
+          &nbsp; &nbsp;Copyright © InitSpring Corporation. All Rights Reserved.<br>
+      <br>
+   </div>
+</form>
+</div>
+   
 </body>
 </html>
