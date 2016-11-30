@@ -7,7 +7,10 @@
    @Data : 2016.11.22
    @Desc :  회원가입 step2 view 이메일 인증 
 -->
-
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
 <a href="${pageContext.request.contextPath}/login.htm"><img src="${pageContext.request.contextPath}/images/smLogo.png"></a>
 
 
@@ -65,4 +68,17 @@
 	<input type="button" value="취소" id="cancel" class="btn btn-default">
 	&nbsp;&nbsp; <input type="button" value="다음 단계" id="step2btn"
 		class="btn btn-success">
+</div>
+
+<div class="modal fade" id="email_layerpop">
+	<div class="modal-dialog">
+		<div class="character">
+			<div class="head">
+				<div class="eyes">. .</div>
+			</div>
+			<div class="body"></div>
+			<img src="https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/439/aiga_mail-512.png" />
+			<div class="shadow"></div>
+		</div>	
+	</div>
 </div>
