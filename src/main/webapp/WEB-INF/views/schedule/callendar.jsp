@@ -112,7 +112,7 @@
 <br>
 <!-- 캘린더 일정 일괄 등록  form-->
 <se:authorize access="hasAnyRole('ROLE_ADMIN')">
-	<button class="btn btn-success btn-sm col-sm-offset-3" data-target="#layerpop" data-toggle="modal">일정일괄등록</button>
+	<button class="btn btn-success btn-sm col-sm-offset-6" data-target="#layerpop" data-toggle="modal">일정일괄등록</button>
 </se:authorize>
 <br />
 <div class="modal fade" id="layerpop">
