@@ -35,6 +35,10 @@
 <a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a> ||
 
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
+<a href="${pageContext.request.contextPath}/schedule/schedule.htm">학사일정</a>||
+</se:authorize>
+
+<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/notice/notice.htm">게시판</a>
 </se:authorize>
 

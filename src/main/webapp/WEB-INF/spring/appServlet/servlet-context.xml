@@ -30,6 +30,15 @@
 			</list>
 		</property>
 	</bean>
+	
+
+	<!-- 영빈  -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <property name="order" value="1"></property>
+   </bean>
+   
+   	 <bean id="pageView" class="kr.or.initspring.view.PageView"></bean>
+   	 <!-- 영빈 end -->
 
 	<bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
