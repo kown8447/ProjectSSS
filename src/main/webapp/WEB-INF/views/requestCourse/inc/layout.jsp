@@ -20,6 +20,7 @@
 <body>
 
 	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="aside" />
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="sidebar-nav">

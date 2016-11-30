@@ -9,17 +9,28 @@
 package kr.or.initspring.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.commons.PeriodDTO;
+import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.MemberService;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+
 @Controller
 public class IndexController {
 	@Autowired
 	private MemberService memberservice;
+	
+	@Autowired
+	private View jsonview;
+	
 	/*
 	 * @method Name : goHome
 	 * @Author : 권기엽
@@ -49,5 +60,37 @@ public class IndexController {
 		} else{
 			return  "login.login";
 		}
+	}
+	
+	/*
+	 * @method Name : goTimetableForm
+	 * @Author : 권기엽
+	 * @description 시간표 형태 출력을 위한 페이지 이동
+	 */
+	/*@RequestMapping(value={"goTimetableForm.htm","/member/goTimetableForm.htm","/collegeregister/goTimetableForm.htm",
+			"/favorite/goTimetableForm.htm","/notice/goTimetableForm.htm","/requestcourse/goTimetableForm.htm"})*/
+	@RequestMapping(value={"goTimetableForm.htm","*/goTimetableForm.htm"})
+	@Secured({"ROLE_STUDENT"})
+	public String goTimetableForm(){
+		return "member/viewTimetable";
+	}
+	
+	/*
+	 * @method Name : viewCurrentTimetable
+	 * @Author : 권기엽
+	 * @description 시간표 조회 클릭 시, 비동기화로 화면에 시간표 출력
+	 */
+	@RequestMapping(value={"viewCurrentTimetable.htm","*/viewCurrentTimetable.htm"})
+	@Secured({"ROLE_STUDENT"})
+	public View viewCurrentTimetable(Model model, Principal principal){
+		
+		List<OpenedLectureDTO> lists = null;
+		List<PeriodDTO> periodList = null;
+		lists = memberservice.viewCurrentTimetable(principal.getName());
+		periodList = memberservice.getPeriodList();
+		
+		model.addAttribute("lists", lists);
+		model.addAttribute("periodList", periodList);
+		return jsonview;
 	}
 }

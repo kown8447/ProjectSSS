@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
+
 <script src="${pageContext.request.contextPath}/js/inc/header.js"></script>
+
 <se:authorize
 	access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/index.htm"><img

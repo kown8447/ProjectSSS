@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -37,7 +38,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.join.MemberDTO;
+import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.MemberService;
 
 @Controller
