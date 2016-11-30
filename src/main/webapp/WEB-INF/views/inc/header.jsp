@@ -6,7 +6,7 @@
 <se:authorize
 	access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 	<a href="${pageContext.request.contextPath}/index.htm"><img
-		src="images/smLogo.png"></a>
+		src="${pageContext.request.contextPath}/images/smLogo.png"></a>
 </se:authorize>
 
 <se:authorize
@@ -55,6 +55,5 @@
 		<ul id="favoriteList" class="dropdown-menu">
 		</ul>
 	</div>
-
 </se:authorize>
 <hr>

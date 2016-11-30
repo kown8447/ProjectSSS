@@ -193,7 +193,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkBeforeSubjectByRecord" resultType="int">
-		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
+		select count(*) from record r join subject s 
+		on r.subject_code = s.subject_code
+		where r.student_code = #{param2} and s.subject_name = #{param1}
 	</select>
 	
 	<update id="updateTimetableShare" parameterType="kr.or.initspring.dto.commons.StudentDTO">

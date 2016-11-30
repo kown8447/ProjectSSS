@@ -4,55 +4,90 @@
 <!-- 
    @Project : InitSpring
    @File name : joinStep1_Admin.jsp
-   @Author : 김영빈
+   @Author : 송아름
    @Data : 2016.11.22
-   @Desc : 관리자 회원가입 2번째 view
+   @Desc : 관리자 회원가입 step1 view
 -->
-<h1>회원가입 Step1</h1>
-<table>
-	
-	<tr>
-		<td>관리자코드 </td>
-		<td><input type="text" name="code" id="code"></td>
-	</tr>
-	<tr>
-		<td>이름</td>
-		<td><input type="text" name="code_name" id="code_name"></td>
-	</tr>
-	<tr>
-		<td>
-               <label for="inputNumber" class="col-sm-2 control-label" style="width: 30%">생년월일</label>
-                  <div>
-                  <div class="col-sm-2">
-                  <select class="form-control" id="year" style="width:80%">
-                     <option id="year" value="0">----</option>
-                     <c:forEach var="i" begin="1950" end="2017">
-                        <option value="${i}">${i}</option>
-                     </c:forEach>
-                  </select> <font size="3pt">년</font>
-                  </div>
 
-                  <div class="col-sm-2">
-                  <select class="form-control" id="month" style="width:80%">
-                     <option id="month" value="0">----</option>
-                     <c:forEach var="i" begin="1" end="12">
-                        <option value="${i}">${i}</option>
-                     </c:forEach>
-                  </select> <font size="3pt">월</font>
-                  </div>
-         
-                  <div class="col-sm-2">
-                  <select class="form-control" id="day" style="width:80%">
-                     <option id="day" value="0">----</option>
-                     <c:forEach var="i" begin="1" end="31">
-                        <option value="${i}">${i}</option>
-                     </c:forEach>
-                  </select> <font size="3pt">일</font>
-                  </div>
-              </div>
-              </td>
-          
-         
-	</tr>	
-</table>
-<input type="button" value="다음 단계" id="step1btn">
+<a href="${pageContext.request.contextPath}/login.htm">
+	<img src="${pageContext.request.contextPath}/images/smLogo.png"></a>
+
+<div class="container" style="margin-top: 5%; width: 70%;">
+	<div class="row">
+		<div class="stepwizard">
+			<div class="stepwizard-row">
+				<div class="stepwizard-step">
+					<a class="btn btn-success btn-circle active-step" data-toggle="tab">1</a>
+					<p>Step 1</p>
+				</div>
+				<div class="stepwizard-step">
+					<a class="btn btn-default btn-circle" disabled="disabled" data-toggle="tab">2</a>
+					<p>Step 2</p>
+				</div>
+				<div class="stepwizard-step">
+					<a class="btn btn-default btn-circle" disabled="disabled" data-toggle="tab">3</a>
+					<p>Step 3</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div
+	style="border: 1px solid green; padding: 3%; border-radius: 1em; width: 60%; margin: auto;">
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">이름</label>
+			<div class="col-sm-6">
+				<input type="text" name="code_name" id="code_name" class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">관리자 코드</label>
+			<div class="col-sm-6">
+				<input type="text" name="code" id="code" class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="form-inline">
+				<label class="col-sm-2 control-label col-sm-offset-2">생년월일</label>
+				<div>
+					<div class="col-sm-2">
+						<select class="form-control" id="year" style="width: 110%;">
+							<option id="year" value="0">년도</option>
+							<c:forEach var="i" begin="1900" end="2017">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>
+					</div>
+
+					<div class="col-sm-2">
+						<select class="form-control" id="month" style="width: 100%;">
+							<option id="month" value="0">월</option>
+							<c:forEach var="i" begin="1" end="12">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>
+					</div>
+
+					<div class="col-sm-2">
+						<select class="form-control" id="day" style="width: 100%;">
+							<option id="month" value="0">일</option>
+							<c:forEach var="i" begin="1" end="31">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+<div align="center">
+	<input type="button" value="취소" id="cancel" class="btn btn-default">
+	&nbsp;&nbsp; <input type="button" value="다음 단계" id="step1btn" class="btn btn-success">
+</div>

@@ -71,9 +71,9 @@ public class LoginController {
 		return "login.loginFail";
 	}
 
-	@RequestMapping("searchID.htm")
+	@RequestMapping(value="searchID.htm", method = RequestMethod.GET)
 	public String searchID() {
-		return "login.searchID";
+		return "login/searchID";
 	}
 
 	/*
@@ -84,7 +84,7 @@ public class LoginController {
 	*/	
 	@RequestMapping("searchIDajax.htm")
 	public View searchID(String member_name, String member_email, Model model) {
-
+		
 		String member_id = null;
 
 		System.out.println("비동기 요청 : " + member_email + "/" + member_name);
@@ -98,7 +98,7 @@ public class LoginController {
 
 	@RequestMapping(value = "searchPwd.htm", method = RequestMethod.GET)
 	public String searchPwd() {
-		return "login.searchPwd";
+		return "login/searchPwd";
 	}
 
 	/*
@@ -112,7 +112,6 @@ public class LoginController {
 	*/	
 	@RequestMapping(value = "searchPwd.htm", method = RequestMethod.POST)
 	public View searchPwd(String member_id, String member_email, Model model) {
-
 		final String address = member_email;
 		final String temp_pwd = getRandomPassword(15);
 		boolean result = false;

@@ -20,4 +20,21 @@ $(function(){
 			return false;
 		}
 	})
+	
+	
+	$('#searchID').click(function(){
+		$('div.modal').modal({
+            remote : 'login/searchID.htm'
+          	  
+      });
+    });
+	
+	$('#searchPW').click(function(){
+		$('div.modal').modal({
+            remote : 'login/searchPwd.htm'
+          	  
+      });
+    });
+
+    
 });

@@ -54,6 +54,7 @@ public class NoticeController {
 		model.addAttribute("toPage", map.get("toPage"));
 		model.addAttribute("start", map.get("start"));
 		model.addAttribute("end", map.get("end"));
+		model.addAttribute("query", map.get("query"));
 		
 		return "notice.notice";
 	}
