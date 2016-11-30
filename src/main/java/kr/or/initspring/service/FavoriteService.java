@@ -34,21 +34,17 @@ public class FavoriteService {
 				configList.add(allList.get(i));
 			}
 		}
-
-		List<LinkDataDTO> userList = favoritedao.getUserFavoriteList(memberid);
-
 		List<LinkDataDTO> subjectLinks = new ArrayList<LinkDataDTO>();
 		List<LinkDataDTO> allUserLinks = new ArrayList<LinkDataDTO>();
 		List<LinkDataDTO> studentInfoLinks = new ArrayList<LinkDataDTO>();
 		List<LinkDataDTO> enrollLinks = new ArrayList<LinkDataDTO>();
 		List<LinkDataDTO> adminLinks = new ArrayList<LinkDataDTO>();
-
+		List<LinkDataDTO> favoLinks = favoritedao.getUserFavoriteList(memberid);
 		for (int i = 0; i < configList.size(); i++) {
-			for (int j = 0; j < userList.size(); j++) {
-				if (configList.get(i).getLink_code().equals(userList.get(j).getLink_code())) {
+			for (int j = 0; j < favoLinks.size(); j++) {
+				if(configList.get(i).getLink_code().equals(favoLinks.get(j).getLink_code())){
 					configList.get(i).setFavorite(true);
-
-				}
+				}	
 			}
 			if (configList.get(i).getLink_type() == 0) {
 				allUserLinks.add(configList.get(i));
@@ -63,11 +59,45 @@ public class FavoriteService {
 			}
 		}
 
+		model.addAttribute("favoLinks", favoLinks);
 		model.addAttribute("allUserLinks", allUserLinks);
 		model.addAttribute("studentInfoLinks", studentInfoLinks);
 		model.addAttribute("enrollLinks", enrollLinks);
 		model.addAttribute("subjectLinks", subjectLinks);
 		model.addAttribute("adminLinks", adminLinks);
 
+	}
+
+	public void getFavariteList(String memberid, Model model) {
+		FavoriteDAO favoritedao = sqlsession.getMapper(FavoriteDAO.class);
+		List<LinkDataDTO> favoLinks = favoritedao.getUserFavoriteList(memberid);
+		model.addAttribute("favoLinks", favoLinks);
+	}
+
+	public boolean appendFavorite(String memberid, String link_code) {
+		FavoriteDAO favoritedao = sqlsession.getMapper(FavoriteDAO.class);
+		LinkDataDTO link = new LinkDataDTO();
+		link.setMember_id(memberid);
+		link.setLink_code(link_code);
+	int resultNum=favoritedao.favoriteAppend(link);
+		if(resultNum>0){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+
+	public boolean deleteFavarite(String memberid, String link_code) {
+		FavoriteDAO favoritedao = sqlsession.getMapper(FavoriteDAO.class);
+		LinkDataDTO link = new LinkDataDTO();
+		link.setMember_id(memberid);
+		link.setLink_code(link_code);
+		int resultNum=favoritedao.favoriteDelete(link);
+		if(resultNum>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
