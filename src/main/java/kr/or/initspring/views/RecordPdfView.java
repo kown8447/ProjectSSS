@@ -1,5 +1,12 @@
 package kr.or.initspring.views;
-
+/*
+ * @Class : RecordPdfView
+ * @Date : 2016.11.30
+ * @Author : 최준호
+ * @Desc
+ * 학생의 성적 정보를 받아 PDF파일을 구성해 학생에게 다운로드를 제공하는 view 클래스
+ * 
+*/
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +35,12 @@ import kr.or.initspring.dto.collegeRegister.StudentStateDTO;
 public class RecordPdfView extends AbstractPdfView {
 
 	private String fontPath = "C:\\windows\\Fonts\\malgun.ttf";
-
+	/*
+	 * @method Name : buildPdfDocument
+	 * @Author : 최준호
+	 * @description
+	 * 학생의 성적정보를 가지고 PDF파일을 구성하는 메서드
+	 */
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {

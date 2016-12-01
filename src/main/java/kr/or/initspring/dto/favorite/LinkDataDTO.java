@@ -1,5 +1,10 @@
 package kr.or.initspring.dto.favorite;
-
+/*
+ * @Class :LinkDataDTO
+ * @Date : 2016.11.30
+ * @Author : 최준호
+ * @Desc : 즐겨찾기 관련된 링크 정보를 담기위한 DTO
+*/
 public class LinkDataDTO {
 	private String link_code;
 	private int link_type;
