@@ -136,18 +136,12 @@ public class JoinService {
 	public boolean checkID(String member_id) {
 		boolean result = false;
 		JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
-		String checkID = "";
 
-		checkID = joindao.checkID(member_id);
-		try {
-			if (checkID.equals(member_id)) {
+		int checkID = joindao.checkID(member_id);
+		
+			if (checkID>0) {
 				result = true;
 			}
-		} catch (NullPointerException e) {
-			System.out.println("JoinService / checkid nullpointexception");
-			result = false;
-		}
-
 		return result;
 	}
 }

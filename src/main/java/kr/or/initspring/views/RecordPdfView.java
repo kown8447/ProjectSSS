@@ -1,5 +1,12 @@
 package kr.or.initspring.views;
-
+/*
+ * @Class : RecordPdfView
+ * @Date : 2016.11.30
+ * @Author : 최준호
+ * @Desc
+ * 학생의 성적 정보를 받아 PDF파일을 구성해 학생에게 다운로드를 제공하는 view 클래스
+ * 
+*/
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +23,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
 import com.sun.prism.paint.Color;
 
@@ -27,7 +35,12 @@ import kr.or.initspring.dto.collegeRegister.StudentStateDTO;
 public class RecordPdfView extends AbstractPdfView {
 
 	private String fontPath = "C:\\windows\\Fonts\\malgun.ttf";
-
+	/*
+	 * @method Name : buildPdfDocument
+	 * @Author : 최준호
+	 * @description
+	 * 학생의 성적정보를 가지고 PDF파일을 구성하는 메서드
+	 */
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -63,7 +76,8 @@ public class RecordPdfView extends AbstractPdfView {
 		studentTable.addCell(new Cell(new Paragraph("이름", font)));
 		studentTable.addCell(new Cell(new Paragraph(student.getMember_name(), font)));
 		studentTable.addCell(new Cell(new Paragraph("전공", font)));
-		Cell majorcell = new Cell(new Paragraph(major.getCollege_name() + " " + major.getDepartment_name()+" 학과", font));
+		Cell majorcell = new Cell(
+				new Paragraph(major.getCollege_name() + " " + major.getDepartment_name() + " 학과", font));
 		majorcell.setColspan(3);
 		studentTable.addCell(majorcell);
 
@@ -125,6 +139,10 @@ public class RecordPdfView extends AbstractPdfView {
 		calDataTable.addCell(outFcell);
 
 		document.add(calDataTable);
+
+		writer.getDirectContentUnder().addImage(
+				Image.getInstance(request.getSession().getServletContext().getRealPath("/images") + "/pdfLogo3.png"),
+				500, 0, 0, 350, 25, 290);
 
 	}
 

@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -37,7 +38,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.join.MemberDTO;
+import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
+import kr.or.initspring.service.AsideService;
 import kr.or.initspring.service.MemberService;
 
 @Controller
@@ -50,6 +54,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberservice;
+	
+	@Autowired
+	private AsideService asideservice;
 	
 	@Autowired
 	private JavaMailSender mailSender;	//Email 전송을 위한 클래스
@@ -202,6 +209,12 @@ public class MemberController {
 	
 		model.addAttribute("mailresult", "success");
 		model.addAttribute("sessionID", sessionID);
+		return jsonview;
+	}
+	
+	@RequestMapping("persnalDataCall.htm")
+	public View persnalDataCall(Principal principal, Model model) {
+		asideservice.persnalDataCall(principal.getName(), model);
 		return jsonview;
 	}
 }

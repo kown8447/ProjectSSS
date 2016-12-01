@@ -11,6 +11,8 @@
 
 var realGradeSum=0;	//총학점
 
+
+
 $(function(){
 	
 	onloadRealtable();
@@ -43,13 +45,14 @@ $(function(){
 				}
 		);
 	});	
+
 });
 
+
 /*
- * @method Name : (document).on("click","real_info",function(e)
- * @Author : 권기엽
+ * @method Name : (document).on("click","real_info",function(e) @Author : 권기엽
  * @description : 과목의 상세 정보 확인
-*/	
+ */	
 $(document).on("click",".real_info",function(e){
 	$.ajax(
 			{
@@ -182,15 +185,15 @@ function realBeforeSubject(e){
 }
 
 function realInsertTimeTable(e){
+
 	$.ajax(
 			{
 				url:"getOpSubjectInfo.htm",
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
-					
-					realGradeSum+=data.subject_info.subject_credit;
 					var flag=true;
+					realGradeSum+=data.subject_info.subject_credit;
 					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
 						realGradeSum-=data.subject_info.subject_credit;
@@ -203,9 +206,9 @@ function realInsertTimeTable(e){
 								return false;
 							}	
 						})
-						if(flag==true){
-							insertRealDbSubject(data.subject_info.subject_code);
-						}
+					}
+					if(flag==true){
+						insertRealDbSubject(data.subject_info.subject_code, data.subject_info.subject_credit);
 					}
 				}
 			}
@@ -216,26 +219,40 @@ function realInsertTimeTable(e){
  * @method Name : insertRealDbSubject()
  * @Author : 권기엽
  * @description : 수강 등록 버튼을 눌렀을 경우, 시간표에 들어가기 이전 DB에서 Insert 작업을 먼저 해둔뒤에 시간표에 출력한다.
-*/	
-function insertRealDbSubject(e){
+*/
+
+var socket1 = null;	//소켓
+
+function insertRealDbSubject(e,c){
 	var subject_code = e;
+	var subject_credit = c;
+
+	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
 	
-	$.ajax(
+	socket1.onmessage = function(evt) {
+		$('#waitlist').empty();
+		$('#waitlist').append('신청 대기자열 : <font style="color:blue"><b>' + evt.data + '</b></font> 명');
+	};
+	
+	var ajax = $.ajax(
 		{
 			url:"insertRealDbSubject.htm",
 			data:{subject_code:subject_code},
 			dataType:"json",
+			beforeSend:function(){
+				$('#wait_layerpop').modal('toggle')
+			},
 			success:function(data){
 				if(data.map.result=='success'){
 					alert('강의 신청에 성공하였습니다.');
-					location.href="realRegiser.htm";
 				}else if(data.map.result=='over'){
 					alert('수강 정원이 넘었습니다.');
-					return false;
 				}else{
 					alert('일시적인 장애가 발생하였습니다. 지속될 경우 관리자에게 문의해주세요.');
-					return false;
 				}
+			},
+			complete:function(){
+				location.href="realRegiser.htm";
 			}
 		}	
 	);

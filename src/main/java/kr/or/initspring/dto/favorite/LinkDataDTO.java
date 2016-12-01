@@ -1,19 +1,25 @@
 package kr.or.initspring.dto.favorite;
-
+/*
+ * @Class :LinkDataDTO
+ * @Date : 2016.11.30
+ * @Author : 최준호
+ * @Desc : 즐겨찾기 관련된 링크 정보를 담기위한 DTO
+*/
 public class LinkDataDTO {
-	private String Link_code;
+	private String link_code;
 	private int link_type;
 	private int typeName;
 	private String link_name;
 	private String link_addr;
 	private boolean favorite;
+	private String member_id;
 
 	public String getLink_code() {
-		return Link_code;
+		return link_code;
 	}
 
 	public void setLink_code(String link_code) {
-		Link_code = link_code;
+		this.link_code = link_code;
 	}
 
 	public int getLink_type() {
@@ -56,10 +62,19 @@ public class LinkDataDTO {
 		this.favorite = favorite;
 	}
 
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
 	@Override
 	public String toString() {
-		return "LinkDataDTO [Link_code=" + Link_code + ", link_type=" + link_type + ", typeName=" + typeName
-				+ ", link_name=" + link_name + ", link_addr=" + link_addr + ", favorite=" + favorite + "]";
+		return "LinkDataDTO [link_code=" + link_code + ", link_type=" + link_type + ", typeName=" + typeName
+				+ ", link_name=" + link_name + ", link_addr=" + link_addr + ", favorite=" + favorite + ", member_id="
+				+ member_id + "]";
 	}
 
 }

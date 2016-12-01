@@ -54,6 +54,7 @@ public class NoticeController {
 		model.addAttribute("toPage", map.get("toPage"));
 		model.addAttribute("start", map.get("start"));
 		model.addAttribute("end", map.get("end"));
+		model.addAttribute("query", map.get("query"));
 		
 		return "notice.notice";
 	}
@@ -96,9 +97,12 @@ public class NoticeController {
 	 * @description : 공지사항 글 상세보기
 	 */
 	 @RequestMapping("noticeDetail.htm")
-	 public String noticeDetail(int notice_index , Model model ) throws ClassNotFoundException, SQLException{
+	 public String noticeDetail(Principal principal, int notice_index,String admin_code , Model model ) throws ClassNotFoundException, SQLException{        
+		 
 		 CustomerNoticeDTO noticedto = noticeservice.noticeDetail(notice_index);
 		 model.addAttribute("notice", noticedto);
+		 noticeservice.noticeCount(principal.getName(), notice_index);
+		 
   	     return "notice.noticeDetail";
 	 }
 	 
@@ -168,7 +172,7 @@ public class NoticeController {
 	@Secured({"ROLE_ADMIN"})
 	public String replyWrite(int notice_index, Model model)throws ClassNotFoundException, SQLException {
 
-		CustomerNoticeDTO notice = noticeservice.replyWrite(notice_index);
+		CustomerNoticeDTO notice = noticeservice.noticeDetail(notice_index);
 		model.addAttribute("notice", notice);
 		return "notice.replyWrite";
 	}

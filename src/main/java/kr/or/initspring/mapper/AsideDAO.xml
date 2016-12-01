@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.AsideDAO">
+	<select id="getStudentInfo" resultType="kr.or.initspring.dto.aside.AsideStudentDTO">
+		SELECT
+		s.STUDENT_CODE,m.MEMBER_NAME,m.MEMBER_PICTURE,st.GRADE,d.DEPARTMENT_NAME,c.COLLEGE_NAME
+		FROM (SELECT STUDENT_CODE,DEPARTMENT_CODE FROM MJ_RECORD where
+		mj_type=0) mr join STUDENT s on mr.STUDENT_CODE=s.STUDENT_CODE join
+		member m on s.MEMBER_ID=m.MEMBER_ID join ST_STATE st on
+		s.STUDENT_CODE=st.STUDENT_CODE join DEPARTMENT d on
+		mr.DEPARTMENT_CODE=d.DEPARTMENT_CODE join COLLEGE c on
+		d.COLLEGE_CODE=c.COLLEGE_CODE where m.MEMBER_ID=#{param1}
+	</select>
+	<select id="getProfessorInfo" resultType="kr.or.initspring.dto.aside.AsideProfessorDTO">
+		SELECT
+		p.PROFESSOR_CODE,m.MEMBER_NAME,c.COLLEGE_NAME,d.DEPARTMENT_NAME,
+		m.MEMBER_PICTURE FROM
+		PROFESSOR p join PF_MAJOR pm on
+		pm.PROFESSOR_CODE=p.PROFESSOR_CODE
+		join DEPARTMENT d on
+		pm.DEPARTMENT_CODE=d.DEPARTMENT_CODE join COLLEGE
+		c on
+		d.COLLEGE_CODE=c.COLLEGE_CODE join MEMBER m on p.MEMBER_ID=
+		m.MEMBER_ID where p.MEMBER_ID=#{param1}
+	</select>
+	<select id="getAdminIfo" resultType="kr.or.initspring.dto.aside.AsideAdminDTO">
+		SELECT
+		a.ADMIN_CODE,m.MEMBER_NAME, m.MEMBER_PICTURE FROM ADMIN a join MEMBER
+		m on
+		a.MEMBER_ID=m.MEMBER_ID where m.MEMBER_ID=#{param1}
+	</select>
+</mapper>

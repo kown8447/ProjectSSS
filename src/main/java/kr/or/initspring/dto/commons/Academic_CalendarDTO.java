@@ -47,14 +47,5 @@ public class Academic_CalendarDTO {
 	public void setCalendar_end(Date calednar_end) {
 		this.calendar_end = calednar_end;
 	}
-	@Override
-	public String toString() {
-		return "Academic_CalendarDTO [calendar_code=" + calendar_code + ", calendar_title=" + calendar_title
-				+ ", calendar_content=" + calendar_content + ", calendar_start=" + calendar_start + ", calednar_end="
-				+ calendar_end + "]";
-	}
-	
-	
-	
-	
+		
 }

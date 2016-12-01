@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.initspring.dao.ScheduleBoardDAO">
+
+<insert id="insertScheduleBoard" > 
+    insert into ACADEMIC_CALENDAR(calendar_Code,calendar_Title,calendar_Content,calendar_Start,calendar_End)
+      values(code.nextval, #{calendar_title},#{calendar_content},#{calendar_start},#{calendar_end} )
+</insert>
+
+  <select id="getScheduleBoardList" resultType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
+       select * from ACADEMIC_CALENDAR ORDER BY calendar_Code ASC<!-- where sal <= 1000 [CDATA]-->                 
+ </select>   
+ <delete id="deleteScheduleBoard" parameterType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
+  delete from ACADEMIC_CALENDAR where calendar_Code=#{calendar_Code} 
+ </delete>
+ <update id="updateScheduleBoard" parameterType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
+  update ACADEMIC_CALENDAR set calendar_Title=#{calendar_title} , calendar_Content=#{calendar_content} , calendar_Start=#{calendar_start} ,
+                   calendar_End=#{calendar_end} 
+  where calendar_Code=#{calendar_code} 
+ </update>
+ <insert id="insertExcel" parameterType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
+   insert into ACADEMIC_CALENDAR(calendar_Code,calendar_Title,calendar_Content,calendar_Start,calendar_End)
+      values(code.nextval, #{calendar_title},#{calendar_content},#{calendar_start},#{calendar_end} )
+   </insert>
+ 
+
+</mapper>
