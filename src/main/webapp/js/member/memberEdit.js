@@ -10,13 +10,17 @@ $(function() {
    $('#edit_email').click(function() {
       $('#layerpop').modal();
    })
+   
+   $('#refer').click(function() {
+      location.href="/initspring/index.htm";
+   })
    var sessionid;
 
    $('#auth_email').click(function() {
       var re_mail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; 
       var mail = $('#member_email1');
       if ($("#member_email1").val() == "") {
-          alert("이메일을 꼭 입력해주세용 !");
+          alert("이메일을 입력해주세요.");
           $("#member_email1").focus();
       }else if(re_mail.test(mail.val()) != true){
        alert('[Email 입력 오류] 유효한 이메일 주소를 입력해 주세요.');
@@ -43,10 +47,10 @@ $(function() {
          $('#layerpop').modal('hide');
          $('#member_email').val($('#member_email1').val());
       }else if($('#member_email').val() == ""){
-          alert("이메일을 꼭 입력해주세용 !");
+          alert("이메일을 입력해주세요.");
           $("#member_email").focus();
       }else if($('#auth_key').val() == ""){
-    	  alert("인증번호를 꼭 입력해주세용 !");
+    	  alert("인증번호를 입력해주세요.");
           $("#auth_key").focus();
       } else {
          alert('인증실패. 이메일 주소 또는 인증번호를 다시 확인 부탁드립니다.');
@@ -59,15 +63,15 @@ $(function() {
 	   var password = $("#member_pwd").val();
 	 
 	   if($("#member_pwd").val() == "") {
-	        alert("비밀번호을 꼭 입력하세요!");
+	        alert("비밀번호을 입력하세요.");
 	            $("#member_pwd").focus();
 	            return false;
-	      }else  if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
-			   alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-			   $("#member_pwd").focus();
-			   return false;
+	      }else  if(!/^.*(?=.{6,15})(?=.*[0-9])(?=.*[a-zA-Z]).*$/.test(password)){
+	            alert('숫자와 영문자 조합으로 6~15자리를 사용해야 합니다.');
+	            $("#member_pwd").focus();
+	            return false;
 		   }else if($("#member_pwd_confirm").val() == "") {
-	          alert("비밀번호 확인을 꼭 입력하세요!");
+	          alert("비밀번호 확인을 입력하세요");
 	              $("#member_pwd_confirm").focus();
 	              return false;
 	      }else if($('#member_pwd').val() != $('#member_pwd_confirm').val()){
@@ -153,7 +157,7 @@ function handleFileSelect(evt) {
             // Render thumbnail.
             $('#list').empty();
             var span = document.createElement('span');
-            span.innerHTML = [ '<img class="thumb" src="', e.target.result,
+            span.innerHTML = [ '<img class="img-rounded" src="', e.target.result,
                   '" title="', escape(theFile.name), '"/>' ].join('');
             document.getElementById('list').insertBefore(span, null);
          };

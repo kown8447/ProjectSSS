@@ -54,6 +54,5 @@
 		<a  href="notice.htm" class="btn btn-success">목록</a> 
 		
 		</div>
-
 	</form>
 </div>
