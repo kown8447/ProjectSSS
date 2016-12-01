@@ -63,5 +63,5 @@
 	<bean id="modifyTermScheduler" class="kr.or.initspring.scheduler.ModifyTermScheduler"/>
 	<!-- 프로퍼티 속성 사용 가능  -->
 	<context:property-placeholder location="scheduler/registerTerm.properties"/>
-
+	
 </beans>

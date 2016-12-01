@@ -1,9 +1,9 @@
 <!-- 
-	@Project : InitSpring
-	@File name : tempPwd.html
-	@Author : 권기엽
-	@Data : 2016.11.16
-	@Desc : 비밀번호 찾기 서비스 시에 발송되는 임시 비밀번호 발급 메일 Template.
+   @Project : InitSpring
+   @File name : tempPwd.html
+   @Author : 권기엽
+   @Data : 2016.11.16
+   @Desc : 비밀번호 찾기 서비스 시에 발송되는 임시 비밀번호 발급 메일 Template.
 -->
 <!DOCTYPE html>
 <html>
@@ -12,8 +12,53 @@
 <title>SSS 임시 비밀번호 발급 메일</title>
 </head>
 <body>
-	<h3>임시 비밀번호 : <font style="color:skyblue">${temp_pwd}</font></h3><br>
-	발급된 임시 비밀번호 로그인 후엔 <font style="color:red">반드시 비밀번호를 변경해 주시길 바랍니다.</font><br>
-	감사합니다.
+
+<div style="border:1px solid green; padding:3%; border-radius: 1em;width:70%;margin: auto;">
+   <form class="form-horizontal">
+    <div class="form-group">
+      <div style=" text-align: center;">
+         <img src="http://i65.tinypic.com/111068o.png" border="0" alt="Image and video hosting by TinyPic"><br>
+         <h1>InitSpring 이메일 인증 진행</h1> <br>
+         <p style="font-size: 11px;">고객님의 소중한 개인정보 보호를 위해서 이메일 인증을 받아주시기 바랍니다.<p>
+         <br>
+         <br>
+         
+         <hr>
+      </div>
+   </div>
+   <div class="form-group">
+      <h3>안녕하세요, 고객님</h3>
+      InitSpring 로그인을 위한 임시비밀번호가 발급되었습니다.<br>
+      <b style="color:green">아래의 임시비밀번호를 복사하여 로그인</b>을 완료 해주세요.   
+   </div>
+   <br>
+   <div class="form-group" style="background-color: lavender ;border-radius: 1em;">
+   <br>
+      <table>
+         <tr>
+            <th> &nbsp;<b style="font-size: 15px;">&nbsp;임시비밀번호 </b></th>
+            <th> &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" value="${temp_pwd}" size="40" style="font-size: 15px;font-weight: bold;" readonly></th>
+         </tr> 
+      </table>
+   <br> 
+   </div>
+   <br> 
+   <div class="form-group">
+   <p>> 임시비밀번호를 드래그하여 복사하거나 직접 입력해주세요.</p><br>
+   <p>> 발급된 임시 비밀번호 로그인 후엔 <font style="color:red">반드시 비밀번호를 변경해 주시길 바랍니다.</font> <br><br>
+   <p>> 감사합니다. 궁금하신 사항은 InitSpring고객센터로 문의하시기 바랍니다.</p><br>
+   </div>
+   <br>   
+    <div class="form-group" style="background-color: lavender ;border-radius: 1em;">
+    <br>
+      
+       &nbsp; &nbsp;InitSpring   (주)InitSpring 대표이사:권기엽 주소:경기도 성남시 분당구 판교로 256번길 7
+         <br>
+       &nbsp; &nbsp;이메일: kown8447@google.co.kr<br>
+          &nbsp; &nbsp;Copyright © InitSpring Corporation. All Rights Reserved.<br>
+      <br>
+   </div>
+</form>
+</div>
 </body>
 </html>

@@ -134,81 +134,69 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${mid.firstGrade.startDate}")
 	public void firstGradeMidStart() throws Exception {	
 		setEnrollActive(1,1, 1);	
-		setReserveCheck(); 
 		System.out.println("1학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.firstGrade.endDate}")
 	public void firstGradeMidEnd() throws Exception { 
 		setEnrollActive(1,1, 0);	
-		setReserveCheck();
 		System.out.println("1학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.secondGrade.startDate}")
 	public void secondGradeMidStart() throws Exception { 
 		setEnrollActive(2,1, 1);	
-		setReserveCheck();
 		System.out.println("2학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.secondGrade.endDate}")
 	public void secondGradeMidEnd() throws Exception { 
 		setEnrollActive(2,1, 0);	
-		setReserveCheck();
 		System.out.println("2학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.thirdGrade.startDate}")
 	public void thirdGradeMidStart() throws Exception { 
 		setEnrollActive(3,1, 1);	
-		setReserveCheck();
 		System.out.println("3학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.thirdGrade.endDate}")
 	public void thirdGradeMidEnd() throws Exception { 
 		setEnrollActive(3,1, 0);
-		setReserveCheck();
 		System.out.println("3학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.fourthGrade.startDate}")
 	public void fourthGradeMidStart() throws Exception { 
 		setEnrollActive(4,1, 1);	
-		setReserveCheck();
 		System.out.println("4학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.fourthGrade.endDate}")
 	public void fourthGradeMidEnd() throws Exception { 
 		setEnrollActive(4,1, 0);	
-		setReserveCheck();
 		System.out.println("4학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.AllGrade.startDate}")
 	public void AllGradeMidStart() throws Exception { 
 		setEnrollActive(0,1, 1);	
-		setReserveCheck();
 		System.out.println("전학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.AllGrade.endDate}")
 	public void AllGradeMidEnd() throws Exception { 
 		setEnrollActive(0,1, 0);
-		setReserveCheck();
 		System.out.println("전학년 끝");
 	}
 	
 	
 	////////////// 수강 정정 24시간 전//////////////////
 		
-	@Scheduled(cron="${wait.after.firstStartDate}")
+	@Scheduled(cron="${wait.after.StartDate}")
 	public void waitAllAfterStart() {setEnrollActive(0, 2, 2);System.out.println("대기 시간..");}
-	
-	@Scheduled(cron="${wait.after.secondStartDate}")
-	public void waitAllAfterEnd() {setEnrollActive(0, 2, 2);System.out.println("대기 시간..");}
+
 	
 	
 	///////////////////수강 정정 기간 ///////////////////
@@ -216,14 +204,13 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${after.AllGrade.startDate}")
 	public void AllGradeAfterStart() throws Exception { 
 		setEnrollActive(0,2, 1);	
-		setReserveCheck();
 		System.out.println("전학년 시작");
 	}
 	
 	@Scheduled(cron="${after.AllGrade.endDate}")
 	public void AllGradeAfterEnd() throws Exception { 
 		setEnrollActive(0,2, 0);
-		setReserveCheck();
+		copyToTimeTable();
 		System.out.println("전학년 끝");
 	}
 	
@@ -261,5 +248,10 @@ public class ModifyTermScheduler {
 			System.out.println("ModifyTermScheduler / setReserveCheck : " + e.getMessage());
 			throw e;
 		}
+	}
+	
+	public void copyToTimeTable(){
+		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
+		dao.copyToTimeTable();
 	}
 }

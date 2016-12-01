@@ -9,22 +9,27 @@
 $(function(){
 	$('#searchPwdBtn').click(function() {
 		console.log('버튼 클릭되었다!!!');
+		console.log($('#modal_member_id').val()+' / ' + $('#modal_member_email').val());
 		$.ajax(
 			{
-				url : "searchPwd.htm",
+				url : "login/searchPwd.htm",
 				method : "post",
 				dataType : "json",
-				data : {member_id:$('#member_id').val(),member_email:$('#member_email').val()},
+				data : {member_id:$('#modal_member_id').val(),member_email:$('#modal_member_email').val()},
+				beforeSend:function(){
+					$('#pwdEmail_layerpop').modal('toggle');
+				},
 				success:function(data){
 					if(data.pwdresult == 'success'){
 						alert('임시 비밀번호를 발급하였습니다. 등록하신 메일을 확인해 주세요.');
-						location.href="../index.htm";
+						location.href="login.htm";
 					}else if(data.pwdresult == 'fail' || data.pwdresult == 'error'){
 						alert('임시 비밀번호 발급에 실패하였습니다. 다시 시도해 주세요.');
-						location.href="searchPwd.htm";
+						location.href="login/searchPwd.htm";
 					}else if(data.pwdresult == 'incorrect'){
 						alert('아이디 또는 등록된 이메일 주소가 다릅니다.');
 						$('#member_email').focus();
+						$('#pwdEmail_layerpop').modal('toggle');
 					}
 				}
 			}

@@ -1,30 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
+<link href="${pageContext.request.contextPath}/css/requestCourse/realRegisterCourse.css" rel="stylesheet">
+
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-5">
 		<div class="navbar-header">
 			<form class="form-inline" onSubmit='return false'>
-				<select id="real_searchType" class="form-control">
+				<select id="real_searchType" class="form-control" style="font-size: small">
 					<option value="subject_name">과목명</option>
 					<option value="subject_code">과목코드</option>
 				</select> 
 				<input type="text" class="form-control" id="real_keyword" /> 
-				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색">
+				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색"/>
+
 				<div id="fail_result" class="row">
 				
 				</div>
-				<span id="real_result" style="margin: 20px 20px 20px 20px"> </span>
+				<div id="real_result" style="overflow:auto;height:400px;"> </div>
 			</form>
 		</div>
 	</div>
 
 
-	<div class="col-md-6">
+	<div class="col-md-7" style="overflow:auto;height:500px;">
 		<form action="" method="post">
 			<table id="real_timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
-				<tr>
+				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);'>
 					<th>시간</th>
 					<th>월</th>
 					<th>화</th>
@@ -33,13 +37,13 @@
 					<th>금</th>
 				</tr>
 				<c:forEach var="i" begin="1" end="20">
-					<tr>
-						<td id="PERIOD_START_${i}_3" style="word-break: break-all;"></td>
-						<td id="PR_MON_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_TUE_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_WEN_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_THU_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
-						<td id="PR_FRI_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+					<tr style="font-size:small; text-align: center" height="20px">
+						<td id="PERIOD_START_${i}_3" style="word-break: break-all; text-align: center"></td>
+						<td id="PR_MON_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_TUE_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_WEN_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_THU_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_FRI_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -49,7 +53,7 @@
 
 
 <div class="modal fade" id="real_layerpop">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -88,6 +92,31 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="wait_layerpop">
+	<div class="modal-dialog modal-50size">
+		<div class="modal-content">
+			<!-- body -->
+			<div class="modal-body modal-50size">
+				<div id="container">
+					<div id="h">
+						<div class="strand_h" id="blue"></div>
+						<div class="strand_h" id="pink"></div>
+					</div>
+
+					<div id="v">
+						<div class="strand_v" id="green"></div>
+						<div class="strand_v" id="yellow"></div>
+					</div>
+				</div>
+				<div id="waitlist" style="font-size:large; text-align: center"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">닫기</button>
 			</div>
 		</div>
 	</div>

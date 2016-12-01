@@ -9,24 +9,99 @@
  * 정원 초과 과목에 대해서는 신청 불가능
 */
 
-var gradeSum=0;
+var realGradeSum=0;	//총학점
+
+
 
 $(function(){
+	
+	onloadRealtable();
+	
 	/*
-	 * @method Name : ajax
+	 * @method Name : searchBtn.click(function()
 	 * @Author : 권기엽
-	 * @description : 페이지 로딩 시 사용자가 가진 Reserve 테이블 내의 정보를 가져와서 시간표에 뿌림 + 수강 실패 과목을 최상단으로 보여줌
+	 * @description : 과목을 검색하여 해당 결과를 가져옴
 	*/	
+	$('#real_searchBtn').click(function() {
+		$.ajax(
+				{
+					url:"searchBykeword.htm",
+					data:{
+						searchType:$('#real_searchType').val(),
+						keyword:$('#real_keyword').val()
+					},
+					dataType:"json",
+					success:function(data){
+						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>검색 결과</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th></tr>"
+						$('#real_result').empty();
+						$.each(data.lists, function(i, elt) {
+							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
+											"data-target='#real_layerpop' data-toggle='modal'/></td>" +
+									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
+						});
+						$('#real_result').append(text);
+					}
+				}
+		);
+	});	
+
+});
+
+
+/*
+ * @method Name : (document).on("click","real_info",function(e) @Author : 권기엽
+ * @description : 과목의 상세 정보 확인
+ */	
+$(document).on("click",".real_info",function(e){
+	$.ajax(
+			{
+				url:"getOpSubjectInfo.htm",
+				data:{subject_code:e.currentTarget.id},
+				dataType:"json",
+				success:function(data){
+					$('#real_subject_name').html(data.subject_info.subject_name);
+					$('#real_subject_code').html(data.subject_info.subject_code);
+					$('#real_professor_name').html(data.subject_info.professor_name);
+					$('#real_subject_credit').html(data.subject_info.subject_credit);
+					var classroom="";
+					var period="";
+					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
+						classroom+="<i>"+elt.classroom_name+"</i><br>";
+						
+					});
+					$.each(data.subject_info.period, function(i, p) {
+						period += p.period_day + " : " + p.period_start + " ~ " + p.period_end + "<br>";
+					})
+					$('#real_classroom_name').html(classroom);
+					$('#real_period').html(period);
+					$('#real_grade_limit').html(data.subject_info.grade_limit);
+					if(data.subject_info.required_choice == 0){
+						$('#real_required_choice').html('필수');
+					}else{
+						$('#real_required_choice').html('선택');
+					}
+					$('#real_subject_seats').html(data.subject_info.subject_seats);
+				}
+			}
+	);
+});
+
+/*
+ * @method Name : onloadRealtable
+ * @Author : 권기엽
+ * @description : 페이지 로딩 시 사용자가 가진 Enrollment 테이블 내의 정보를 가져와서 시간표에 뿌림 + 수강 실패 과목을 최상단으로 보여줌
+*/	
+function onloadRealtable(){
 	$.ajax(
 		{
 			url:"getRealTimetable.htm",
 			dataType:"json",
 			success:function(data){
-				console.log(data);
-				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
+				var failText="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:red; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>예비 수강신청 실패 과목</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th><tr/>";
 				$('#fail_result').empty();
 				$.each(data.failedLists, function(i, elt) {
-					failText+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
+					failText+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
 					"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
 							"data-target='#real_layerpop' data-toggle='modal'/></td>" +
 					"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
@@ -38,7 +113,7 @@ $(function(){
 				});
 				
 				$.each(data.lists, function(i, elt) {
-					gradeSum+=elt.subject_credit;
+					realGradeSum+=elt.subject_credit;
 					var prev = 0;
 					var prevDay = "";
 					var color="";
@@ -61,79 +136,12 @@ $(function(){
 						prevDay = str[1];
 					});
 				});
+				console.log('첫 로딩시 가져오는 학점 : ' + realGradeSum);
 			}
 		}
 	);
-	
-	
-	/*
-	 * @method Name : searchBtn.click(function()
-	 * @Author : 권기엽
-	 * @description : 과목을 검색하여 해당 결과를 가져옴
-	*/	
-	$('#real_searchBtn').click(function() {
-		$.ajax(
-				{
-					url:"searchBykeword.htm",
-					data:{
-						searchType:$('#real_searchType').val(),
-						keyword:$('#real_keyword').val()
-					},
-					dataType:"json",
-					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue'>검색 결과</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th></tr>"
-						$('#real_result').empty();
-						$.each(data.lists, function(i, elt) {
-							text+="<tr><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
-									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='real_info' id='"+elt.subject_code+"'" +
-											"data-target='#real_layerpop' data-toggle='modal'/></td>" +
-									"<td><input type='button' value='강의 신청' class='real_request' id='"+elt.subject_code+"'/></td></tr>";
-						});
-						$('#real_result').append(text);
-					}
-				}
-		);
-	});	
-});
+}
 
-/*
- * @method Name : (document).on("click","real_info",function(e)
- * @Author : 권기엽
- * @description : 과목의 상세 정보 확인
-*/	
-$(document).on("click",".real_info",function(e){
-	$.ajax(
-			{
-				url:"getOpSubjectInfo.htm",
-				data:{subject_code:e.currentTarget.id},
-				dataType:"json",
-				success:function(data){
-					console.log(data.subject_info.subject_code);
-					$('#real_subject_name').html(data.subject_info.subject_name);
-					$('#real_subject_code').html(data.subject_info.subject_code);
-					$('#real_professor_name').html(data.subject_info.professor_name);
-					$('#real_subject_credit').html(data.subject_info.subject_credit);
-					var classroom="";
-					var period="";
-					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
-						classroom+="<i>"+elt.classroom_name+"</i><br>";
-						$.each(elt.periodlist, function(i, p) {
-							period += p.period_day + " / " + p.period_start + " / " + p.period_end + "<br>";
-						})
-					});
-					$('#real_classroom_name').html(classroom);
-					$('#real_period').html(period);
-					$('#real_grade_limit').html(data.subject_info.grade_limit);
-					if(data.subject_info.required_choice == 0){
-						$('#real_required_choice').html('필수');
-					}else{
-						$('#real_required_choice').html('선택');
-					}
-					$('#real_subject_seats').html(data.subject_info.subject_seats);
-				}
-			}
-	);
-});
 
 /*
  * @method Name : $(document).on("click",".request", function(e)
@@ -177,33 +185,30 @@ function realBeforeSubject(e){
 }
 
 function realInsertTimeTable(e){
-	
+
 	$.ajax(
 			{
 				url:"getOpSubjectInfo.htm",
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
-					
-					gradeSum+=data.subject_info.subject_credit;
 					var flag=true;
-					if(gradeSum > 21){
+					realGradeSum+=data.subject_info.subject_credit;
+					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
-						gradeSum-=data.subject_info.subject_credit;
+						realGradeSum-=data.subject_info.subject_credit;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
-							
 							if($('#'+elt.period_code+'_3').html() != ''){
 								alert('시간이 중복되는 과목이 있습니다.');
-								gradeSum-=data.subject_info.subject_credit;
+								realGradeSum-=data.subject_info.subject_credit;
 								flag=false;
 								return false;
 							}	
 						})
-						if(flag==true){
-							console.log('여기서 DB Insert 작업하고 location href시켜주는 function 호출');
-							insertRealDbSubject(data.subject_info.subject_code);
-						}
+					}
+					if(flag==true){
+						insertRealDbSubject(data.subject_info.subject_code, data.subject_info.subject_credit);
 					}
 				}
 			}
@@ -214,26 +219,40 @@ function realInsertTimeTable(e){
  * @method Name : insertRealDbSubject()
  * @Author : 권기엽
  * @description : 수강 등록 버튼을 눌렀을 경우, 시간표에 들어가기 이전 DB에서 Insert 작업을 먼저 해둔뒤에 시간표에 출력한다.
-*/	
-function insertRealDbSubject(e){
+*/
+
+var socket1 = null;	//소켓
+
+function insertRealDbSubject(e,c){
 	var subject_code = e;
+	var subject_credit = c;
+
+	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
 	
-	$.ajax(
+	socket1.onmessage = function(evt) {
+		$('#waitlist').empty();
+		$('#waitlist').append('신청 대기자열 : <font style="color:blue"><b>' + evt.data + '</b></font> 명');
+	};
+	
+	var ajax = $.ajax(
 		{
 			url:"insertRealDbSubject.htm",
 			data:{subject_code:subject_code},
 			dataType:"json",
+			beforeSend:function(){
+				$('#wait_layerpop').modal('toggle')
+			},
 			success:function(data){
 				if(data.map.result=='success'){
 					alert('강의 신청에 성공하였습니다.');
-					location.href="realRegiser.htm";
 				}else if(data.map.result=='over'){
 					alert('수강 정원이 넘었습니다.');
-					return false;
 				}else{
 					alert('일시적인 장애가 발생하였습니다. 지속될 경우 관리자에게 문의해주세요.');
-					return false;
 				}
+			},
+			complete:function(){
+				location.href="realRegiser.htm";
 			}
 		}	
 	);
@@ -261,7 +280,7 @@ $(document).on("click",".real_table_ele",function(e){
 						dataType:"json",
 						success:function(data){
 							if(data.subject_credit){
-								gradeSum -= data.subject_credit;
+								realGradeSum -= data.subject_credit;
 							
 							
 								for(var i=1; i<=20; i++){
@@ -276,7 +295,7 @@ $(document).on("click",".real_table_ele",function(e){
 										$('#PR_TUE_'+i+'_3').attr('style','background-color:white');
 									}
 									if($('#PR_WEN_'+i+"_3 .real_sub").val()==subject_code){
-										$('#PR_WEN_'+i+"_# .real_sub").val('');
+										$('#PR_WEN_'+i+"_3 .real_sub").val('');
 										$('#PR_WEN_'+i+'_3').html('');
 										$('#PR_WEN_'+i+'_3').attr('style','background-color:white');
 									}

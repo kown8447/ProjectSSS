@@ -18,12 +18,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertStudentTable">
 		insert into student(student_code, member_id) values(#{param1},#{param2})
 	</insert>
+	<insert id="insertProfessorTable">
+		insert into professor(professor_code, member_id) values(#{param1},#{param2})
+	</insert>
+	<insert id="insertAdminTable">
+		insert into admin(admin_code, member_id) values(#{param1},#{param2})
+	</insert>
 	
 	<select id="joinCheck1" parameterType="kr.or.initspring.dto.commons.CodeMgDTO" resultType="int">
-		select count(*) from code_mg where code_name = #{code_name} and code = #{code} and code_birth = #{code_birth}
+		select count(*) from code_mg where code_name = #{code_name} and code_type = #{code_type} and code = #{code} and code_birth = #{code_birth}
 	</select>
 	
-	<select id="checkID" resultType="String">
-		select member_id from member where member_id = #{member_id}
+	<select id="studentConfirm" resultType="String" >
+		select student_code from student
 	</select>
+	<select id="professorConfirm" resultType="String" >
+		select professor_code from professor 
+	</select>
+	
+	<select id="adminConfirm" resultType="String" >
+		select admin_code from admin 
+	</select>
+	
+	<select id="checkID" resultType="Integer">
+		select count(member_id) from member where member_id = #{member_id}
+	</select>
+	
+	<insert id="insertStstateTable">
+		insert into st_state values(#{student_code}, 1, 1,0)
+	</insert>
 </mapper>

@@ -20,6 +20,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -90,11 +91,53 @@ public class RequestCourseController {
 			@RequestParam(value="department_code", required=false) String department_code,
 			Model model
 			){		
-		System.out.println("department_code : " + department_code);
 		HashMap<String, String> keyword = new HashMap<String, String>();
 		keyword.put("department_code", department_code);
 		List<OpenedLectureDTO> lists = requestCourseService.searchSubject(keyword);
 		model.addAttribute("lists", lists);
+		return jsonview;
+	}
+	
+	
+	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 과목 이름 정렬을 통한 개설과목 리스트 출력
+	*/
+	@RequestMapping("searchOpLectureOrderbySubjectName.htm")
+	public View searchOpLectureOrderbySubjectName(
+			@RequestParam(value="department_code", required=false) String department_code,
+			@RequestParam(value="order_by", required=false, defaultValue="asc") String order_by,
+			Model model
+			){		
+		HashMap<String, String> keyword = new HashMap<String, String>();
+		keyword.put("department_code", department_code.trim());
+		keyword.put("order_by", order_by.trim());
+		
+		List<OpenedLectureDTO> lists = requestCourseService.searchOpLectureOrderbySubjectName(keyword);
+		model.addAttribute("searchList", lists);
+		return jsonview;
+	}
+	
+	
+	/*
+	 * @method Name : searchOpLectureOrderbySubjectName
+	 * @Author : 권기엽
+	 * @description : 교수명  정렬을 통한 개설과목 리스트 출력
+	*/
+	@RequestMapping("searchOpLectureOrderbyProfessorName.htm")
+	public View searchOpLectureOrderbyProfessorName(
+			@RequestParam(value="department_code", required=false) String department_code,
+			@RequestParam(value="order_by", required=false, defaultValue="asc") String order_by,
+			Model model
+			){
+		HashMap<String, String> keyword = new HashMap<String, String>();
+		keyword.put("department_code", department_code.trim());
+		keyword.put("order_by", order_by.trim());
+		
+		
+		List<OpenedLectureDTO> lists = requestCourseService.searchOpLectureOrderbyProfessorName(keyword);
+		model.addAttribute("searchList", lists);
 		return jsonview;
 	}
 	
@@ -107,10 +150,8 @@ public class RequestCourseController {
 	public void download(String f, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String fname = new String(f.getBytes("euc-kr"), "8859_1");
-		System.out.println(fname);
 		response.setHeader("Content-Disposition", "attachment;filename=" + fname + ";");
 		String fullpath = request.getServletContext().getRealPath("/files/lecturePlan/" + f);
-		System.out.println(fullpath);
 		FileInputStream fin = new FileInputStream(fullpath);
 		ServletOutputStream sout = response.getOutputStream();
 		byte[] buf = new byte[1024];
@@ -141,13 +182,27 @@ public class RequestCourseController {
 	 * @description : 관리자가 설정한 시간 및 대상 학년에 따라 사용자에게 보여지는 페이지를 다르게 return 하는 함수(본 수강 신청)
 	*/
 	@RequestMapping("realRegiser.htm")
-	public String realRegiserForm(Principal principal, Model model){
+	public String realRegiserForm(Principal principal, Model model, HttpServletRequest request){
+		HttpSession session = request.getSession();
 		String viewpage = "";
 		String member_id = principal.getName();
 		viewpage = requestCourseService.possibleRealRegister(member_id);
+		session.setAttribute("member_id", principal.getName());
 		return viewpage;
 	}
 	
+	/*
+	 * @method Name : correctRegiserForm
+	 * @Author : 권기엽
+	 * @description : 수강 정정 페이지 
+	*/
+	@RequestMapping("correctRegiser.htm")
+	public String correctRegiserForm(Principal principal, Model model){
+		String viewpage = "";
+		String member_id = principal.getName();
+		viewpage = requestCourseService.possibleCorrectRegister(member_id);
+		return viewpage;
+	}
 	
 	/*
 	 * @method Name : searchBykeword
@@ -160,11 +215,9 @@ public class RequestCourseController {
 			@RequestParam(value="keyword", defaultValue="") String keyword,
 			Model model
 			){
-		System.out.println("searchType : " + searchType);
-		System.out.println("keyword : " + keyword);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
-		map.put("keyword", keyword);
+		map.put("keyword", keyword.toUpperCase());
 		
 		List<OpenedLectureDTO> lists = requestCourseService.searchByKeyword(map);
 		model.addAttribute("lists",lists);
@@ -181,7 +234,6 @@ public class RequestCourseController {
 	public View getOpSubjectInfo(
 			@RequestParam("subject_code") String subject_code, Model model, Principal principal
 			){
-		System.out.println("subject_code : " + subject_code);
 		OpenedLectureDTO subject_info = requestCourseService.getOpSubjectInfoBySubjectCode(subject_code, principal.getName());
 		model.addAttribute("subject_info", subject_info);
 		return jsonview;
@@ -377,4 +429,20 @@ public class RequestCourseController {
 		model.addAttribute("subject_credit", subject_credit);
 		return jsonview;
 	}
+	
+	
+	/*
+	 * @method Name : getRealTimetable
+	 * @Author : 권기엽
+	 * @description : 본 수강 신청 페이지 로딩시 비동기 처리로 예비수강신청 시간표 보여주는 함수, 수강 신청 실패 과목은 시간표에서 제외시키고, 검색 폼 최상단에 출력
+	*/
+	@RequestMapping("getCorrectTimetable.htm")
+	public View getCorrectTimetable(Principal principal, Model model){
+		List<OpenedLectureDTO> lists = requestCourseService.getRealTimetable(principal.getName());
+		List<PeriodDTO> periodList = requestCourseService.getPeriodList();
+		model.addAttribute("lists", lists);
+		model.addAttribute("periodList", periodList);
+		return jsonview;
+	}
+	
 }

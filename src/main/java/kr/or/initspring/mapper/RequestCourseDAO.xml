@@ -72,7 +72,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</otherwise>
 		</choose>
 	</select>
-	
+
+	<select id="searchOpLectureOrderbySubjectName" parameterType="hashmap" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		<choose>
+			<when test="department_code.equals('1000')">
+				select *
+				from opened o join subject s
+				on o.subject_code = s.SUBJECT_CODE
+				order by s.subject_name ${order_by}
+			</when>
+			<when test="department_code.equals('100')">
+				select *
+				from liberal l join subject s
+				on l.subject_code = s.subject_code
+				order by s.subject_name ${order_by}
+			</when>
+			<otherwise>
+				select *
+				from (select * from major where department_code=#{department_code}) m join subject s
+				on m.subject_code = s.subject_code
+				where s.subject_state=2
+				order by s.subject_name ${order_by}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="searchOpLectureOrderbyProfessorName" parameterType="hashmap" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		<choose>
+			<when test="department_code.equals('1000')">
+				select* from
+				(select k.subject_code, k.registed_seat, k.subject_credit, k.subject_name, k.grade_limit, k.subject_state, k.subject_seats , k.subject_type, k.professor_code, p.member_id from
+				(select o.subject_code, o.registed_seat, s.subject_credit, s.subject_name, s.grade_limit, s.subject_state, s.subject_seats , s.subject_type, s.professor_code from opened o join subject s on o.subject_code = s.SUBJECT_CODE) k join professor p on k.professor_code = p.PROFESSOR_CODE) i
+				join member m on i.member_id = m.member_id order by m.member_name ${order_by}
+			</when>
+			<when test="department_code.equals('100')">
+				select* from
+				(select k.subject_code, k.subject_credit, k.subject_name, k.grade_limit, k.subject_state, k.subject_seats , k.subject_type, k.professor_code, p.member_id from
+				(select o.subject_code, s.subject_credit, s.subject_name, s.grade_limit, s.subject_state, s.subject_seats , s.subject_type, s.professor_code from liberal o join subject s on o.subject_code = s.SUBJECT_CODE) k join professor p on k.professor_code = p.PROFESSOR_CODE) i
+				join member m on i.member_id = m.member_id order by m.member_name ${order_by}
+			</when>
+			<otherwise>
+				select m.member_name, t.professor_code, t.subject_name, t.subject_credit, t.subject_state, t.subject_seats, t.subject_type, t.grade_limit , t.subject_code
+				from(select k.professor_code, k.subject_name, k.subject_credit, k.subject_state, k.subject_seats, k.subject_type, k.grade_limit, p.member_id, k.subject_code
+				from (select s.subject_code, s.subject_name, s.subject_credit, s.subject_state, s.subject_seats, s.subject_type, s.professor_code, s.grade_limit from (select * from major where department_code=#{department_code}) m join subject s on m.subject_code = s.subject_code where s.subject_state=2) k join professor p
+				on k.professor_code = p.professor_code) t join member m on t.member_id = m.member_id
+				order by m.member_name ${order_by}
+			</otherwise>
+		</choose>
+	</select>
+
+
 	<update id="setErollStatus" parameterType="hashmap">
 		update enroll_status set enroll_active=#{enroll_active} where enroll_grade=#{enroll_grade} and enroll_type=#{enroll_type}
 	</update>
@@ -144,7 +193,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkBeforeSubjectByRecord" resultType="int">
-		select count(*) from record where student_code = #{param1} and subject_code = #{param2}
+		select count(*) from record r join subject s 
+		on r.subject_code = s.subject_code
+		where r.student_code = #{param2} and s.subject_name = #{param1}
 	</select>
 	
 	<update id="updateTimetableShare" parameterType="kr.or.initspring.dto.commons.StudentDTO">
@@ -173,6 +224,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on r.subject_code = s.subject_code
 		where r.student_code = #{student_code}
 	</select>
+
+	<select id="getCurrentTimetableByStudentCode" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select * from
+		timetable t join subject s
+		on t.subject_code = s.subject_code
+		where t.student_code = #{student_code}
+	</select>
+
 
 	<update id="plusRegistedSeatBySubjectCode">
 		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
@@ -211,7 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="setReserveCheck" parameterType="hashmap">
-		update reserve set reserve_check = #{result} where subject_code = #{subject_code}
+		update reserve set reserve_check = #{result} where subject_code = #{subject_code} and student_code = #{student_code}
 	</select>
 	
 	<update id="updateRequestSeat">
@@ -258,4 +317,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFromEnrollment">
 		delete from enrollment where student_code = #{param1} and subject_code = #{param2}
 	</delete>
+	
+	<select id="getReserveSeatsBySubjectCode" resultType="int">
+		select count(*) from reserve where subject_code=#{subject_code}	
+	</select>
+	
+	<insert id="copyToTimeTable">
+		insert into timetable select student_code, subject_code from enrollment
+	</insert>
 </mapper>

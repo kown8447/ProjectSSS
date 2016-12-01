@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
 <form class="form-inline" onSubmit="return false">
 	<div class="form-group">
 		<label for="searchStudent_code">조회할 학생 학번 : </label> 

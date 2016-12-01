@@ -10,7 +10,9 @@ package kr.or.initspring.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import javax.mail.internet.MimeMessage;
@@ -56,48 +58,94 @@ public class JoinController {
 	private View jsonview;	//비동기 처리를 위한 jsonview 객체
 	
 	
-	@RequestMapping(value="join1.htm", method=RequestMethod.GET)
-	public String joinStep1(){
-		return "join.joinStep1";
+	@RequestMapping(value="join.htm", method=RequestMethod.GET)
+	public String joinStep(){
+		return "join.joinStep";
 	}
-	
-	
-	/*
-	 * @method Name : joinStep1
-	 * @Author : 권기엽
-	 * @description
-	 * 회원가입 1단계
-	 * Code_MG 테이블 과의 데이터를 비교.
-	 * code_type -> 학생/교수/관리자 비교
-	 * code_name -> code_mg 테이블에 있는 이름
-	 * code_birth -> code_mg 테이블에 있는 생년월일. yyyy-MM-dd 형식을 가지며, Java에서는 DATE Type으로 받음
-	*/	
-	@RequestMapping(value="join1.htm", method=RequestMethod.POST)
-	public View joinStep1(int code_type, String code_name, Date code_birth, String code, 
+	   /*
+	    * @method Name : joinStep
+	    * @Author : 김영빈
+	    * @description
+	    * 처음 회원가입시 학생, 교수 ,관리자 중 택 1 
+	   */
+	@RequestMapping(value="join.htm", method=RequestMethod.POST)
+	public View joinStep(int code_type,  
 			Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
-		boolean result = false;
-		
 		CodeMgDTO codemg = new CodeMgDTO();
-		codemg.setCode(code);
 		codemg.setCode_type(code_type);
-		codemg.setCode_birth(code_birth);
-		codemg.setCode_name(code_name);
-		
 		MemberDTO member = new MemberDTO();
-		result = joinservice.joinCheck1(codemg);
-		
-		if(result){
-			member.setCode(codemg.getCode());
-			member.setCode_type(codemg.getCode_type());
-			member.setMember_name(codemg.getCode_name());
-			member.setMember_birth(codemg.getCode_birth());
-			session.setAttribute("member", member);
+		member.setCode_type(codemg.getCode_type());
+		session.setAttribute("member", member);
+		if(code_type==0 ||code_type==1||code_type==2){
 			model.addAttribute("result", "success");
 		}else{
 			model.addAttribute("result", "fail");
 		}
 		
+		return jsonview;
+	}
+	/*
+	    * @method Name : joinStepRole
+	    * @Author : 김영빈
+	    * @description
+	    * 권한에 따라 페이지를 다르게 함 
+	   */
+	@RequestMapping(value="join1.htm", method=RequestMethod.GET)
+	public String joinStepRole(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		if(member.getCode_type()==0){
+			return "join.joinStep1_Student";
+		}else if(member.getCode_type()==1){
+			return "join.joinStep1_Professor";
+		}else{
+			return "join.joinStep1_Admin";
+		}
+	
+		
+	}
+	   /*
+	    * @method Name : joinStep1
+	    * @Author : 김영빈
+	    * @description
+	    * 회원가입 1단계
+	    * Code_MG 테이블 과의 데이터를 비교.
+	    * code_type -> 학생/교수/관리자 비교
+	    * code_name -> code_mg 테이블에 있는 이름
+	    * code_birth -> code_mg 테이블에 있는 생년월일. yyyy-MM-dd 형식을 가지며, Java에서는 DATE Type으로 받음, format 함수 이용해서 date 형식 바꺼줌
+	    * joincheck1 -> code_mg에 등록된 회원인지 확인 등록-> return true
+	    * joincheck2 -> code_mg로 등록된 멤버가 있는지 확인 있으면  return false 
+	   */   
+	@RequestMapping(value = "join1.htm", method = RequestMethod.POST)
+	public View joinStep1(String code_name, String code_year, String code_month, String code_day, String code,
+			Model model, HttpServletRequest request) throws ParseException {
+		HttpSession session = request.getSession();
+		boolean result = false;
+		boolean result2 = false;
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		java.util.Date parsed = format.parse(code_year + code_month + code_day);
+		java.sql.Date code_birth = new java.sql.Date(parsed.getTime());
+
+		CodeMgDTO codemg = new CodeMgDTO();
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
+		codemg.setCode(code);
+		codemg.setCode_type(member.getCode_type());
+		codemg.setCode_birth(code_birth);
+		codemg.setCode_name(code_name);
+
+		result = joinservice.joinCheck1(codemg);
+		result2 = joinservice.joinCheck2(codemg);
+		if (result == true && result2 == true) {
+			member.setCode(codemg.getCode());
+			member.setMember_name(codemg.getCode_name());
+			member.setMember_birth(codemg.getCode_birth());
+			session.setAttribute("member", member);
+			model.addAttribute("result", "success");
+		} else {
+			model.addAttribute("result", "fail");
+		}
+
 		return jsonview;
 	}
 	
@@ -141,7 +189,6 @@ public class JoinController {
 		
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		member.setMember_email(member_email);
-		System.out.println(member.toString());
 		
 		model.addAttribute("mailresult", "success");
 		model.addAttribute("sessionID", sessionID);
@@ -152,7 +199,7 @@ public class JoinController {
 	public String joinStep3(){
 		return "join.joinStep3";
 	}
-
+	
 	/*
 	 * @method Name : joinStep3
 	 * @Author : 권기엽
@@ -163,15 +210,14 @@ public class JoinController {
 	*/	
 	@RequestMapping(value="join3.htm", method=RequestMethod.POST)
 	public String joinStep3(MemberDTO member_temp, HttpServletRequest request, Model model) throws IOException{
-		
 		boolean result = false;
 		String viewpage = "";
 		HttpSession session = request.getSession();
 		String pwd = bCryptPasswordEncoder.encode(member_temp.getMember_pwd());
-		
+		String addr =member_temp.getAddr_num()+"?"+ member_temp.getMember_addr()+"?" + member_temp.getMember_addr_detail();
 		CommonsMultipartFile file = member_temp.getFile();
 		String filename = file.getOriginalFilename();
-		String path = request.getServletContext().getRealPath("/images");
+		String path = request.getServletContext().getRealPath("/profiles");
 		String fullpath = path + "\\" + filename;
 		
 		if (!filename.equals("")) {
@@ -188,7 +234,7 @@ public class JoinController {
 		member.setMember_phone(member_temp.getMember_phone());
 		member.setMember_sex(member_temp.getMember_sex());
 		member.setMember_picture(filename);
-		member.setMember_addr(member_temp.getMember_addr());
+		member.setMember_addr(addr);
 		
 		try {
 			result = joinservice.insertMember(member);
@@ -203,6 +249,9 @@ public class JoinController {
 		}
 		return viewpage;
 	}
+	
+	
+	
 
 	/*
 	 * @method Name : checkID
@@ -226,7 +275,9 @@ public class JoinController {
 	
 	@RequestMapping("welcome.htm")
 	public String welcome(){
-		return "join.welcome";
+		return "login.login";
 	}
+	
+
 	
 }
