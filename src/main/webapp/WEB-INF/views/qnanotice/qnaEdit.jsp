@@ -7,35 +7,48 @@
 -->   
 
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<div id="content">
+	<h2>QnA 수정</h2>
+	
 	<form action="" method="post" enctype="multipart/form-data">
 		
-		<table>
-			<tr>
-				<td>제목</td>
-				<td><input name="qna_title" id="qna_title" value="${qna.qna_title}" /></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>${qna.member_id}</td>
-			</tr>
-			<tr>
-				<td>조회수</td>
-				<td>${qna.qna_count}</td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td><input type="file" id="file" name="file" /></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea id="qna_content" name="qna_content">${qna.qna_content}</textarea></td>
+		<table class="table table-bordered" style="width:70%; margin: auto;">
+			<tr style="width:20%">
+				<th style="text-align: center" >글번호</th>
+				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
+				<th style="text-align: center">작성일</th>
+				<td>${qna.qna_date}</td>
 			</tr>			
+			<tr>
+				<th style="text-align: center">작성자</th>
+				<td colspan="3">${qna.member_id}</td>
+			</tr>					
+			<tr>	
+				<th style="text-align: center">제목</th>
+				<td colspan="3">
+					<input type="text" class="form-control" name="qna_title" id="qna_title" value="${qna.qna_title}" />
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center">내용</th>
+				<td colspan="3">
+					<textarea rows="7" class="form-control" id="qna_content" name="qna_content">${qna.qna_content}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th style="text-align: center">첨부파일</th>
+				<td colspan="3">
+					<input type="file" id="file" name="file" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<input type="submit" id="editBtn" name="editBtn" value="수정" class="btn btn-success"/> 
+					<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-success">취소</a>				
+				</td>
+			</tr>
 		</table>
 
-			<input type="submit" id="editBtn" name="editBtn" value="수정" /> 
-			<a href="qnaDetail.htm?qna_index=${qna.qna_index}">취소</a>
-
 	</form>
-
+</div>
  

@@ -188,8 +188,9 @@ public class QnaController {
 	 * @description : QnA게시판 답글 작성 페이지 이동
 	 */
 	@RequestMapping(value = "/qnaReply.htm", method = RequestMethod.GET)
-	public String qnaReply(int qna_index, Model model) throws ClassNotFoundException, SQLException {
-
+	public String qnaReply(Principal principal,int qna_index, Model model) throws ClassNotFoundException, SQLException {
+		String id = principal.getName();
+		model.addAttribute("id", id);
 		
 		CustomerQnaDTO qna = qnaservice.qnaDetail(qna_index);
 		model.addAttribute("qna", qna);

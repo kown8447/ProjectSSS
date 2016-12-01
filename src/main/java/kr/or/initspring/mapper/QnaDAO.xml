@@ -88,8 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SET qna_Step = qna_Step+1
 		WHERE qna_Refer = #{qna_refer} AND  qna_Step > #{qna_step}
 	</update>
-	
-	
+		
 	<!-- 댓글 저장 -->
 	<insert id="insertComment" parameterType="kr.or.initspring.dto.qna.CustomerQnaReplyDTO">
 		<selectKey order="BEFORE" keyProperty="reply_step"  resultType="Integer">
@@ -110,6 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QNA_REPLY where REPLY_REFER= #{qna_index} order by reply_step asc
 	</select>
 	
+	<!-- 댓글 삭제 -->
 	<delete id="qnaCmtDelete">
 	 	DELETE qna_reply WHERE reply_index = #{reply_index}
 	</delete>

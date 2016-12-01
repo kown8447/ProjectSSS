@@ -10,36 +10,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h3>QnA</h3>
+<h2>QnA</h2>
 <div id="content">
 
-	<form>
-		<div class="col-sm-3" style="margin-left: 68%">
-			<div class="input-group">
-
-				<select id="searchType" name="searchType">
+	<div align="center">
+		<form>
+			<div class="form-inline" >
+				<select id="searchType" name="searchType" class="form-control"  style="width:120px;margin-right:5px;">
 					<option value="0">제목</option>
 					<option value="1">제목+내용</option>
 					<option value="2">글쓴이</option>
-				</select> 
-				
-				<input type="text" id="keyword" name="keyword" /> 
-				
-				<span class="input-group-btn"> 
-				 <input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
-				</span>
+				</select>	
+				<input type="text" id="keyword" name="keyword" class="form-control" style="width:250px;margin-right:5px;"/> 
+				<input type="submit" id="searchBtn" class="btn btn-primary" value="찾기">			
 			</div>
-		</div>
-	</form>
-
-<div style="width:85%; text-align: center; margin: auto;">
+		</form>
+	</div>
+	
+	<div style="width:85%; text-align: center; margin: auto;">
 	<table class="table table-hover">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th style="text-align:center">번호</th>
+			<th style="text-align:center">제목</th>
+			<th style="text-align:center">작성자</th>
+			<th style="text-align:center">작성일</th>
+			<th style="text-align:center">조회수</th>
 		</tr>	
 		<tbody>
 		 	<c:if test="${empty list}">
@@ -51,31 +46,30 @@
 			<c:forEach items="${list}" var="qna">
 				<tr>
 					<td>${qna.qna_index}</td>
-					<td>
-										
-			<c:choose>
-					<c:when test="${qna.qna_depth != 0 }">
-						<c:forEach var="depth"  begin="0" end="${qna.qna_depth*2}" step="1">
-							&nbsp;
-						</c:forEach>						
-							▶	
-					</c:when>			
-			</c:choose>
-			
-			<c:if test="${fn:length(qna.qna_title) > 15}">
-                  	<a  href="qnaDetail.htm?qna_index=${qna.qna_index}">
-                  	<c:if test="${qna.qna_status==1}">
-                  	[삭제된 글의 답글입니다]
-                  	</c:if>
-                 	<c:out value="${fn:substring(qna.qna_title,0,15)}" />...  </a>                  
-            </c:if> 
-                     
-            <c:if test="${fn:length(qna.qna_title) <= 15}">
-            	<c:if test="${qna.qna_status==1}">
-                  	[삭제된 글의 답글입니다]
-                  	</c:if>
-                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}">${qna.qna_title}</a>
-            </c:if>
+					<td>							
+						<c:choose>
+								<c:when test="${qna.qna_depth != 0 }">
+									<c:forEach var="depth"  begin="0" end="${qna.qna_depth*2}" step="1">
+										&emsp;&emsp;
+									</c:forEach>						
+										<img src="../images/reply.png">&nbsp;	
+								</c:when>			
+						</c:choose>
+						
+						<c:if test="${fn:length(qna.qna_title) > 15}">
+			                  	<a  href="qnaDetail.htm?qna_index=${qna.qna_index}">
+			                  	<c:if test="${qna.qna_status==1}">
+			                  		<h5 style="color: red">[삭제된 글의 답글입니다]</h5>
+			                  	</c:if>
+			                 	<c:out value="${fn:substring(qna.qna_title,0,15)}" />...  </a>                  
+			            </c:if> 
+			                     
+			            <c:if test="${fn:length(qna.qna_title) <= 15}">
+			            	<c:if test="${qna.qna_status==1}">
+			                  	<h5 style="color: red">[삭제된 글의 답글입니다]</h5>
+			                 </c:if>
+			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}" style="text-align: left;">${qna.qna_title}</a>
+			            </c:if>
                    </td>
 														
 				<td>${qna.member_id}</td>
