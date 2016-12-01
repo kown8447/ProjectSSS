@@ -36,7 +36,13 @@
 		</tr>
 		<tr>
 			<td align="center"><b>첨부파일</b></td>
-			<td><input type="file" id="file" name="file"></td>
+			<td><div class="form-group">
+					<span class="filetype"> <input type="text" class="file-text" />
+						<span class="file-btn">찾아보기</span> <span class="file-select">
+							<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+					</span>
+					</span>
+			</div></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">

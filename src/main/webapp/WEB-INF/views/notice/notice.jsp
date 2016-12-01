@@ -24,14 +24,14 @@
 	</form>
 	<br><br>
 	
-<div style="width:85%; text-align: center; margin: auto;">
+<div style="width:85%; margin: auto;">
 	<table class="table table-hover">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th style="text-align: center;">번호</th>
+			<th style="text-align: center;">제목</th>
+			<th style="text-align: center;">작성자</th>
+			<th style="text-align: center;">작성일</th>
+			<th style="text-align: center;">조회수</th>
 		</tr>
 		<tbody>
 			<c:if test="${empty list}">
@@ -45,7 +45,7 @@
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
-								&emsp;&emsp;
+								&emsp;
                            		</c:forEach>
 								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>
@@ -53,14 +53,14 @@
 						<c:if test="${fn:length(n.notice_title) > 15}">
 								<a href="noticeDetail.htm?notice_index=${n.notice_index}"> 
 								<c:if test="${n.notice_status==1}">
-										<h5 style="color:red">[ 삭제된 글의 답글입니다 ]</h5>
+										<font style="color:red">[ 삭제된 글의 답글입니다 ]</font>
 									</c:if> 
 									<c:out value="${fn:substring(n.notice_title,0,15)}" />...
 								</a>
 							</c:if> 
 							<c:if test="${fn:length(n.notice_title) <= 15}">
 								<c:if test="${n.notice_status==1}">
-									<h5 style="color:red">[ 삭제된 글의 답글입니다 ]</h5>
+									<font style="color:red">[ 삭제된 글의 답글입니다 ]</font>
 								</c:if>
 								<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
 							</c:if></td>

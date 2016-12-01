@@ -9,6 +9,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/notice/notice.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
   
