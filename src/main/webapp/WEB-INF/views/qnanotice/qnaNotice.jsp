@@ -10,21 +10,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-	<h3>QnA</h3>
-	
+<h3>QnA</h3>
+<div id="content">
+
 	<form>
-	
-		<select id="searchType" name="searchType">
-			<option value="0">제목</option>
-			<option value="1">제목+내용</option>
-			<option value="2">글쓴이</option>
-		</select>	
-	
-		<input type="text" id="keyword" name="keyword" /> 
-		<input type="submit" id="searchBtn" value="검색" />
+		<div class="col-sm-3" style="margin-left: 68%">
+			<div class="input-group">
+
+				<select id="searchType" name="searchType">
+					<option value="0">제목</option>
+					<option value="1">제목+내용</option>
+					<option value="2">글쓴이</option>
+				</select> 
+				
+				<input type="text" id="keyword" name="keyword" /> 
+				
+				<span class="input-group-btn"> 
+				 <input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
+				</span>
+			</div>
+		</div>
 	</form>
- 
- 	<table border="1">
+
+<div style="width:85%; text-align: center; margin: auto;">
+	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -32,7 +41,6 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>	
-		
 		<tbody>
 		 	<c:if test="${empty list}">
             	<tr>
@@ -77,10 +85,13 @@
 			</c:forEach>
 	</tbody>
 	</table>			
+	<div style="margin-left: 90%">
+		<a href="${pageContext.request.contextPath}/qnanotice/qnaWrite.htm" class="btn btn-success">글쓰기</a>
+	</div>
+</div>	
 
-	<table>
-		<tr>
-			<td align="center">
+	<div align = "center">
+	 <ul class="pagination">
 			<!-- 처음 이전 링크 --> 
 			<c:if test="${pg>fromPage}">
 			<!-- 5>10 : false / 15>10 : true -->
@@ -111,12 +122,9 @@
             [<span style="color: gray">▶</span>]
             [<span style="color: gray">▶▶</span>]  
     		</c:if>
-
-			</td>
-		</tr>
-	</table>
-	
-	<a href="qnaWrite.htm">글쓰기</a>
+	</ul>
+	</div>
+</div>	
 
 
 

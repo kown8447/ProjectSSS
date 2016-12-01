@@ -83,6 +83,7 @@ $(function() {
 								$('#replyList').empty();
 								replyReset(data.list);
 								cmtdeleteSetting();
+								cmtUpdateSetting();
 							} else {
 								alert("실패");
 							}
@@ -105,7 +106,7 @@ $(function() {
 									+ (index + 1)
 									+ '">'
 									+ obj.member_id
-									+ '</div><br><div id="cmt_content_'
+									+ '</div><br><div class="cmtContent" id="cmt_content_'
 									+ (index + 1)
 									+ '">'
 									+ obj.reply_content
@@ -113,7 +114,7 @@ $(function() {
 									+ (index + 1)
 									+ '" class="cmtEdit" id="cmtUpdate_'
 									+ (index + 1)
-									+ ' name="cmtEdit">수정</button><button type="button" value="cmtDelete_'
+									+ '" name="cmtEdit">수정</button><button type="button" value="cmtDelete_'
 									+ (index + 1)
 									+ '" class="cmtDel" id="cmtDelete_'
 									+ (index + 1)
@@ -154,6 +155,7 @@ $(function() {
 									$('#replyList').empty();
 									replyReset(data.list);
 									cmtdeleteSetting();
+									cmtUpdateSetting();
 								} else {
 									alert("실패");
 								}
@@ -165,62 +167,67 @@ $(function() {
 				});
 	}
 	
-	cmtdeleteSetting();
 	
     var cmtIndex=0;
-	$('.cmtEdit').click(function() {
-		
-		var clickedindex = $(this).val().split('_')[1];
-		
-		if ($('#readerId').val() != $('#cmt_id_' + clickedindex)
-				.val()) {
-			alert('본인이 작성한 글이 아닙니다')
-			return;
-		}
-		
-		cmtIndex = $(this).val().split('_')[1];
-        $('#updateCmtContent').remove();
-        $('#updateCmtUpdate').remove();
-        $('#updateCmtCancel').remove();
-		$('.cmtContent').attr("style", "display : inline;");
-		$('.cmtEdit').attr("style", "display : inline;");
-		$('.cmtDel').attr("style", "display : inline;");
+    
+    function cmtUpdateSetting() {
+    	$('.cmtEdit').click(function() {
+    		
+    		var clickedindex = $(this).val().split('_')[1];
+    		
+    		if ($('#readerId').val() != $('#cmt_id_' + clickedindex)
+    				.val()) {
+    			alert('본인이 작성한 글이 아닙니다')
+    			return;
+    		}
+    		
+    		cmtIndex = $(this).val().split('_')[1];
+            $('#updateCmtContent').remove();
+            $('#updateCmtUpdate').remove();
+            $('#updateCmtCancel').remove();
+    		$('.cmtContent').attr("style", "display : inline;");
+    		$('.cmtEdit').attr("style", "display : inline;");
+    		$('.cmtDel').attr("style", "display : inline;");
 
-		$('#cmt_content_' + cmtIndex).attr("style", "display : none;");
-		$('#cmtUpdate_' + cmtIndex).attr("style", "display : none;");
-		$('#cmtDelete_' + cmtIndex).attr("style", "display : none;");
-		var updateTool=
-			'<input type="text" id="updateCmtContent" value="'+$('#cmt_content_'+cmtIndex).text() +'"><input type="button" id="updateCmtUpdate" value="확인"><input type="button" id="updateCmtCancel" value="취소">'
-			
-		$('#replyView_'+cmtIndex).append(updateTool);
-		$('#updateCmtUpdate').click(function() {
-			$.ajax({
-				url : "qnaCmtUpdate.htm?reply_index=" + $('#cmt_index_'+cmtIndex).val()
-						+ '&reply_content=' + $('#updateCmtContent').val()+ '&qna_index=' + $('#qna_index').val(),
-				method : "post",
-				dataType : "json",
-				success : function(data) {
-					if (data.result == 'success') {
-						alert("성공");
-						$('#replyList').empty();
-						replyReset(data.list);
-						cmtdeleteSetting();
-					} else {
-						alert("실패");
-					}
-				}
-			});
-		});
-		
-		$('#updateCmtCancel').click(function() {
-			$('#updateCmtContent').remove();
-	        $('#updateCmtUpdate').remove();
-	        $('#updateCmtCancel').remove();
-	        
-	    	$('.cmtContent').attr("style", "display : inline;");
-			$('.cmtEdit').attr("style", "display : inline;");
-			$('.cmtDel').attr("style", "display : inline;");
-		});
-	});
+    		$('#cmt_content_' + cmtIndex).attr("style", "display : none;");
+    		$('#cmtUpdate_' + cmtIndex).attr("style", "display : none;");
+    		$('#cmtDelete_' + cmtIndex).attr("style", "display : none;");
+    		var updateTool=
+    			'<input type="text" id="updateCmtContent" value="'+$('#cmt_content_'+cmtIndex).text() +'"><input type="button" id="updateCmtUpdate" value="확인"><input type="button" id="updateCmtCancel" value="취소">'
+    			
+    		$('#replyView_'+cmtIndex).append(updateTool);
+    		$('#updateCmtUpdate').click(function() {
+    			$.ajax({
+    				url : "qnaCmtUpdate.htm?reply_index=" + $('#cmt_index_'+cmtIndex).val()
+    						+ '&reply_content=' + $('#updateCmtContent').val()+ '&qna_index=' + $('#qna_index').val(),
+    				method : "post",
+    				dataType : "json",
+    				success : function(data) {
+    					if (data.result == 'success') {
+    						alert("성공");
+    						$('#replyList').empty();
+    						replyReset(data.list);
+    						cmtdeleteSetting();
+    						cmtUpdateSetting();
+    					} else {
+    						alert("실패");
+    					}
+    				}
+    			});
+    		});
+    		
+    		$('#updateCmtCancel').click(function() {
+    			$('#updateCmtContent').remove();
+    	        $('#updateCmtUpdate').remove();
+    	        $('#updateCmtCancel').remove();
+    	        
+    	    	$('.cmtContent').attr("style", "display : inline;");
+    			$('.cmtEdit').attr("style", "display : inline;");
+    			$('.cmtDel').attr("style", "display : inline;");
+    		});
+    	});
+	}
+    cmtdeleteSetting();
+	cmtUpdateSetting();
 
 });
