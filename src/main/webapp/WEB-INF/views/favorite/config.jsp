@@ -2,7 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<!-- 
+   @Project : InitSpring
+   @File name : config.jsp
+   @Author : 최준호
+   @Data : 2016.11.30
+   @Desc : 즐겨찾기 설정 페이지
+-->
 <div>
 	<h3>즐겨찾기 메뉴설정</h3>
 	<hr>
