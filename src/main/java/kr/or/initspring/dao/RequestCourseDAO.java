@@ -55,7 +55,8 @@ public interface RequestCourseDAO {
 	public Integer getTimetableShareByMemberid(String memeber_id);	//멤버 아이디로 시간표 공유 여부 가져오기
 	
 	public List<OpenedLectureDTO> getPreTimetableByStudentCode(String student_code);	//학번으로 예비수강 신청 테이블 가져오기
-
+	public List<OpenedLectureDTO> getCurrentTimetableByStudentCode(String student_code);	//학번으로 재학 시간표 테이블 가져오기
+	
 	public int getRetakeCheck(String student_code, String subject_code);	//학번+과목코드로 성적 테이블을 검색해서 검색결과가 있을 경우 재수강으로 취급
 	public Integer checkStudentCode(String student_code);	//학번이 있는지 체크
 	public Integer checkOthersShareByStudentCode(String student_code);	//학번 기준으로 시간표 공유 여부 확인
@@ -83,4 +84,8 @@ public interface RequestCourseDAO {
 	public Integer checkAlreadyExistSubject(String subject_code, String student_code);	//예비 수강신청에서 실패했던 과목에 대해서 수강신청 할 경우를 확인
 	public void deleteFromEnrollment(String student_code, String subject_code);	//선택 과목 삭제
 	public void minusRegistedSeatBySubjectCode(String subject_code);	//정원 감소
+	
+	//수강 정정
+	
+	public void copyToTimeTable();	//수강 정정 끝난 이후 재학시간 테이블로 Enrollment Table 복사
 }

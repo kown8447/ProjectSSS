@@ -57,7 +57,7 @@
 					<div class="col-sm-2">
 						<select class="form-control" id="year" style="width: 110%;">
 							<option id="year" value="0">년도</option>
-							<c:forEach var="i" begin="1900" end="2017">
+							<c:forEach var="i" begin="1940" end="2017">
 								<option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
