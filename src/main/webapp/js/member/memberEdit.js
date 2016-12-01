@@ -31,14 +31,20 @@ $(function() {
     	         data : {
     	            member_email : $('#member_email1').val()
     	         },
+    	         beforeSend:function(){
+    	        	 $('#pwdEmail_layerpop2').modal('toggle');
+    	         },
     	         dataType : "json",
     	         success : function(data) {
     	            if (data.mailresult == 'success') {
     	               sessionid = data.sessionID;
     	               alert('메일이 발송되었습니다. 인증번호를 확인해 주세요.');
     	            }
+    	         },
+    	         complete:function(){
+    	        	 $('#pwdEmail_layerpop2').modal('toggle');
     	         }
-    	         });
+    	    });
     	   
       		}
    });

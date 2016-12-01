@@ -19,7 +19,8 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#preloader').fadeOut('fast');
+		$("#wrapper").toggleClass("toggled");
+		$('#preloader').fadeOut('slow');
 		$('body').css({
 			'overflow' : 'visible'
 		});
@@ -29,10 +30,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body style="background-image: url('${pageContext.request.contextPath}/images/back.jpg'); background-repeat: no-repeat; background-size: cover; overflow: hidden;">
+<body>
 
 <tiles:insertAttribute name="header"/>
-	<div id="wrapper">
+	<div id="wrapper" style="width:10%">
 		<div id="sidebar-wrapper" style="display: block;">
 			<tiles:insertAttribute name="aside" />
 		</div>
@@ -49,7 +50,6 @@
 
 	<!-- Menu Toggle Script -->
 	<script>
-		$('#page-content-wrapper').hide();
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$('#page-content-wrapper').hide();
@@ -61,14 +61,11 @@
 		<div id="loader"> </div>
 	</div> -->
 	
-	<div class="row container">
-		<div class="col-md-2">
-			<tiles:insertAttribute name="visual" />
-		</div>
-		<div class="col-md-10">
+	<center>
+		<div class="row container" >
 			<tiles:insertAttribute name="content" />
 		</div>
-	</div>
+	</center>
 	<tiles:insertAttribute name="footer"/>
 
 	<div class="modal fade" id="tableviewer">

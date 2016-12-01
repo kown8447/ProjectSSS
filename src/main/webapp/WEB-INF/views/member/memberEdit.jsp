@@ -175,6 +175,21 @@
 </div>
 </div>
 
+<div class="modal fade" id="pwdEmail_layerpop2">
+	<div class="modal-dialog">
 
 
+		<div id="mail-container">
+			<div id="line-container">
+				<div class="line line-1"></div>
+				<div class="line line-4"></div>
+				<div class="line line-2"></div>
+				<div class="line line-5"></div>
+				<div class="line line-3"></div>
+			</div>
+			<div id="mail"></div>
+		</div>
 
+
+	</div>
+</div>

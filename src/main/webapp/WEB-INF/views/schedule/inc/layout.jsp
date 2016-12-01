@@ -25,6 +25,7 @@
 
 <script type="text/javascript">
 	$(function() {
+		$("#wrapper").toggleClass("toggled");
 		$('#preloader').fadeOut('slow');
 		$('body').css({
 			'overflow' : 'visible'
@@ -34,9 +35,9 @@
 
 <title>Insert title here</title>	
 </head>
-<body style="background-image: url('${pageContext.request.contextPath}/images/back.jpg'); background-repeat: no-repeat; background-size: cover; overflow: hidden;">
+<body>
 	<tiles:insertAttribute name="header" />
-	<div id="wrapper">
+	<div id="wrapper" style="width:10%">
 		<div id="sidebar-wrapper" style="display: block;">
 			<tiles:insertAttribute name="aside" />
 		</div>
@@ -53,7 +54,6 @@
 
 	<!-- Menu Toggle Script -->
 	<script>
-		$('#page-content-wrapper').hide();
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$('#page-content-wrapper').hide();
