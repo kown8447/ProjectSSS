@@ -13,31 +13,70 @@
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
+<link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
+
+<script type="text/javascript">
+	$(function() {
+		$('#preloader').fadeOut('slow');
+		$('body').css({
+			'overflow' : 'visible'
+		});
+	})
+</script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-image: url('${pageContext.request.contextPath}/images/back.jpg'); background-repeat: no-repeat; background-size: cover; overflow: hidden;">
 
-	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="aside" />
-	<div class="row">
-		<div class="col-sm-2">
-			<div class="sidebar-nav">
-				<div class="navbar navbar-default" role="navigation">
-					<div class="navbar-header"></div>
-					<div class="navbar-collapse collapse sidebar-navbar-collapse">
-						<tiles:insertAttribute name="visual" />
+<tiles:insertAttribute name="header"/>
+	<div id="wrapper">
+		<div id="sidebar-wrapper" style="display: block;">
+			<tiles:insertAttribute name="aside" />
+		</div>
+		<div id="page-content-wrapper" style="display: block;">
+			<div>
+				<div class="row">
+					<div class="col-lg-12">
+						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
 					</div>
-					<!--/.nav-collapse -->
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-10">
+	</div>
+
+	<!-- Menu Toggle Script -->
+	<script>
+		$('#page-content-wrapper').hide();
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$('#page-content-wrapper').hide();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+
+	<div id="preloader">
+		<div id="loader"> </div>
+	</div>
+	<div class="row container">
+		<div class="col-md-2">
+			<tiles:insertAttribute name="visual" />
+		</div>
+		<div class="col-md-10">
 			<tiles:insertAttribute name="content" />
 		</div>
 	</div>
-	<tiles:insertAttribute name="footer" />
+	<tiles:insertAttribute name="footer"/>
+
+	<div class="modal fade" id="tableviewer">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- remote ajax call이 되는영역 -->
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

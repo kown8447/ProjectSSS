@@ -40,7 +40,6 @@
 </se:authorize>
 
 <se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-
 	<div class="dropdown">
 		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> 즐겨찾기
 		<span class="caret"></span>
