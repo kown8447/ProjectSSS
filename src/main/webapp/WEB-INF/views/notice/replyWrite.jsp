@@ -28,9 +28,6 @@
 			<td align="center"><b>제목</b></td>
 			<td colspan="3">
 			<input type="text" name="notice_title" value="RE:${notice.notice_title}"></td>
-			<c:forEach begin="0" end="${notice.notice_depth}">
-				&nbsp;&nbsp;&nbsp;
-		</c:forEach>
 		</tr>
 		<tr>
 			<td align="center"><b>글내용</b></td>

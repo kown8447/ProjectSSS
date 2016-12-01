@@ -242,7 +242,7 @@ public class JoinController {
 			System.out.println("joinController / joinStep3 : " + e.getMessage());
 		}
 		if(result){
-			viewpage = "redirect:welcome.htm";
+			viewpage = "redirect:/login.htm";
 		}else{
 			System.out.println("멤버가입 실패");
 			viewpage = "redirect:join1.htm";

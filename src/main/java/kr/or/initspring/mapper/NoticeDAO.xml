@@ -74,5 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{notice_file,jdbcType=VARCHAR},
 		#{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
+	
+	<update id="noticeDeleteAndUpdate">
+   		UPDATE NOTICE set NOTICE_STATUS =1 where NOTICE_REFER=#{param1}
+   </update>   
 
 </mapper>

@@ -201,7 +201,15 @@ public class NoticeService {
 	public String noticeDel(int notice_index) throws ClassNotFoundException, SQLException {
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		CustomerNoticeDTO cn = noticedao.getNotice(notice_index);
 		noticedao.delete(notice_index);
+		
+		noticedao.noticeDeleteAndUpdate(notice_index);
+
+	      if (cn.getNotice_depth() == 0) {
+	    	  noticedao.noticeDeleteAndUpdate(cn.getNotice_refer());
+	      }
+	      noticedao.delete(notice_index);
 
 		return "redirect:notice.htm";
 	}

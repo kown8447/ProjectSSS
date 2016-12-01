@@ -4,17 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
-  .thumb {
-    height: 75px;
-    border: 1px solid #000;
-    margin: 10px 5px 0 0;
-  }
-</style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/memberEdit.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/memberEdit.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- 다음 api -->

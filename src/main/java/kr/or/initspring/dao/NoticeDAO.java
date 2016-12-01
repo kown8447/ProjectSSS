@@ -45,4 +45,7 @@ public interface NoticeDAO {
 	
 	//지금 읽고있는 게시글을 작성자(admin_code) 가져오기
 	public String getWriterCode(int notice_index) throws ClassNotFoundException, SQLException;
+	
+	// 글 삭제전 답글 업뎃
+	public int noticeDeleteAndUpdate(int notice_refer)throws ClassNotFoundException, SQLException; 
 }
