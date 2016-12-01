@@ -1,0 +1,22 @@
+#footer {
+	height: 70px;
+	clear: both;
+	position: center;
+}
+
+
+#header {
+	height: 100px;	
+}
+
+
+#content {	
+	float: both;
+	width: 720px; /*755-35*/
+	padding-left:35px;
+	padding-top:45px;
+	position:relative;	
+}
+
+
+

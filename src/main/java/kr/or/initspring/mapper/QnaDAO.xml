@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.initspring.dao.QnaDAO">
+	
+	<!-- 전체 글 수 -->
+	<select id="getCount" resultType="Integer">
+		select count(*) CNT
+        	from qna
+        where ${param1} LIKE '%'||#{param2}||'%'
+	</select>
+	
+	
+	<select id="getQna" resultType="kr.or.initspring.dto.qna.CustomerQnaDTO">		  
+		select * from 
+       	 (
+        	select A.* ,ROWNUM r from (
+               select * from qna where ${param1} like '%'||#{param2}||'%' order by qna_refer desc , qna_step 
+                                   ) A        
+         ) where r >= #{param3} and r &lt;= #{param4}   		  
+	</select>
+	
+	<select id="getQnaMul" resultType="kr.or.initspring.dto.qna.CustomerQnaDTO">		  
+		select * from
+        	(
+         	select A.* ,ROWNUM r from (
+               	select * from qna
+            
+               	where ${param1} like '%'||#{param3}||'%' or  ${param2} like '%'||#{param3}||'%'
+               	order by qna_refer desc , qna_step ) A
+            
+        	) where r >= #{param4} and r &lt;= #{param5}
+	</select>
+		
+	<insert id="qnaInsert" parameterType="kr.or.initspring.dto.qna.CustomerQnaDTO">
+		<selectKey order="BEFORE" keyProperty="qna_refer"  resultType="Integer">
+			SELECT NVL(MAX(qna_Refer),0)+1 FROM QNA
+		</selectKey>
+			insert into QNA
+							   (qna_Index,member_Id, qna_Depth, qna_Step, qna_Refer,
+							   qna_File, qna_Title, qna_Content, qna_Date)
+							   
+						VALUES(qna_Index.nextval,#{member_id}, 0, 0, #{qna_refer},
+								#{qna_file,jdbcType=VARCHAR}, #{qna_title}, #{qna_content}, SYSDATE)
+	</insert>
+	
+	<select id="qnaDetail" resultType="kr.or.initspring.dto.qna.CustomerQnaDTO">
+     	SELECT * FROM QNA WHERE qna_Index = #{qna_index}
+	</select>
+	
+	<delete id="qnaDelete">
+	 	DELETE QNA WHERE qna_Index = #{qna_index}
+	</delete>
+	
+	<update id="qnaDeleteAndUpdate">
+	UPDATE QNA set QNA_STATUS =1 where QNA_REFER=#{param1}
+	</update>	
+	
+	<update id="qnaUpdate">
+		UPDATE QNA 
+			SET qna_Title=#{qna_title},
+	    		qna_File=#{qna_file,jdbcType=VARCHAR},
+	    		qna_Content=#{qna_content} 
+	    		
+			WHERE qna_Index=#{qna_index}
+	</update>	
+	
+    <update id="qnaCount">
+  		UPDATE QNA
+  			SET qna_Count = qna_Count +1
+		WHERE qna_Index= #{qna_index}
+ 	</update>
+ 	
+	<!-- qnaInsertReply(답글처리) -->
+	<insert id="qnaInsertReply" parameterType="kr.or.initspring.dto.qna.CustomerQnaDTO">
+		INSERT INTO QNA
+					(qna_Index,member_Id, qna_Depth, qna_Step, qna_Refer,
+					qna_File, qna_Title, qna_Content, qna_Date)
+		
+					VALUES(qna_Index.nextval ,#{member_id},  #{qna_depth},  #{qna_step}, #{qna_refer},
+						  #{qna_file,jdbcType=VARCHAR}, #{qna_title}, #{qna_content}, SYSDATE)
+	</insert>
+	
+	<!-- qnaUpdateStep(답글시 순번 처리하기) -->
+	<update id="qnaUpdateStep" parameterType="kr.or.initspring.dto.qna.CustomerQnaDTO">
+		UPDATE QNA
+			SET qna_Step = qna_Step+1
+		WHERE qna_Refer = #{qna_refer} AND  qna_Step > #{qna_step}
+	</update>
+	
+	
+	<!-- 댓글 저장 -->
+	<insert id="insertComment" parameterType="kr.or.initspring.dto.qna.CustomerQnaReplyDTO">
+		<selectKey order="BEFORE" keyProperty="reply_step"  resultType="Integer">
+			SELECT NVL(MAX(reply_step),0)+1 as reply_step FROM qna_reply where reply_refer = #{qna_index}
+		</selectKey>
+			insert into qna_reply
+				(reply_index,member_id, reply_refer, reply_depth, reply_step,reply_content)
+			VALUES(reply_index.nextval,#{member_id},#{qna_index}, 0,  #{reply_step}, #{reply_content})
+	</insert>
+	
+	<!-- 댓글 index로 리스트 가져오기 -->
+	<select id="getReplyList" resultType="kr.or.initspring.dto.qna.CustomerQnaReplyDTO">
+			SELECT * FROM qna_reply where reply_refer = #{qna_index} order by reply_step asc
+	</select>
+		
+	<!-- 댓글 리스트 -->
+	<select id="listComment" resultType="kr.or.initspring.dto.qna.CustomerQnaReplyDTO">	
+		SELECT * FROM QNA_REPLY where REPLY_REFER= #{qna_index} order by reply_step asc
+	</select>
+	
+	<delete id="qnaCmtDelete">
+	 	DELETE qna_reply WHERE reply_index = #{reply_index}
+	</delete>
+	
+	<delete id="qnaDeleteBeforeWork">
+	 	DELETE qna_reply WHERE reply_refer = #{qna_index}
+	</delete>
+	
+	
+	<update id="qnaCmtUpdate">
+		UPDATE QNA_REPLY set REPLY_CONTENT=#{param2} where Reply_index=${param1}
+	</update>
+</mapper>
+
