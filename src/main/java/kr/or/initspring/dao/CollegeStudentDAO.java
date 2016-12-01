@@ -25,6 +25,7 @@ public interface CollegeStudentDAO {
 	public List<StudentRecordDTO> getRecordFullList(String student_code);//학생성적 전체리스트
 	public List<StudentRecordDTO> getRecordSelectList(RecordRequestDTO recordRequest);// 학생성적 학기별리스트
 	public MajorDTO majorEssentialCheck(String subject_code);//전공 과목 필수 여부확인
+
 	public int liberalEssentialCheck(String subject_code);//교양과목 필수 여부확인
 	public List<StudentRegisterDTO> getStudentRegisterList(String student_code);//학생 등록기록 리스트
 	public List<StudentSemesterStateDTO> getStudentSemesterList(String student_code);//학생 재학기록 리스트

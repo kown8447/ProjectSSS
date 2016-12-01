@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="${pageContext.request.contextPath}/js/collegeRegister/studentRecord.js"></script>
 성적조회
 <div>
 	<select class="recordSelect" id="recordGrade"><option
@@ -44,4 +45,5 @@
 			<td>평점(F제외):${outF}</td>
 		</tr>
 	</table>
+	<a id="pdfDownLoader" href="recordPdfRequest.htm">성적 PDF 파일 다운로드</a>
 </div>

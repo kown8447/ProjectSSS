@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
+<link href="${pageContext.request.contextPath}/css/requestCourse/realRegisterCourse.css" rel="stylesheet">
+
+
 <div class="row">
 	<div class="col-md-5">
 		<div class="navbar-header">
@@ -10,7 +14,8 @@
 					<option value="subject_code">과목코드</option>
 				</select> 
 				<input type="text" class="form-control" id="real_keyword" /> 
-				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색">
+				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색"/>
+
 				<div id="fail_result" class="row">
 				
 				</div>
@@ -87,6 +92,31 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="wait_layerpop">
+	<div class="modal-dialog modal-50size">
+		<div class="modal-content">
+			<!-- body -->
+			<div class="modal-body modal-50size">
+				<div id="container">
+					<div id="h">
+						<div class="strand_h" id="blue"></div>
+						<div class="strand_h" id="pink"></div>
+					</div>
+
+					<div id="v">
+						<div class="strand_v" id="green"></div>
+						<div class="strand_v" id="yellow"></div>
+					</div>
+				</div>
+				<div id="waitlist" style="font-size:large; text-align: center"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">닫기</button>
 			</div>
 		</div>
 	</div>

@@ -49,6 +49,8 @@ $(function() {
 								});
 								 rows+='<tr><td colspan="4">전공: '+data.majorCredit+'&nbsp; &nbsp; 교양:'+data.liberalCredit+' &nbsp; &nbsp; 복수전공:'+ data.doubleCredit+' &nbsp; &nbsp; 총이수학점:'+data.totalCredit+' &nbsp;</td><td>평점(F포함 계산):'+data.inF+'</td><td>평점(F제외):'+data.outF+'</td></tr>';
 						        $('#recordView').append(rows);
+						        
+						        $('#pdfDownLoader').attr("href","recordPdfRequest.htm?grade="+grade+"&semester="+semester);
 							}
 					});
 						

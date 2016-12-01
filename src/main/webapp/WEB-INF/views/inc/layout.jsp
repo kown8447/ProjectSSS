@@ -19,6 +19,8 @@
 <body>
 	<tiles:insertAttribute name="header"/>
 	
+	<tiles:insertAttribute name="aside"/>
+	
 	<tiles:insertAttribute name="content"/>
 	
 	<tiles:insertAttribute name="footer"/>

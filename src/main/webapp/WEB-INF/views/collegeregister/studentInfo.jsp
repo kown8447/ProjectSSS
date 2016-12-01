@@ -4,7 +4,7 @@
 <h5>학생 개인정보</h5>
 <div>
 	<img
-		src="${pageContext.request.contextPath}/images/${student.member_picture}">
+		src="${pageContext.request.contextPath}/profiles/${student.member_picture}">
 </div>
 <div>
 	<table></table>

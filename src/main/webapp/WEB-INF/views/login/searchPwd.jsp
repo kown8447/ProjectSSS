@@ -8,6 +8,11 @@
    @Desc : 비밀번호 찾기 view
 -->  
 <script src="${pageContext.request.contextPath}/js/login/searchPwd.js"></script>
+<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>
 	<h5>비밀번호 찾기</h5>
@@ -32,4 +37,24 @@
 </div>
 <div class="modal-footer">
 	<input type="button" id="searchPwdBtn" value="찾기" class="btn btn-success" style="width: 20%;">
+</div>
+
+
+<div class="modal fade" id="pwdEmail_layerpop">
+	<div class="modal-dialog">
+
+
+		<div id="mail-container">
+			<div id="line-container">
+				<div class="line line-1"></div>
+				<div class="line line-4"></div>
+				<div class="line line-2"></div>
+				<div class="line line-5"></div>
+				<div class="line line-3"></div>
+			</div>
+			<div id="mail"></div>
+		</div>
+
+
+	</div>
 </div>

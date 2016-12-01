@@ -13,6 +13,7 @@
 </style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/memberEdit.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -24,6 +25,8 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+	
+	<tiles:insertAttribute name="aside" />
 	
 	<tiles:insertAttribute name="content"/>
 	

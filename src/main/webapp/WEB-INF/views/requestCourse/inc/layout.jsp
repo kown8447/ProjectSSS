@@ -8,16 +8,10 @@
 
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/requestCourse/layout.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/requestCourse/preRegisterCourse.css" rel="stylesheet">
 
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/requestCourse/viewOpLecture.js"></script>
-<script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
-<script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
-<script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
-<script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,6 +20,7 @@
 <body>
 
 	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="aside" />
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="sidebar-nav">
