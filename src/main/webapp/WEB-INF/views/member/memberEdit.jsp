@@ -9,8 +9,8 @@
    @Data : 2016.11.22
    @Desc : 회원정보 수정 view 
 -->   
-<div class="container" style="margin-top: 5%; ">
-
+<center>
+<div class="container">
 <h3>${member.member_id}님 정보 수정 </h3>
 <br>
 <div class="form">
@@ -127,7 +127,7 @@
 </form>
 </div>
 </div>
-   
+</center>
 <!-- 이메일 수정 모달 -->
 <div class="modal fade" id="layerpop" >
   <div class="modal-dialog">
