@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.MethodType;
@@ -161,8 +162,9 @@ public class LectureMgController {
 		
 		
 		System.out.println("학생리스트출력스"+subject_code);
-		CustomLectureMgDTO dto = lectureservice.select_Studentlist(subject_code);
+		List<CustomLectureMgDTO> dto = lectureservice.select_Studentlist(subject_code);
 		
+		System.out.println("학생디티오:"+dto.toString());
 		model.addAttribute("student",dto);
 		
 		return jsonview;
@@ -180,8 +182,26 @@ public class LectureMgController {
 		return "lecture.studentmain";
 	}
 	
+	@RequestMapping(value="insertGrade.htm")
 	
-	
+	public String insertGrade(String subject_code,String student_code,String semester_code,String record_level){
+		
+		System.out.println(subject_code);
+		System.out.println(student_code);
+		System.out.println(semester_code);
+		System.out.println(record_level);
+		
+		CustomLectureMgDTO dto = new CustomLectureMgDTO();
+		dto.setSubject_code(subject_code);
+		dto.setStudent_code(student_code);
+		dto.setSemester_code(semester_code);
+		dto.setRecord_level(record_level);
+		dto = lectureservice.insertgrade(dto);
+		System.out.println("인쑤얼트그루에이드");
+		
+		return "lecture.studentmain";
+		
+	}
 	
 	
 	

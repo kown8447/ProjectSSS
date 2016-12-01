@@ -13,6 +13,7 @@ import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
 import kr.or.initspring.dto.commons.PlanDTO;
 import kr.or.initspring.dto.commons.ProfessorDTO;
+import kr.or.initspring.dto.commons.RecordDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
@@ -26,7 +27,7 @@ public interface LectureMgDAO {
 	
 	//과목등록 사용
 	//위에 셀렉프로페서
-	public int insert_Subject(SubjectDTO dto);
+	public void insert_Subject(SubjectDTO dto);
 	public PfMajorDTO select_departmentcode(String memberid);
 	public int insert_Liberal(String subject_code,String required_choice);
 	public int insert_major(String subject_code,String required_choice,String department_code);
@@ -56,7 +57,7 @@ public interface LectureMgDAO {
 	public void delete_Rejection(String subject_code);
 	
 	//성적입력
-	public CustomLectureMgDTO select_Studentlist(String subject_code);
+	public List<CustomLectureMgDTO> select_Studentlist(String subject_code);
 	
 	public int insert_BeforeName(String subject_code,String subject_name);
 	
@@ -71,6 +72,8 @@ public interface LectureMgDAO {
 	public List<SemesterDTO> getSemester();
 	public void setAskTime(String classroom_code,String period_code,String subject_code);
 	public void setOprequest(CustomLectureMgDTO dto);
-	
-
+	public CustomLectureMgDTO select_stState(String student_code);
+	public void insert_record(CustomLectureMgDTO dto);
+	public RecordDTO select_record(String student_code);
+	public String maxRecord_code(); 
 }

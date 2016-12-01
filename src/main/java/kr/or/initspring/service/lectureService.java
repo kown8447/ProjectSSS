@@ -21,6 +21,7 @@ import kr.or.initspring.dto.commons.LiberalDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
+import kr.or.initspring.dto.commons.RecordDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
@@ -73,31 +74,26 @@ public class lectureService {
 		System.out.println(principalid);
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 
-		String subject_code = lecturedao.maxSubject_code();
-
-		String code[] = subject_code.split("_");
-		String first = code[0];
-		String second = code[1];
 		
-		System.out.println(first+"/"+second);
+		String subject_codenum = lecturedao.maxSubject_code();
+		System.out.println(subject_codenum);
+		String subject_code = "SJ_"+subject_codenum;
 		
-		int change = Integer.parseInt(second);
-		change += 1;
+		System.out.println("수정한 서브젝트코드"+subject_code);
 
-		subject_code = first+"_"+change;
 		dto.setSubject_code(subject_code);
-		
+		System.out.println("디티오안에 ㅅ브젝트코드"+dto.getSubject_code());
 		
 		try {
 			String insertparam = lecturedao.select_Professor(principalid);
 			dto.setProfessor_code(insertparam);
 			lecturedao.insert_Subject(dto);
-		
+			System.out.println("1번");
 			int subject_type = dto.getSubject_type();
 			int required_select = 5; 
-
+			
 			department_code = lecturedao.select_departmentcode(principalid).getDepartment_code();
-
+			System.out.println("2번");
 			if (subject_type == 0) {
 				required_select = lecturedao.insert_major(subject_code, required_choice, department_code);
 
@@ -111,7 +107,7 @@ public class lectureService {
 					before = lecturedao.insert_BeforeName(subject_code, "없음");
 				} 
 			}
-
+			System.out.println("3번");
 		} catch (Exception e) {
 			System.out.println("장현 등록 트랜잭션 오류 : " + e.getMessage());
 			try {
@@ -321,14 +317,37 @@ public class lectureService {
 	
 	
 	
-	public CustomLectureMgDTO select_Studentlist(String subject_code){
+	public List<CustomLectureMgDTO> select_Studentlist(String subject_code){
 		System.out.println("스투던트서비스탐"+subject_code);
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		CustomLectureMgDTO dto = lecturedao.select_Studentlist(subject_code);
+		List<CustomLectureMgDTO> dto = lecturedao.select_Studentlist(subject_code);
 		
 		return dto;
 	}
 	
+	public CustomLectureMgDTO insertgrade(CustomLectureMgDTO dto){
+		
+		
+		System.out.println("성적입력 서비스");
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);	
+		System.out.println("확인 고고"+dto.getSemester_code());
+		System.out.println(dto.getStudent_code());
+		String record = lecturedao.maxRecord_code();
+		String record_code = "RC_"+record;
+		
+		dto.setRecord_code(record_code);
+		CustomLectureMgDTO state = lecturedao.select_stState(dto.getStudent_code());
+		System.out.println("학기뿌린다"+state.getPersonal_Semester());
+		dto.setRecord_code(record_code);
+		System.out.println("꼭확인해야됨"+dto.toString());
+		
+		lecturedao.insert_record(dto);
+		System.out.println("1번 인설트성공");
+		
+		
+		
+		return dto;
+	}
 	
 }

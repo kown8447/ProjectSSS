@@ -9,15 +9,14 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
-	
+var subject_code='';
 
 
 	$(function(){
 			
-		var subject_code = $("#d").val();
-		
 		$("#subject").change(function(){
-			alert(subject_code);
+			subject_code = $("#subject").val();
+			console.log(subject_code);
 			$.ajax(
 					{
 						url : "selectStudent.htm",
@@ -25,15 +24,63 @@
 							subject_code : subject_code,
 						},
 						dataType : "json",
-						success : function(){
-							alert("ㅋㅋ");
-							location.replace("lectureMyclass.htm");
+						success : function(data){
+							$("td").remove();
+							console.log(data);
+							$.each(data.student,function(index){
+							$("#list").append("<tr><td id='student_code_"+index+"'>"+data.student[index].student_code+"</td>"
+							+"<td>"+data.student[index].member_name+"</td><td>"+data.student[index].member_email+"</td>"
+							+"<td><select id='grade_"+index+"'><option value='A+'>A+</option><option value='A'>A</option>"
+							+"<option value='B+'>B+</option><option value='B'>B</option><option value='C+'>C+</option>"
+							+"<option value='C'>C</option><option value='D+'>D+</option><option value='D'>D</option>"
+							+"<option value='F'>F</option>"
+							+"</select><button class='update' value='btn_"+index+"'>성적등록</button></td></tr>"
+							+"<input type='hidden' id='semester"+index+"' value='"+data.student[index].semester_code+"'>")
+							
+							
+							})		
+							recordUpdateSetting();
+							
+									
 						}
 						
 					}
 					)
 			
-		})
+		});
+		
+		function recordUpdateSetting() {
+			$('.update').click(function() {
+				alert("떳다업데이트버튼");
+				
+			var btnIndex=$(this).val().split('_')[1];
+			alert(btnIndex);	
+			alert($('#student_code_'+btnIndex).text());
+			alert("이게 성적:"+$('#grade_'+btnIndex).val());
+			alert(subject_code);
+			alert($('#semester'+btnIndex).val());
+			
+			
+			$.ajax(
+					{
+						url : "insertGrade.htm",
+						data : {
+							 subject_code: subject_code,
+							student_code : $("#student_code_"+btnIndex).text(),
+						   	semester_code : $("#semester"+btnIndex).val(), 
+						   	record_level: $('#grade_'+btnIndex).val(), 
+							
+							
+						},
+						success : (function(data){
+							alert("성공스");
+						})
+					}
+				);
+				
+			});
+		}
+		
 	})
 
 </script>
@@ -42,7 +89,7 @@
 	<select id="subject">
 		<option value="0">선택하세요</option>
 		<c:forEach items="${myclass}" var="i">
-			<option>${i.subject_name }</option>		
+			<option value="${i.subject_code }">${i.subject_name }</option>		
 		</c:forEach>
 	</select>
 	
@@ -52,18 +99,8 @@
 	
 		<div class="container">
 	<table id="list" border="1px" class="table">
-		<tr>
-			<td>구분</td><td>학년</td><td>학생명</td><td>성적</td>
-		</tr>
-
-		<c:forEach items="${student}" var="stu">
-		<tr>
-		<td>${stu.student_code }</td>
-		<td>${stu.member_email}</td>
+	<tr><th>학번</th><th>학생명</th><th>학생이메일</th><th>성적</th></tr>
 	
-		
-		</tr>
-		</c:forEach>
 		</table>
 		</div>
 

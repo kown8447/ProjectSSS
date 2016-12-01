@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name},subject_credit=#{subject_credit}
+		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name}
 		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
 	</update>
 	
@@ -132,8 +132,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
 	<select id="maxSubject_code" resultType="String">
-		 SELECT nvl(max(subject_code),'SJ_0') FROM SUBJECT s ORDER BY s.SUBJECT_CODE desc
+		SELECT subject_seq.nextval as subject_code FROM double
 	</select>
+		
+	<select id="maxRecord_code" resultType="String">
+		SELECT record_seq.nextval as record_code FROM double
+	</select>
+	
 	
 	<!-- 개설신청 -->
 	<insert id="insert_Plan" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
@@ -169,8 +174,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="select_Studentlist" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		    select * from timetable t join student s on t.student_code = s.student_code
-		     join member m on m.member_id = s.MEMBER_ID where t.SUBJECT_CODE = #{param1} 
+		    select * from timetable t join student s on t.student_code = s.student_code 
+		     join member m on m.member_id = s.MEMBER_ID join opened o on o.subject_code = t.subject_code
+		      where t.SUBJECT_CODE = #{param1} 
 
 	</select>
 	
@@ -179,5 +185,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join OPENED o on s.subject_code = o.subject_code where p.professor_code = #{professor_code}
 	</select>
 	
+	<select id="select_stState" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from ST_STATE where student_code = #{param1}
+	</select>
+	
+	<insert id="insert_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into RECORD(record_code,student_code,subject_code,semester_code,record_level,record_grade,record_semester,retake_check)
+		values (#{record_code},#{student_code},#{subject_code},#{semester_code},#{record_level},#{record_grade},#{personal_Semester},0)
+	</insert>
+	
+	<select id="select_record" resultType="kr.or.initspring.dto.commons.RecordDTO">
+		select * from RECORD where student_code = #{param1}
+	</select>
 	
 </mapper>

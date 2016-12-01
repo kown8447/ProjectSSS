@@ -35,6 +35,7 @@ public class CustomLectureMgDTO {
 	private String member_phone;  //학생폰번
 	private String record_code;    //성적코드
 	private String record_level;  //성적
+	private int personal_Semester;
 	
 	
 	
@@ -42,7 +43,12 @@ public class CustomLectureMgDTO {
 	
 	
 	
-	
+	public int getPersonal_Semester() {
+		return personal_Semester;
+	}
+	public void setPersonal_Semester(int personal_Semester) {
+		this.personal_Semester = personal_Semester;
+	}
 	public String getStudent_code() {
 		return student_code;
 	}
@@ -243,8 +249,10 @@ public class CustomLectureMgDTO {
 				+ record_grade + ", success_check=" + success_check + ", grade_limit=" + grade_limit + ", before_name="
 				+ before_name + ", classroom_name=" + classroom_name + ", member_id=" + member_id + ", member_name="
 				+ member_name + ", student_code=" + student_code + ", member_email=" + member_email + ", member_phone="
-				+ member_phone + ", record_code=" + record_code + ", record_level=" + record_level + "]";
+				+ member_phone + ", record_code=" + record_code + ", record_level=" + record_level
+				+ ", personal_Semester=" + personal_Semester + "]";
 	}
+	
 	
 	
 
