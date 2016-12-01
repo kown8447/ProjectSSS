@@ -60,9 +60,9 @@ table, td, th {
 		});
 	</script>
 
-	<div id="preloader">
+	<!-- <div id="preloader">
 		<div id="loader"> </div>
-	</div>
+	</div> -->
 	<div class="row container">
 		<tiles:insertAttribute name="content" />
 	</div>

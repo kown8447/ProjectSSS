@@ -19,7 +19,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#preloader').fadeOut('slow');
+		$('#preloader').fadeOut('fast');
 		$('body').css({
 			'overflow' : 'visible'
 		});
@@ -57,9 +57,10 @@
 		});
 	</script>
 
-	<div id="preloader">
+	<!-- <div id="preloader">
 		<div id="loader"> </div>
-	</div>
+	</div> -->
+	
 	<div class="row container">
 		<div class="col-md-2">
 			<tiles:insertAttribute name="visual" />
