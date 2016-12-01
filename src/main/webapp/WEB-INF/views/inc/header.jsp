@@ -31,6 +31,9 @@
 <se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
 <a href="${pageContext.request.contextPath}/lecture/lectureView.htm">교수쓰</a>
 </se:authorize>
+<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
+<a href="${pageContext.request.contextPath}/lecture/lectureMyclass.htm">성적입력</a>
+</se:authorize>
 <se:authorize access="hasRole('ROLE_STUDENT')">
 	<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
 </se:authorize>

@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	$(function(){
 		var count = 0;
-		
+		var credit = ${list.subject_credit};
 		$.ajax(
 				{
 					url : "lecturePeriod.htm",
@@ -24,11 +24,7 @@
 					}
 				}
 				)
-		
-		
-		
-		
-		
+
 		$("#building").change(function(){
 		//alert($("#building").val());
 
@@ -86,38 +82,63 @@
 			
 		
 		})
-		
+
 		$("td").click(function(){
-			
-			var credit = ${list.subject_credit};
+			if($("#classroom").val()=="없음" || $("#classroom").val()=="" || $("#building").val()=="없음" || 
+					$("#building").val() == ""){
+				alert("강의실을 선택해주세요");		
+				return false;
+			}else{
+				if(($(this).html()) != ""){
+					alert("중복입니다")
+					return false;}
+				else{
+				
 			if(credit <= count){
 			alert("그만넣어");
 			return false;
 			}else{
 				console.log("else탐");
 			$(this).text("${list.subject_name}");
-			$(this).css("background","#47C83E")
+			$(this).css("background","#47C83E");
 			count+=1;
 			}
+		}
+			
+			}
+		
+			})
+		
 	
-		});
-		
-		
+
+	
 	})
-		function getvalue(i){  
-			alert("이싱거"+i);
-			$("#timetime").append(i);
-	}
 	
+		var count = 0;
+		function getvalue(i){ 
+		
+		var credit = ${list.subject_credit};
+			
+		if(count >= credit){
+				return false;
+			}
+			else{
+				//periodArray.push(i);
+				$("#period").append("<input type=hidden name=period_code value="+i+">");
+				count+=1;
+			}
+		console.log(count);
+			}
 
 </script>
 </head>
 <body>
+
 <div class="container">
-<form id="postSubject_htm" enctype="multipart/form-data">
+
 	<table border=1px class="table">
 		<tr>
-		<th>구분</th><th>선수과목></th><th>과목명</th><th>학점</th><th>정원</th><th>수강대상</th>
+		<th>구분</th><th>선수과목</th><th>과목명</th><th>학점</th><th>정원</th><th>수강대상</th>
 		</tr>
 		<tr>
 		<th>	
@@ -139,26 +160,39 @@
 		</table>
 		<br>
 		</div>
-			<div class="row">
+	
+	<form action="postRequestSubject.htm" enctype="multipart/form-data" method="post">
+	
+	<input type="hidden" value="${list.subject_code }" name="subject_code">
+	<input type="hidden" value="${list.success_check }" name="success_check">
+	<div class="row">
 		<!-- 건물  -->
 		<div class="col-sm-3">
-		<select class="form-control" id="building" name="building">
+		<select class="form-control" id="building" name="building_code">
 			<option>없음</option>
 			<option value="B_001" name="B_001">본부동</option>
 			<option value="B_002" name="B_002">가츠동</option>
 			<option value="B_003" name="B_003">어우동</option>
 		</select>
+		<label>시간</label> <div id="period" name="period"></div>
 	
+		<label>강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filename"><br>
+			
+		</div>
 		<div class="col-sm-3">
-		<select class="form-control" id="classroom" name="classroom">
-
+		<select class="form-control" id="classroom" name="classroom_code">없음
+		<option value="0">없음</option>
 		</select>  
-		<label>시간</label> <div id="timetime"></div>
-		<label>강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filesrc"><br>
 	
+		<%-- 		
+		<select id="semester_code" name="semester_code" class="form-control">
+		<c:forEach items="${semester }" var="i">
+			<option value="${i.semester_code }">${i.semester_name }</option>
+		</c:forEach>
+		</select>
+		 --%>
 		</div>
-		
-		</div>
+	
 	
 
 	 <div class="col-sm-6">
@@ -175,20 +209,23 @@
 				<c:forEach var="i" begin="1" end="20">
 					<tr bordercolor="black" style="font-size:small; text-align: center; border: 1px" height="20px">
 						<th id="PERIOD_START_${i}" style="word-break: break-all; text-align: center"></td>
-						<td id="PR_MON_${i}" height="auto" style="word-break: break-all;" onclick=getvalue("PR_MON_${i}")></td>
+						<td id="PR_MON_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_MON_${i}")></td>
 						<td id="PR_TUE_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_TUE_${i}")></td>
 						<td id="PR_WEN_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_WEN_${i}")></td>
 						<td id="PR_THU_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_THU_${i}")></td>
 						<td id="PR_FRI_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_FRI_${i}")></td>
 					</tr>
 				</c:forEach>
+			
 			</table>
-		</div>
-		</div>
 		
+				<input type="submit" id="submit" value="제출">
+			
+			</form>
+		</div>
+	</div>
+
 	
-		<input type="submit" value="신청쓰">
-	</form>
-	<button id="back">돌아가기</button> 
+	<button id="back" class="btn btn-primary">돌아가기</button>
 </body>
 </html>

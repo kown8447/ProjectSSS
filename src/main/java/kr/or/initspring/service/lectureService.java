@@ -1,11 +1,13 @@
 package kr.or.initspring.service;
 
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.set.SynchronizedSet;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dao.LectureMgDAO;
-import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.LiberalDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
-import kr.or.initspring.dto.commons.PlanDTO;
+import kr.or.initspring.dto.commons.SemesterDTO;
+import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
 
 @Service
@@ -66,6 +68,7 @@ public class lectureService {
 
 		int result = 0;
 		int before = 0;
+		
 		String principalid = principal.getName();
 		System.out.println(principalid);
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
@@ -209,28 +212,62 @@ public class lectureService {
 	
 	}
 	
-	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int RequestSubject(CustomLectureMgDTO dto){
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class})
+	public void RequestSubject(CustomLectureMgDTO dto,HttpServletRequest request,String success_check) throws Exception{
 		
-	LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		System.out.println("이것이 작업할 :"+success_check);
 		
-		try{
-			System.out.println(dto.getSubject_filesrc());
-			lecturedao.insert_Plan(dto);
-			System.out.println("강의계획서 등록");
-			
-			//시간표 등록
-			//강의 실 등록
-		 
-	} catch (Exception e) {
-		System.out.println("장현 삭제 트랜잭션 오류 : " + e.getMessage());
-		try {
-			throw e;
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		if(success_check.equals("2")){
+			lecturedao.delete_Ask_Time(dto.getSubject_code());
+			lecturedao.delete_Oprequest(dto.getSubject_code());
+			lecturedao.delete_Rejection(dto.getSubject_code());
 		}
+		
+		
+		
+		String period_code = dto.getPeriod_code();
+
+		String code[] = period_code.split(",");
+		String subject_code = dto.getSubject_code();
+		String classroom_code = dto.getClassroom_code();
+		System.out.println(classroom_code+code[0]+subject_code);
+	
+		try{
+			lecturedao.setOprequest(dto);
+			
+			for(int i = 0; i < code.length ; i++){
+			System.out.println(code[i]);
+			lecturedao.setAskTime(classroom_code,code[i].trim(),subject_code);
+			}
+			
+			CommonsMultipartFile file = dto.getSubject_filename();
+			String filename = null;
+			String filesrc = null;
+
+		      if (file != null && file.getSize() > 0) {
+		         String fname = file.getOriginalFilename();
+		         String path = request.getServletContext().getRealPath("/files/lecture");
+		         String fullpath = path + "\\" + fname;
+		         if (!fname.equals("")) {
+		            FileOutputStream fs = new FileOutputStream(fullpath);
+		            fs.write(file.getBytes());
+		            fs.close();
+		         }
+		         filename = fname;
+		         filesrc = path;
+		      }
+
+		      dto.setSubject_filename(file);
+		      dto.setSubject_filesrc(filename);
+		      System.out.println(file+"/"+dto.getSubject_code());
+		      
+		      lecturedao.insert_Plan(dto);
+	 
+		} catch (Exception e) {
+		System.out.println("장현 신청 트랜잭션 오류 : " + e.getMessage());
+		throw e;
 	}
-	 return 0;
 		
 	}
 	
@@ -259,5 +296,39 @@ public class lectureService {
 		
 		return dto;
 	}
+	
+	public List<SemesterDTO> getSemester(){
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		List<SemesterDTO> dto = lecturedao.getSemester();
+		
+		return dto;
+	}
+	
+	public List<CustomLectureMgDTO> selectMyclass(Principal principal){
+		
+		System.out.println("마이클래스");
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		String professor_code = lecturedao.select_Professor(principal.getName());
+		
+		System.out.println("셀렉마이클래스"+professor_code);
+		
+		List<CustomLectureMgDTO> dto = lecturedao.select_myClass(professor_code);
+		System.out.println("ㅣㄸ띠띠띠띠오생성");
+		return dto;
+		
+	}
+	
+	
+	
+	public CustomLectureMgDTO select_Studentlist(String subject_code){
+		System.out.println("스투던트서비스탐"+subject_code);
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		CustomLectureMgDTO dto = lecturedao.select_Studentlist(subject_code);
+		
+		return dto;
+	}
+	
 	
 }

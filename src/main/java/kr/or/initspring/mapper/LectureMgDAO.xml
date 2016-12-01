@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.LectureMgDAO">
 	<select id="select_list" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-	 select s.subject_code, nvl(o.success_check,3) as success_check,s.GRADE_LIMIT,s.subject_name,s.subject_type 
+	 select s.subject_code, nvl(o.success_check,0) as success_check,s.GRADE_LIMIT,s.subject_name,s.subject_type 
     from SUBJECT s LEFT OUTER join OP_REQUEST o 
     on s.subject_code = o.subject_code where s.professor_code = #{param1}
 	
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 여기서부터디테일 -->
 	<select id="subject_Detail" parameterType="String" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		select * from subject s left outer join before_subject b on s.subject_code = b.subject_code
+		select * from subject s left outer join before_subject b on s.subject_code = b.subject_code 
         where s.subject_code = #{param1}
 	</select>
 	
@@ -107,6 +107,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from PLAN where subject_code=  #{param1}
 	</delete>
 	
+	<delete id="delete_Oprequest">
+		delete from OP_REQUEST where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Rejection">
+		delete from REJECTION where subject_code = #{param1}
+	</delete>
+	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name},subject_credit=#{subject_credit}
 		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
@@ -129,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 개설신청 -->
 	<insert id="insert_Plan" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		insert into Plan subject_filesrc values #{subject_filesrc} where subject_code = #{subject_code}
+		insert into Plan (subject_filesrc,subject_code) values (#{subject_filesrc},#{subject_code})
 	</insert>
 	
 	
@@ -138,17 +146,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    s.professor_code = p.professor_code join member m on p.member_id = m.member_id
 		     where a.classroom_code = #{param1}
 	</select>
-	
-	<select id="select_semester">
-			select * from semester
-	</select>
-	
+
 	<select id="selectAllBuilding" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-			select *  from classroom where building_code = #{param1}
+			select * from classroom where building_code = #{param1}
 	</select>
 	
 	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
 		select * from Period
 	</select>
+	
+	<insert id="setAskTime" parameterType="String">
+		insert into ASK_TIME (classroom_code,period_code,subject_code) values (#{param1},#{param2},#{param3})
+	</insert>
+	
+	<insert id="setOprequest" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',1)
+	</insert>
+	
+	
+	<select id="getSemester" resultType="kr.or.initspring.dto.commons.SemesterDTO">
+		select * from SEMESTER
+	</select>
+
+	<select id="select_Studentlist" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		    select * from timetable t join student s on t.student_code = s.student_code
+		     join member m on m.member_id = s.MEMBER_ID where t.SUBJECT_CODE = #{param1} 
+
+	</select>
+	
+	<select id="select_myClass" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from PROFESSOR p join subject s on p.PROFESSOR_CODE = s.PROFESSOR_CODE 
+		join OPENED o on s.subject_code = o.subject_code where p.professor_code = #{professor_code}
+	</select>
+	
 	
 </mapper>

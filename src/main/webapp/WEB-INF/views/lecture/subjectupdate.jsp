@@ -26,12 +26,12 @@
 		 <c:when test="${list.subject_type == '1'}">교양</c:when>
 		 </c:choose>
 		 <input type="hidden" name="subject_type" value=${list.subject_type }>
-			<select id="required_choice" name="required_choice">
-			<option value=0>필수</option>
-			<option value=1>선택</option>
-		</select>
+			 <c:choose>
+		 <c:when test="${list.required_choice == '0'}">필수</c:when>
+		 <c:when test="${list.required_choice == '1'}">선택</c:when>
+		 </c:choose>
 		</td>
-		<td>강의대상</td><td><input type="text" name="grade_limit"value="${list.grade_limit}"></td></tr>
+		<td>강의대상</td><td>${list.grade_limit}</td></tr>
 		<tr>
 		<td>선수과목</td><td colspan="3"><input type="text" name="before_name" value="${list.before_name}"></td></tr>
 		<tr>

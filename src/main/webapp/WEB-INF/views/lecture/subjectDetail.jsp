@@ -8,7 +8,35 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function(){
-	
+		
+		var success_check = $("#sc").val();
+		var subject_code = $("#subject_code").val();
+		
+		$("#delete").click(function(){
+				alert("삭제못해요");
+				return false;
+			
+		});
+		
+		$("#update").click(function(){
+			alert(success_check);
+			if(success_check != 0){
+				alert("신청중이므로 수정할 수 없습니다");
+				return false;
+			}else{
+				location.replace("lectureEdit.htm?subject_code="+subject_code);
+			}
+			
+		});
+		
+		$("#request").click(function(){
+			if(success_check != 0){
+				alert("이미 신청된 과목입니다");
+				return false;
+			}else{
+				location.replace("lecturePost.htm?subject_code="+subject_code+"&success_check="+success_check);
+			}
+		})
 		
 	})
 	
@@ -37,12 +65,16 @@
 		<td>과목명</td><td colspan="3">${list.subject_name}</td></tr>
 		<tr>
 		<td>학점</td><td>${list.subject_credit}</td><td>정원</td><td>${list.subject_seats}</td></tr>
-		<input type="hidden" value="${list.subject_code }">
+		
+		<input type="hidden" id="subject_code" value="${list.subject_code }">
+		<input type="hidden" id="sc" value=<%=request.getParameter("success_check") %>>
+		
 	</table>
 	</div>
 	<button id="back">돌아가기</button>  
-	<a href="lectureEdit.htm?subject_code=${list.subject_code}">수정하기</a>
-	<a href="lectureDelete.htm?subject_code=${list.subject_code }">삭제하기</a>
-	<a href="lecturePost.htm?subject_code=${list.subject_code}">신청하기</a>
-</body>
+	
+	<button id="update" class="btn btn-primary">수정</button>
+	<button id="delete" class="btn btn-danger">삭제</button>
+	<button id="request" class="btn btn-success">신청</button>
+	</body>
 </html>

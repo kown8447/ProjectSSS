@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import kr.or.initspring.dto.commons.AskTimeDTO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
+import kr.or.initspring.dto.commons.OpenedDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.commons.PfMajorDTO;
 import kr.or.initspring.dto.commons.PlanDTO;
 import kr.or.initspring.dto.commons.ProfessorDTO;
+import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SubjectDTO;
 import kr.or.initspring.dto.lectureMg.CustomLectureMgDTO;
 
@@ -49,15 +52,25 @@ public interface LectureMgDAO {
 	public void delete_Liberal(String subject_code);
 	public void delete_Ask_Time(String subject_code);
 	public void delete_Before(String subject_code);
+	public void delete_Oprequest(String subject_code);
+	public void delete_Rejection(String subject_code);
+	
+	//성적입력
+	public CustomLectureMgDTO select_Studentlist(String subject_code);
 	
 	public int insert_BeforeName(String subject_code,String subject_name);
 	
 	public CustomLectureMgDTO select_period_build(String subject_code);
 	
+	public List<CustomLectureMgDTO> select_myClass(String professor_code);
 	//신청히기
 	public List<CustomLectureMgDTO> viewtimetable(String classroom_code);
-	public String insert_Plan(CustomLectureMgDTO dto);
+	public void insert_Plan(CustomLectureMgDTO dto);
 	public List<CustomLectureMgDTO> selectAllBuilding(String building_code); 
 	public List<PeriodDTO> getPeriodList();
+	public List<SemesterDTO> getSemester();
+	public void setAskTime(String classroom_code,String period_code,String subject_code);
+	public void setOprequest(CustomLectureMgDTO dto);
+	
 
 }
