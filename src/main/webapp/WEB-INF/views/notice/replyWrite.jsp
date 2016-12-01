@@ -16,10 +16,12 @@
 		<tr>
 			<td>
 			<!-- 히든 필드로 정보 보내기 -->
+			<input type="hidden" name="notice_index" value="${notice.notice_index}"/>
+			<input type="hidden" name="notice_step" value="${notice.notice_step}"/>
 			<input type="hidden" name="notice_refer" value="${notice.notice_refer}"/>
 			<input type="hidden" name="notice_depth" value="${notice.notice_depth}"/>
 			</td>
-			<td align="center"><b>글쓴이</b></td>
+			<td align="center"><b>작성자</b></td>
 			<td>관리자</td>
 		</tr>
 		<tr>

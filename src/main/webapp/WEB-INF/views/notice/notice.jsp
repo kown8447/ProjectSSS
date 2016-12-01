@@ -12,7 +12,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h3>공지사항</h3>
 <div id="content">
-
 	<form method="post">
 			<div class="col-sm-3" style="margin-left: 68%">
 				<div class="input-group">
@@ -23,7 +22,6 @@
 				</div>
 			</div>
 	</form>
-
 	<br><br>
 	
 <div style="width:85%; text-align: center; margin: auto;">
@@ -46,8 +44,8 @@
 					<td>${n.notice_index}</td>
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
-								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}"
-									step="1"> &nbsp;
+								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
+								&emsp;&emsp;
                            		</c:forEach>
 								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>

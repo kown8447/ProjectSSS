@@ -87,12 +87,8 @@ public class NoticeService {
 		cn.setNotice_file(filenames);
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		  int lastReplyStep =noticedao.lastReplyStep(cn);
-          if(lastReplyStep!=0){
-             cn.setNotice_step(lastReplyStep);
-          }
           
-          noticedao.addStep(cn);
+        noticedao.addStep(cn);
 		cn.setAdmin_code(noticedao.selectAdmin(principal.getName()));
 		cn.setNotice_step(cn.getNotice_step()+1);
 		cn.setNotice_depth(cn.getNotice_depth()+1);
@@ -176,10 +172,25 @@ public class NoticeService {
 	public CustomerNoticeDTO noticeDetail(int notice_index) throws ClassNotFoundException, SQLException {
 
 		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		noticedao.increase(notice_index);
 		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);
-		
 		return noticedto;
+	}
+	
+	/*
+	 * @method Name : noticeCount
+	 * @Author : 송아름
+	 * @description : 글 조회수 service
+	 */
+	public void noticeCount(String readerId, int notice_index) throws ClassNotFoundException, SQLException {
+		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		
+		String readerCode= noticedao.selectAdmin(readerId);
+		String writerCode= noticedao.getWriterCode(notice_index);
+		
+		if (readerId==null||!readerCode.equals(writerCode)) {
+			noticedao.increase(notice_index);
+		}
+
 	}
 
 	/*
@@ -264,5 +275,7 @@ public class NoticeService {
 		fin.close();
 		sout.close();
 	}
+
+
 
 }

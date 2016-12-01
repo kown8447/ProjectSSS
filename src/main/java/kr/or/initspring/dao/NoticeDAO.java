@@ -43,7 +43,6 @@ public interface NoticeDAO {
 	//답글 달기
 	public void replyWrite(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
 	
-	//마지막 스텝 찾기
-	public int lastReplyStep(CustomerNoticeDTO cn) throws ClassNotFoundException, SQLException;
-
+	//지금 읽고있는 게시글을 작성자(admin_code) 가져오기
+	public String getWriterCode(int notice_index) throws ClassNotFoundException, SQLException;
 }
