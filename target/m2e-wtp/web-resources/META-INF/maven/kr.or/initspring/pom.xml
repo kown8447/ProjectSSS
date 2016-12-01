@@ -67,7 +67,7 @@
 			<artifactId>ojdbc</artifactId>
 			<version>11</version>
 		</dependency>
-
+		
 		<!-- fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -79,7 +79,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		
 		<!-- UI Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -91,21 +91,21 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-
+		
 		<!-- jsp (JSTL) -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
+		
 		<!-- slf4j (log) -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.6</version>
 		</dependency>
-
+		
 		<!-- Mybatis 설정하기 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -116,8 +116,8 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
-		</dependency>
-
+		</dependency>	
+		
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -137,9 +137,9 @@
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>4.0.1.RELEASE</version>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-crypto</artifactId>
+		    <version>4.0.1.RELEASE</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
@@ -160,8 +160,8 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.7.3</version>
-		</dependency>
+			<version>2.7.4</version>
+		</dependency>		
 
 		<!-- 인터페이스 없이도 Transactional 사용 가능 -->
 		<dependency>
@@ -180,23 +180,16 @@
 
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4</version>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
-
-		<!--http://www.mvnrepository.com/artifact/com.lowagie/itext/2.1.7 -->
-		<dependency>
-			<groupId>com.lowagie</groupId>
-			<artifactId>itext</artifactId>
-			<version>2.1.7</version>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity</artifactId>
+		    <version>1.7</version>
 		</dependency>
 	</dependencies>
 	<build>
