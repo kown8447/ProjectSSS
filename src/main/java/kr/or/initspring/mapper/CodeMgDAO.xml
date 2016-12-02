@@ -171,6 +171,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into register(student_code, semester_code , register_type, tuition, register_state) values(register_idx.nextval, #{semester_code}, #{register_type}, #{tuition}, #{register_state})
 	</insert>
 	
+	
+	
 	<select id="getMaxBuildingCode" resultType="String">
 		SELECT nvl(max(building_code),'SJ_0') FROM building s ORDER BY s.building_CODE desc
 	</select>
@@ -226,5 +228,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteEnrollment">
 		delete from enrollment
 	</delete>
+	
+	
+	<select id="classbuilding" resultType="kr.or.initspring.dto.member.ClassBuildingDTO">
+		SELECT * FROM CLASSROOM cl join building bd on cl.building_code = bd.BUILDING_CODE
+	</select>
+	<select id="labbuilding" resultType="kr.or.initspring.dto.member.LabBuildingDTO">
+		select * from laboratory lb join building bd on lb.building_code = bd.building_code
+	</select>
+	<select id="officebuilding" resultType="kr.or.initspring.dto.member.OfiiceBuildingDTO">
+		SELECT * FROM OFFICE o join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+	</select>
 	
 </mapper>

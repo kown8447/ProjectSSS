@@ -61,6 +61,9 @@ import kr.or.initspring.service.CodeService;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dto.join.MemberDTO;
+import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.LabBuildingDTO;
+import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.service.MemberService;
 
@@ -700,9 +703,10 @@ public class MemberController{
 	public String officeList(Model model){
 		
 		List<OfficeDTO> officelist = codeservice.officelist();
+		List<BuildingDTO> building = codeservice.buildingList();
 		
 		model.addAttribute("officelist", officelist);
-		System.out.println(officelist.toString());
+		model.addAttribute("building", building);
 		
 		return "codemg.officelist";
 	}
@@ -1107,6 +1111,34 @@ public class MemberController{
 			view = "redirect:registerlist.htm";
 		}
 		return view;
+	}
+	
+	@RequestMapping("showclasslist.htm")
+	public String showclasslist(Model model){
+		
+		List<ClassBuildingDTO> classlist = codeservice.showclasslist();
+		model.addAttribute("classlist", classlist);
+		
+		return "codemg.classroomlist";
+	}
+	
+	@RequestMapping("showlablist.htm")
+	public String showlablist(Model model){ 	
+		
+		List<LabBuildingDTO> lablist = codeservice.showlablist();
+		model.addAttribute("lablist", lablist);
+		
+		return "codemg.lablist";
+		
+	}
+	
+	@RequestMapping("showofficelist.htm")
+	public String showofficelist(Model model){
+		
+		List<OfiiceBuildingDTO> office = codeservice.showofficelist();
+		model.addAttribute("officelist", office);
+		
+		return "codemg.officelist";
 	}
 }
 

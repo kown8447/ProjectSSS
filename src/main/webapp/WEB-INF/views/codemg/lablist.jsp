@@ -15,7 +15,7 @@
 			<tbody>
 				<tr>
 					<td>${lab.lab_code}</td>
-					<td>${lab.building_code}</td>
+					<td>${lab.building_name}</td>
 					<td>
 						<a href="labDetail.htm?lab_code=${lab.lab_code}">${lab.lab_name}</a>
 					</td>

@@ -33,6 +33,9 @@ import kr.or.initspring.dto.commons.RegisterDTO;
 import kr.or.initspring.dto.commons.ScSystemDTO;
 import kr.or.initspring.dto.commons.ScholarshipDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
+import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.LabBuildingDTO;
+import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 
 @Service
@@ -1077,5 +1080,30 @@ public class CodeService {
 		int result = dao.insertRegister(register);
 		
 		return result;
+	}
+	
+	public List<ClassBuildingDTO> showclasslist(){
+		
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<ClassBuildingDTO> classroomlsit = dao.classbuilding();
+		
+		return classroomlsit;
+		
+	}
+	
+	public List<LabBuildingDTO> showlablist(){
+		
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<LabBuildingDTO> lablist = dao.labbuilding();
+		
+		return lablist;
+	}
+	
+	public List<OfiiceBuildingDTO> showofficelist(){
+		
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<OfiiceBuildingDTO> officelist = dao.officebuilding();
+		
+		return officelist;
 	}
 }

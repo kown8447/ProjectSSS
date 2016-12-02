@@ -576,7 +576,8 @@
 				</tr>
 			</table>
 		</form>
-		<a href="classroomList.htm">리스트</a>
+		<!-- <a href="classroomList.htm">리스트</a> -->
+		<a href="showclasslist.htm">리스트</a>
 		<form id="clexcelForm" action="classroomExcelUpload.htm">
 			파일 일괄등록: <input id="clexcel" name="clexcel" type="file"
 				placeholder="Excel input">
@@ -616,7 +617,8 @@
 				</tr>
 			</table>
 		</form>
-		<a href="officeList.htm">리스트</a>
+		<!-- <a href="officeList.htm">리스트</a> -->
+		<a href="showofficelist.htm">리스트</a>
 		<hr>
 		<form id="ofexcelForm" action="ofExcelUpload.htm">
 			파일 일괄등록: <input id="ofexcel" name="ofexcel" type="file"
@@ -662,7 +664,8 @@
 				</tr>
 			</table>
 		</form>
-		<a href="labList.htm">리스트</a>
+		<!-- <a href="labList.htm">리스트</a> -->
+		<a href="showlablist.htm">리스트</a>
 		<hr>
 		<form id="lbexcelForm" action="lbExcelUpload.htm">
 			파일 일괄등록: <input id="lbexcel" name="lbexcel" type="file"

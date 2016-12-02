@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td>${office.office_code}</td>
-					<td>${office.building_code}</td>
+					<td>${office.building_name}</td>
 					<td>${office.office_phone}</td>
 					<td>
 						<a href="selectOffice.htm?office_code=${office.office_code}">

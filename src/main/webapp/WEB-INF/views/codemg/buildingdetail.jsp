@@ -11,8 +11,9 @@
 	<form action="updateBuilbilding.htm">
 		빌딩코드<input type="text" id="building_code" name="building_code" readonly="readonly" value="${building.building_code }"><br>
 		건물명<input type="text" id="building_name" name="building_name" value="${building.building_name }"><br>
-		주소<input type="text" id="building_addr" name="building_addr" value="${building.building_addr }">
+		주소<input type="text" id="building_addr" name="building_addr" value="${building.building_addr }"><br>
 		<button type="submit">수정하기</button>
 	</form>
+	<a href="code.htm">되돌아가기</a>
 </body>
 </html>

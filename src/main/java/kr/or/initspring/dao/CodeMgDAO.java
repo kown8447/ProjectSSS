@@ -18,6 +18,9 @@ import kr.or.initspring.dto.commons.ScSystemDTO;
 import kr.or.initspring.dto.commons.ScholarshipDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
+import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.LabBuildingDTO;
+import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 
 public interface CodeMgDAO {
@@ -76,6 +79,9 @@ public interface CodeMgDAO {
 	public List<OpenedInfoDTO> openedInfolist();
 	public List<RegisterDTO> registerlist();
 	public int insertRegister(RegisterDTO register);
+	public List<ClassBuildingDTO> classbuilding();
+	public List<LabBuildingDTO> labbuilding();
+	public List<OfiiceBuildingDTO> officebuilding();
 	
 	
 	//최대 코드번호 가져오기

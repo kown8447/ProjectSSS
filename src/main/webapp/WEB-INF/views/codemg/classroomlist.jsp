@@ -6,8 +6,8 @@
 		<thead>
 			<tr>
 				<td>강의실코드</td>
-				<td>강의실 이름</td>
 				<td>건물코드</td>
+				<td>강의실 이름</td>
 				<td>수용인원</td>
 				<td>강의실 타입</td>
 			</tr>
@@ -19,10 +19,10 @@
 					${c.classroom_code }
 				</td>
 				<td>
-					<a href="classroomUpdate.htm?classroom_code=${c.classroom_code}">${c.classroom_name }</a>	
+					${c.building_name }
 				</td>
 				<td>
-					${c.building_code }
+					<a href="classroomUpdate.htm?classroom_code=${c.classroom_code}">${c.classroom_name }</a>	
 				</td>
 				<td>
 					${c.seat }
