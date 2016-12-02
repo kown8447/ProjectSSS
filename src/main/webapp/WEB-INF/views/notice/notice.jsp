@@ -10,21 +10,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<h3>공지사항</h3>
+<h2>공지사항</h2>
 <div id="content">
 	<form method="post">
-			<div class="col-sm-3" style="margin-left: 68%">
-				<div class="input-group">
-					<input type="text" id="keyword" name="keyword" class="form-control"> 
-					<span class="input-group-btn"> 
-						<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
-					</span>
+			<div class="col-sm-3" style="margin-left: 62%">
+				<div class="form-inline">
+					<input type="text" id="keyword" name="keyword" class="form-control" > 
+					<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
 				</div>
 			</div>
 	</form>
 	<br><br>
 	
-<div style="width:85%; margin: auto;">
+<div style="width:70%; margin: auto;">
 	<table class="table table-hover">
 		<tr>
 			<th style="text-align: center;">번호</th>
@@ -41,7 +39,7 @@
 			</c:if>
 			<c:forEach items="${list}" var="n">
 				<tr>
-					<td>${n.notice_index}</td>
+					<td style="text-align: center;">${n.notice_index}</td>
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
@@ -64,16 +62,16 @@
 								</c:if>
 								<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
 							</c:if></td>
-					<td>관리자</td>
-					<td>${n.notice_date}</td>
-					<td>${n.notice_count}</td>
+					<td style="text-align: center;">관리자</td>
+					<td style="text-align: center;">${n.notice_date}</td>
+					<td style="text-align: center;">${n.notice_count}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div style="margin-left: 90%">
 		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
-			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
+			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success btn-sm" >글쓰기</a>
 		</se:authorize>
 	</div>
 </div>

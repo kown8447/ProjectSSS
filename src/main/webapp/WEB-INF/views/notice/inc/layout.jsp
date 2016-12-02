@@ -19,8 +19,6 @@
 	
 	<tiles:insertAttribute name="aside" />
 
-	<tiles:insertAttribute name="visual" />
-
 	<tiles:insertAttribute name="content" />
 
 	<tiles:insertAttribute name="footer" />

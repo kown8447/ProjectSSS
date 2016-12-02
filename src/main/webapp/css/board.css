@@ -12,13 +12,13 @@
 
 .filetype .file-text {
   position: relative;
-  width: 170px;
+  width: 200px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
   height: 20px;
-  background-color: #ecefef;
+  background-color: #F6F6F6;
   margin: 0;
   border: 1px solid #cdd3d4;
   line-height: 20px;
@@ -42,7 +42,7 @@
 
 .filetype .file-text + .file-btn {
   display: inline-block;
-  background-color: #38A600;
+  background-color: #5D5D5D;
   height: 22px;
   line-height: 22px;
   padding: 0 15px;
