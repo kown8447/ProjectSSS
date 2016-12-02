@@ -225,6 +225,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.student_code = #{student_code}
 	</select>
 
+	<select id="getCurrentTimetableByStudentCode" resultType="kr.or.initspring.dto.requestCourse.OpenedLectureDTO">
+		select * from
+		timetable t join subject s
+		on t.subject_code = s.subject_code
+		where t.student_code = #{student_code}
+	</select>
+
+
 	<update id="plusRegistedSeatBySubjectCode">
 		update opened set registed_seat = registed_seat + 1 where subject_code = #{subject_code}
 	</update>
@@ -313,4 +321,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getReserveSeatsBySubjectCode" resultType="int">
 		select count(*) from reserve where subject_code=#{subject_code}	
 	</select>
+	
+	<insert id="copyToTimeTable">
+		insert into timetable select student_code, subject_code from enrollment
+	</insert>
 </mapper>

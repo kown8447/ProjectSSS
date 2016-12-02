@@ -60,11 +60,14 @@ import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.service.CodeService;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
+import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
+import kr.or.initspring.service.AsideService;
 import kr.or.initspring.service.MemberService;
 
 @Controller
@@ -81,6 +84,10 @@ public class MemberController{
 	@Autowired
 	private CodeService codeservice;
 	
+	@Autowired
+	private AsideService asideservice;
+	
+	@Autowired
 	private JavaMailSender mailSender;	//Email 전송을 위한 클래스
 	
 	@Autowired
@@ -1139,6 +1146,12 @@ public class MemberController{
 		model.addAttribute("officelist", office);
 		
 		return "codemg.officelist";
+	}
+	
+	@RequestMapping("persnalDataCall.htm")
+	public View persnalDataCall(Principal principal, Model model) {
+		asideservice.persnalDataCall(principal.getName(), model);
+		return jsonview;
 	}
 }
 

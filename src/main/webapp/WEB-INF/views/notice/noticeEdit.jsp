@@ -16,7 +16,7 @@
 	<table class="table table-bordered" style="width:70%; margin: auto;" >
 		<tr style="width:20%">
 			<th style="text-align: center" >글번호</th>
-			<td style="text-align: center; width:30%;">${notice.notice_index}</td>
+			<td style="text-align: center;">${notice.notice_index}</td>
 			<th style="text-align: center">작성일</th>
 			<td>${notice.notice_date}</td>
 		</tr>

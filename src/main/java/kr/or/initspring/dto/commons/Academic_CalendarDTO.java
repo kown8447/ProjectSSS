@@ -16,6 +16,7 @@ public class Academic_CalendarDTO {
 	private String calendar_content;	//내용
 	private Date calendar_start;		//시작일
 	private Date calendar_end;			//종료일
+
 	public String getCalendar_code() {
 		return calendar_code;
 	}
@@ -52,6 +53,4 @@ public class Academic_CalendarDTO {
 				+ ", calendar_content=" + calendar_content + ", calendar_start=" + calendar_start + ", calendar_end="
 				+ calendar_end + "]";
 	}
-
-	
 }

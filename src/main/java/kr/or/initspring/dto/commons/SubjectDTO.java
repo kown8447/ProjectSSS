@@ -3,21 +3,18 @@ package kr.or.initspring.dto.commons;
 public class SubjectDTO {
 	/*
 	 * @Class: SubjectDTO
-	 * 
 	 * @Date: 2016. 11. 19
-	 * 
 	 * @Author: 김영빈
-	 * 
-	 * @Desc: 과목
+	 * @Desc: 과목 
 	 */
-	private String subject_code; // 과목코드
-	private String professor_code; // 교수코드
-	private String subject_name; // 과목명
-	private int subject_credit; // 배정학점
-	private int grade_limit; // 수강대상
-	private int subject_state; // 과목상태
-	private int subject_type; // 과목유형
-	private int subject_seats; // 과목 정원
+	private String subject_code;  //과목코드
+	private String professor_code; //교수코드
+	private String subject_name; //과목명
+	private int subject_credit;  //배정학점
+	private int grade_limit;  //수강대상
+	private int subject_state;  //과목상태
+	private int subject_type;  //과목유형
+	private int subject_seats;	//과목 정원
 
 	public int getSubject_seats() {
 		return subject_seats;

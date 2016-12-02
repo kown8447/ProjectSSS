@@ -210,6 +210,7 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${after.AllGrade.endDate}")
 	public void AllGradeAfterEnd() throws Exception { 
 		setEnrollActive(0,2, 0);
+		copyToTimeTable();
 		System.out.println("전학년 끝");
 	}
 	
@@ -247,5 +248,10 @@ public class ModifyTermScheduler {
 			System.out.println("ModifyTermScheduler / setReserveCheck : " + e.getMessage());
 			throw e;
 		}
+	}
+	
+	public void copyToTimeTable(){
+		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
+		dao.copyToTimeTable();
 	}
 }

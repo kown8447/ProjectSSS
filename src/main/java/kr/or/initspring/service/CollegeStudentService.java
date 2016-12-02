@@ -35,9 +35,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : viewStudentInfo
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description 학생이 자신의 개인정보 열람을 요청했을시 해당정보를 찾아주는 함수
 	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })

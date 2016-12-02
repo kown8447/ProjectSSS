@@ -12,7 +12,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <h3>공지사항</h3>
 <div id="content">
-
 	<form method="post">
 			<div class="col-sm-3" style="margin-left: 68%">
 				<div class="input-group">
@@ -23,7 +22,6 @@
 				</div>
 			</div>
 	</form>
-
 	<br><br>
 	
 <div style="width:85%; text-align: center; margin: auto;">
@@ -46,19 +44,26 @@
 					<td>${n.notice_index}</td>
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
-								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}"
-									step="1"> &nbsp;
+								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
+								&emsp;&emsp;
                            		</c:forEach>
 								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>
 						</c:choose> 
 						<c:if test="${fn:length(n.notice_title) > 15}">
-							<a href="noticeDetail.htm?notice_index=${n.notice_index}">
-							<c:out value="${fn:substring(n.notice_title,0,15)}" />...  </a>                  
-								</c:if> 
+								<a href="noticeDetail.htm?notice_index=${n.notice_index}"> 
+								<c:if test="${n.notice_status==1}">
+										<h5 style="color:red">[ 삭제된 글의 답글입니다 ]</h5>
+									</c:if> 
+									<c:out value="${fn:substring(n.notice_title,0,15)}" />...
+								</a>
+							</c:if> 
 							<c:if test="${fn:length(n.notice_title) <= 15}">
-							<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
-						</c:if></td>
+								<c:if test="${n.notice_status==1}">
+									<h5 style="color:red">[ 삭제된 글의 답글입니다 ]</h5>
+								</c:if>
+								<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
+							</c:if></td>
 					<td>관리자</td>
 					<td>${n.notice_date}</td>
 					<td>${n.notice_count}</td>
@@ -77,8 +82,8 @@
 	 <ul class="pagination">
 	 	<!-- 처음, 이전페이지 -->
      	<c:if test="${pg>fromPage}">
-			<li><a href="notice.htm?pg=1">◀◀</a></li>
-			<li><a href="notice.htm?pg=${pg-1}">◀</a></li>
+			<li><a href="notice.htm?pg=1&keyword=${query}">◀◀</a></li>
+			<li><a href="notice.htm?pg=${pg-1}&keyword=${query}">◀</a></li>
 		</c:if>
 		<c:if test="${pg<=fromPage}">
 			<li><span style="color: gray">◀◀</span></li>
@@ -89,14 +94,14 @@
 		 <c:forEach begin="${fromPage}" end="${toPage}" var="i">
 			<li><c:if test="${i==pg}"><a href="#">${i}</a></c:if></li>	
 				<c:if test="${i!=pg}">
-					<li><a href="notice.htm?pg=${i}">${i}</a></li>
+					<li><a href="notice.htm?pg=${i}&keyword=${query}">${i}</a></li>
 				</c:if>
 		</c:forEach>
 		 
 		 <!-- 다음, 이후 -->
 		<c:if test="${pg<allPage}">
-			<li><a href="notice.htm?pg=${pg+1}">▶</a></li>
-			<li><a href="notice.htm?pg=${allPage}">▶▶</a></li>
+			<li><a href="notice.htm?pg=${pg+1}&keyword=${query}">▶</a></li>
+			<li><a href="notice.htm?pg=${allPage}&keyword=${query}">▶▶</a></li>
 		</c:if>
 		
 		<c:if test="${pg>=allPage}">

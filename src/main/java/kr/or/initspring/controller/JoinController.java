@@ -210,7 +210,6 @@ public class JoinController {
 	*/	
 	@RequestMapping(value="join3.htm", method=RequestMethod.POST)
 	public String joinStep3(MemberDTO member_temp, HttpServletRequest request, Model model) throws IOException{
-		
 		boolean result = false;
 		String viewpage = "";
 		HttpSession session = request.getSession();
@@ -243,7 +242,7 @@ public class JoinController {
 			System.out.println("joinController / joinStep3 : " + e.getMessage());
 		}
 		if(result){
-			viewpage = "redirect:welcome.htm";
+			viewpage = "redirect:/login.htm";
 		}else{
 			System.out.println("멤버가입 실패");
 			viewpage = "redirect:join1.htm";
@@ -276,7 +275,7 @@ public class JoinController {
 	
 	@RequestMapping("welcome.htm")
 	public String welcome(){
-		return "join.welcome";
+		return "login.login";
 	}
 	
 

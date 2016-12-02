@@ -10,7 +10,9 @@ package kr.or.initspring.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,12 @@ public class RequestCourseService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	private static List<String> waiting = new ArrayList<String>();
+	
+	public static List<String> getWaiting() {
+		return waiting;
+	}
+
 	/*
 	 * @method Name : viewOpLecture
 	 * @Author : 권기엽
@@ -299,9 +307,12 @@ public class RequestCourseService {
 		StudentDTO studentDto = null;
 		int count = 0;
 		try{
+
 			beforeSubjectDto = requestCourseDao.getBeforeSubjectBySubjectCode(subject_code);
 			studentDto = requestCourseDao.getStudentByMemberid(member_id);
 			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
+
 		}catch(NullPointerException e){
 			System.out.println("RequestCourseService / checkBeforeSubject : " + e.getMessage());
 			if(beforeSubjectDto == null){
@@ -506,8 +517,26 @@ public class RequestCourseService {
 	 * + Transaction 처리
 	*/
 	
+	public HashMap<String, String> insertRealDbSubject(String member_id, String subject_code) throws Exception{
+		HashMap<String, String> map = null;
+		
+		waiting.add(member_id);
+		
+		map = RealDbSubject(member_id, subject_code);
+		
+		Iterator<String> it = waiting.iterator();
+		
+		while(it.hasNext()){
+			if(it.next().equals(member_id)){
+				it.remove();
+			}
+		}
+		
+		return map;
+	}
+	
 	@Transactional(rollbackFor={Exception.class,NullPointerException.class,SQLException.class,RuntimeException.class})
-	public synchronized HashMap<String, String> insertRealDbSubject(String member_id, String subject_code) throws Exception{
+	public synchronized HashMap<String, String> RealDbSubject(String member_id, String subject_code) throws Exception{
 		HashMap<String, String> map = new HashMap<String, String>();
 		HashMap<String, String> parameter = new HashMap<String, String>();
 		OpenedLectureDTO data = null;
@@ -570,4 +599,5 @@ public class RequestCourseService {
 		}
 		return subject_credit;
 	}
+
 }
