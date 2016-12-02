@@ -9,16 +9,23 @@
 
 $(function(){
 		var count = 0;
+		var credit = $("#credit").val();
 		
 		$.ajax(
 				{
 					url : "lecturePeriod.htm",
 					dataType : "json",
 					success : function(data){
-						
+					
+						$.each(data.buildinglist,function(index,value){
+							
+							console.log(value.building_name);
+							$("#building").append("<option value='B_00"+index+"'>"+value+"</option>");
+						})
 						$.each(data.periodlist,function(index,value){
 							$('#PERIOD_START_'+index).html(value.period_start);
 						})
+						
 						
 					}
 				}
@@ -81,37 +88,48 @@ $(function(){
 		})
 
 		$("td").click(function(){
-			var credit = $("#credit").val();
+			
 
 			if($("#classroom").val()=="없음" || $("#classroom").val()=="" || $("#building").val()=="없음" || 
 					$("#building").val() == ""){
 				alert("강의실을 선택해주세요");		
 				return false;
 			}else{
-				if(($(this).html()) != ""){
-					alert("중복입니다")
-					return false;}
-				else{
+					if(($(this).html()) != ""){
+						alert("중복입니다")
+						return false;}
+					else{
+					
+							if(credit <= count){
+							alert("그만넣어");
+							return false;
+							}else{
+								console.log("else탐");
+							$(this).text($('#subject_name').val());
+							$(this).css("background","#47C83E");
+							count+=1;
+						}
+					  }
+						
+					}
+					
+				})
 				
-			if(credit <= count){
-			alert("그만넣어");
-			return false;
-			}else{
-				console.log("else탐");
-			$(this).text($('#subject_name').val());
-			$(this).css("background","#47C83E");
-			count+=1;
-			}
-		}
-			
-			}
-		
+				$("#submit").click(function(){
+					if(count != credit){
+						alert("과목을 다 채워주세요");
+						return false;
+					}
+					if($("#subject_filesrc").text() == "" || $("#subject_filesrc").text() == null){
+						alert("강의계획서를 등록해주세요");
+						return false;
+					}
+				})
+				
+				$("#back").click(function(){
+						history.go(-1)();
+		})
 			})
-		
-	
-
-	
-	})
 	
 		var count = 0;
 		function getvalue(i){ 

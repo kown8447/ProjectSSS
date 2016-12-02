@@ -82,18 +82,16 @@ public class lectureService {
 		System.out.println("수정한 서브젝트코드"+subject_code);
 
 		dto.setSubject_code(subject_code);
-		System.out.println("디티오안에 ㅅ브젝트코드"+dto.getSubject_code());
 		
 		try {
 			String insertparam = lecturedao.select_Professor(principalid);
 			dto.setProfessor_code(insertparam);
 			lecturedao.insert_Subject(dto);
-			System.out.println("1번");
 			int subject_type = dto.getSubject_type();
 			int required_select = 5; 
 			
 			department_code = lecturedao.select_departmentcode(principalid).getDepartment_code();
-			System.out.println("2번");
+		
 			if (subject_type == 0) {
 				required_select = lecturedao.insert_major(subject_code, required_choice, department_code);
 
@@ -107,7 +105,7 @@ public class lectureService {
 					before = lecturedao.insert_BeforeName(subject_code, "없음");
 				} 
 			}
-			System.out.println("3번");
+		
 		} catch (Exception e) {
 			System.out.println("장현 등록 트랜잭션 오류 : " + e.getMessage());
 			try {
@@ -143,7 +141,7 @@ public class lectureService {
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		System.out.println("subjectDetail service subect_code :"+subject_code);
-	
+		
 		CustomLectureMgDTO detail = lecturedao.subject_Detail(subject_code);
 		String reject_reason = lecturedao.select_Rejection(subject_code);
 		if(detail.getSubject_type() == 0){
@@ -161,6 +159,13 @@ public class lectureService {
 
 			return detail;
 	}
+	
+	
+	/*
+	 * @method Name : selectperiod
+	 * @Author : 조장현
+	 * @description : 교시 정보 조회
+	 */
 	
 	public CustomLectureMgDTO selectperiod(String subject_code){
 		
@@ -327,6 +332,18 @@ public class lectureService {
 		List<PeriodDTO> dto = lecturedao.getPeriodList();
 		
 		return dto;
+	}
+
+	/*
+	 * @method Name : getBuildingName
+	 * @Author : 조장현
+	 * @description : 건물 이름 출력
+	 */
+	public List<String> getBuildingName(){
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		List<String> building = lecturedao.select_BuildingName();
+		
+		return building;		
 	}
 	
 	/*

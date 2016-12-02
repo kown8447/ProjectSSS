@@ -56,9 +56,11 @@
 		<div class="col-sm-3">
 		<select class="form-control" id="building" name="building_code">
 			<option>없음</option>
-			<option value="B_001" name="B_001">본부동</option>
+
+
+		<!-- 	<option value="B_001" name="B_001">본부동</option>
 			<option value="B_002" name="B_002">가츠동</option>
-			<option value="B_003" name="B_003">어우동</option>
+			<option value="B_003" name="B_003">어우동</option> -->
 		</select>
 		<label>시간</label> <div id="period" name="period"></div>
 	

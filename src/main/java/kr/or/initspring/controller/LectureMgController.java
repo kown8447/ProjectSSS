@@ -64,10 +64,10 @@ public class LectureMgController {
 	}
 	
 	@RequestMapping(value="lectureEdit.htm")
-	public String updateSubject(Model model,String subject_code){
+	public String updateSubject(Model model,String subject_code,Principal principal){
 		System.out.println(subject_code);
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
-
+		lectureservice.selectBefore(principal.getName(), model);
 		model.addAttribute("list",list);
 		
 		return "lecture.subjectupdate";
@@ -124,8 +124,11 @@ public class LectureMgController {
 	@RequestMapping(value="lecturePeriod.htm")
 	public View getPeriod(Model model){
 		List<PeriodDTO> periodlist = lectureservice.getPeriodList();
+		List<String> buildinglist = lectureservice.getBuildingName();
 		
+		System.out.println("빌딩이름 : "+buildinglist.get(0));
 		model.addAttribute("periodlist",periodlist);
+		model.addAttribute("buildinglist",buildinglist);
 		return jsonview;
 	}
 	
@@ -150,8 +153,6 @@ public class LectureMgController {
 	public String setSubject(CustomLectureMgDTO dto,HttpServletRequest request) throws Exception{
 		
 		String success_check = request.getParameter("success_check");
-		System.out.println("컨틀롤러 석셐쳌:"+success_check);
-		System.out.println("진짜신청 투스트링"+dto.toString());
 		lectureservice.RequestSubject(dto,request,success_check);
 		
 		return "redirect:lectureView.htm";
@@ -160,7 +161,6 @@ public class LectureMgController {
 	
 	@RequestMapping(value="selectStudent.htm")
 	public View selectStudent(String subject_code,Model model){
-		
 		
 		System.out.println("학생리스트출력스"+subject_code);
 		List<CustomLectureMgDTO> dto = lectureservice.select_Studentlist(subject_code);

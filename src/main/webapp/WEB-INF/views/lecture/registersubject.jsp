@@ -43,6 +43,7 @@
 
 
 		<input type="submit" value="등록하기">
+		
 	</form>
 
 </body>

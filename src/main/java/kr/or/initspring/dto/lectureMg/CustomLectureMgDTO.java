@@ -227,6 +227,7 @@ public class CustomLectureMgDTO {
 	public void setBuilding_code(String building_code) {
 		this.building_code = building_code;
 	}
+	
 	public String getBuilding_name() {
 		return building_name;
 	}
