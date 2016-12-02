@@ -1,3 +1,11 @@
+<%--
+@Project : InitSpring
+@File name : subjectDetail.jsp
+@Author : 조장현
+@Data : 2016.11.23
+@Desc : 과목 상세보기 
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -6,39 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/js/lecture/subjectdetail.js"></script>
 <script type="text/javascript">
-	$(function(){
-		
-		var success_check = $("#sc").val();
-		var subject_code = $("#subject_code").val();
-		
-		$("#delete").click(function(){
-				alert("삭제못해요");
-				return false;
-			
-		});
-		
-		$("#update").click(function(){
-			alert(success_check);
-			if(success_check != 0){
-				alert("신청중이므로 수정할 수 없습니다");
-				return false;
-			}else{
-				location.replace("lectureEdit.htm?subject_code="+subject_code);
-			}
-			
-		});
-		
-		$("#request").click(function(){
-			if(success_check != 0){
-				alert("이미 신청된 과목입니다");
-				return false;
-			}else{
-				location.replace("lecturePost.htm?subject_code="+subject_code+"&success_check="+success_check);
-			}
-		})
-		
-	})
 	
 
 </script>

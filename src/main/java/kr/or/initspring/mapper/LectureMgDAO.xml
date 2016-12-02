@@ -198,4 +198,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from RECORD where student_code = #{param1}
 	</select>
 	
+	<update id="update_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+	 UPDATE record SET record_level = #{record_level} where student_code = #{student_code} AND subject_code = #{subject_code}
+	</update>
+	
+	<select id="select_Recordlevel" resultType="String">
+		select * from record where student_code = #{param1} AND subject_code = #{param2}
+	</select>
+	
+	<select id="select_reStudy" resultType="String">
+		  select record_code from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE 
+		  where s.subject_code = #{param1} and r.STUDENT_CODE = #{param2}
+	</select>
+	
+	<update id="update_RetakeCheck">
+		  UPDATE RECORD SET RETAKE_CHECK = 1 where record_code = #{param1};
+	</update>
 </mapper>

@@ -12,7 +12,7 @@
 	<a href="${pageContext.request.contextPath}/index.htm"><img
 		src="${pageContext.request.contextPath}/images/smLogo.png"></a>
 </se:authorize>
-=======
+
 <se:authentication property="name" var="LoginUser" />
 <div class="header_top"></div>
 <div class="menu">
@@ -59,7 +59,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/collegeregister/record.htm">신청</a>
 							</li>
-						</ul></li> >>>>>>> 78a2492d2428445fceec5753dce70fce74c5022a
+						</ul></li>
 
 
 					<li class="dropdown fadeInDown animated d3"><se:authorize

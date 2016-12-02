@@ -76,4 +76,8 @@ public interface LectureMgDAO {
 	public void insert_record(CustomLectureMgDTO dto);
 	public RecordDTO select_record(String student_code);
 	public String maxRecord_code(); 
+	public void update_record(CustomLectureMgDTO dto);
+	public String select_Recordlevel(String student_code,String subject_code);
+	public List<String> select_reStudy(String subject_code,String student_code);
+	public void update_RetakeCheck(String record_code);
 }

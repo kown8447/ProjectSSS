@@ -1,3 +1,11 @@
+<%--
+@Project : InitSpring
+@File name : registersubject.jsp
+@Author : 조장현
+@Data : 2016.11.23
+@Desc : 과목 등록하기
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

@@ -1,3 +1,11 @@
+<%--
+@Project : InitSpring
+@File name : postsubject.jsp
+@Author : 조장현
+@Data : 2016.11.23
+@Desc : 과목 신청하기
+--%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -7,130 +15,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<script type="text/javascript">
-	$(function(){
-		var count = 0;
-		var credit = ${list.subject_credit};
-		$.ajax(
-				{
-					url : "lecturePeriod.htm",
-					dataType : "json",
-					success : function(data){
-						
-						$.each(data.periodlist,function(index,value){
-							$('#PERIOD_START_'+index).html(value.period_start);
-						})
-						
-					}
-				}
-				)
-
-		$("#building").change(function(){
-		//alert($("#building").val());
-
-
-		$.ajax(
-				{
-					url : "requestsubject.htm",
-					data : {
-						building_code : $("#building").val(),
-					},
-					dataType : "json",
-					success : function(data){
-						var content = "<option>없음</option>";
-								
-						$.each(data.classroom,function(index){
-						console.log(data.classroom[index].classroom_name);	
-						content += "<option value='"+data.classroom[index].classroom_code+"'>"
-										+data.classroom[index].classroom_name+"</option>"
-						});
-						$('#classroom').html(content);
-						
-					}
-				})
-		
-		});
-
-		$("#classroom").change(function(){
-		//alert($("#classroom").val());
-		$.ajax(
-					{
-						url : "requestclassroom.htm",
-						data : {
-							classroom_code : $("#classroom").val(),
-	
-						},
-						dataType : "json",
-						success : function(data){
-						$("td").empty();
-						$("td").css("background","white");
-							console.log(data);
-				
-							$.each(data.time,function(index){
-								console.log(data.time[index].period_code);
-								console.log(data.time[index].classroom_code);
-								if(data.time[index].period_code != "" || data.time[index].period_code != null){
-									$('#'+data.time[index].period_code).html(data.time[index].subject_name);
-									$('#'+data.time[index].period_code).append(" - "+data.time[index].member_name+" 교수");
-									$('#'+data.time[index].period_code).css("background","skyblue");
-								}
-							})		
-						}
-						
-					}
-					)
-			
-		
-		})
-
-		$("td").click(function(){
-			if($("#classroom").val()=="없음" || $("#classroom").val()=="" || $("#building").val()=="없음" || 
-					$("#building").val() == ""){
-				alert("강의실을 선택해주세요");		
-				return false;
-			}else{
-				if(($(this).html()) != ""){
-					alert("중복입니다")
-					return false;}
-				else{
-				
-			if(credit <= count){
-			alert("그만넣어");
-			return false;
-			}else{
-				console.log("else탐");
-			$(this).text("${list.subject_name}");
-			$(this).css("background","#47C83E");
-			count+=1;
-			}
-		}
-			
-			}
-		
-			})
-		
-	
-
-	
-	})
-	
-		var count = 0;
-		function getvalue(i){ 
-		
-		var credit = ${list.subject_credit};
-			
-		if(count >= credit){
-				return false;
-			}
-			else{
-				//periodArray.push(i);
-				$("#period").append("<input type=hidden name=period_code value="+i+">");
-				count+=1;
-			}
-		console.log(count);
-			}
-
-</script>
+<script src="${pageContext.request.contextPath}/js/lecture/postsubject.js"></script>
 </head>
 <body>
 
@@ -160,7 +45,8 @@
 		</table>
 		<br>
 		</div>
-	
+		<input type="hidden" id="credit" value=${list.subject_credit }>
+		<input type="hidden" id="subject_name" value=${list.subject_name }>
 	<form action="postRequestSubject.htm" enctype="multipart/form-data" method="post">
 	
 	<input type="hidden" value="${list.subject_code }" name="subject_code">
@@ -224,6 +110,7 @@
 			</form>
 		</div>
 	</div>
+
 
 	
 	<button id="back" class="btn btn-primary">돌아가기</button>
