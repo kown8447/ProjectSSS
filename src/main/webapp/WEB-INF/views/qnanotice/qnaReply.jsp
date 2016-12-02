@@ -18,7 +18,7 @@
 	<input type="hidden" name="qna_refer" value="${qna.qna_refer}" />
 	<!-- 히든 필드로 정보 보내기 -->
 	
-	<table class="table table-bordered" style="width: 50%; margin: auto;">
+	<table class="table table-bordered" style="width: 70%; margin: auto;">
 		<tr>
 			<th style="background-color: #F8F4EC; text-align: center;"><b>작성자</b></th>
 			<td>${id}</td>
@@ -52,8 +52,8 @@
 	</table>
 	<br>
 		<div align="center" style="margin-left: 40%">
-			<input type="submit" id="replyBtn" value="저장" class="btn btn-success btn-sm"/>
-			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm">취소</a>	
+			<input type="submit" id="replyBtn" value="저장" style="width: 15%;" class="btn btn-success btn-sm"/>
+			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" style="width: 15%;" class="btn btn-default btn-sm">취소</a>	
 		</div>
 	</form>
 </div>

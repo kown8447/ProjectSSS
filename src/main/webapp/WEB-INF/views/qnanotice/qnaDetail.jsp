@@ -15,7 +15,7 @@
 	<h2>QnA</h2>
 	
 	<form method="post">
-	<table class="table table-bordered" style="width:50%; margin: auto;">
+	<table class="table table-bordered" style="width:70%; margin: auto;">
 			<tr>
 				<th style="text-align: center; background-color: #F8F4EC;">글번호</th>
 				<td style="text-align: center;">${qna.qna_index}</td>
@@ -50,43 +50,42 @@
 			<a href="qnaReply.htm?qna_index=${qna.qna_index}" class="btn btn-success btn-sm" >답변</a>
 			<a href="qnanotice.htm" class="btn btn-success btn-sm">목록</a>
 		</div>
-		<hr>
-		
+		<br>		
 		<!-- 댓글 -->
 		<input type="hidden" id="qna_index" name="qna_index" value="${qna.qna_index}" />
-		
-		<div id="replyList" style="background-color: #f9f9f9">
+	<div align="center">
+		<div id="replyList" style="background-color: #f9f9f9;width:52%;text-align: left;">
 			<c:forEach items="${rqna}" var="rqna" varStatus="index">
 				<div id="replyView_${index.count}">
-					<input type="hidden" id="cmt_index_${index.count}" value="${rqna.reply_index}"> 
-					
-					<div id="cmt_writer_${index.count}">${rqna.member_id}</div> <br>
-					
-					<div class="cmtContent" id="cmt_content_${index.count}">${rqna.reply_content}</div>
-					
-					<button type="button" value="cmtUpdate_${index.count}"
-						id="cmtUpdate_${index.count}" class="cmtEdit btn btn-default" name="cmtEdit">수정</button>
-						
-					<button type="button" id="cmtDelete_${index.count}" value="cmtDelete_${index.count}" 
-						class="cmtDel btn btn-default" name="cmtDel">삭제</button> 	
-					<input type="hidden" id="cmt_id_${index.count}" value="${rqna.member_id}">
-				</div>
-				<hr>
+				<input type="hidden" id="cmt_index_${index.count}" value="${rqna.reply_index}"> 
+				<input type="hidden" id="cmt_id_${index.count}" value="${rqna.member_id}">				
+					<table>
+						<tr>
+							<td> <div id="cmt_writer_${index.count}" style="color: green">&nbsp;&nbsp;&nbsp;&nbsp;${rqna.member_id}:&nbsp;&nbsp;</div></td>
+							<td> <div class="cmtContent" id="cmt_content_${index.count}">${rqna.reply_content}</div></td>
+							<td>
+								<button type="button" value="cmtUpdate_${index.count}" id="cmtUpdate_${index.count}" class="cmtEdit btn-link" name="cmtEdit" >&nbsp;&nbsp;&nbsp;<font size="1">수정</font></button>
+								<button type="button" id="cmtDelete_${index.count}" value="cmtDelete_${index.count}" class="cmtDel btn-link" name="cmtDel"><font size="1">삭제</font></button>
+							</td>
+						</tr>
+					</table>
+				 </div> 
 			</c:forEach>
 		</div>
-		
+	</div>
 		<!--댓글 올리는부분-->
-		<table>
+		<table align="center">
 			<tr>
-				<td style="text-align: left;">댓글올리기<br>
-					<textarea id="insertReply_content" name="insertReply_content"  rows="3" cols="40" class="form-control" style="resize: none;"></textarea>
-				</td>
 				<td>
-				<br>
-					<button type="button" id="commentBtn" name="commentBtn" class="btn btn-default" style="width: 100px; height: 75px;">등록</button>
+					<textarea id="insertReply_content" name="insertReply_content"  rows="2" cols="75" class="form-control" style="resize: none;"></textarea>
+				</td>
+					<br>
+				<td>
+					<button type="button" id="commentBtn" name="commentBtn" class="btn btn-default" style="width: 100px; height: 55px;">등록</button>
 				</td>	
 			</tr>	
 		</table>
+		
 		
 	</form>
 </div>

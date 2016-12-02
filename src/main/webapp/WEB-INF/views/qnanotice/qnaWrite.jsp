@@ -10,7 +10,7 @@
 	<h2>QnA</h2>
 	
 	<form action="" method="post" enctype="multipart/form-data">
-		<table class="table table-bordered" style="width: 50%; margin: auto;">
+		<table class="table table-bordered" style="width: 70%; margin: auto;">
 			<tr>
 				<th style="text-align: center; width:20%; background-color: #F8F4EC;">제목</th>
 				<td>
@@ -40,8 +40,8 @@
 		
 		<br>
 		<div align="center" style="margin-left: 40%">
-			<input type="submit" id="writeBtn" name="writeBtn" class="btn btn-success btn-sm" value="저장" />
-			<a href="qnanotice.htm" class="btn btn-default btn-sm">취소</a>
+			<input type="submit" id="writeBtn" name="writeBtn" class="btn btn-success btn-sm" style="width: 15%;" value="저장" />
+			<a href="qnanotice.htm" class="btn btn-default btn-sm"style="width: 15%;" >취소</a>
 		</div>
 	</form>
 </div>	

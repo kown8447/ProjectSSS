@@ -12,7 +12,7 @@
 	
 	<form action="" method="post" enctype="multipart/form-data">
 		
-		<table class="table table-bordered" style="width:50%; margin: auto;">
+		<table class="table table-bordered" style="width:70%; margin: auto;">
 			<tr style="width:20%">
 				<th style="text-align: center; background-color: #F8F4EC;" >글번호</th>
 				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
@@ -52,8 +52,8 @@
 		</table>
 		<br>
 		<div align="center" style="margin-left: 40%">
-			<input type="submit" id="editBtn" name="editBtn" value="수정하기" class="btn btn-success btn-sm"/> 
-			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm">취소</a>	
+			<input type="submit" id="editBtn" name="editBtn" value="수정하기" class="btn btn-success btn-sm" style="width: 15%;"/> 
+			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm" style="width: 15%;">취소</a>	
 		</div>
 	</form>
 </div>
