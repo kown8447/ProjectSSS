@@ -15,8 +15,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
-<<<<<<< HEAD
-=======
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileOutputStream;
 import java.util.Calendar;
->>>>>>> bc469fa79acf68c75e2b1e6151fe26a251145815
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -65,15 +62,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dto.commons.PeriodDTO;
 import kr.or.initspring.dto.join.MemberDTO;
-<<<<<<< HEAD
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.AsideService;
-=======
 import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
->>>>>>> bc469fa79acf68c75e2b1e6151fe26a251145815
 import kr.or.initspring.service.MemberService;
 
 @Controller
