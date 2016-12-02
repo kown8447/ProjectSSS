@@ -94,7 +94,11 @@ public class CollegeRegisterController {
 		collegestudentservice.viewRegisterInfo(principal.getName(), model);
 		return "collegeregister.register";
 	}
-
+	/*
+	 * @method Name : studentRecordPdfView
+	 * @Author : 최준호
+	 * @description : 학생의 성적 정보를 가져와 PDF 다운로드를 위한 view에 전달하는 메서드
+	 */
 	@RequestMapping(value = "recordPdfRequest.htm")
 	public String studentRecordPdfView(RecordRequestDTO recordrequest,Principal principal ,Model model) {
 		if(recordrequest.getGrade()!=0&&recordrequest.getSemester()!=0){

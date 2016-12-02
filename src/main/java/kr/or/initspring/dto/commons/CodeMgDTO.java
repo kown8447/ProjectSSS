@@ -1,20 +1,21 @@
+
 /*
  * @Class : CodeMgDTO
  * @Date : 2016.11.19
  * @Author : 권기엽
  * @Desc : 코드 번호를 관리하는 DTO
 */
-
 package kr.or.initspring.dto.commons;
 
 import java.sql.Date;
+
 
 public class CodeMgDTO {
 	private String code;
 	private int code_type;
 	private String code_name;
 	private Date code_birth;
-	
+
 	public String getCode() {
 		return code;
 	}

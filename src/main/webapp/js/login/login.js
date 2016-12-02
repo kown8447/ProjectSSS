@@ -34,7 +34,5 @@ $(function(){
             remote : 'login/searchPwd.htm'
           	  
       });
-    });
-
-    
+    });    
 });

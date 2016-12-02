@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 
+   @Project : InitSpring
+   @File name : studentRecord.jsp
+   @Author : 최준호
+   @Data : 2016.11.30
+   @Desc : 학생성적열람페이지
+-->
 <script src="${pageContext.request.contextPath}/js/collegeRegister/studentRecord.js"></script>
 성적조회
 <div>

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : register.jsp
+   @Author : 최준호
+   @Data : 2016.11.30
+   @Desc : 등록 장학정보 조회 페이지
+-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
 	src="${pageContext.request.contextPath}/js/collegeRegister/register.js"></script>

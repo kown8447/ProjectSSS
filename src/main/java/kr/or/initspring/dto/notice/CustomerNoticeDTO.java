@@ -25,7 +25,14 @@ public class CustomerNoticeDTO {
 	private String notice_content; // 내용
 	private Date notice_date; // 날짜
 	private int notice_count; // 조회수
+	private int notice_status; //공지사항 상태
 	
+	public int getNotice_status() {
+		return notice_status;
+	}
+	public void setNotice_status(int notice_status) {
+		this.notice_status = notice_status;
+	}
 	public int getNotice_index() {
 		return notice_index;
 	}
@@ -97,7 +104,8 @@ public class CustomerNoticeDTO {
 		return "CustomerNoticeDTO [notice_index=" + notice_index + ", admin_code=" + admin_code + ", notice_depth="
 				+ notice_depth + ", notice_step=" + notice_step + ", notice_refer=" + notice_refer + ", notice_file="
 				+ notice_file + ", file=" + file + ", notice_title=" + notice_title + ", notice_content="
-				+ notice_content + ", notice_date=" + notice_date + ", notice_count=" + notice_count + "]";
+				+ notice_content + ", notice_date=" + notice_date + ", notice_count=" + notice_count
+				+ ", notice_status=" + notice_status + "]";
 	}
 
 

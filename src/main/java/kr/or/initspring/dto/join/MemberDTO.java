@@ -4,6 +4,7 @@
  * @Author : 권기엽
  * @Desc : 회원 가입 시 사용하는 Custom DTO
 */
+
 package kr.or.initspring.dto.join;
 
 import java.util.Date;
