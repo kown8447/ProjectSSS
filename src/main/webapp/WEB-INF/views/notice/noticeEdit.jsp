@@ -9,11 +9,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div id="content">
-	<h2>공지사항 수정</h2>
+<h4 style="margin-left: 10%">
+	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항 수정</h4>
+<br><br>
 
+<div id="content">
 <form method="POST" enctype="multipart/form-data">
-	<table class="table table-bordered" style="width:50%; margin: auto;" >
+	<table class="table table-bordered" style="width:70%; margin: auto;" >
 		<tr>
 			<th style="text-align: center;background-color: #F8F4EC;" >글번호</th>
 			<td style="text-align: center; width:30%; ">${notice.notice_index}</td>
@@ -48,9 +50,9 @@
 		</tr>
 	</table>
 	<br>
-		<div align="center" style="margin-left:40%;">
-			<input type="submit" id="editBtn" value="수정하기"  class="btn btn-success btn-sm">
-			<a  href="notice.htm" class="btn btn-default">취소</a>
+		<div align="center" style="margin-left:55%;">
+			<input type="submit" id="editBtn" value="수정하기"  class="btn btn-success btn-sm" style="width:15%;">
+			<a  href="notice.htm" class="btn btn-default btn-sm" style="width:15%;">취소</a>
 		</div>
 	</form>
 </div>

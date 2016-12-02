@@ -10,10 +10,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<h2>공지사항</h2>
+<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항</h4>
+<br><br>
+
 <div id="content">
 	<form method="post">
-			<div class="col-sm-3" style="margin-left: 62%">
+			<div class="col-sm-6" style="margin-left: 60%">
 				<div class="form-inline">
 					<input type="text" id="keyword" name="keyword" class="form-control" > 
 					<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
@@ -22,7 +24,7 @@
 	</form>
 	<br><br>
 	
-<div style="width:70%; margin: auto;">
+<div style="width:75%; margin: auto;">
 	<table class="table table-hover">
 		<tr>
 			<th style="text-align: center;">번호</th>

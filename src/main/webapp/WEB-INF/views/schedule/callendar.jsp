@@ -11,7 +11,9 @@
 -->
 
 <!-- 캘린더  -->
+<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;학사일정</h4>
 
+<br><br>
 <div id="calendar" class="calendar"></div>
 
 <!-- 캘린더  일정추가 모달-->

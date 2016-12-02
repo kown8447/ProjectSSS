@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		insert into notice(notice_index, admin_code, notice_depth,
 		notice_step, notice_refer, notice_file, notice_title ,notice_content, notice_date )
-		values( notice_index.nextval, #{admin_code}, 0, 0, #{notice_refer},
+		values( notice_idx.nextval, #{admin_code}, 0, 0, #{notice_refer},
 		#{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
 	
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		insert into notice(notice_index, admin_code, notice_depth, notice_step,
 		notice_refer, notice_file, notice_title ,notice_content, notice_date )
-		values( notice_index.nextval, #{admin_code}, #{notice_depth},
+		values( notice_idx.nextval, #{admin_code}, #{notice_depth},
 		#{notice_step}, #{notice_refer},
 		#{notice_file,jdbcType=VARCHAR},
 		#{notice_title}, #{notice_content}, SYSDATE)

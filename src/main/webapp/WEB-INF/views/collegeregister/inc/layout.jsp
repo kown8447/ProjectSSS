@@ -9,19 +9,32 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/visual.css">
+<link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="${pageContext.request.contextPath}/js/inc/visual.js"></script>
+
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
 
 	<tiles:insertAttribute name="aside" />
 
-	<tiles:insertAttribute name="visual" />
-
-	<tiles:insertAttribute name="content" />
+	<div class="row">
+		<div class="col-sm-2">
+			<div class="sidebar-nav">
+				<div class="navbar navbar-default" role="navigation">
+					<div class="navbar-header"></div>
+					<div class="navbar-collapse collapse sidebar-navbar-collapse">
+						<tiles:insertAttribute name="visual" />
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-10">
+			<tiles:insertAttribute name="content" />
+		</div>
+	</div>
 
 	<tiles:insertAttribute name="footer" />
 </body>

@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div>
-	<h3>즐겨찾기 메뉴설정</h3>
-	<hr>
+
+	<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;즐겨찾기 메뉴 설정</h4>
+	<br><br>
 	<div class="ui-widget ui-helper-clearfix">
 		<div id="gallery">
 			<ul>
@@ -139,4 +139,3 @@
 			</c:choose>
 		</c:forEach> </ui>
 	</div>
-</div>

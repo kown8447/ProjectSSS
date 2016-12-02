@@ -8,7 +8,9 @@
    @Author : 김영빈
    @Data : 2016.11.22
    @Desc : 회원정보 수정 view 
--->   
+-->
+
+
 <div class="container" style="margin-top: 5%; ">
 
 <h3>${member.member_id}님 정보 수정 </h3>
