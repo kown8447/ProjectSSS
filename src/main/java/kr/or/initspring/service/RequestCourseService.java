@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,38 @@ public class RequestCourseService {
 	private SqlSession sqlsession;
 	
 	private static List<String> waiting = new ArrayList<String>();
+	
+	
+
+	@Value("#{props['pre.firstGrade.startDate']}")
+	private String preOneStart;
+
+	@Value("#{props['pre.secondGrade.startDate']}")
+	private String preTwoStart;
+
+	@Value("#{props['pre.thirdGrade.startDate']}")
+	private String preThreeStart;
+
+	@Value("#{props['pre.fourthGrade.startDate']}")
+	private String preFourStart;
+	
+	
+	@Value("#{props['mid.firstGrade.startDate']}")
+	private String realOneStart;
+
+	@Value("#{props['mid.secondGrade.startDate']}")
+	private String realTwoStart;
+
+	@Value("#{props['mid.thirdGrade.startDate']}")
+	private String realThreeStart;
+
+	@Value("#{props['mid.fourthGrade.startDate']}")
+	private String realFourStart;
+	
+	
+	@Value("#{props['after.AllGrade.startDate']}")
+	private String afterStart;
+
 	
 	public static List<String> getWaiting() {
 		return waiting;
@@ -156,8 +189,18 @@ public class RequestCourseService {
 			int allgrade_enroll_active = requestCourseDao.getEnrollActive(0,0);
 			if(allgrade_enroll_active==0){
 				if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
-				else if(enroll_active==1) { viewpage = "requestCourse.preRegisterCourse";}
-				else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+				else if(enroll_active==1) {viewpage = "requestCourse.preRegisterCourse";}
+				else if(enroll_active==2) {
+					if(stStateDto.getGrade()==1){
+						System.out.println(preOneStart);
+					}else if(stStateDto.getGrade()==2){
+						System.out.println(preTwoStart);
+					}else if(stStateDto.getGrade()==3){
+						System.out.println(preTwoStart);
+					}else if(stStateDto.getGrade()==4){
+						System.out.println(preTwoStart);
+					}
+					viewpage = "requestCourse.before24Hours";}
 			}else{
 				viewpage = "requestCourse.preRegisterCourse";
 			}
@@ -187,7 +230,19 @@ public class RequestCourseService {
 			if(allgrade_enroll_active==0){
 				if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
 				else if(enroll_active==1) { viewpage = "requestCourse.realRegisterCourse";}
-				else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+				else if(enroll_active==2) {
+					String [] porfArray= {};
+					if(stStateDto.getGrade()==1){
+						porfArray=realOneStart.split(" ");
+					}else if(stStateDto.getGrade()==2){
+						porfArray=realTwoStart.split(" ");
+					}else if(stStateDto.getGrade()==3){
+						porfArray=realTwoStart.split(" ");
+					}else if(stStateDto.getGrade()==4){
+						porfArray=realTwoStart.split(" ");
+					}
+					
+					viewpage = "requestCourse.before24Hours";}
 			}else{
 				viewpage = "requestCourse.realRegisterCourse";
 			}
@@ -214,7 +269,9 @@ public class RequestCourseService {
 			enroll_active = requestCourseDao.getEnrollActive(0, 2);
 			if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
 			else if(enroll_active==1) { viewpage = "requestCourse.correctRegisterCourse";}
-			else if(enroll_active==2) { viewpage = "requestCourse.before24Hours";}
+			else if(enroll_active==2) {
+				System.out.println(afterStart);
+				viewpage = "requestCourse.before24Hours";}
 
 		}catch(Exception e){
 			System.out.println("RequestCourseService / possibleRealRegister : "+ e.getMessage());

@@ -106,5 +106,6 @@
 			<bean class="kr.or.initspring.interceptor.CustomHandShakeInterceptor"/>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
+	
 
 </beans>
