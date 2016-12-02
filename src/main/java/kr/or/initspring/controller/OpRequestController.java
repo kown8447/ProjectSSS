@@ -69,10 +69,11 @@ public class OpRequestController {
 	 * 관리자가 개설신청을 수정해주는 컨트롤러, 성공시 리스트 보기 출력
 	*/
 	@RequestMapping("updateSuccess.htm")
-	public String updateCheck(@RequestParam("code") String subject_code){
+	public String updateCheck(@RequestParam("code") String subject_code) throws Exception{
 		
 		String view = "";
-		
+		System.out.println("승인버튼 누를시 컨트롤러 " + subject_code);
+	
 		int result = oprequestservice.updateSuccess(subject_code);
 		
 		if(result == 1){
@@ -92,7 +93,7 @@ public class OpRequestController {
 		String view = "";
 		boolean result = oprequestservice.UpdateReject(subject_code, reject_reason);
 		
-		if(result){
+		if(result==true){
 			view ="redirect:list.htm"; 
 		}
 		return view;

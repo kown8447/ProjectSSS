@@ -2,16 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <c:set value="${detail}" var="de"/>
 <c:set value="${room}" var="c"/>
 <c:set value="${opcheck}" var="oc"/>
-<form action="UpdateReject.htm?code=${de.subject_code}">
+<div>
+<script type="text/javascript">
+$(function() {
+	$('#reject').click(function() {
+		$('#rejectForm').submit();
+	});
+});
+
+</script>
+<form id="rejectForm" action="UpdateReject.htm?code=${de.subject_code}">
 <table style="table-layout: auto;">
 	<tr>
 		<td>구분</td>
@@ -59,9 +62,11 @@
 	</tr>
 </table>
 <input type="text" value="${de.subject_code}" name="code"><br>
-<button><a href="list.htm">목록</a></button>
-<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>
-<input type="submit" value="거절">
+	<c:if test="${de.subject_state==1 && de.success_check==0}">
+		<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>
+		<input id="reject" type="button" value="거절">
+	</c:if>
 </form>
-</body>
-</html>
+<button><a href="list.htm">목록</a></button>
+<input type="hidden" id="subject_state" value="${de.subject_state}"/>
+</div>

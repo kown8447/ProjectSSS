@@ -3,7 +3,9 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-<script src="${pageContext.request.contextPath}/js/member/excel.js"></script>    
+<script src="${pageContext.request.contextPath}/js/member/excel.js"></script>  
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>  
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

@@ -43,11 +43,25 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.commons.Academic_CalendarDTO;
+import kr.or.initspring.dto.commons.BuildingDTO;
+import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CodeMgDTO;
+import kr.or.initspring.dto.commons.CollegeDTO;
+import kr.or.initspring.dto.commons.DepartmentDTO;
+import kr.or.initspring.dto.commons.LaboratoryDTO;
+import kr.or.initspring.dto.commons.MjRecordDTO;
+import kr.or.initspring.dto.commons.OfficeDTO;
+import kr.or.initspring.dto.commons.OpenedDTO;
+import kr.or.initspring.dto.commons.RegisterDTO;
+import kr.or.initspring.dto.commons.ScSystemDTO;
+import kr.or.initspring.dto.commons.ScholarshipDTO;
+import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.service.CodeService;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dto.join.MemberDTO;
+import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.service.MemberService;
 
 @Controller
@@ -186,7 +200,25 @@ public class MemberController{
 	 * 관리자가 코드 관리뷰로 이동
 	*/
 	@RequestMapping("code.htm")
-	public String codeMg(){
+	public String codeMg(Model model){
+		
+		
+		List<BuildingDTO> building = codeservice.buildingList();
+		List<ScSystemDTO> scsystem = codeservice.scSystemList();
+		List<SemesterDTO> semester = codeservice.semesterList();
+		List<CollegeDTO> college = codeservice.collegelist();
+		List<DepartmentDTO> department = codeservice.departmentList();
+		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
+		List<OfficeDTO> officelist = codeservice.officelist();
+	
+		model.addAttribute("building", building);
+		model.addAttribute("sc", scsystem);
+		model.addAttribute("semester", semester);
+		model.addAttribute("college", college);
+		model.addAttribute("department", department);
+		model.addAttribute("opened", openedinfolist);
+		model.addAttribute("officelist", officelist);
+		
 		return "codemg.code";
 		
 	}
@@ -198,14 +230,13 @@ public class MemberController{
 	*/
 	@RequestMapping(value="codeRegister.htm", method=RequestMethod.POST)
 	public String registerCode(CodeMgDTO code){
-		System.out.println("코드 등록 컨트롤");
-		int result = 0;
+		
 		String viewpage = "";
 		
-		result = codeservice.insertCode(code);
+		int result = codeservice.insertCode(code);
 		
 		if(result == 1){
-			viewpage = "codemg.code";
+			viewpage = "redirect:codelist.htm";
 		}
 		
 		return viewpage;
@@ -218,10 +249,8 @@ public class MemberController{
 	*/
 	@RequestMapping("codelist.htm")
 	public String viewCodeList(Model model){
-		System.out.println("코드 리스트 보여주기 컨트롤");
 		
 		List<CodeMgDTO> codelist = codeservice.codelist();
-		System.out.println(codelist);
 		model.addAttribute("codelist", codelist);
 		return "codemg.codelist";
 	}
@@ -233,10 +262,8 @@ public class MemberController{
 	*/
 	@RequestMapping("codedetail.htm")
 	public String detailCode(Model model, String code){
-		System.out.println("코드 상세보기 컨트롤");
 		
 		CodeMgDTO codeDTO = codeservice.detailcode(code);
-		System.out.println(codeDTO);
 		model.addAttribute("code", codeDTO);
 		return "codemg.codedetail";
 	}
@@ -248,8 +275,6 @@ public class MemberController{
 	*/
 	@RequestMapping(value = "updateCode.htm", method=RequestMethod.POST)
 	public String updateCode(Model model,  String code, int code_type, String code_name, Date code_birth){
-		System.out.println("코드 수정하기 컨트롤");
-		System.out.println(code + "/"+ code_type +"/"+ code_name +"/"+ code_birth);
 		
 		int result = 0;
 		String viewpage = "";
@@ -279,8 +304,6 @@ public class MemberController{
 	@RequestMapping("excel.htm")
 	public ModelAndView download(HttpServletRequest request, HttpServletResponse response){
 		
-		
-		System.out.println("액셀컨트롤러");
 		String baseDir = request.getRealPath("/WEB-INF/Template");
 		
 		File downloadFile = new File(baseDir,"code_mg.xlsx");
@@ -295,7 +318,6 @@ public class MemberController{
 	*/
 	@RequestMapping(value = "compExcelUpload.htm", method=RequestMethod.POST)
 	public View excelUpload(MultipartHttpServletRequest request, Model model){
-		System.out.println("exceForm 실행후 컨트롤러 실험");	
 		codeservice.insertExcelList(request, model);
 
 		return jsonview;
@@ -308,8 +330,6 @@ public class MemberController{
 	*/
 	@RequestMapping(value = "codeDelete.htm", method = RequestMethod.POST)
 	public View deleteCode(String code, Model model){
-		System.out.println("code =" + code);
-		System.out.println("삭제 컨트롤러!");
 		
 		boolean result=false;
 		
@@ -367,4 +387,726 @@ public class MemberController{
 		return jsonview;
 	}
 	
+	@RequestMapping(value="registerBuilding.htm", method=RequestMethod.POST)
+	public String registerBuilding(BuildingDTO building){
+		
+		codeservice.insertBuilding(building);
+		return "redirect:buildingList.htm";
+	}
+	
+	@RequestMapping("buildingList.htm")
+	public String buildingList(Model model){
+		
+		List<BuildingDTO> buildingList = codeservice.buildingList();
+		model.addAttribute("building", buildingList);
+		
+		return "codemg.buildinglist";
+	}
+	
+	@RequestMapping("buildingDelete.htm")
+	public View deleteBuilding(String building_code, Model model){
+		
+		boolean result=false;
+		
+		System.out.println(building_code);
+		System.out.println("빌딩삭제 컨트롤러");
+	
+		int dbResult = codeservice.deleteBuilding(building_code, model);
+		if(dbResult >0){
+			result = true;
+		}else if(dbResult==0){
+			model.addAttribute("reason", "삭제대상이 이미 제거 되어 있습니다");
+		}
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	//빌딩 기본양식
+	@RequestMapping("buildingexcel.htm")
+	public ModelAndView buildingdownload(HttpServletRequest request, HttpServletResponse response){
+		
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+		
+		File downloadFile = new File(baseDir,"building.xlsx");
+		
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+	}
+	//강의실 기본양식
+	@RequestMapping("classroomexcel.htm")
+	public ModelAndView classroomdownload(HttpServletRequest request, HttpServletResponse response){
+		
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+		
+		File downloadFile = new File(baseDir,"classroom.xlsx");
+		
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+	}
+	//사무실 기본양식
+		@RequestMapping("ofexcel.htm")
+		public ModelAndView officedownload(HttpServletRequest request, HttpServletResponse response){
+			
+			String baseDir = request.getRealPath("/WEB-INF/Template");
+			
+			File downloadFile = new File(baseDir,"office.xlsx");
+			
+			return new ModelAndView("pageView", "downloadFile", downloadFile);
+		}	
+	//연구실 기본양식
+		@RequestMapping("lbexcel.htm")
+		public ModelAndView laboratorydownload(HttpServletRequest request, HttpServletResponse response){
+				
+			String baseDir = request.getRealPath("/WEB-INF/Template");
+					
+			File downloadFile = new File(baseDir,"laboratory.xlsx");
+					
+			return new ModelAndView("pageView", "downloadFile", downloadFile);
+		}		
+	//연구실 기본양식
+	@RequestMapping("scsexcel.htm")
+	public ModelAndView scSystemdownload(HttpServletRequest request, HttpServletResponse response){
+						
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+							
+			File downloadFile = new File(baseDir,"sc_system.xlsx");
+							
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+	}
+	//연구실 기본양식
+	@RequestMapping("sclexcel.htm")
+	public ModelAndView scholarshipdownload(HttpServletRequest request, HttpServletResponse response){
+							
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+								
+			File downloadFile = new File(baseDir,"scholarship.xlsx");
+								
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+		}	
+	//연구실 기본양식
+	@RequestMapping("colexcel.htm")
+	public ModelAndView collegedownload(HttpServletRequest request, HttpServletResponse response){
+								
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+									
+			File downloadFile = new File(baseDir,"college.xlsx");
+									
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+		}
+	//학부 기본양식
+		@RequestMapping("depexcel.htm")
+		public ModelAndView departmentdownload(HttpServletRequest request, HttpServletResponse response){
+									
+			String baseDir = request.getRealPath("/WEB-INF/Template");
+										
+				File downloadFile = new File(baseDir,"department.xlsx");
+										
+			return new ModelAndView("pageView", "downloadFile", downloadFile);
+			}	
+		
+	//학부 기본양식
+		@RequestMapping("mjexcel.htm")
+		public ModelAndView mjrecorddownload(HttpServletRequest request, HttpServletResponse response){
+										
+			String baseDir = request.getRealPath("/WEB-INF/Template");
+												
+			File downloadFile = new File(baseDir,"mjrecord.xlsx");
+												
+			return new ModelAndView("pageView", "downloadFile", downloadFile);
+			}
+	//등록 기본양식	
+		@RequestMapping("regexcel.htm")
+		public ModelAndView registerdownload(HttpServletRequest request, HttpServletResponse response){
+										
+			String baseDir = request.getRealPath("/WEB-INF/Template");
+												
+			File downloadFile = new File(baseDir,"register.xlsx");
+												
+			return new ModelAndView("pageView", "downloadFile", downloadFile);
+			}		
+	//빌딩 일괄등록
+	@RequestMapping(value = "buildingExcelUpload.htm", method=RequestMethod.POST)
+	public View buildingExcelUpload(MultipartHttpServletRequest request, Model model){
+		
+		boolean result = false;
+		
+		result = codeservice.buildingExcelList(request, model);
+		model.addAttribute("result", result);
+
+		return jsonview;
+	}
+	//강의실 일괄등록
+	@RequestMapping(value = "classroomExcelUpload.htm", method=RequestMethod.POST)
+	public View classroomExcelUpload(MultipartHttpServletRequest request, Model model) throws Exception{
+		
+		boolean result = false;
+		
+		result = codeservice.classroomExcelList(request, model);
+		
+		model.addAttribute("result", result);
+
+		return jsonview;
+	}
+	//사무실 일괄등록
+		@RequestMapping(value = "ofExcelUpload.htm", method=RequestMethod.POST)
+		public View officeExcelUpload(MultipartHttpServletRequest request, Model model){
+			System.out.println("사무실 파일일괄등록 컨트롤");
+
+			codeservice.officeExcelList(request, model);
+			return jsonview;
+		}		
+	//연구실 일괄등록
+	@RequestMapping(value = "lbExcelUpload.htm", method=RequestMethod.POST)
+	public View laboratoryExcelUpload(MultipartHttpServletRequest request, Model model){
+		System.out.println("연구실 파일일괄등록 컨트롤");
+
+		codeservice.laboratoryExcelList(request, model);
+		return jsonview;
+	}
+	//장학제도 일괄등록
+	@RequestMapping(value = "scsExcelUpload.htm", method=RequestMethod.POST)
+	public View scSystemExcelUpload(MultipartHttpServletRequest request, Model model){
+		
+		System.out.println("장학제도 파일일괄등록 컨트롤");
+		codeservice.scSystemExcelList(request, model);
+		return jsonview;
+	}
+	
+	//장학금 일괄등록
+	@RequestMapping(value = "sclExcelUpload.htm", method=RequestMethod.POST)
+	public View scholarshipExcelUpload(MultipartHttpServletRequest request, Model model){
+			
+		System.out.println("장학금 파일일괄등록 컨트롤");
+		codeservice.scholarshipExcelList(request, model);
+		return jsonview;
+		}	
+	
+	//단과대학 일괄등록
+		@RequestMapping(value = "colExcelUpload.htm", method=RequestMethod.POST)
+		public View collegeExcelUpload(MultipartHttpServletRequest request, Model model){
+				
+			System.out.println("장학금 파일일괄등록 컨트롤");
+			codeservice.collegeExcelList(request, model);
+			return jsonview;
+			}
+	//학부 일괄등록
+		@RequestMapping(value = "depExcelUpload.htm", method=RequestMethod.POST)
+		public View departmentExcelUpload(MultipartHttpServletRequest request, Model model){
+						
+			System.out.println("학부 파일일괄등록 컨트롤");
+			codeservice.departmentExcelList(request, model);
+			return jsonview;
+		}	
+	//학부 일괄등록
+		@RequestMapping(value = "mjExcelUpload.htm", method=RequestMethod.POST)
+		public View mjrecordExcelUpload(MultipartHttpServletRequest request, Model model){
+							
+			System.out.println("전공 파일일괄등록 컨트롤");
+			codeservice.mjrecordExcelList(request, model);
+			return jsonview;
+		}
+	//학부 일괄등록
+		@RequestMapping(value = "regExcelUpload.htm", method=RequestMethod.POST)
+		public View registerExcelUpload(MultipartHttpServletRequest request, Model model){
+									
+			System.out.println("전공 파일일괄등록 컨트롤");
+			codeservice.registerExcelList(request, model);
+			return jsonview;
+		}	
+		
+	@RequestMapping("buildingDetail.htm")
+	public String buildingDetail(String building_code, Model model){
+
+		BuildingDTO building = codeservice.selectBuilding(building_code);
+		model.addAttribute("building", building);
+	
+		return "codemg.buildingdetail"; 
+	}
+	
+	@RequestMapping("updateBuilbilding.htm")
+	public String updateBuilding(String building_code, String building_name,  String building_addr){
+
+		String view = "";
+		
+		int result = codeservice.updateBuilding(building_code, building_name, building_addr);
+		
+		if(result == 1){
+			view = "redirect:buildingList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("classroomList.htm")
+	public String classroomList(Model model){
+		
+		List<ClassroomDTO> classlsit =  codeservice.classList();
+		model.addAttribute("classlist", classlsit);
+		return "codemg.classroomlist";
+	}
+	
+	@RequestMapping("classroomUpdate.htm")
+	public String classroomDetail(String classroom_code, Model model){
+		
+		String view = "";
+		
+		ClassroomDTO classroom = codeservice.selectClassroom(classroom_code);
+		List<BuildingDTO> building = codeservice.buildingList();
+
+		model.addAttribute("classroom", classroom);
+		model.addAttribute("building", building);
+	
+		return "codemg.classroomdetail";
+	}
+	
+	@RequestMapping(value = "registerClassroom.htm", method=RequestMethod.POST)
+	public String insertClassroom(ClassroomDTO classroom){
+
+		int result = codeservice.insertClassroom(classroom);
+		String view = "";
+		
+		if(result == 1){
+			view = "redirect:classroomList.htm";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping("updateClassroom.htm")
+	public String updateClassroom(ClassroomDTO classroom){
+
+		int result = codeservice.updateClassroom(classroom);
+		String view = "";
+		
+		if(result == 1){
+			view = "redirect:classroomList.htm";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping( value = "insertOffice.htm", method = RequestMethod.POST)
+	public String insertOffice(OfficeDTO office){
+		
+		System.out.println("컨틀롤러에서의 값" + office.toString());
+		String view = "";
+		int result = codeservice.insertOffice(office);
+		
+		if(result == 1){
+			view = "redirect:officeList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("officeList.htm")
+	public String officeList(Model model){
+		
+		List<OfficeDTO> officelist = codeservice.officelist();
+		
+		model.addAttribute("officelist", officelist);
+		System.out.println(officelist.toString());
+		
+		return "codemg.officelist";
+	}
+	
+	@RequestMapping("detailOffice.htm")
+	public String detailOffice(String office_code){
+		
+		return null;
+	}
+	
+	@RequestMapping("labList.htm")
+	public String labList(Model model){
+		
+		List<LaboratoryDTO> lablist = codeservice.lablist();
+		
+		model.addAttribute("lablist", lablist);
+		return "codemg.lablist";
+	}
+	
+	@RequestMapping(value = "insertLab.htm", method = RequestMethod.POST)
+	public String insertLab(LaboratoryDTO lab){
+		
+		int result = codeservice.insertLab(lab);
+		String view = "";
+		
+		if(result ==1){
+			view = "redirect:labList.htm";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping(value = "labDetail.htm")
+	public String labDetail(String lab_code, Model model){
+		
+		LaboratoryDTO lab = codeservice.labDetail(lab_code);
+		List<BuildingDTO> building = codeservice.buildingList();
+		
+		model.addAttribute("lab", lab);
+		model.addAttribute("building", building);
+		
+		return "codemg.labdetail";
+	}
+	
+	@RequestMapping("scSystemList.htm")
+	public String scSystemList(Model model){
+		
+		List<ScSystemDTO> scsystemlist = codeservice.scSystemList();
+		model.addAttribute("scsystemlist", scsystemlist);
+		
+		return "codemg.scsystemlist";
+	}
+	
+	@RequestMapping("detailScSystem.htm")
+	public String detailScSystem(String sys_code, Model model){
+		
+		ScSystemDTO dto = codeservice.detailScSystem(sys_code);
+		model.addAttribute("scsystem", dto);
+		
+		return "codemg.scsystemdetail"; 
+	}
+	
+	@RequestMapping("insertScSystem.htm")
+	public String insertScSystem(ScSystemDTO scsystem){
+		
+		String view = "";
+		int result = codeservice.insertScSystem(scsystem);
+		
+		if(result == 1){
+			view = "redirect:scSystemList.htm"; 
+		}
+		return view;
+	}
+	
+	@RequestMapping("scholarshipList.htm")
+	public String scholarshipList(Model model){
+		
+		List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
+		model.addAttribute("scholarshipList", scholarshipList);	
+
+		return "codemg.scholarshiplist";
+	}
+	
+	@RequestMapping("detailScholarship.htm")
+	public String detailScholarship(String scholarship_code, Model model){
+		
+		ScholarshipDTO scholarship = codeservice.detailScholarship(scholarship_code);
+		List<ScSystemDTO> scsystem = codeservice.scSystemList();
+		List<SemesterDTO> semester = codeservice.semesterList();
+		
+		
+		model.addAttribute("scholarship", scholarship);
+		model.addAttribute("scsystem", scsystem);
+		model.addAttribute("semester", semester);
+		
+		return "codemg.detailscholarship";
+	}
+	
+	@RequestMapping("semesterList.htm")
+	public String semesterList(Model model){
+		
+		List<SemesterDTO> semesterlist = codeservice.semesterList();
+		model.addAttribute("semesterlist", semesterlist);
+		
+		return "codemg.semesterlist";
+	}
+	
+	@RequestMapping(value = "insertSemester.htm", method = RequestMethod.POST)
+	public String insertSemester(SemesterDTO semester){
+		
+		String view = "";
+		System.out.println("학기 등록 컨트롤러");
+		System.out.println(semester.getSemester_code());
+		System.out.println(semester.toString());
+		int result = codeservice.insertSemester(semester);
+		
+		if(result ==1){
+			view = "redirect:semesterList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("detailSemester.htm")
+	public String detailSemester(String semester_code, Model model){
+		
+		SemesterDTO dto = codeservice.detailSemester(semester_code);
+		model.addAttribute("semester", dto);
+		
+		return "codemg.semesterdetail";
+	}
+	
+	@RequestMapping("academicCalendarList.htm")
+	public String academicCalendarList(Model model){
+		
+		List<Academic_CalendarDTO> academiclist = codeservice.academicCalendarList();
+		model.addAttribute("academic", academiclist);
+		
+		return "codemg.academiccalendarlist";
+	}
+	
+	@RequestMapping(value ="insertAcademicCalendar.htm", method = RequestMethod.POST)
+	public String insertAcademicCalendar(Academic_CalendarDTO academic){
+		
+		System.out.println(academic.toString());
+		String view = "";
+		int result = codeservice.insertAcademicCalendar(academic);
+		
+		if(result == 1){
+			view = "redirect:academicCalendarList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("academicCalendarDetail.htm")
+	public String academicCalendarDetail(String calendar_code, Model model){
+		
+		Academic_CalendarDTO academic = codeservice.academicCalendarDetail(calendar_code);
+		model.addAttribute("academic", academic);
+		
+		return "codemg.academicCalendarDetail";
+	}
+	
+	@RequestMapping("selectOffice.htm")
+	public String selectOffice(String office_code, Model model){
+		
+		OfficeDTO office = codeservice.selectOffice(office_code);
+		List<BuildingDTO> building = codeservice.buildingList();
+		
+		model.addAttribute("office", office);
+		model.addAttribute("building", building);
+		
+		return "codemg.officedetail";
+		
+	}
+	
+	@RequestMapping("updateOffice.htm")
+	public String updateOffice(OfficeDTO office){
+		
+		String view = "";
+		int result = codeservice.updateOffice(office);
+		
+		if(result == 1){
+			view = "redirect:officeList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("updateLab.htm")
+	public String updateLab(LaboratoryDTO lab){
+		
+		String view = "";
+		int result = codeservice.updateLab(lab);
+		
+		if(result == 1){
+			view = "redirect:labList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("updateAcademic.htm")
+	public String updateAcademic(Academic_CalendarDTO academic){
+		
+		String view = "";
+		int result = codeservice.updateAcademic(academic);
+		
+		if(result == 1){
+			view = "redirect:academicCalendarList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("scsytemUpdate.htm")
+	public String updateScSystemUpdate(ScSystemDTO scsytem){
+		
+		String view = "";
+		int result = codeservice.updateScSytem(scsytem);
+		
+		if(result == 1){
+			view = "redirect:scSystemList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("updateScholarship.htm")
+	public String updateScholarship(ScholarshipDTO scholarship){
+		
+		String view = "";
+		int result = codeservice.scholarshipUpdate(scholarship);
+		
+		if(result == 1){
+			view = "redirect:scholarshipList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("insertScholarship.htm")
+	public String insertScholarship(ScholarshipDTO scholarship){
+		
+		String view = "";
+		int result = codeservice.insertScholarship(scholarship);
+		
+		if(result ==1){
+			view = "redirect:scholarshipList.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("updateSemester.htm")
+	public String updateSemester(SemesterDTO semester){
+		
+		String view = "";
+		int result = codeservice.updateSemester(semester);
+
+		if(result == 1){
+			view = "redirect:semesterList.htm"; 
+		}
+		return view;
+	}
+	
+	@RequestMapping("collegeList.htm")
+	public String colleageList(Model model){
+		
+		List<CollegeDTO> collegelsit = codeservice.collegelist();
+		model.addAttribute("college", collegelsit);
+		
+		return "codemg.collegelist";
+	}
+	
+	@RequestMapping(value ="insertCollege.htm", method = RequestMethod.POST)
+	public String insertCollege(CollegeDTO college){
+		
+		String view = "";
+		int result = codeservice.insertCollege(college);
+
+		if(result == 1){
+			view = "redirect:collegeList.htm";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping("updateColleage.htm")
+	public String updateCollege(CollegeDTO college){
+		
+		String view = "";
+		int result = codeservice.updateCollege(college);
+		
+		if(result == 1){
+			view = "redirect:collegeList.htm";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping("selectCollege.htm")
+	public String collegeDetail(String college_code, Model model){
+		
+		CollegeDTO college = codeservice.collegeDetail(college_code);
+		model.addAttribute("college", college);
+		System.out.println(college.toString());
+		
+		return "codemg.collegedetail";
+	}
+	
+	@RequestMapping("departmentlist.htm")
+	public String departmentList(Model model){
+		
+		List<DepartmentDTO> departmentlist = codeservice.departmentList();
+		model.addAttribute("department", departmentlist);
+		
+		return "codemg.departmentlist";
+	}
+	
+	@RequestMapping(value ="insertDepartment.htm", method = RequestMethod.POST)
+	public String inesrtDepartment(DepartmentDTO department){
+		
+		System.out.println(department.toString());
+		String view = "";
+		int result = codeservice.insertDepartment(department);
+		
+		if(result == 1){
+			view = "redirect:departmentlist.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("departmentDetail.htm")
+	public String selectDepartment(String department_code, Model model){
+		
+		DepartmentDTO department = codeservice.selectDepartment(department_code);
+		System.out.println(department.toString());
+		model.addAttribute("department", department);
+		
+		return "codemg.departmentdetail";
+	}
+	
+	@RequestMapping("updateDepartment.htm")
+	public String updateDepartment(DepartmentDTO department){
+		
+		String view = "";
+		int result = codeservice.updateDepartment(department);
+		
+		if(result == 1){
+			view = "redirect:departmentlist.htm";
+		}
+		return view;
+	}
+	
+	@RequestMapping("mjRecordList.htm")
+	public String mjRecordList(Model model){
+		
+		List<MjRecordDTO> mjrecordlist = codeservice.mjRecordList();
+		model.addAttribute("mjrecord", mjrecordlist);
+		
+		return "codemg.mjrecordlist";
+	}
+	
+	@RequestMapping(value = "insertMjRecord.htm", method = RequestMethod.POST)
+	public String insertMjRecord(MjRecordDTO mjrecord){
+		
+		String view = "";
+		int result = codeservice.insertMjRecord(mjrecord);
+		
+		if(result == 1){
+			view = "redirect:mjRecordList.htm";
+		}
+		return view;
+	}
+	
+	/*
+	 * MethodName :  initSemester
+	 * author : 성홍모
+	 * Desc : 학기 초기화 함수. Timetable, Lecture, Opened, Ask_time, Oprequest, rejection, reserve, enrollment 삭제
+	 */
+	@RequestMapping("initSemester.htm")
+	public View initSemester(Model model) throws Exception{
+		
+		boolean result = codeservice.initSemester();
+		
+		if(result)	model.addAttribute("result", "success");
+		else	model.addAttribute("result", "fail");
+		
+		return jsonview;
+	}
+	
+	@RequestMapping("registerlist.htm")
+	public String registerlist(Model model){
+		
+	    List<RegisterDTO> registerlist = codeservice.registerlist();
+	    model.addAttribute("register", registerlist);
+	    
+		return "codemg.registerlist";
+	}
+	
+	@RequestMapping("insertRegister.htm")
+	public String insertRegister(RegisterDTO register){
+		
+		String view = "";
+		int result = codeservice.insertRegister(register);
+		
+		if(result == 1){
+			view = "redirect:registerlist.htm";
+		}
+		return view;
+	}
 }
+

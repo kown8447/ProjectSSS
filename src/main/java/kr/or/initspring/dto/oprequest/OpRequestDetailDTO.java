@@ -9,9 +9,22 @@ public class OpRequestDetailDTO {
 	private int subject_seats; 		// 과목 정원
 	private String subject_name;	// 과목명
 	private String subject_Filesrc;	// 첨부파일명
+	private int subject_state; // 과목 상태
+	private int success_check;	//관리자 개설 승인_거부 상태
 	
 	
-	
+	public int getSuccess_check() {
+		return success_check;
+	}
+	public void setSuccess_check(int success_check) {
+		this.success_check = success_check;
+	}
+	public int getSubject_state() {
+		return subject_state;
+	}
+	public void setSubject_state(int subject_state) {
+		this.subject_state = subject_state;
+	}
 	public String getSubject_Filesrc() {
 		return subject_Filesrc;
 	}
@@ -58,9 +71,8 @@ public class OpRequestDetailDTO {
 	public String toString() {
 		return "OpRequestDetailDTO [subject_code=" + subject_code + ", grade_limit=" + grade_limit + ", subject_credit="
 				+ subject_credit + ", subject_type=" + subject_type + ", subject_seats=" + subject_seats
-				+ ", subject_name=" + subject_name + ", subject_Filesrc=" + subject_Filesrc + "]";
+				+ ", subject_name=" + subject_name + ", subject_Filesrc=" + subject_Filesrc + ", subject_state="
+				+ subject_state + ", success_check=" + success_check + "]";
 	}
-	
-	
 	
 }

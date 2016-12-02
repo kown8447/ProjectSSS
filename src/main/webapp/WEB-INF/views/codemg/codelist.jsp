@@ -24,7 +24,6 @@
 					} else {
 						alert(data.reason);
 					} 
-					//location.href = "codelist.htm";
 				}
 			});
 
@@ -45,8 +44,21 @@
 	<c:forEach items="${codelist}" var="code" varStatus="index">
 		<tbody>
 			<tr>
-				<td>${code.code_type}</td>
-				<td id="code${index.count}">${code.code}</td>  <%-- <input name="code${index.count}" id="code${index.count}" type="text" readonly="readonly" value="${code.code}">  --%>
+				<td>
+					<c:choose>
+						<c:when test="${code.code_type ==0}">
+							학생
+						</c:when>
+						<c:when test="${code.code_type ==1}">
+							교수
+						</c:when>
+						<c:otherwise>
+							관리자
+						</c:otherwise>
+					</c:choose>
+				<%-- ${code.code_type} --%>
+				</td>
+				<td id="code${index.count}">${code.code}</td>
 				<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
 				</td>
 				<td>${code.code_birth}</td>
@@ -57,6 +69,5 @@
 			</tr>
 		</tbody>
 	</c:forEach>
-
 </table>
-
+<a href="code.htm">되돌아가기</a>

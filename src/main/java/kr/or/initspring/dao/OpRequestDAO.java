@@ -28,4 +28,7 @@ public interface OpRequestDAO {
 	public int UpdateSuccess(String subject_code);
 	public int UpdateReject(String subject_code);
 	public int insertRejection(String subject_code, String reject_reason);
+	public int insertIntoOpened(String subject_code);
+	public int insertIntoLecture(String subject_code);
+	public int updateSubjectState(String subject_code);
 }
