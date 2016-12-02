@@ -15,6 +15,7 @@ public class SubjectDTO {
 	private int subject_state;  //과목상태
 	private int subject_type;  //과목유형
 	private int subject_seats;	//과목 정원
+
 	
 	public int getSubject_seats() {
 		return subject_seats;

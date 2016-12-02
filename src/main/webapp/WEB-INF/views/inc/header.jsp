@@ -33,10 +33,8 @@
 			</div>
 			<div class="collapse navbar-collapse pull-right" id="main-menu">
 				<ul class="nav">
-					<li class="dropdown fadeInDown animated d3"><se:authorize
-							access="hasAnyRole('ROLE_STUDENT')">
-							<a
-								href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a>
+					<li class="dropdown fadeInDown animated d3"><se:authorize access="hasAnyRole('ROLE_STUDENT')">
+							<a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu"
 							style="display: none;">
@@ -81,13 +79,27 @@
 								href="${pageContext.request.contextPath}/requestcourse/correctRegiser.htm">수강정정</a>
 							</li>
 						</ul></li>
+					<li class="dropdown fadeInDown animated d3">
+						<a href="#">교수 메뉴</a>
+						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
+							<li>
+								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
+									<a href="${pageContext.request.contextPath}/lecture/lectureView.htm">강의 등록</a>
+								</se:authorize> 
+							</li>
+							<li>
+								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
+									<a href="${pageContext.request.contextPath}/lecture/lectureMyclass.htm">성적입력</a>
+								</se:authorize>
+							</li>
+						</ul>
+					</li>
 
 					<li class="dropdown fadeInDown animated d2"><se:authorize
 							access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 							<a href="${pageContext.request.contextPath}/notice/notice.htm">게시판</a>
 						</se:authorize>
-						<ul class="firstlevel dropdown-menu sub-menu"
-							style="display: none;">
+						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
 							<li><a
 								href="${pageContext.request.contextPath}/notice/notice.htm">공지사항</a>
 							</li>
@@ -107,9 +119,8 @@
 						<ul class="firstlevel dropdown-menu sub-menu" id="favoriteList"
 							style="display: none;">
 
-						</ul></li>
-
-
+						</ul>
+					</li> 
 				</ul>
 			</div>
 		</div>

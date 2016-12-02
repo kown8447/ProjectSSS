@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.LectureMgDAO">
+	<select id="select_list" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+	 select s.subject_code, nvl(o.success_check,0) as success_check,s.GRADE_LIMIT,s.subject_name,s.subject_type 
+    from SUBJECT s LEFT OUTER join OP_REQUEST o 
+    on s.subject_code = o.subject_code where s.professor_code = #{param1}
+	
+	</select>
+	
+	<select id="select_major" resultType="String">
+		select required_choice from MAJOR where subject_code = #{param1}
+	</select>
+	
+	<select id="select_liberal" resultType="String">
+		select required_choice from LIBERAL where subject_code = #{param1}  
+	</select>
+	
+
+	<select id="select_Professor" parameterType="String" resultType="String">
+		select professor_code from professor where member_id=#{param1}
+	</select>
+	
+	<!-- 과목등록할때 선수과목 불러옴 -->
+	<select id="select_Before" parameterType="String" resultType="String">
+	SELECT DISTINCT(sub.subject_name) FROM MAJOR m join SUBJECT sub on m.SUBJECT_CODE = sub.SUBJECT_CODE 
+	WHERE m.DEPARTMENT_CODE = #{param1}
+	</select>
+	
+	<select id="select_departmentcode" resultType="kr.or.initspring.dto.commons.PfMajorDTO">
+	SELECT m.PROFESSOR_CODE,m.DEPARTMENT_CODE FROM PROFESSOR p join PF_MAJOR m			
+	on p.PROFESSOR_CODE = m.PROFESSOR_CODE WHERE MEMBER_ID = #{param1}
+	</select>
+
+	
+	<insert id="insert_Subject" parameterType="kr.or.initspring.dto.commons.SubjectDTO">
+	 	insert into SUBJECT(subject_code,professor_code,subject_name,subject_credit,grade_limit,
+	 	subject_state,subject_seats,subject_type) values (#{subject_code},#{professor_code},#{subject_name},
+	 	#{subject_credit},#{grade_limit},0,#{subject_seats},#{subject_type})
+	</insert>
+	
+	<insert id="insert_op" parameterType="String">
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{param1},#{param2},0)
+	</insert>
+	
+	<insert id="insert_BeforeName" parameterType="String">
+		insert into BEFORE_SUBJECT (subject_code,before_name) values (#{param1},
+		(select subject_name from SUBJECT where subject_name = #{param2}))
+	</insert>
+	
+	<insert id="insert_Liberal" parameterType="String">
+	 	insert into LIBERAL (subject_code,required_choice) values (#{param1},#{param2})
+	</insert>
+	
+	<insert id="insert_major" parameterType="String">
+	 	insert into MAJOR (subject_code,required_choice,department_code) values (#{param1},#{param2},#{param3})
+	</insert>
+	
+	
+	<!-- 여기서부터디테일 -->
+	<select id="subject_Detail" parameterType="String" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from subject s left outer join before_subject b on s.subject_code = b.subject_code 
+        where s.subject_code = #{param1}
+	</select>
+	
+	<select id="detail_liberal" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from subject s left outer join before_subject b on s.subject_code = b.subject_code
+        join liberal l on s.subject_code = l.subject_code where s.subject_code = #{param1}		
+	</select>
+		
+	<select id="detail_major" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from subject s left outer join before_subject b on s.subject_code = b.subject_code
+        join major m on s.subject_code = m.subject_code where s.subject_code = #{param1}	
+	</select>
+	
+	<!-- 비포코드로 그 비포코드에 맞는 과목명 가져옴 -->
+	<select id="detail_beforename" resultType="String">
+		select subject_name from subject where subject_code = #{param1}
+	</select>
+	
+	<!-- 삭제쿼리모음집 -->
+	
+	<delete id="delete_Subject">
+		delete from SUBJECT where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Liberal">
+		delete from LIBERAL where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Major">
+		delete from MAJOR where subject_code =  #{param1}
+	</delete>
+	
+	<delete id="delete_Ask_Time">
+		delete from ASK_TIME where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Before">
+		delete from BEFORE_SUBJECT where subject_code = #{param1}
+	</delete>	
+	
+	<delete id="delete_Plan">
+		delete from PLAN where subject_code=  #{param1}
+	</delete>
+	
+	<delete id="delete_Oprequest">
+		delete from OP_REQUEST where subject_code = #{param1}
+	</delete>
+	
+	<delete id="delete_Rejection">
+		delete from REJECTION where subject_code = #{param1}
+	</delete>
+	
+	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name}
+		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
+	</update>
+	
+	<!-- 선수과목을 수정하는 쿼리 -->
+	<update id="update_before_subject"  parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		update BEFORE_SUBJECT set before_name=#{before_name} where subject_code = #{subject_code}
+	</update>
+	
+	<!-- 이거는 이미 들어가있는 건물,시간표 조회 -->
+	<select id="select_period_build" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from ASK_TIME a join subject s on a.subject_code = s.subject_code where subject_code = #{param1}
+	</select>
+	
+	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
+	<select id="maxSubject_code" resultType="String">
+		SELECT subject_seq.nextval as subject_code FROM double
+	</select>
+		
+	<select id="maxRecord_code" resultType="String">
+		SELECT record_seq.nextval as record_code FROM double
+	</select>
+	
+	
+	<!-- 개설신청 -->
+	<insert id="insert_Plan" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into Plan (subject_filesrc,subject_code) values (#{subject_filesrc},#{subject_code})
+	</insert>
+	
+	
+	<select id="viewtimetable" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		    select * from ASK_TIME a join subject s on a.SUBJECT_CODE = s.subject_code join professor p on
+		    s.professor_code = p.professor_code join member m on p.member_id = m.member_id
+		     where a.classroom_code = #{param1}
+	</select>
+
+	<select id="selectAllBuilding" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+			select * from classroom where building_code = #{param1}
+	</select>
+	
+	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
+		select * from Period
+	</select>
+	
+	<insert id="setAskTime" parameterType="String">
+		insert into ASK_TIME (classroom_code,period_code,subject_code) values (#{param1},#{param2},#{param3})
+	</insert>
+	
+	<insert id="setOprequest" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',0)
+	</insert>
+	
+	
+	<select id="getSemester" resultType="kr.or.initspring.dto.commons.SemesterDTO">
+		select * from SEMESTER
+	</select>
+
+	<select id="select_Studentlist" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		    select * from timetable t join student s on t.student_code = s.student_code 
+		     join member m on m.member_id = s.MEMBER_ID join opened o on o.subject_code = t.subject_code
+		      join record r on s.student_code = r.student_code
+		      where t.SUBJECT_CODE = #{param1} 
+
+	</select>
+	
+	<select id="select_myClass" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from PROFESSOR p join subject s on p.PROFESSOR_CODE = s.PROFESSOR_CODE 
+		join OPENED o on s.subject_code = o.subject_code where p.professor_code = #{professor_code}
+	</select>
+	
+	<select id="select_stState" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		select * from ST_STATE where student_code = #{param1}
+	</select>
+	
+	<insert id="insert_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+		insert into RECORD(record_code,student_code,subject_code,semester_code,record_level,record_grade,record_semester,retake_check)
+		values (#{record_code},#{student_code},#{subject_code},#{semester_code},#{record_level},#{record_grade},#{personal_Semester},0)
+	</insert>
+	
+	<select id="select_record" resultType="kr.or.initspring.dto.commons.RecordDTO">
+		select * from RECORD where student_code = #{param1}
+	</select>
+	
+	<update id="update_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
+	 UPDATE record SET record_level = #{record_level} where student_code = #{student_code} AND subject_code = #{subject_code}
+	</update>
+	
+	<select id="select_Recordlevel" resultType="String">
+		select * from record where student_code = #{param1} AND subject_code = #{param2}
+	</select>
+	
+	<select id="select_reStudy" resultType="String">
+		  select record_code from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE 
+		  where s.subject_code = #{param1} and r.STUDENT_CODE = #{param2}
+	</select>
+	
+	<update id="update_RetakeCheck">
+		  UPDATE RECORD SET RETAKE_CHECK = 1 where record_code = #{param1}
+	</update>
+	
+	<select id="select_Rejection" resultType="String">
+		  select reject_reason from REJECTION where subject_code = #{param1}
+	</select>
+</mapper>
