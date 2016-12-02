@@ -13,7 +13,7 @@
 <h2>QnA</h2>
 <div id="content">
 
-	<div align="center">
+	<div align="right" style="margin-right: 15%;">
 		<form>
 			<div class="form-inline" >
 				<select id="searchType" name="searchType" class="form-control"  style="width:120px;margin-right:5px;">
@@ -22,12 +22,13 @@
 					<option value="2">글쓴이</option>
 				</select>	
 				<input type="text" id="keyword" name="keyword" class="form-control" style="width:250px;margin-right:5px;"/> 
-				<input type="submit" id="searchBtn" class="btn btn-primary" value="찾기">			
+				<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">			
 			</div>
 		</form>
 	</div>
+	<br>
 	
-	<div style="width:85%; text-align: center; margin: auto;">
+	<div style="width:70%; margin: auto;">
 	<table class="table table-hover">
 		<tr>
 			<th style="text-align:center">번호</th>
@@ -42,15 +43,16 @@
                		<td colspan="5" style="text-align: center">등록된 글이 없습니다.</td>
             	</tr>
          	</c:if>
-         
-			<c:forEach items="${list}" var="qna">
+         	
+			<c:forEach items="${list}" var="qna">		
 				<tr>
-					<td>${qna.qna_index}</td>
-					<td>							
+					<td style="text-align: center;">${qna.qna_index}</td>
+					<td>	
+					 <div class="form-group">				
 						<c:choose>
 								<c:when test="${qna.qna_depth != 0 }">
 									<c:forEach var="depth"  begin="0" end="${qna.qna_depth*2}" step="1">
-										&emsp;&emsp;
+										&emsp;
 									</c:forEach>						
 										<img src="../images/reply.png">&nbsp;	
 								</c:when>			
@@ -59,33 +61,34 @@
 						<c:if test="${fn:length(qna.qna_title) > 15}">
 			                  	<a  href="qnaDetail.htm?qna_index=${qna.qna_index}">
 			                  	<c:if test="${qna.qna_status==1}">
-			                  		<h5 style="color: red">[삭제된 글의 답글입니다]</h5>
+			                  		<font color="red">[삭제된 글의 답글입니다]</font>
 			                  	</c:if>
 			                 	<c:out value="${fn:substring(qna.qna_title,0,15)}" />...  </a>                  
 			            </c:if> 
 			                     
 			            <c:if test="${fn:length(qna.qna_title) <= 15}">
 			            	<c:if test="${qna.qna_status==1}">
-			                  	<h5 style="color: red">[삭제된 글의 답글입니다]</h5>
+			                  		<font color="red">[삭제된 글의 답글입니다]</font>
 			                 </c:if>
-			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}" style="text-align: left;">${qna.qna_title}</a>
+			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}">${qna.qna_title}</a>
 			            </c:if>
+			         </div>		
                    </td>
 														
-				<td>${qna.member_id}</td>
-				<td>${qna.qna_date}</td>
-				<td>${qna.qna_count}</td>
-			</tr>
+				<td style="text-align: center;">${qna.member_id}</td>
+				<td style="text-align: center;">${qna.qna_date}</td>
+				<td style="text-align: center;">${qna.qna_count}</td>
+			</tr>	
 			</c:forEach>
 	</tbody>
 	</table>			
 	<div style="margin-left: 90%">
-		<a href="${pageContext.request.contextPath}/qnanotice/qnaWrite.htm" class="btn btn-success">글쓰기</a>
+		<a href="${pageContext.request.contextPath}/qnanotice/qnaWrite.htm" class="btn btn-success btn-sm">글쓰기</a>
 	</div>
 </div>	
 
 	<div align = "center">
-	 <ul class="pagination">
+		<ul class="pagination">
 			<!-- 처음 이전 링크 --> 
 			<c:if test="${pg>fromPage}">
 			<!-- 5>10 : false / 15>10 : true -->
@@ -116,7 +119,7 @@
             [<span style="color: gray">▶</span>]
             [<span style="color: gray">▶▶</span>]  
     		</c:if>
-	</ul>
+		</ul>
 	</div>
 </div>	
 
