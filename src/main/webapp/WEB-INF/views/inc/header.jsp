@@ -111,8 +111,7 @@
 							</li>
 						</ul></li>
 
-					<li class="dropdown fadeInDown animated d2"><se:authorize
-							access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
+					<li class="dropdown fadeInDown animated d2"><se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 							<a href="${pageContext.request.contextPath}/favorite/config.htm">즐겨찾기
 								설정</a>
 						</se:authorize>
@@ -121,6 +120,15 @@
 
 						</ul>
 					</li> 
+					<se:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">관리자 메뉴</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/code.htm">코드관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/oprequest/list.htm">개설과목 관리</a></li>
+							</ul>
+						</li>
+					</se:authorize>
 				</ul>
 			</div>
 		</div>

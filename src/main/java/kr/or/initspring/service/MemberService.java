@@ -170,4 +170,5 @@ public class MemberService {
 		List<PeriodDTO> periodList = requestCourseDao.getPeriodList();
 		return periodList;
 	}
+
 }
