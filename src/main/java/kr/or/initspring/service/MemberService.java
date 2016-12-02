@@ -146,7 +146,7 @@ public class MemberService {
 	 */
 	public List<OpenedLectureDTO> viewCurrentTimetable(String member_id){
 		
-		List<OpenedLectureDTO> lists = new ArrayList<>();
+		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
