@@ -67,6 +67,7 @@ public class LectureMgController {
 	public String updateSubject(Model model,String subject_code){
 		System.out.println(subject_code);
 		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
+
 		model.addAttribute("list",list);
 		
 		return "lecture.subjectupdate";

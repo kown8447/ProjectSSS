@@ -145,7 +145,7 @@ public class lectureService {
 		System.out.println("subjectDetail service subect_code :"+subject_code);
 	
 		CustomLectureMgDTO detail = lecturedao.subject_Detail(subject_code);
-		
+		String reject_reason = lecturedao.select_Rejection(subject_code);
 		if(detail.getSubject_type() == 0){
 			detail = lecturedao.detail_major(subject_code);	
 			if(detail.getBefore_name() == null || detail.getBefore_name().equals("")){
@@ -156,7 +156,9 @@ public class lectureService {
 			detail = lecturedao.detail_liberal(subject_code);
 			detail.setBefore_name("없음");
 		}
-	
+		
+		detail.setReject_reason(reject_reason);
+
 			return detail;
 	}
 	
@@ -394,6 +396,7 @@ public class lectureService {
 			List<String> secondsubject = lecturedao.select_reStudy(dto.getSubject_code(), dto.getStudent_code());
 			if(secondsubject.equals("") || secondsubject == null){
 				for(int i=0; i<secondsubject.size();i++){
+					System.out.println("재수강탔음");
 					lecturedao.update_RetakeCheck(dto.getRecord_code());
 				}
 			}

@@ -44,9 +44,9 @@
 		<td><a href="lectureDetail.htm?subject_code=${subject.subject_code}&success_check=${subject.success_check }">
 		${subject.subject_name}</td></a>
 		<td><c:choose>
-		<c:when test = "${subject.success_check == 0}"> 등록 </c:when>
-		<c:when test = "${subject.success_check == 1}"> 개설신청 </c:when>
-		<c:when test = "${subject.success_check == 2}"> 개설 </c:when>
+		<c:when test = "${subject.success_check == 0}"> 대기 </c:when>
+		<c:when test = "${subject.success_check == 1}"> 승인 </c:when>
+		<c:when test = "${subject.success_check == 2}"> 거절 </c:when>
 		</c:choose>
 		</td>
 		

@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="setOprequest" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',1)
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',0)
 	</insert>
 	
 	
@@ -176,6 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_Studentlist" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		    select * from timetable t join student s on t.student_code = s.student_code 
 		     join member m on m.member_id = s.MEMBER_ID join opened o on o.subject_code = t.subject_code
+		      join record r on s.student_code = r.student_code
 		      where t.SUBJECT_CODE = #{param1} 
 
 	</select>
@@ -212,6 +213,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="update_RetakeCheck">
-		  UPDATE RECORD SET RETAKE_CHECK = 1 where record_code = #{param1};
+		  UPDATE RECORD SET RETAKE_CHECK = 1 where record_code = #{param1}
 	</update>
+	
+	<select id="select_Rejection" resultType="String">
+		  select reject_reason from REJECTION where subject_code = #{param1}
+	</select>
 </mapper>

@@ -36,13 +36,16 @@ public class CustomLectureMgDTO {
 	private String record_code;    //성적코드
 	private String record_level;  //성적
 	private int personal_Semester;
+	private String reject_reason;
 	
 	
-	
-	
-	
-	
-	
+
+	public String getReject_reason() {
+		return reject_reason;
+	}
+	public void setReject_reason(String reject_reason) {
+		this.reject_reason = reject_reason;
+	}
 	public int getPersonal_Semester() {
 		return personal_Semester;
 	}

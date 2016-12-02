@@ -29,6 +29,7 @@ var subject_code='';
 							$("#list").append("<tr><td id='student_code_"+index+"'>"+data.student[index].student_code+"</td>"
 							+"<td>"+data.student[index].member_name+"</td><td>"+data.student[index].member_email+"</td>"
 							+"<td><select id='grade_"+index+"'>"
+							//+"<option value='"+data.student[index].record_level+"'>"+data.student[index].record_level+"</option>"
 							+"<option value='A+'>A+</option><option value='A'>A</option>"
 							+"<option value='B+'>B+</option><option value='B'>B</option><option value='C+'>C+</option>"
 							+"<option value='C'>C</option><option value='D+'>D+</option><option value='D'>D</option>"

@@ -80,4 +80,6 @@ public interface LectureMgDAO {
 	public String select_Recordlevel(String student_code,String subject_code);
 	public List<String> select_reStudy(String subject_code,String student_code);
 	public void update_RetakeCheck(String record_code);
+	public String select_Rejection(String subject_code);
+
 }
