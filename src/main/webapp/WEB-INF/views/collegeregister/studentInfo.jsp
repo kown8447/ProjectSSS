@@ -1,10 +1,19 @@
+<!-- 
+   @Project : InitSpring
+   @File name : studentInfo.jsp
+   @Author : 최준호
+   @Data : 2016.11.30
+   @Desc : 학생정보 조회 페이지
+-->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;개인정보</h4>
 
-<div class="container">
-   <table class="table">
+<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;개인정보</h4>
+<br><br>
+
+   <table class="table" style="width:75%;" align="center">
       <tr>
          <th rowspan="2" style="display: table-cell; vertical-align: middle;">
             <div style="text-align: center;">
@@ -70,4 +79,4 @@
       </tr>   
    </table>
    
-</div>
+

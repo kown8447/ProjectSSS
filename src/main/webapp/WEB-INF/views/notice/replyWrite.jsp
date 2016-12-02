@@ -17,7 +17,7 @@
 <div id="content">
 	<form method="POST" enctype="multipart/form-data">
 	
-	<!-- 히든 필드로 정보 보내기 -->
+			<!-- 히든 필드로 정보 보내기 -->
 			<input type="hidden" name="notice_index" value="${notice.notice_index}"/>
 			<input type="hidden" name="notice_step" value="${notice.notice_step}"/>
 			<input type="hidden" name="notice_refer" value="${notice.notice_refer}"/>
@@ -29,31 +29,26 @@
 			<td>관리자</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;background-color: #F8F4EC;"><b>제목</b></td>
+			<td align="center"><b>제목</b></td>
 			<td colspan="3">
-			<input type="text" name="notice_title" value="RE:${notice.notice_title}" class="form-control"></td>
+			<input type="text" name="notice_title" value="RE:${notice.notice_title}"></td>
 		</tr>
 		<tr>
-			<td style="text-align: center;background-color: #F8F4EC;"><b>글내용</b></td>
-			<td colspan="3">
-				<textarea rows="7" cols="50" name="notice_content" class="form-control" style="resize: none;">${notice.notice_content}</textarea>
+			<td align="center"><b>글내용</b></td>
+			<td colspan="3"><textarea rows="7" cols="50" name="notice_content">${notice.notice_content}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;background-color: #F8F4EC;"><b>첨부파일</b></td>
-			<td><div class="form-group">
-					<span class="filetype"> <input type="text" class="file-text" />
-						<span class="file-btn">찾아보기</span> <span class="file-select">
-							<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
-						</span>
-					</span>
-			</div></td>
+			<td align="center"><b>첨부파일</b></td>
+			<td><input type="file" id="file" name="file"></td>
 		</tr>
 	</table>
+
 		<br>
 		<div align="center" style="margin-left:55%;">
 			<input type="submit" id="replyBtn" value="저장" class="btn btn-success btn-sm" style="width:15%;"/> 
 			<a href="notice.htm" class="btn btn-default btn-sm" style="width:15%;">취소</a>
 		</div>
+
 	</form>
 </div>

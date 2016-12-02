@@ -23,32 +23,27 @@
 			<td style="text-align: center;">${notice.notice_date}</td>
 		</tr>
 		<tr>
-			<th style="text-align: center;background-color: #F8F4EC;">작성자</th>
+			<th style="text-align: center">작성자</th>
 			<td colspan="3">관리자</td>
 		</tr>
 		<tr>
-			<th style="text-align: center;background-color: #F8F4EC;">제목</th>
+			<th style="text-align: center">제목</th>
 			<td colspan="3">
 			<input type="text" name="notice_title" id="notice_title"  class="form-control" value="${notice.notice_title}"></td>
 		</tr>
 		<tr>
-			<th style="text-align: center;background-color: #F8F4EC;">글내용</th>
-			<td colspan="3"><textarea rows="7" class="form-control" id="notice_content" name="notice_content" style="resize: none;">${notice.notice_content}</textarea>
+			<th style="text-align: center">글내용</th>
+			<td colspan="3"><textarea rows="7" class="form-control" id="notice_content" name="notice_content">${notice.notice_content}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th style="text-align: center;background-color: #F8F4EC;">첨부파일</th>
-			<td colspan="3">
-			<div class="form-group">
-					<span class="filetype"> <input type="text" class="file-text" />
-						<span class="file-btn">찾아보기</span> <span class="file-select">
-							<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file}" readonly>
-					</span>
-					</span>
-				</div>
+			<th style="text-align: center">첨부파일</th>
+			<td colspan="3">${notice.notice_file}
+			<input type="file" name="file">
 			</td>
 		</tr>
 	</table>
+
 	<br>
 		<div align="center" style="margin-left:55%;">
 			<input type="submit" id="editBtn" value="수정하기"  class="btn btn-success btn-sm" style="width:15%;">

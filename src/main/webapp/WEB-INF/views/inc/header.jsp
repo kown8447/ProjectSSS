@@ -22,8 +22,8 @@
 				</se:authorize>
 				<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 					<font style="font-size: 9pt; color: #A1A1A1;">${LoginUser}님
-						환영합니다 &nbsp;|&nbsp; <a
-						href="${pageContext.request.contextPath}/logout">로그아웃</a>
+						환영합니다 &nbsp;|&nbsp; 
+						<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 					</font>
 				</se:authorize>
 			</div>
@@ -31,7 +31,7 @@
 				<ul class="nav">
 					<li class="dropdown fadeInDown animated d3">
 						<se:authorize access="hasAnyRole('ROLE_STUDENT')">
-							<a href="${pageContext.request.contextPath}/collegeregister/viewmember.htm">학적조회</a>
+							<a href="${pageContext.request.contextPath}/collegeregister/viewstudent.htm">학적조회</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
 							<li class="twolevel">
@@ -40,7 +40,8 @@
 								<a href="${pageContext.request.contextPath}/collegeregister/record.htm" menuid="10" followlink="true">성적조회</a></li>
 							<li class="twolevel">
 								<a href="${pageContext.request.contextPath}/collegeregister/register.htm">등록/장학</a></li>
-						</ul></li>
+						</ul>
+					</li>
 
 
 					<li class="dropdown fadeInDown animated d3">
@@ -54,7 +55,34 @@
 							<li><a href="${pageContext.request.contextPath}/requestcourse/searchOtherTimetable.htm">타학생 예비 시간표 조회</a></li>
 							<li><a href="${pageContext.request.contextPath}/requestcourse/realRegiser.htm">수강신청</a></li>
 							<li><a href="${pageContext.request.contextPath}/requestcourse/correctRegiser.htm">수강정정</a></li>
-						</ul></li>
+						</ul>
+					</li>
+						
+					<li class="dropdown fadeInDown animated d3">
+						<a href="#">교수 메뉴</a>
+						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
+							<li>
+								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
+									<a href="${pageContext.request.contextPath}/lecture/lectureView.htm">강의 등록</a>
+								</se:authorize> 
+							</li>
+							<li>
+								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
+									<a href="${pageContext.request.contextPath}/lecture/lectureMyclass.htm">성적입력</a>
+								</se:authorize>
+							</li>
+						</ul>
+					</li>
+					
+					<se:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">관리자 메뉴</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/code.htm">코드관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/oprequest/list.htm">개설과목 관리</a></li>
+							</ul>
+						</li>
+					</se:authorize>
 
 					<li class="dropdown fadeInDown animated d2">
 						<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
@@ -65,17 +93,20 @@
 							<li><a href="${pageContext.request.contextPath}/notice/notice.htm">공지사항</a></li>
 							<li><a href="${pageContext.request.contextPath}/qnanotice/qnanotice.htm">Q&A게시판</a></li>
 							<li><a href="${pageContext.request.contextPath}/schedule/schedule.htm">학사일정</a></li>
-						</ul></li>
+						</ul>
+					</li>
 
 					<li class="dropdown fadeInDown animated d2">
 						<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 							<a href="${pageContext.request.contextPath}/favorite/config.htm">즐겨찾기</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" id="favoriteList" style="display: none;">
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </div>
 
+					

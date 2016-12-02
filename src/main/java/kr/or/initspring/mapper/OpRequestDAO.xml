@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.initspring.dao.OpRequestDAO">
+	<select id="OpRequestList" resultType="kr.or.initspring.dto.oprequest.OpRequsetCheckDTO">
+		SELECT sj.GRADE_LIMIT, sj.SUBJECT_NAME, cd.CODE_NAME ,op.SUCCESS_CHECK, sj.SUBJECT_CODE, sj.SUBJECT_TYPE, sj.PROFESSOR_CODE 
+		FROM OP_REQUEST op join SUBJECT sj on op.SUBJECT_CODE = sj.SUBJECT_CODE join CODE_MG cd on sj.PROFESSOR_CODE = cd.CODE
+	</select>
+	<select id="Liberal" resultType="kr.or.initspring.dto.commons.LiberalDTO">
+		SELECT subject_code, required_choice FROM LIBERAL where SUBJECT_CODE = #{param1}
+	</select>
+	<select id="Major" resultType="kr.or.initspring.dto.commons.MajorDTO">
+		SELECT subject_code, department_code, required_choice FROM MAJOR where SUBJECT_CODE = #{param1}
+	</select>
+	<select id="detail" resultType="kr.or.initspring.dto.oprequest.OpRequestDetailDTO">
+		select * from subject s 
+		join plan p on s.subject_code = p.subject_code 
+		join op_request o on s.subject_code = o.subject_code
+		where s.subject_code = #{subject_code}
+	</select>
+	<select id="className" resultType="kr.or.initspring.dto.oprequest.OpClassRoomDTO">
+		SELECT cl.BUILDING_CODE, cl.CLASSROOM_NAME, bd.BUILDING_NAME, cl.CLASSROOM_CODE, cl.CLASSROOM_TYPE,cl.SEAT 
+		FROM CLASSROOM cl join BUILDING bd on cl.BUILDING_CODE = bd.BUILDING_CODE
+		WHERE cl.CLASSROOM_CODE = #{classroom_code}
+	</select>
+	<select id="AskTime" resultType="kr.or.initspring.dto.commons.AskTimeDTO">
+		SELECT * FROM ASK_TIME where SUBJECT_CODE = #{param1}
+	</select>
+	<select id="Subject" resultType="kr.or.initspring.dto.commons.SubjectDTO">
+		SELECT * FROM SUBJECT where SUBJECT_CODE = #{param1}
+	</select>
+	<select id="Before" resultType="kr.or.initspring.dto.commons.BeforeSubjectDTO">
+		SELECT * FROM BEFORE_SUBJECT where SUBJECT_CODE = #{param1}
+	</select>
+	<select id="Period" resultType="kr.or.initspring.dto.commons.PeriodDTO">
+		SELECT * FROM PERIOD where PERIOD_CODE = #{param1}
+	</select>
+	<select id="OpPeriod" resultType="kr.or.initspring.dto.oprequest.OpRequestPeriodDTO">
+		SELECT at.CLASSROOM_CODE, at.PERIOD_CODE, at.SUBJECT_CODE, p.PERIOD_DAY, p.PERIOD_START, p.PERIOD_END 
+		FROM ASK_TIME at join PERIOD p on at.PERIOD_CODE=p.PERIOD_CODE 
+		where at.SUBJECT_CODE=#{param1}
+	</select>
+	<update id="UpdateSuccess">
+		UPDATE OP_REQUEST SET SUCCESS_CHECK = 1 where SUBJECT_CODE = #{param1}
+	</update>
+	<update id="UpdateReject">
+		UPDATE OP_REQUEST SET SUCCESS_CHECK = 2 where SUBJECT_CODE = #{param1}
+	</update>
+	<insert id="insertRejection">
+		insert into REJECTION(SUBJECT_CODE, REJECT_REASON) VALUES(#{param1}, #{param2})
+	</insert>
+	<insert id="insertIntoOpened">
+		insert into OPENED o SELECT subject_Code,semester_Code,0 as registed_Seat FROM OP_REQUEST r WHERE r.SUBJECT_CODE= #{param1}
+	</insert>
+	<insert id="insertIntoLecture">
+		insert into LECTURE l SELECT * FROM ASK_TIME a where a.SUBJECT_CODE=#{param1}
+	</insert>
+	<update id="updateSubjectState">
+		update subject set subject_state = 2 where subject_code = #{param1}
+	</update>
+</mapper>

@@ -7,7 +7,7 @@
 <br><br>
 
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-md-4">
 		<div class="navbar-header">
 			<form class="form-inline" onSubmit='return false'>
 				<select id="real_searchType" class="form-control" style="font-size: small">
@@ -26,7 +26,7 @@
 	</div>
 
 
-	<div class="col-md-7" style="overflow:auto;height:500px;">
+	<div class="col-md-8" style="overflow:auto;height:500px;">
 		<form action="" method="post">
 			<table id="real_timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);'>

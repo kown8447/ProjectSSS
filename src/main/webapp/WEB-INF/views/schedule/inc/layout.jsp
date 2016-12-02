@@ -20,11 +20,43 @@
 <script src="${pageContext.request.contextPath}/fullcalendar-3.0.1/fullcalendar.js"></script>
 <script src="${pageContext.request.contextPath}/fullcalendar-3.0.1/locale-all.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script> 
+
+<link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
+
+<script type="text/javascript">
+	$(function() {
+		$("#wrapper").toggleClass("toggled");
+		$('#preloader').fadeOut('slow');
+		$('body').css({
+			'overflow' : 'visible'
+		});
+	})
+</script>
+
 <title>Insert title here</title>	
 </head>
 <body>
-   <tiles:insertAttribute name="header"/>
-   <div class="row">
+<tiles:insertAttribute name="header"/>
+	
+		<div id="wrapper" style="width:10%">
+		<div id="sidebar-wrapper" style="display: block;">
+			<tiles:insertAttribute name="aside" />
+		</div>
+		<div id="page-content-wrapper" style="display: block;">
+			<div>
+				<div class="row">
+					<div class="col-lg-12">
+						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="row">
 		<div class="col-sm-2">
 			<div class="sidebar-nav">
 				<div class="navbar navbar-default" role="navigation">
@@ -40,7 +72,25 @@
 			<tiles:insertAttribute name="content" />
 		</div>
 	</div>
-   
-   <tiles:insertAttribute name="footer"/>
+
+	<tiles:insertAttribute name="footer" />
+	
+	<!-- Menu Toggle Script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$('#page-content-wrapper').hide();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+
+
+	<div class="modal fade" id="tableviewer">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- remote ajax call이 되는영역 -->
+			</div>
+		</div>
+	</div>
 </body>
 </html>

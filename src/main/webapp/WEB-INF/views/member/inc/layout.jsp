@@ -13,16 +13,63 @@
 <!-- 다음 api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 
+<link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
+
+<script type="text/javascript">
+	$(function() {
+		$("#wrapper").toggleClass("toggled");
+		$('#preloader').fadeOut('slow');
+		$('body').css({
+			'overflow' : 'visible'
+		});
+	})
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
-	
-	<tiles:insertAttribute name="aside" />
-	
-	<tiles:insertAttribute name="content"/>
-	
-	<tiles:insertAttribute name="footer"/>
+	<tiles:insertAttribute name="header" />
+	<div id="wrapper" style="width:10%">
+		<div id="sidebar-wrapper" style="display: block;">
+			<tiles:insertAttribute name="aside" />
+		</div>
+		<div id="page-content-wrapper" style="display: block;">
+			<div>
+				<div class="row">
+					<div class="col-lg-12">
+						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Menu Toggle Script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$('#page-content-wrapper').hide();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+
+	<!-- <div id="preloader">
+		<div id="loader"> </div>
+	</div> -->
+	<div class="row container">
+		<tiles:insertAttribute name="content" />
+	</div>
+	<tiles:insertAttribute name="footer" />
+
+	<div class="modal fade" id="tableviewer">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- remote ajax call이 되는영역 -->
+			</div>
+		</div>
+	</div>
 </body>
 </html>
