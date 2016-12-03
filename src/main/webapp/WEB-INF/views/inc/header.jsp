@@ -31,7 +31,7 @@
 				<ul class="nav">
 					<li class="dropdown fadeInDown animated d3">
 						<se:authorize access="hasAnyRole('ROLE_STUDENT')">
-							<a href="${pageContext.request.contextPath}/collegeregister/viewstudent.htm">학적조회</a>
+							<a href="#">학적조회</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
 							<li class="twolevel">
@@ -46,7 +46,7 @@
 
 					<li class="dropdown fadeInDown animated d3">
 						<se:authorize access="hasRole('ROLE_STUDENT')">
-							<a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강신청</a>
+							<a href="#">수강신청</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
 							<li><a href="${pageContext.request.contextPath}/requestcourse/courseMain.htm">수강안내</a></li>
@@ -59,17 +59,15 @@
 					</li>
 						
 					<li class="dropdown fadeInDown animated d3">
-						<a href="#">교수 메뉴</a>
+						<se:authorize access="hasRole('ROLE_PROFESSOR')">
+							<a href="#">교수 메뉴</a>
+						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
 							<li>
-								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
-									<a href="${pageContext.request.contextPath}/lecture/lectureView.htm">강의 등록</a>
-								</se:authorize> 
+								<a href="${pageContext.request.contextPath}/lecture/lectureView.htm">강의 등록</a>
 							</li>
 							<li>
-								<se:authorize access="hasAnyRole('ROLE_PROFESSOR')">
-									<a href="${pageContext.request.contextPath}/lecture/lectureMyclass.htm">성적입력</a>
-								</se:authorize>
+								<a href="${pageContext.request.contextPath}/lecture/lectureMyclass.htm">성적입력</a>
 							</li>
 						</ul>
 					</li>
@@ -86,7 +84,7 @@
 
 					<li class="dropdown fadeInDown animated d2">
 						<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-							<a href="${pageContext.request.contextPath}/notice/notice.htm">게시판</a>
+							<a href="#">게시판</a>
 						</se:authorize>
 						
 						<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
@@ -101,6 +99,7 @@
 							<a href="${pageContext.request.contextPath}/favorite/config.htm">즐겨찾기</a>
 						</se:authorize>
 						<ul class="firstlevel dropdown-menu sub-menu" id="favoriteList" style="display: none;">
+							
 						</ul>
 					</li>
 				</ul>

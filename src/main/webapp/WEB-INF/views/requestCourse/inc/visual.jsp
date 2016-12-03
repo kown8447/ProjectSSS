@@ -18,7 +18,7 @@
                 </li>  
                 
                 <li>
-                  <a href="${pageContext.request.contextPath}/requestcourse/searchOtherTimetable.htm">타학생 예비 시간표 조회</a>
+                  <a href="${pageContext.request.contextPath}/requestcourse/searchOtherTimetable.htm">타학생예비시간표조회</a>
                 </li>   
                 
                 <li>

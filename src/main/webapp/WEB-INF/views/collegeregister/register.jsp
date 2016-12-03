@@ -10,11 +10,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
 	src="${pageContext.request.contextPath}/js/collegeRegister/register.js"></script>
-<div class="wrapper">
-  <div class="container">
-     등록/장학
+
+     <h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;등록/장학</h4>
+     <br><br>
+    
     <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs" id="studentRegisterTabs">
-      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist" style="width:70%;">
         <li role="presentation" class="active">
           <a href="#studentRegister" id="studentRegister-tab" role="tab" data-toggle="tab" aria-controls="studentRegister" aria-expanded="true">
             <span class="text">등록</span>
@@ -38,14 +39,14 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="studentRegister" aria-labelledby="studentRegister-tab">
-          <table class="table table-bordered">
+          <table class="table table-bordered" style="width:70%;">
          <tr>
-            <th>년도</th>
-            <th>분기</th>
-            <th>기간</th>
-            <th>등록유형</th>
-            <th>등록금액</th>
-            <th>등록상태</th>
+            <th style="text-align: center;">년도</th>
+            <th style="text-align: center;">분기</th>
+            <th style="text-align: center;">기간</th>
+            <th style="text-align: center;">등록유형</th>
+            <th style="text-align: center;">등록금액</th>
+            <th style="text-align: center;">등록상태</th>
          </tr>
          <c:forEach var="regist" items="${registerList}">
             <tr>
@@ -53,40 +54,28 @@
                <td>${regist.semesterType}</td>
                <td>${regist.semester_start}~${regist.semester_end}</td>
                <td><c:choose>
-                     <c:when test="${regist.register_type==1}">
-             계절학기
-            </c:when>
-                     <c:when test="${regist.register_type==2}">
-            졸업연기
-            </c:when>
-                     <c:otherwise>
-            일반
-            </c:otherwise>
+                     	<c:when test="${regist.register_type==1}"> 계절학기 </c:when>
+                     	<c:when test="${regist.register_type==2}">  졸업연기 </c:when>
+                     <c:otherwise> 일반 </c:otherwise>
                   </c:choose></td>
                <td>${regist.tuition}</td>
                <td><c:choose>
-                     <c:when test="${regist.register_state==1}">
-             등록
-            </c:when>
-
-                     <c:otherwise>
-            미납
-            </c:otherwise>
+                     <c:when test="${regist.register_state==1}">  등록 </c:when>
+                     <c:otherwise>미납</c:otherwise>
                   </c:choose></td>
             </tr>
          </c:forEach>
       </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="studentSemesterState" aria-labelledby="studentSemesterState-tab">
-          <p>
-           <table class="table table-bordered">
+          <table class="table table-bordered" style="width:70%;">
          <tr>
-            <th>년도</th>
-            <th>분기</th>
-            <th>학년</th>
-            <th>학기</th>
-            <th>해당학기 신청학점</th>
-            <th>해당학기 이수학점</th>
+            <th style="text-align: center;">년도</th>
+            <th style="text-align: center;">분기</th>
+            <th style="text-align: center;">학년</th>
+            <th style="text-align: center;">학기</th>
+            <th style="text-align: center;">해당학기 신청학점</th>
+            <th style="text-align: center;">해당학기 이수학점</th>
          </tr>
          <c:forEach var="semester" items="${studentSemesterList}">
             <tr>
@@ -103,14 +92,14 @@
         </div>
         
         <div role="tabpanel" class="tab-pane fade" id="studentScholaship" aria-labelledby="studentScholaship-tab">
-         <table class="table table-bordered">
+         <table class="table table-bordered" style="width:70%;">
          <tr>
-            <th>번호</th>
-            <th>년도</th>
-            <th>분기</th>
-            <th>장학명</th>
-            <th>장학금액</th>
-            <th>선발기준</th>
+            <th style="text-align: center;">번호</th>
+            <th style="text-align: center;">년도</th>
+            <th style="text-align: center;">분기</th>
+            <th style="text-align: center;">장학명</th>
+            <th style="text-align: center;">장학금액</th>
+            <th style="text-align: center;">선발기준</th>
          </tr>
          <c:forEach var="scholarship" items="${scholarshipList}">
             <tr>
@@ -126,13 +115,13 @@
         </div>
         
          <div role="tabpanel" class="tab-pane fade" id="studentAbsence" aria-labelledby="studentAbsence-tab">
-         <table class="table table-bordered">
+         <table class="table table-bordered" style="width:70%;">
          <tr>
-            <th>번호</th>
-            <th>휴학신청일</th>
-            <th>휴학기간(학기)</th>
-            <th>휴학사유</th>
-            <th>복학예정일</th>
+            <th style="text-align: center;">번호</th>
+            <th style="text-align: center;">휴학신청일</th>
+            <th style="text-align: center;">휴학기간(학기)</th>
+            <th style="text-align: center;">휴학사유</th>
+            <th style="text-align: center;">복학예정일</th>
          </tr>
          <c:forEach var="absence" items="${absenceList}">
             <tr>
@@ -147,5 +136,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+

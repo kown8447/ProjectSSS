@@ -51,15 +51,12 @@
 
 	<div class="row">
 		<div class="col-sm-2">
-			<div class="sidebar-nav">
 				<div class="navbar navbar-default" role="navigation">
-					<div class="navbar-header"></div>
 					<div class="navbar-collapse collapse sidebar-navbar-collapse">
 						<tiles:insertAttribute name="visual" />
 					</div>
 					<!--/.nav-collapse -->
 				</div>
-			</div>
 		</div>
 		<div class="col-sm-10">
 			<tiles:insertAttribute name="content" />

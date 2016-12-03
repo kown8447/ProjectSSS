@@ -16,7 +16,7 @@
 	<form method="post" action="" enctype="multipart/form-data">
 		<table class="table table-bordered" style="width: 70%; margin: auto;">
 			<tr>
-				<th style="text-align: center;width:120px">제목</th>
+				<th style="text-align: center;width:120px;background-color: #F8F4EC;">제목</th>
 				<td>
 					<input type="text" name="notice_title" id="notice_title" class="form-control"></td>
 			</tr>
@@ -25,7 +25,7 @@
 					<td><textarea name="notice_content" id="notice_content" rows="12" style="resize:none;"class="form-control"></textarea></td>
 			</tr>
 			<tr>
-				<th style="text-align: center;">첨부파일</th>
+				<th style="text-align: center;background-color: #F8F4EC;">첨부파일</th>
 				<td><input type="file" id="file" name="file"></td>	
 			</tr>
 			<tr>
