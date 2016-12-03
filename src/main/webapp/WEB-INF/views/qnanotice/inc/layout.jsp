@@ -8,7 +8,9 @@
 <script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <script src="${pageContext.request.contextPath}/js/qnanotice/qnanotice.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->

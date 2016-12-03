@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							   (qna_Index,member_Id, qna_Depth, qna_Step, qna_Refer,
 							   qna_File, qna_Title, qna_Content, qna_Date)
 							   
-						VALUES(qna_Index.nextval,#{member_id}, 0, 0, #{qna_refer},
+						VALUES(qna_Idx.nextval,#{member_id}, 0, 0, #{qna_refer},
 								#{qna_file,jdbcType=VARCHAR}, #{qna_title}, #{qna_content}, SYSDATE)
 	</insert>
 	
@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					(qna_Index,member_Id, qna_Depth, qna_Step, qna_Refer,
 					qna_File, qna_Title, qna_Content, qna_Date)
 		
-					VALUES(qna_Index.nextval ,#{member_id},  #{qna_depth},  #{qna_step}, #{qna_refer},
+					VALUES(qna_Idx.nextval ,#{member_id},  #{qna_depth},  #{qna_step}, #{qna_refer},
 						  #{qna_file,jdbcType=VARCHAR}, #{qna_title}, #{qna_content}, SYSDATE)
 	</insert>
 	
@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 			insert into qna_reply
 				(reply_index,member_id, reply_refer, reply_depth, reply_step,reply_content)
-			VALUES(reply_index.nextval,#{member_id},#{qna_index}, 0,  #{reply_step}, #{reply_content})
+			VALUES(reply_idx.nextval,#{member_id},#{qna_index}, 0,  #{reply_step}, #{reply_content})
 	</insert>
 	
 	<!-- 댓글 index로 리스트 가져오기 -->
