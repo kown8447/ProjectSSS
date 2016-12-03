@@ -96,7 +96,7 @@ $(function(){
 				return false;
 			}else{
 					if(($(this).html()) != ""){
-						alert("중복입니다")
+						alert("중복입니다");
 						return false;}
 					else{
 					

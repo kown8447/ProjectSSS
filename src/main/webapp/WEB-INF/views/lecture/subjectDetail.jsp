@@ -42,7 +42,7 @@
 		<td>과목명</td><td colspan="3">${list.subject_name}</td></tr>
 		<tr>
 		<td>학점</td><td>${list.subject_credit}</td><td>정원</td><td>${list.subject_seats}</td></tr>
-		<tr><td>거절사유</td><td colspan="3"></td>${list.reject_reason }</tr>
+		<tr><td>거절사유</td><td colspan="3">${list.reject_reason }</td></tr>
 		
 		<input type="hidden" id="subject_code" value="${list.subject_code }">
 		<input type="hidden" id="sc" value=<%=request.getParameter("success_check") %>>
