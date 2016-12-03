@@ -44,6 +44,9 @@ public class CollegeStudentService {
 
 		StudentInfoDTO student = collegestudentdao.getStudent(userid);
 		student.setEnterYear(Integer.parseInt(student.getStudent_code().substring(0, 4)));
+		String address = student.getMember_addr();
+	    String [] array = address.split("\\?");
+	    student.setMember_addr(array[1] +" "+ array[2]);
 
 		model.addAttribute("student", student);
 

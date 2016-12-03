@@ -9,7 +9,6 @@
 	<div align="right">
 		<button class="btn btn-default" id="menu_toggle2">X</button>
 	</div>
-	<li class="sidebar-brand"></li>
 	<image id="asidePicture" class="img-circle" width="150" height="150"
 		src="${pageContext.request.contextPath}/profiles/eunji.jpg">
 	 <se:authorize
@@ -33,15 +32,16 @@
 		<li id="asideAdminCode">코드 : </li>
 		<li id="asideAdminName">이름 : </li>
 	</se:authorize>
+	<br>
 	<div>
 		<se:authorize
 			access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
 			<a href="${pageContext.request.contextPath}/member/edit.htm"> <input
-				type="button" class="btn btn-primary" value="정보 수정">
+				type="button" class="btn btn-sm btn-warning" value="회원정보수정">
 			</a>
 		</se:authorize>
 		<se:authorize access="hasRole('ROLE_STUDENT')">
-			<button class="btn btn-success" id="viewTimetable"
+			<button class="btn btn-success btn-sm" id="viewTimetable"
 				data-toggle="modal">시간표조회</button>
 		</se:authorize>
 	</div>
