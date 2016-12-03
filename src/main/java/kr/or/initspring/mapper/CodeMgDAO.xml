@@ -200,7 +200,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMaxDepartmentCode" resultType="String">
 		SELECT nvl(max(department_code),'DP_0') FROM DEPARTMENT dp ORDER BY dp.department_code desc
 	</select>
-	
+	<select id="getMaxSemesterCode" resultType="String">
+		select max(semester_code) as semester_code from semester
+	</select>
 	
 	
 	
@@ -240,4 +242,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM OFFICE o join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
 	</select>
 	
+	<select id="getRegister" resultType="kr.or.initspring.dto.commons.RegisterDTO">
+		select * from register where register_type=0 and semester_code = (select max(semester_code) from semester)
+	</select>
+	
+	<select id="getStState" resultType="kr.or.initspring.dto.commons.StStateDTO">
+		select * from st_state where student_code = #{student_code}
+	</select>
+	
+	<select id="getGetCreditBystudentCode" resultType="int">
+		select sum(s.subject_credit) as get_credit 
+		from timetable t join record r on t.subject_code = r.subject_code 
+		join subject s on r.subject_code=s.subject_code 
+		where t.student_code = #{student_code} and r.record_level != 'F' and r.semester_code = (select max(semester_code) from semester)
+	</select>
+	
+	<select id="getCurrentCreditByStudentCode" resultType="int">
+		select sum(s.subject_credit) as subject_credit 
+		from timetable t join subject s on t.subject_code = s.subject_code 
+		where t.student_code=#{student_code}
+	</select>
+	
+	<insert id="insertIntoSmstate" parameterType="kr.or.initspring.dto.commons.SmStateDTO">
+		insert into sm_state 
+		values(#{student_code},#{semester_code},#{student_grade},#{student_semester},#{get_credit},#{request_credit})
+	</insert>
+	
+	<select id="getTotalCreditByStudentCode" resultType="int">
+		select sum(s.subject_credit) 
+		from record r join subject s on r.subject_code = s.subject_code 
+		where student_code=#{student_code} and record_level != 'F' and retake_check = 0
+	</select>
+	
+	<update id="updateStstate" parameterType="kr.or.initspring.dto.commons.StStateDTO">
+		update st_state set grade=#{grade}, personal_semester=#{personal_semester}, total_credit=#{total_credit}
+		where student_code=#{student_code}
+	</update>
 </mapper>

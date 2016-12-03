@@ -1091,7 +1091,7 @@ public class MemberController{
 	
 	/*
 	 * MethodName :  initSemester
-	 * author : 성홍모
+	 * author : 성홍모, 권기엽
 	 * Desc : 학기 초기화 함수. Timetable, Lecture, Opened, Ask_time, Oprequest, rejection, reserve, enrollment 삭제
 	 */
 	@RequestMapping("initSemester.htm")

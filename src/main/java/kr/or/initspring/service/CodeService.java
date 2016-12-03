@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.sun.mail.smtp.SMTPSSLTransport;
+
 import kr.or.initspring.dao.CodeMgDAO;
 import kr.or.initspring.dto.commons.Academic_CalendarDTO;
 import kr.or.initspring.dto.commons.BuildingDTO;
@@ -33,6 +35,8 @@ import kr.or.initspring.dto.commons.RegisterDTO;
 import kr.or.initspring.dto.commons.ScSystemDTO;
 import kr.or.initspring.dto.commons.ScholarshipDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
+import kr.or.initspring.dto.commons.SmStateDTO;
+import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
@@ -1045,19 +1049,82 @@ public class CodeService {
 		return openedInfoList;
 	}
 
+	/*
+	 * @method Name : initSemester
+	 * @Author : 권기엽
+	 * @description 학기 초기화 버튼 클릭 시, 관련 테이블 삭제 및 ST_STATE TABLE 상태 업데이트 및 SM_STATE TABLE INSERT 실행
+	 */
 	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class, RuntimeException.class})
 	public boolean initSemester() throws Exception{
 		boolean result = true;
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<RegisterDTO> registerdto = null;
+		List<StStateDTO> ststatedto = new ArrayList<StStateDTO>();
 		try{
+			
+			registerdto = dao.getRegister();
+			
+			for(RegisterDTO dto : registerdto){
+				ststatedto.add(dao.getStState(dto.getStudent_code()));
+			}
+			
+			for(StStateDTO dto : ststatedto){
+				SmStateDTO smstatedto = new SmStateDTO();
+				int getCredit = 0;
+				int currentcredit = 0;
+				int totlaCredit = 0;
+				
+				try{
+					getCredit = dao.getGetCreditBystudentCode(dto.getStudent_code());
+					currentcredit = dao.getCurrentCreditByStudentCode(dto.getStudent_code());
+				}catch(NullPointerException e2){
+					throw e2;
+				}
+				
+				smstatedto.setGet_credit(getCredit);
+				smstatedto.setRequest_credit(currentcredit);
+				smstatedto.setStudent_code(dto.getStudent_code());
+				smstatedto.setSemester_code(dao.getMaxSemesterCode());
+				smstatedto.setStudent_grade(dto.getGrade());
+				smstatedto.setStudent_semester(dto.getPersonal_semester());
+				
+				try{
+					dao.insertIntoSmstate(smstatedto);
+				}catch(Exception e3){
+					throw e3;
+				}
+				
+				if(dto.getPersonal_semester()==2){
+					dto.setPersonal_semester(1);
+					dto.setGrade(dto.getGrade()+1);
+				}else{
+					dto.setPersonal_semester(2);
+				}
+				
+				try{
+					totlaCredit = dao.getTotalCreditByStudentCode(dto.getStudent_code());
+					dto.setTotal_credit(totlaCredit);
+				}catch(NullPointerException e4){
+					throw e4;
+				}
+				try{
+					dao.updateStstate(dto);
+				}catch(Exception e5){
+					System.out.println("dao.updateStstate(dto) : " + e5.getMessage());
+					throw e5;
+				}
+				
+			}
+			
+			dao.deleteTimetalbe();
+			dao.deleteReserve();
+			dao.deleteEnrollment();
 			dao.deleteRejection();
 			dao.deleteAskTime();
-			dao.deleteEnrollment();
 			dao.deleteLecture();
 			dao.deleteOpened();
 			dao.deleteOpRequest();
-			dao.deleteReserve();
-			dao.deleteTimetalbe();
+			
 		}catch(Exception e){
 			System.out.println("initSemester : " + e.getMessage());
 			result = false;

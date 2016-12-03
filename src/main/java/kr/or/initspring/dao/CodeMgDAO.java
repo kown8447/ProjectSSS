@@ -17,6 +17,8 @@ import kr.or.initspring.dto.commons.RegisterDTO;
 import kr.or.initspring.dto.commons.ScSystemDTO;
 import kr.or.initspring.dto.commons.ScholarshipDTO;
 import kr.or.initspring.dto.commons.SemesterDTO;
+import kr.or.initspring.dto.commons.SmStateDTO;
+import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
@@ -108,5 +110,11 @@ public interface CodeMgDAO {
 	public int deleteRejection();
 	public int deleteReserve();
 	public int deleteEnrollment();
-	
+	public List<RegisterDTO> getRegister();	//최신 학기 중, 등록이 0(일반등록)인 학생들의 등록정보 가져오기
+	public StStateDTO getStState(String student_code);	//위의 쿼리에서 나온 학생들의 현재 재학 상태 가져오기
+	public Integer getCurrentCreditByStudentCode(String student_code);	//학생의 해당 학기 이수학점 가져오기
+	public Integer getGetCreditBystudentCode(String student_code);	//학생의 F 학점을 제외한 실제 획득 이수학점
+	public int insertIntoSmstate(SmStateDTO dto);	//재학 기록 테이블에 데이터 삽입
+	public Integer getTotalCreditByStudentCode(String student_code);	//학생의 총 이수학점(F, 재수강 제외)
+	public Integer updateStstate(StStateDTO dto);	//현재 학적 상태 학년, 이수학점, 개인 학기 업데이트 
 }
