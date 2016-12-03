@@ -17,7 +17,9 @@
 </head>
 <body>
 	<form action="lectureEditOk.htm">
-	<table border=1px>
+	<div class="container">
+	<div class="row">
+	<table border=1px; class='table table-condensed col-sm-4'>
 		<tr>
 		<td>구분</td>
 		<td>
@@ -32,15 +34,25 @@
 		 </c:choose>
 		</td>
 		<td>강의대상</td><td>${list.grade_limit}</td></tr>
+		<input type="hidden" name="grade_limit" value="${list.grade_limit}">
 		<tr>
+		<input type="text" value="${list.before_name }">
 		<td>선수과목</td><td colspan="3">
-				<select id="before_name" name="before_name">
+			<select id="before_code" name="before_name">
 				<option value="0">없음</option>
-				<c:forEach items="${list}" var="i">
-					<option value="${i}">${i}</option>
+				<c:forEach items="${before}" var="i">
+					<c:choose>
+						<c:when test="${i == list.before_name}">
+							<option value="${i}" selected>${i}</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${i}">${i}</option>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 				</select>
-				 <br> 
+				</td>
+				
 		<tr>
 		<td>과목명</td><td colspan="3"><input type="text" name="subject_name"value="${list.subject_name}"></td></tr>
 		<tr>
@@ -50,6 +62,8 @@
 		<tr>
 		
 	</table>
+	</div>
+	</div>
 	<input type="submit" value="전송쓰">
 	</form>
 	<button id="back">돌아가기</button>  

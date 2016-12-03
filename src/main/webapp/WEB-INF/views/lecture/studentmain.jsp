@@ -31,6 +31,8 @@
 		<input type="hidden" id="d" value="${y.subject_code }">
 	</c:forEach>
 	
+	
+	
 		<div class="container">
 	<table id="list" border="1px" class="table">
 	<tr><th>학번</th><th>학생명</th><th>학생이메일</th><th>성적</th></tr>

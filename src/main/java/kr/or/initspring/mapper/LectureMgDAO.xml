@@ -125,6 +125,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update BEFORE_SUBJECT set before_name=#{before_name} where subject_code = #{subject_code}
 	</update>
 	
+	<select id="select_beforename" resultType="String">
+		select before_name from before_subject
+	</select>
+	
 	<!-- 이거는 이미 들어가있는 건물,시간표 조회 -->
 	<select id="select_period_build" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		select * from ASK_TIME a join subject s on a.subject_code = s.subject_code where subject_code = #{param1}
@@ -132,11 +136,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
 	<select id="maxSubject_code" resultType="String">
-		SELECT subject_seq.nextval as subject_code FROM double
+		SELECT subject_idx.nextval as subject_code FROM double
 	</select>
 		
 	<select id="maxRecord_code" resultType="String">
-		SELECT record_seq.nextval as record_code FROM double
+		SELECT record_idx.nextval as record_code FROM double
 	</select>
 	
 	
@@ -155,6 +159,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllBuilding" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 			select * from classroom where building_code = #{param1}
 	</select>
+
+	<select id="select_BuildingName" resultType="String">
+		select building_name from BUILDING order by building_code
+	</select>
 	
 	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
 		select * from Period
@@ -165,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="setOprequest" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',0)
+		insert into OP_REQUEST (subject_code,semester_code,success_check) values (#{subject_code},'SS_2016_01',3)
 	</insert>
 	
 	
