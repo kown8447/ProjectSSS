@@ -17,6 +17,35 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/lecture/postsubject.js"></script>
 </head>
+<style>
+
+table {
+	border : 1ex;
+	border-color:black;
+}
+
+table tr:nth-child(2n) {
+	background: #eff0f1;
+	
+	
+}
+
+table tr:nth-child(2n+3) {
+	background: #fff;
+	border-color: black;
+	border: 1em;
+}
+
+table th, table td {
+	padding: 1em;
+	border-color: black;
+	border: 1em;
+}
+
+
+
+
+</style>
 <body>
 
 <div class="container">
@@ -57,10 +86,6 @@
 		<select class="form-control" id="building" name="building_code">
 			<option>없음</option>
 
-
-		<!-- 	<option value="B_001" name="B_001">본부동</option>
-			<option value="B_002" name="B_002">가츠동</option>
-			<option value="B_003" name="B_003">어우동</option> -->
 		</select>
 		<label>시간</label> <div id="period" name="period"></div>
 	
@@ -71,15 +96,6 @@
 		<select class="form-control" id="classroom" name="classroom_code">없음
 		<option value="0">없음</option>
 		</select>  
-	
-		<%-- 		
-		<select id="semester_code" name="semester_code" class="form-control">
-		<c:forEach items="${semester }" var="i">
-			<option value="${i.semester_code }">${i.semester_name }</option>
-		</c:forEach>
-		</select>
-		 --%>
-		</div>
 	
 	
 

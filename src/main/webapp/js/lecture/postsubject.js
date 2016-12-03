@@ -120,7 +120,7 @@ $(function(){
 						alert("과목을 다 채워주세요");
 						return false;
 					}
-					if($("#subject_filesrc").text() == "" || $("#subject_filesrc").text() == null){
+					if($("#subject_filesrc").val() == "" || $("#subject_filesrc").val() == null){
 						alert("강의계획서를 등록해주세요");
 						return false;
 					}
@@ -140,9 +140,8 @@ $(function(){
 				return false;
 			}
 			else{
-				//periodArray.push(i);
 				$("#period").append("<input type=hidden name=period_code value="+i+">");
 				count+=1;
 			}
-		console.log(count);
+				console.log(count);
 			}

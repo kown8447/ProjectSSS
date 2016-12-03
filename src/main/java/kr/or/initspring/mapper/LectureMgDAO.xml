@@ -136,11 +136,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
 	<select id="maxSubject_code" resultType="String">
-		SELECT subject_seq.nextval as subject_code FROM double
+		SELECT subject_idx.nextval as subject_code FROM double
 	</select>
 		
 	<select id="maxRecord_code" resultType="String">
-		SELECT record_seq.nextval as record_code FROM double
+		SELECT record_idx.nextval as record_code FROM double
 	</select>
 	
 	

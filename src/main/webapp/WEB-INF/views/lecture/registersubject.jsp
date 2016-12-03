@@ -33,7 +33,7 @@
 				<option value="0">없음</option>
 				<c:forEach items="${before}" var="i">
 					<option value="${i}">${i}</option>
-				</c:forEach>
+				</c:forEach> 
 				</select>
 				 <br> 
 				 과목명 : <input type="text" id="subject_name" name="subject_name"><br> 

@@ -51,8 +51,20 @@ public class LectureMgController {
 		System.out.println(principal.getName());
 		lectureservice.selectBefore(principal.getName(),model);
 		
+		
     	return "lecture.registersubject";
     }
+	
+	@RequestMapping(value="lectureRegister.htm",method=RequestMethod.POST)
+	public String insertsubject(SubjectDTO dto,String before_code,Principal principal,String required_choice,
+					BeforeSubjectDTO beforedto,MajorDTO majordto,LiberalDTO liberdto,String department_code) throws Exception{
+		int result = 0;
+		System.out.println("컨트롤러");
+		result = lectureservice.insert_Subject(dto,before_code ,principal,required_choice, beforedto, majordto, liberdto ,department_code);
+	
+		return "redirect:lectureView.htm";
+	}
+	
 	
 	@RequestMapping(value="lectureDetail.htm")
 	public String detailSubject(Model model,String subject_code){
@@ -94,14 +106,6 @@ public class LectureMgController {
 	}
 	
 	
-	@RequestMapping(value="lectureRegister.htm",method=RequestMethod.POST)
-	public String insertsubject(SubjectDTO dto,String before_code,Principal principal,String required_choice,
-					BeforeSubjectDTO beforedto,MajorDTO majordto,LiberalDTO liberdto,String department_code) throws Exception{
-		int result = 0;
-		result = lectureservice.insert_Subject(dto,before_code ,principal,required_choice, beforedto, majordto, liberdto ,department_code);
-	
-		return "redirect:lectureView.htm";
-	}
 	
 	@RequestMapping(value="lectureDelete.htm")
 	public String deleteSubject(String subject_code){

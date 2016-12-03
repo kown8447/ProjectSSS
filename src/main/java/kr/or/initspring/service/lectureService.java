@@ -66,7 +66,7 @@ public class lectureService {
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public synchronized int insert_Subject(SubjectDTO dto, String subject_name, Principal principal, String required_choice,
 			BeforeSubjectDTO beforedto, MajorDTO majordto, LiberalDTO liberdto, String department_code) {
-
+		
 		int result = 0;
 		int before = 0;
 		
@@ -122,6 +122,7 @@ public class lectureService {
 	 * @Author : 조장현
 	 * @description : before_code로 subject_name 호출
 	 */
+	
 	public void selectBefore(String memberid, Model model) {
 	
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);

@@ -17,7 +17,12 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
-
+	$(function(){
+		$("#register").click(function(){
+			location.replace("lectureRegister.htm");
+		}
+	)
+	})
 
 </script>
 </head>
@@ -57,6 +62,6 @@
 	</table>
 		</div>
 		
-	<a href="lectureRegister.htm">등록하기</a>
+		<button id="register" class="btn btn-success">등록하기</button>
 </body>
 </html>
