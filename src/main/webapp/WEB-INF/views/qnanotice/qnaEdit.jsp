@@ -14,41 +14,47 @@
 		
 		<table class="table table-bordered" style="width:70%; margin: auto;">
 			<tr style="width:20%">
-				<th style="text-align: center" >글번호</th>
+				<th style="text-align: center; background-color: #F8F4EC;" >글번호</th>
 				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
-				<th style="text-align: center">작성일</th>
-				<td>${qna.qna_date}</td>
+				<th style="text-align: center; background-color: #F8F4EC;">작성일</th>
+				<td style="text-align: center;">${qna.qna_date}</td>
 			</tr>			
 			<tr>
-				<th style="text-align: center">작성자</th>
+				<th style="text-align: center; background-color: #F8F4EC;">작성자</th>
 				<td colspan="3">${qna.member_id}</td>
 			</tr>					
 			<tr>	
-				<th style="text-align: center">제목</th>
+				<th style="text-align: center; background-color: #F8F4EC;">제목</th>
 				<td colspan="3">
 					<input type="text" class="form-control" name="qna_title" id="qna_title" value="${qna.qna_title}" />
 				</td>
 			</tr>
 			<tr>
-				<th style="text-align: center">내용</th>
+				<th style="text-align: center; background-color: #F8F4EC;">내용</th>
 				<td colspan="3">
-					<textarea rows="7" class="form-control" id="qna_content" name="qna_content">${qna.qna_content}</textarea>
+					<textarea rows="7" class="form-control" id="qna_content" name="qna_content" style="resize: none;">${qna.qna_content}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th style="text-align: center">첨부파일</th>
+				<th style="text-align: center; background-color: #F8F4EC;">첨부파일</th>
 				<td colspan="3">
-					<input type="file" id="file" name="file" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="center">
-					<input type="submit" id="editBtn" name="editBtn" value="수정" class="btn btn-success"/> 
-					<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-success">취소</a>				
+					<div class="form-group">	
+               			<span class="filetype"> 
+               				<input type="text" class="file-text" />
+                  			<span class="file-btn">찾아보기</span> 
+                  			<span class="file-select">
+                    			<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+               				</span>
+               			</span>
+            		</div>					
 				</td>
 			</tr>
 		</table>
-
+		<br>
+		<div align="center" style="margin-left: 40%">
+			<input type="submit" id="editBtn" name="editBtn" value="수정하기" class="btn btn-success btn-sm" style="width: 15%;"/> 
+			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm" style="width: 15%;">취소</a>	
+		</div>
 	</form>
 </div>
  

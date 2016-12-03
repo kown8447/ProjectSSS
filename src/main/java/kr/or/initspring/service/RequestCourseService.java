@@ -314,6 +314,7 @@ public class RequestCourseService {
 			System.out.println("예상 오류 지점 3333333333333");
 			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
 			System.out.println("예상 오류 지점 44444444444444");
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
 		}catch(NullPointerException e){
 			System.out.println("RequestCourseService / checkBeforeSubject : " + e.getMessage());
 			if(beforeSubjectDto == null){

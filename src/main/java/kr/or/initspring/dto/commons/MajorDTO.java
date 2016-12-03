@@ -40,5 +40,4 @@ public class MajorDTO {
 		return "MajorDTO [subject_code=" + subject_code + ", department_code=" + department_code + ", required_choice="
 				+ required_choice + "]";
 	}
-
 }

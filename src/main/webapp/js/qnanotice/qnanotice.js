@@ -91,7 +91,8 @@ $(function() {
 					});
 				}
 			});
-
+	
+	//댓글 리스트
 	function replyReset(list) {
 		$(list)
 				.each(
@@ -102,26 +103,28 @@ $(function() {
 									+ (index + 1)
 									+ '" value="'
 									+ obj.reply_index
-									+ '"><div id="cmt_writer_'
+									+ '"> <input type="hidden" id="cmt_id_'
 									+ (index + 1)
-									+ '">'
+									+ '" value="'
 									+ obj.member_id
-									+ '</div><br><div class="cmtContent" id="cmt_content_'
+									+ '"><table><tr><td><div id="cmt_writer_'
+									+ (index + 1)
+									+ '" style="color: green">&nbsp;&nbsp;&nbsp;&nbsp;'
+									+ obj.member_id
+									+ ': &nbsp;&nbsp;</div></td><td><div class="cmtContent" id="cmt_content_'
 									+ (index + 1)
 									+ '">'
 									+ obj.reply_content
-									+ '</div><button type="button" value="cmtUpdate_'
+									+ '</div></td><td><button type="button" value="cmtUpdate_'
 									+ (index + 1)
-									+ '" class="cmtEdit" id="cmtUpdate_'
+									+ '" id="cmtUpdate_'
 									+ (index + 1)
-									+ '" name="cmtEdit">수정</button><button type="button" value="cmtDelete_'
+									+ '" class="cmtEdit btn-link" name="cmtEdit" >&nbsp;&nbsp;&nbsp;<font size="1">수정</font></button></td><td><button type="button" id="cmtDelete_'
 									+ (index + 1)
-									+ '" class="cmtDel" id="cmtDelete_'
+									+ '" value="cmtDelete_'
 									+ (index + 1)
-									+ '" name="cmtDel">삭제</button><input type="hidden" id="cmt_id_'
-									+ (index + 1) + '"value="' + obj.member_id
-									+ '"></div>';
-
+									+ '" class="cmtDel btn-link" name="cmtDel" ><font size="1">삭제</font></button></td></tr></table></div>';
+							
 							$('#replyList').append(replyTag);
 						});
 
@@ -129,13 +132,13 @@ $(function() {
 
 	}
 
+	//댓글 삭제
 	function cmtdeleteSetting() {
 		$('.cmtDel').click(
 				function() {
 					var clickedindex = $(this).val().split('_')[1];
 
 					var deleteTarget = $("#cmt_index_" + clickedindex).val();
-					// alert($('#cmt_id_' + clickedindex).val());
 
 					if ($('#readerId').val() != $('#cmt_id_' + clickedindex)
 							.val()) {
@@ -170,7 +173,10 @@ $(function() {
 	
     var cmtIndex=0;
     
+    //댓글 수정 후 셋팅
     function cmtUpdateSetting() {
+    	
+    	//댓글 수정 과정
     	$('.cmtEdit').click(function() {
     		
     		var clickedindex = $(this).val().split('_')[1];
@@ -188,42 +194,45 @@ $(function() {
     		$('.cmtContent').attr("style", "display : inline;");
     		$('.cmtEdit').attr("style", "display : inline;");
     		$('.cmtDel').attr("style", "display : inline;");
-
+    		
     		$('#cmt_content_' + cmtIndex).attr("style", "display : none;");
     		$('#cmtUpdate_' + cmtIndex).attr("style", "display : none;");
     		$('#cmtDelete_' + cmtIndex).attr("style", "display : none;");
     		var updateTool=
-    			'<input type="text" id="updateCmtContent" value="'+$('#cmt_content_'+cmtIndex).text() +'"><input type="button" id="updateCmtUpdate" value="확인"><input type="button" id="updateCmtCancel" value="취소">'
+    			'<input type="text" id="updateCmtContent" value="'+$('#cmt_content_'+cmtIndex).text() +'"><input type="button" id="updateCmtUpdate" class="btn-link" style="font-size:5pt" value="확인"><input type="button" id="updateCmtCancel" class="btn-link" style="font-size:5pt" value="취소">'
     			
     		$('#replyView_'+cmtIndex).append(updateTool);
-    		$('#updateCmtUpdate').click(function() {
-    			$.ajax({
-    				url : "qnaCmtUpdate.htm?reply_index=" + $('#cmt_index_'+cmtIndex).val()
-    						+ '&reply_content=' + $('#updateCmtContent').val()+ '&qna_index=' + $('#qna_index').val(),
-    				method : "post",
-    				dataType : "json",
-    				success : function(data) {
-    					if (data.result == 'success') {
-    						alert("성공");
-    						$('#replyList').empty();
-    						replyReset(data.list);
-    						cmtdeleteSetting();
-    						cmtUpdateSetting();
-    					} else {
-    						alert("실패");
-    					}
-    				}
-    			});
-    		});
     		
-    		$('#updateCmtCancel').click(function() {
-    			$('#updateCmtContent').remove();
-    	        $('#updateCmtUpdate').remove();
-    	        $('#updateCmtCancel').remove();
+    	//댓글 수정
+    	$('#updateCmtUpdate').click(function() {  			
+    		$.ajax({
+    			url : "qnaCmtUpdate.htm?reply_index=" + $('#cmt_index_'+cmtIndex).val()
+    					+ '&reply_content=' + $('#updateCmtContent').val()+ '&qna_index=' + $('#qna_index').val(),
+    			method : "post",
+    			dataType : "json",
+    			success : function(data) {
+    				if (data.result == 'success') {
+    					alert("성공");
+    					$('#replyList').empty();
+    					replyReset(data.list);
+    					cmtdeleteSetting();
+    					cmtUpdateSetting();
+    				} else {
+    					alert("실패");
+    				}
+    			}
+    		});
+    	});
+    		
+    	//취소	
+    	$('#updateCmtCancel').click(function() {
+    		$('#updateCmtContent').remove();
+    	    $('#updateCmtUpdate').remove();
+    	    $('#updateCmtCancel').remove();
     	        
-    	    	$('.cmtContent').attr("style", "display : inline;");
-    			$('.cmtEdit').attr("style", "display : inline;");
-    			$('.cmtDel').attr("style", "display : inline;");
+    	    $('.cmtContent').attr("style", "display : inline;");
+    	    $('.cmtEdit').attr("style", "display : inline;");
+    		$('.cmtDel').attr("style", "display : inline;");
     		});
     	});
 	}
@@ -231,3 +240,58 @@ $(function() {
 	cmtUpdateSetting();
 
 });
+
+
+/*
+ * @JavaScript : join
+ * @Date : 2016.11.30
+ * @Author : 송아름
+ * @Desc
+ * 파일 업로드 할 경우 파일 경로와 이름 표시 
+*/
+(function(global, $) {
+
+   $(makeObjFile);
+
+   function makeObjFile() {
+      var inputFile = CustomFiletype();
+      inputFile.init($('.filetype'));
+   }
+
+   function CustomFiletype() {
+      if (this === window)
+         return new CustomFiletype;
+      this.$fileBox = null;
+      this.$fileUpload = null;
+   }
+
+   CustomFiletype.prototype = {
+
+      'init' : function(fileClass) {
+         this.$fileBox = fileClass || $('.filetype');
+         this.initEvent();
+      },
+
+      'initEvent' : function() {
+         this.fileUpload();
+      },
+
+      'fileUpload' : function() {
+         var _self = this;
+
+         $.each(_self.$fileBox, function(idx, item) {
+
+            var _$fileBox = _self.$fileBox.eq(idx), _$fileType = _$fileBox
+                  .find('input[type=file]'), _$fileText = _$fileBox
+                  .find('input[type=text]');
+            _$fileText.attr('disabled', 'disabled');
+
+            _$fileType.on('change', function() {
+               var filePath = $(this).val();
+               _$fileText.val(filePath);
+               ;
+            })
+         })
+      }
+   }
+})(window, jQuery);

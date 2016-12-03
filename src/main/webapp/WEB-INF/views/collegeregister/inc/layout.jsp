@@ -9,10 +9,9 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/visual.css">
+<link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 <link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
@@ -27,19 +26,14 @@
 	})
 </script>
 
-<style type="text/css">
-table, td, th {
-	border: 1px solid black;
-}
-</style>
 
 <script src="${pageContext.request.contextPath}/js/inc/visual.js"></script>
 
 </head>
 <body>
-
 	<tiles:insertAttribute name="header"/>
-	<div id="wrapper" style="width:10%">
+	
+		<div id="wrapper" style="width:10%">
 		<div id="sidebar-wrapper" style="display: block;">
 			<tiles:insertAttribute name="aside" />
 		</div>
@@ -53,7 +47,27 @@ table, td, th {
 			</div>
 		</div>
 	</div>
+	
 
+	<div class="row">
+		<div class="col-sm-2">
+			<div class="sidebar-nav">
+				<div class="navbar navbar-default" role="navigation">
+					<div class="navbar-header"></div>
+					<div class="navbar-collapse collapse sidebar-navbar-collapse">
+						<tiles:insertAttribute name="visual" />
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-10">
+			<tiles:insertAttribute name="content" />
+		</div>
+	</div>
+
+	<tiles:insertAttribute name="footer" />
+	
 	<!-- Menu Toggle Script -->
 	<script>
 		$("#menu-toggle").click(function(e) {
@@ -63,14 +77,6 @@ table, td, th {
 		});
 	</script>
 
-	<!-- <div id="preloader">
-		<div id="loader"> </div>
-	</div> -->
-	<div class="row container">
-		<tiles:insertAttribute name="visual" />
-		<tiles:insertAttribute name="content" />
-	</div>
-	<tiles:insertAttribute name="footer" />
 
 	<div class="modal fade" id="tableviewer">
 		<div class="modal-dialog modal-lg">

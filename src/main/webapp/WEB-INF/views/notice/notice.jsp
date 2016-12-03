@@ -10,22 +10,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<h3>공지사항</h3>
-<div id="content">
+
+<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항</h4>
+<br><br>
+
 	<form method="post">
-			<div class="col-sm-3" style="margin-left: 68%">
-				<div class="input-group">
-					<input type="text" id="keyword" name="keyword" class="form-control"> 
-					<span class="input-group-btn"> 
-						<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
-					</span>
+			<div style="margin-left: 60%">
+				<div class="form-inline">
+					<input type="text" id="keyword" name="keyword" class="form-control" > 
+					<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
 				</div>
 			</div>
 	</form>
-	<br><br>
+	<br>
 	
-<div style="width:85%; text-align: center; margin: auto;">
-	<table class="table table-hover">
+	<table class="table table-hover" style="width:75%;margin: auto;">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -71,12 +70,12 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div style="margin-left: 90%">
+	<div style="margin-left: 80%">
 		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
 		</se:authorize>
 	</div>
-</div>
+
 	
 	<div align = "center">
 	 <ul class="pagination">
@@ -110,4 +109,4 @@
 		</c:if>
 	</ul>
 	</div>
-</div>
+

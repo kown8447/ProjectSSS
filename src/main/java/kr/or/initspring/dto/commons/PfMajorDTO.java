@@ -31,5 +31,4 @@ public class PfMajorDTO {
 		return "PfMajorDTO [professor_code=" + professor_code + ", department_code=" + department_code + "]";
 
 	}
-	
 }

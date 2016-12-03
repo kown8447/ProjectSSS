@@ -12,7 +12,7 @@ public class LaboratoryDTO {
 	private String lab_code;		//교수연구실코드
 	private String building_code;	//건물코드
 	private String lab_name;		//연구실 이름
-	private String lab_Phone;		//전화번호
+	private String lab_phone;		//전화번호
 	private int lab_possible;		//사용가능 여부
 	public String getLab_code() {
 		return lab_code;
@@ -32,11 +32,11 @@ public class LaboratoryDTO {
 	public void setLab_name(String lab_name) {
 		this.lab_name = lab_name;
 	}
-	public String getLab_Phone() {
-		return lab_Phone;
+	public String getLab_phone() {
+		return lab_phone;
 	}
-	public void setLab_Phone(String lab_Phone) {
-		this.lab_Phone = lab_Phone;
+	public void setLab_phone(String lab_phone) {
+		this.lab_phone = lab_phone;
 	}
 	public int getLab_possible() {
 		return lab_possible;
@@ -47,9 +47,7 @@ public class LaboratoryDTO {
 	@Override
 	public String toString() {
 		return "LaboratoryDTO [lab_code=" + lab_code + ", building_code=" + building_code + ", lab_name=" + lab_name
-				+ ", lab_Phone=" + lab_Phone + ", lab_possible=" + lab_possible + "]";
+				+ ", lab_phone=" + lab_phone + ", lab_possible=" + lab_possible + "]";
 	}
-	
-	
 	
 }

@@ -187,7 +187,7 @@ public class NoticeService {
 		String readerCode= noticedao.selectAdmin(readerId);
 		String writerCode= noticedao.getWriterCode(notice_index);
 		
-		if (readerId==null||!readerCode.equals(writerCode)) {
+		if (readerCode==null||!readerCode.equals(writerCode)) {
 			noticedao.increase(notice_index);
 		}
 

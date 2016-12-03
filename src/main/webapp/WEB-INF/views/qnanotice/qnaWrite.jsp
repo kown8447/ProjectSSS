@@ -10,28 +10,38 @@
 	<h2>QnA</h2>
 	
 	<form action="" method="post" enctype="multipart/form-data">
-		<table class="table table-bordered" style="width: 50%; margin: auto;">
+		<table class="table table-bordered" style="width: 70%; margin: auto;">
 			<tr>
-				<th style="text-align: center;width:120px">제목</th>
+				<th style="text-align: center; width:20%; background-color: #F8F4EC;">제목</th>
 				<td>
 					<input type="text" name="qna_title" id="qna_title" class="form-control"></td>
 			</tr>
-			<tr style="height: 45%">
-				<th style="text-align: center;">내용</th>
+			<tr>
+				<th style="text-align: center; background-color: #F8F4EC;">내용</th>
 				<td>
-				<textarea id="qna_content" name="qna_content" rows="22" style="width:600px;"></textarea>
+				<textarea id="qna_content" name="qna_content" rows="16" style="resize: none;" class="form-control"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<th style="text-align: center;">첨부파일</th>
-				<td><input type="file" id="file" name="file"></td>	
+				<th style="text-align: center; background-color: #F8F4EC;">첨부파일</th>
+				<td>
+					<div class="form-group">	
+               			<span class="filetype"> 
+               				<input type="text" class="file-text" />
+                  			<span class="file-btn">찾아보기</span> 
+                  			<span class="file-select">
+                    			<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+               				</span>
+               			</span>
+            		</div>
+				</td>	
 			</tr>
 		</table>
 		
 		<br>
-		<div align="center">
-			<input type="submit" id="writeBtn" name="writeBtn" class="btn btn-success" value="저장" />
-			<a href="qnanotice.htm" class="btn btn-success">취소</a>
+		<div align="center" style="margin-left: 40%">
+			<input type="submit" id="writeBtn" name="writeBtn" class="btn btn-success btn-sm" style="width: 15%;" value="저장" />
+			<a href="qnanotice.htm" class="btn btn-default btn-sm"style="width: 15%;" >취소</a>
 		</div>
 	</form>
 </div>	

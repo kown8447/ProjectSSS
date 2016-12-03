@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!-- 
    @Project : InitSpring
    @File name : config.jsp
@@ -9,9 +6,16 @@
    @Data : 2016.11.30
    @Desc : 즐겨찾기 설정 페이지
 -->
-<div>
-	<h3>즐겨찾기 메뉴설정</h3>
-	<hr>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<h4 style="margin-left: 10%">
+	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;즐겨찾기 메뉴 설정</h4>
+	<br><br>
+
 	<div class="ui-widget ui-helper-clearfix">
 		<div id="gallery">
 			<ul>
@@ -113,8 +117,8 @@
 				</ul>
 			</c:if>
 		</div>
-
 	</div>
+	
 	<div id="box" class="ui-widget-content ui-state-default">
 		<h4 class="ui-widget-header">
 			<span>☆</span> 즐겨찾기
@@ -145,4 +149,3 @@
 			</c:choose>
 		</c:forEach> </ui>
 	</div>
-</div>

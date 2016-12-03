@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
+
+<h4 style="margin-left: 10%">
+	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;예비 수강신청</h4>
+<br><br>
 <div class="row">
 	<div class="col-md-4">
 		<div class="navbar-header">

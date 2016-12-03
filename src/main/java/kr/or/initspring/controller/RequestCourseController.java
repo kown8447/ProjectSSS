@@ -90,7 +90,7 @@ public class RequestCourseController {
 	public View searchSubject(
 			@RequestParam(value="department_code", required=false) String department_code,
 			Model model
-			){		
+			){
 		HashMap<String, String> keyword = new HashMap<String, String>();
 		keyword.put("department_code", department_code);
 		List<OpenedLectureDTO> lists = requestCourseService.searchSubject(keyword);

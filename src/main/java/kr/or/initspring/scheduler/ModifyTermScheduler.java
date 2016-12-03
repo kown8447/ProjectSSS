@@ -201,14 +201,14 @@ public class ModifyTermScheduler {
 	
 	///////////////////수강 정정 기간 ///////////////////
 	
-	@Scheduled(cron="${after.AllGrade.startDate}")
-	public void AllGradeAfterStart() throws Exception { 
+	@Scheduled(cron="${correction.AllGrade.startDate}")
+	public void correctionStart() throws Exception { 
 		setEnrollActive(0,2, 1);	
 		System.out.println("전학년 시작");
 	}
 	
-	@Scheduled(cron="${after.AllGrade.endDate}")
-	public void AllGradeAfterEnd() throws Exception { 
+	@Scheduled(cron="${correction.AllGrade.endDate}")
+	public void correctionEnd() throws Exception { 
 		setEnrollActive(0,2, 0);
 		copyToTimeTable();
 		System.out.println("전학년 끝");
