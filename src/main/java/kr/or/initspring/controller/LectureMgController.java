@@ -178,10 +178,7 @@ public class LectureMgController {
 	@RequestMapping(value="lectureMyclass.htm")
 	public String myclass(Principal principal,Model model){
 		
-		System.out.println("마이클래스 컨트롤러탐");
 		List<CustomLectureMgDTO> dto = lectureservice.selectMyclass(principal);
-		System.out.println("마이클래스 서브젝트코드"+dto);
-		System.out.println(dto.toString());
 		
 		model.addAttribute("myclass",dto);
 		return "lecture.studentmain";
