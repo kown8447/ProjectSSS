@@ -246,12 +246,11 @@ public class MemberController{
 	@RequestMapping(value="studentRegister.htm", method=RequestMethod.POST)
 	public String registerCode(StudentCodeRegDTO student, Model model) throws Exception{
 		
-		String viewpage = "";
+		String viewpage = "redirect:code.htm";
 		
 		int result = codeservice.insertStudent(student);
 		
 		if(result == 1){
-			model.addAttribute("student", student);
 			
 			viewpage = "redirect:typeofcodelist.htm?code_type=0";
 		}

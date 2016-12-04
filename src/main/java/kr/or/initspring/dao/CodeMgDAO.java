@@ -139,4 +139,6 @@ public interface CodeMgDAO {
 	public int insertIntoSmstate(SmStateDTO dto);	//재학 기록 테이블에 데이터 삽입
 	public Integer getTotalCreditByStudentCode(String student_code);	//학생의 총 이수학점(F, 재수강 제외)
 	public Integer updateStstate(StStateDTO dto);	//현재 학적 상태 학년, 이수학점, 개인 학기 업데이트 
+	
+	public Integer insertIntoStState(String student_code);	//학생의 최초 현재 학적 상태 입력
 }

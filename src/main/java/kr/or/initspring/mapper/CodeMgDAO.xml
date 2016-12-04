@@ -302,4 +302,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update st_state set grade=#{grade}, personal_semester=#{personal_semester}, total_credit=#{total_credit}
 		where student_code=#{student_code}
 	</update>
+	
+	<insert id="insertIntoStState">
+		insert into ST_STATE VALUES(#{student_code},1,1,0)
+	</insert>
 </mapper>
