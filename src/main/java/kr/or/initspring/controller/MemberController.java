@@ -68,6 +68,7 @@ import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.AsideService;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
@@ -1218,6 +1219,36 @@ public class MemberController{
 		model.addAttribute("officelist", office);
 		
 		return "codemg.officelist";
+	}
+	
+	@RequestMapping("getProfessorList.htm")
+	public View getProfessorList(Model model, String department_code){
+		
+		System.out.println("department_code : " + department_code);
+		
+		List<ProfessorCodeRegDTO> pf_list = codeservice.getProfessorList(department_code);
+		
+		model.addAttribute("pf_list", pf_list);
+		
+		return jsonview;
+	}
+	@RequestMapping("departmentLeaderRegist.htm")
+	public String departmentLeaderRegist(DepartmentLeaderDTO leader){
+		String viewPage="redirect:code.htm";
+		
+		boolean result= codeservice.setDepartmentLeader(leader);
+		if(result){
+			viewPage="redirect:departmentLeaderList.htm";
+		}
+		return viewPage;
+	}
+	
+	@RequestMapping("departmentLeaderList.htm")
+	public String callDepartmentLeaderList(Model model){
+		
+		List<DepartmentLeaderDTO> list= codeservice.getDepartmentLeaderList();
+		model.addAttribute("departmentLeaderList",list );
+		return "codemg.departmentLeaderList";
 	}
 }
 
