@@ -15,7 +15,7 @@
      <br><br>
     
     <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs" id="studentRegisterTabs">
-      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist" style="width:70%;">
+      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist" style="width:70%;margin: auto;">
         <li role="presentation" class="active">
           <a href="#studentRegister" id="studentRegister-tab" role="tab" data-toggle="tab" aria-controls="studentRegister" aria-expanded="true">
             <span class="text">등록</span>
@@ -39,7 +39,7 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="studentRegister" aria-labelledby="studentRegister-tab">
-          <table class="table table-bordered" style="width:70%;">
+          <table class="table table-bordered" style="width:70%;margin: auto;">
          <tr>
             <th style="text-align: center;">년도</th>
             <th style="text-align: center;">분기</th>
@@ -68,7 +68,7 @@
       </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="studentSemesterState" aria-labelledby="studentSemesterState-tab">
-          <table class="table table-bordered" style="width:70%;">
+          <table class="table table-bordered" style="width:70%;margin: auto;">
          <tr>
             <th style="text-align: center;">년도</th>
             <th style="text-align: center;">분기</th>
@@ -92,7 +92,7 @@
         </div>
         
         <div role="tabpanel" class="tab-pane fade" id="studentScholaship" aria-labelledby="studentScholaship-tab">
-         <table class="table table-bordered" style="width:70%;">
+         <table class="table table-bordered" style="width:70%;margin: auto;">
          <tr>
             <th style="text-align: center;">번호</th>
             <th style="text-align: center;">년도</th>
@@ -115,7 +115,7 @@
         </div>
         
          <div role="tabpanel" class="tab-pane fade" id="studentAbsence" aria-labelledby="studentAbsence-tab">
-         <table class="table table-bordered" style="width:70%;">
+         <table class="table table-bordered" style="width:70%;margin: auto;">
          <tr>
             <th style="text-align: center;">번호</th>
             <th style="text-align: center;">휴학신청일</th>
