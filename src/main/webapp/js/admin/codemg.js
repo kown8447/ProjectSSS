@@ -428,6 +428,36 @@ $(function() {
 		});
 		
 		
+		$('#levelChangeTargetDepartment').change(function(){
+			$.ajax(
+				{
+					url:"getProfessorList.htm",
+					data:{department_code:$('#levelChangeTargetDepartment').val()},
+					dataType:"json",
+					success:function(data){
+						$('#levelChangeTargetProfessor').empty();
+						$.each(data.pf_list, function(index, elt){
+							var text = "<option value='"+elt.code+"'>"+elt.code_name+"</option>";
+							$('#levelChangeTargetProfessor').append(text);
+						});
+					}
+				}
+			);
+		});
+		
+		$('#departmentLeaderButton').click(function() {
+	
+		
+		 var department=$('#levelChangeTargetDepartment').val();
+		 var professor=$('#levelChangeTargetProfessor').val();
+		 if(department==null||professor==null||department==""||professor==""){
+			 alert("선택은 하고 눌러라?");
+		 }else{
+			 $('#departmentLeaderRegist').submit();
+		 }
+		 
+		})
+		
 	});
 	function checkFileType(filepath) {
 		var fileForamt = filepath.split(".");
@@ -472,6 +502,7 @@ $(function() {
 			};
 			$('#excelForm').ajaxSubmit(options);
 		}
-
+		
+		
 		
 	}

@@ -27,6 +27,7 @@
 		<li><a href="#opened">개설강의현황</a></li>
 		<li><a href="#register">등록</a></li>
 		<li><a href="#initSemester">학기 초기화</a></li>
+		<li><a href="#changeProfessorLevel">학부장 등록</a></li>
 	</ul>
 	<div id="studentRegister">
 		<hr>
@@ -488,12 +489,6 @@
 		<form action="insertCollege.htm" method="post">
 			<table>
 				<tr>
-					<td>교수코드</td>
-					<td>	
-						<input type="text" name="professor_code" id="professor_code">
-					</td>
-				</tr>
-				<tr>
 					<td>사무실코드</td>
 					<td>
 						<select id="office_code" name="office_code">
@@ -543,12 +538,6 @@
 							<option value="${cl.college_code}">${cl.college_name}</option>
 							</c:forEach>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>교수코드</td>
-					<td>	
-						<input type="text" name="professor_code" id="professor_code">
 					</td>
 				</tr>
 				<tr>
@@ -731,5 +720,34 @@
 	
 	<div id="initSemester">
 		<input type="button" id="initBtn" value="학기 초기화" />
+	</div>
+	
+	<div id="changeProfessorLevel">
+		<hr>
+		학과장 등록
+		<form id="departmentLeaderRegist" action="departmentLeaderRegist.htm" method="post">
+			<table>
+				<tr>
+					<td>학과</td>
+					<td>
+						<select name="department_code" id="levelChangeTargetDepartment">
+							<c:forEach items="${department}" var="dp">
+								<option value="${dp.department_code}">${dp.department_name}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>교수</td>
+					<td>
+						<select name="professor_code" id="levelChangeTargetProfessor">
+							
+						</select>
+					</td>
+				</tr>
+			</table>
+			<input type="button" id="departmentLeaderButton" value="등록하기">
+		</form>
+		<a href="departmentLeaderList.htm">리스트</a>
 	</div>
 </div>

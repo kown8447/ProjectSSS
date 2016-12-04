@@ -42,6 +42,7 @@ import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
@@ -1365,5 +1366,37 @@ public class CodeService {
 		List<OfiiceBuildingDTO> officelist = dao.officebuilding();
 
 		return officelist;
+	}
+	
+	public List<ProfessorCodeRegDTO> getProfessorList(String department_code){
+		
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<ProfessorCodeRegDTO> pf_list = dao.getProfessorListByDepartmentCode(department_code);
+		return pf_list;
+	}
+	
+	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class, RuntimeException.class})
+	public boolean setDepartmentLeader(DepartmentLeaderDTO leader) {
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		int result=0;
+		int result2=0;
+		try {
+			result= dao.departmentLeaderReset(leader.getDepartment_code());
+			result2=dao.departmentLeaderSet(leader);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return false;
+		}
+		if(result==0||result2==0){
+			return false;
+		}else{
+			return true;	
+		}
+	}
+
+	public List<DepartmentLeaderDTO> getDepartmentLeaderList() {
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<DepartmentLeaderDTO> list=dao.getDepartmentLeaderList();
+		return list;
 	}
 }

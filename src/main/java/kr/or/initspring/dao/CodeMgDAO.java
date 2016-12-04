@@ -25,6 +25,7 @@ import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
@@ -141,4 +142,9 @@ public interface CodeMgDAO {
 	public Integer updateStstate(StStateDTO dto);	//현재 학적 상태 학년, 이수학점, 개인 학기 업데이트 
 	
 	public Integer insertIntoStState(String student_code);	//학생의 최초 현재 학적 상태 입력
+	public List<ProfessorCodeRegDTO> getProfessorListByDepartmentCode(String department_code);	//학과 코드로 교수 리스트 가져오기
+	
+	public int departmentLeaderReset(String department_code)throws Exception;
+	public int departmentLeaderSet(DepartmentLeaderDTO leader)throws Exception;
+	public List<DepartmentLeaderDTO> getDepartmentLeaderList();
 }
