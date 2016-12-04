@@ -384,7 +384,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getGetCreditBystudentCode" resultType="int">
 		select
-		sum(s.subject_credit) as get_credit
+		nvl(sum(s.subject_credit),0) as get_credit
 		from timetable t join record r on t.subject_code = r.subject_code
 		join subject s on r.subject_code=s.subject_code
 		where t.student_code = #{student_code} and r.record_level != 'F' and
@@ -393,7 +393,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getCurrentCreditByStudentCode" resultType="int">
 		select
-		sum(s.subject_credit) as subject_credit
+		nvl(sum(s.subject_credit),0) as subject_credit
 		from timetable t join subject s on t.subject_code = s.subject_code
 		where t.student_code=#{student_code}
 	</select>
@@ -406,7 +406,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getTotalCreditByStudentCode" resultType="int">
 		select
-		sum(s.subject_credit)
+		nvl(sum(s.subject_credit),0)
 		from record r join subject s on r.subject_code = s.subject_code
 		where student_code=#{student_code} and record_level != 'F' and retake_check
 		= 0
@@ -449,4 +449,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p.MEMBER_ID=m.MEMBER_ID join COLLEGE c on d.COLLEGE_CODE=
 		c.COLLEGE_CODE where pm.professor_level=1
 	</select>
+	
+	<delete id="deletePlan">
+		delete from plan
+	</delete>
 </mapper>

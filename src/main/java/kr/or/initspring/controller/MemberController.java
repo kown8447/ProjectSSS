@@ -1161,9 +1161,14 @@ public class MemberController{
 	 * Desc : 학기 초기화 함수. Timetable, Lecture, Opened, Ask_time, Oprequest, rejection, reserve, enrollment 삭제
 	 */
 	@RequestMapping("initSemester.htm")
-	public View initSemester(Model model) throws Exception{
+	public View initSemester(Model model) {
 		
-		boolean result = codeservice.initSemester();
+		boolean result=false;
+		try {
+			result = codeservice.initSemester();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(result)	model.addAttribute("result", "success");
 		else	model.addAttribute("result", "fail");

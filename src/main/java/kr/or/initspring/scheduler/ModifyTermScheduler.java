@@ -238,6 +238,7 @@ public class ModifyTermScheduler {
 					HashMap<String, Object> map = new HashMap<String, Object>();
 					map.put("result", 1);
 					map.put("subject_code", dto.getSubject_code());
+					map.put("student_code", dto.getStudent_code());
 					dao.setReserveCheck(map);
 				}else{
 					dao.updateRequestSeat(request_seats, dto.getSubject_code());	//수강인원 수 등록

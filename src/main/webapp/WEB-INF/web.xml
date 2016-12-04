@@ -71,7 +71,7 @@
     </error-page>
     <error-page>
       <exception-type>java.lang.Throwable</exception-type>
-      <location>/ErrorEtc</location>
+      <location>/ErrorEtc.htm</location>
     </error-page>
 
 </web-app>

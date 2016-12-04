@@ -50,8 +50,7 @@ public class JoinService {
 			joindao.insertMember(member);
 			if (member.getCode_type() == 0) {
 				joindao.insertStudentTable(member.getCode(), member.getMember_id());
-				joindao.insertRole("ROLE_STUDENT", member.getMember_id());
-				insertResult = joindao.insertStstateTable(member.getCode());
+				insertResult = joindao.insertRole("ROLE_STUDENT", member.getMember_id());
 			} else if (member.getCode_type() == 1) {
 				joindao.insertProfessorTable(member.getCode(), member.getMember_id());
 				insertResult = joindao.insertRole("ROLE_PROFESSOR", member.getMember_id());

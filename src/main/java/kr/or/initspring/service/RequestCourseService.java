@@ -338,7 +338,6 @@ public class RequestCourseService {
 	*/	
 	@Transactional(rollbackFor={Exception.class, SQLException.class,NullPointerException.class, RuntimeException.class})
 	public boolean requestReserve(String member_id, ArrayList<String> list, int timetable_share) throws Exception{
-		
 		boolean result = false;
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);
