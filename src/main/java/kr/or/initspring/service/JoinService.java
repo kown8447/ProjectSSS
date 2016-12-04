@@ -30,13 +30,15 @@ public class JoinService {
 
 	/*
 	 * @method Name : insertMember
+	 * 
 	 * @Author : 권기엽
-	 * @description
-	 * 회원 정보를 삽입하는 함수
-	 * member table 삽입 -> student/admin/professor 중 하나의 table 삽입 -> 권한 지정 까지를 하나의 트랜잭션으로 처리.
-	 * 하나의 Query가 실패할 시 모든 Query는 Rollback 됨
-	*/	
-	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class })
+	 * 
+	 * @description 회원 정보를 삽입하는 함수 member table 삽입 -> student/admin/professor 중
+	 * 하나의 table 삽입 -> 권한 지정 까지를 하나의 트랜잭션으로 처리. 하나의 Query가 실패할 시 모든 Query는
+	 * Rollback 됨
+	 */
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class,
+			RuntimeException.class })
 	public boolean insertMember(MemberDTO member) throws Exception {
 
 		int insertResult = 0;
@@ -72,10 +74,11 @@ public class JoinService {
 
 	/*
 	 * @method Name : joinCheck1
+	 * 
 	 * @Author : 권기엽
-	 * @description
-	 * CODE_MG 테이블의 정보와 사용자가 입력한 정보가 일치하는 지 확인하는 함수
-	*/
+	 * 
+	 * @description CODE_MG 테이블의 정보와 사용자가 입력한 정보가 일치하는 지 확인하는 함수
+	 */
 	public boolean joinCheck1(CodeMgDTO codemg) {
 		boolean result = false;
 		JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
@@ -87,61 +90,65 @@ public class JoinService {
 
 		return result;
 	}
-	/*
-	    * @method Name : joinCheck2
-	    * @Author : 김영빈
-	    * @description
-	    * 이미 회원가입한 회원인지 확인
-	   */
-	public boolean joinCheck2(CodeMgDTO codemg) {
-		boolean result = false;
-		JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
-		int count =0;
-		if(codemg.getCode_type()==0){
-			List<String> check = joindao.studentConfirm();
-			for(int i=0; i<check.size() ; i++){
-				if(check.get(i).equals(codemg.getCode())){
-					count=0;
-					break;
-				}else {count =1;}
-			}
-			
-		}else if(codemg.getCode_type()==1){
-			List<String> check  = joindao.professorConfirm();
-			for(int i=0; i<check.size() ; i++){
-				if(check.get(i).equals(codemg.getCode())){
-					count=0;
-					break;
-				}else {count =1;}
-			}
-		}else{
-			List<String> check  = joindao.adminConfirm();
-			for(int i=0; i<check.size() ; i++){
-				if(check.get(i).equals(codemg.getCode())){
-					count=0;
-					break;
-				}else {count =1;}
-			}
-		}
-		if (count > 0)
-			result = true;
-		return result;
-	}
 
 	/*
+	 * @method Name : joinCheck2
+	 * 
+	 * @Author : 김영빈
+	 * 
+	 * @description 이미 회원가입한 회원인지 확인
+	 */
+	 public boolean joinCheck2(CodeMgDTO codemg) {
+	      boolean result = true;
+	      JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
+	      int count =1;
+	      if(codemg.getCode_type()==0){
+	         List<String> check = joindao.studentConfirm();
+	         for(int i=0; i<check.size() ; i++){
+	            if(check.get(i).equals(codemg.getCode())){
+	               count=0;
+	               break;
+	            }else {count =1;}
+	         }
+	         
+	      }else if(codemg.getCode_type()==1){
+	         List<String> check  = joindao.professorConfirm();
+	         for(int i=0; i<check.size() ; i++){
+	            if(check.get(i).equals(codemg.getCode())){
+	               count=0;
+	               break;
+	            }else {count =1;}
+	         }
+	      }else{
+	         List<String> check  = joindao.adminConfirm();
+	         for(int i=0; i<check.size() ; i++){
+	            if(check.get(i).equals(codemg.getCode())){
+	               count=0;
+	               break;
+	            }else {count =1;}
+	         }
+	      }
+	      if (count > 0)
+	         result = true;
+	      else if(count == 0 )result=false;
+	      return result;
+	 }
+	/*
 	 * @method Name : checkID
+	 * 
 	 * @Author : 권기엽
+	 * 
 	 * @description : 아이디 중복을 체크하는 함수
-	*/
+	 */
 	public boolean checkID(String member_id) {
 		boolean result = false;
 		JoinDAO joindao = sqlsession.getMapper(JoinDAO.class);
 
 		int checkID = joindao.checkID(member_id);
-		
-			if (checkID>0) {
-				result = true;
-			}
+
+		if (checkID > 0) {
+			result = true;
+		}
 		return result;
 	}
 }
