@@ -168,7 +168,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from REGISTER
 	</select>
 	<insert id="insertRegister">
-		insert into register(student_code, semester_code , register_type, tuition, register_state) values(register_idx.nextval, #{semester_code}, #{register_type}, #{tuition}, #{register_state})
+		insert into register(student_code, semester_code , register_type, tuition, register_state) values(#{student_code}, #{semester_code}, #{register_type}, #{tuition}, #{register_state})
 	</insert>
 	
 	
@@ -202,6 +202,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getMaxSemesterCode" resultType="String">
 		select max(semester_code) as semester_code from semester
+	</select>
+	<insert id="insertmjrecord">
+		insert into MJ_RECORD(student_code, department_Code) values(#{param1}, #{param2})
+	</insert>
+	<insert id="insertStudentCode">
+		insert into CODE_MG(code, code_type, code_name, code_birth) values(#{code}, ${code_type}, #{code_name}, #{code_birth})
+	</insert>
+	<insert id="insertProfessorCode">
+		insert into CODE_MG(code, code_type, code_name, code_birth) values(#{code}, ${code_type}, #{code_name}, #{code_birth})
+	</insert>
+	<insert id="insertstudentmj">
+		insert into MJ_RECORD(student_code, department_Code, mj_Type) values(#{code}, #{department_code}, ${mj_type})
+	</insert>
+	<insert id="insertpfmajor">
+		insert into PF_MAJOR(PROFESSOR_CODE, DEPARTMENT_CODE) VALUES(#{code}, #{department_code})
+	</insert>
+	<insert id="insertProfessorMajor">
+		insert into PF_MAJOR(professor_code, department_code) VALUES(#{professor_code}, #{department_code})
+	</insert>
+	<insert id="insertAdmin">
+		insert into CODE_MG(CODE, CODE_NAME, code_Type, code_Birth) VALUES(#{code}, #{code_name}, ${code_type}, #{code_birth})
+	</insert>
+	<select id="typeofcodelist" parameterType="Integer" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
+		SELECT * FROM CODE_MG where CODE_TYPE = #{param1}
 	</select>
 	
 	

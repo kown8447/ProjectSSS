@@ -19,13 +19,16 @@
 					<td>
 						<c:choose>
 							<c:when test="${reg.register_type==0}">
-								일반등록
+								일반 등록
 							</c:when>
 							<c:when test="${reg.register_type==1}">
-								일반등록
+								계절학기 등록
+							</c:when>
+							<c:when test="${reg.register_type==1}">
+								졸업연기 등록
 							</c:when>
 							<c:otherwise>
-								졸업연기 등록
+								에러
 							</c:otherwise>
 						</c:choose>
 					</td>
@@ -33,7 +36,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${reg.register_state==0}">
-								등록안함
+								등록 안함
 							</c:when>
 							<c:when test="${reg.register_state==1}">
 								등록

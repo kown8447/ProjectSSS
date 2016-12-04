@@ -3,7 +3,10 @@ package kr.or.initspring.dao;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import kr.or.initspring.dto.commons.Academic_CalendarDTO;
+import kr.or.initspring.dto.commons.AdminDTO;
 import kr.or.initspring.dto.commons.BuildingDTO;
 import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CodeMgDTO;
@@ -13,6 +16,7 @@ import kr.or.initspring.dto.commons.LaboratoryDTO;
 import kr.or.initspring.dto.commons.MjRecordDTO;
 import kr.or.initspring.dto.commons.OfficeDTO;
 import kr.or.initspring.dto.commons.OpenedDTO;
+import kr.or.initspring.dto.commons.PfMajorDTO;
 import kr.or.initspring.dto.commons.RegisterDTO;
 import kr.or.initspring.dto.commons.ScSystemDTO;
 import kr.or.initspring.dto.commons.ScholarshipDTO;
@@ -24,14 +28,28 @@ import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
+import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.StudentCodeRegDTO;
 
 public interface CodeMgDAO {
 	
 	public int insertCode(CodeMgDTO code);
+	/*public int insertStudentCode(String code, int code_type, String code_name, String code_birth);*/
+	public int insertStudentCode(StudentCodeRegDTO student);
+	/*public int insertstudentmj(String code, String department_code, int mj_type);*/
+	public int insertProfessorCode(ProfessorCodeRegDTO professor);
+	
+	public int insertstudentmj(StudentCodeRegDTO student);
+	public int insertpfmajor(ProfessorCodeRegDTO professor);
+	
+	public int insertProfessorMajor(PfMajorDTO pfmajor);
+	
+	public int insertAdmin(CodeMgDTO admin);
+	
 	public List<CodeMgDTO> codelist();
 	public CodeMgDTO codeDetail(String code);
 	public int editCode(String code, int code_type, String code_name, Date code_birth);
-	public int insertExcel(CodeMgDTO code);
+	public int insertExcel(CodeMgDTO code)throws Exception;
 	public int deleteCode(String code) throws Exception;
 	public int insertBuilding(BuildingDTO building);
 	public List<BuildingDTO> buildingList();
@@ -40,7 +58,7 @@ public interface CodeMgDAO {
 	public BuildingDTO selectBuilding(String building_code);
 	public List<ClassroomDTO> classlist();
 	public ClassroomDTO selectClassroom(String classroom_code);
-	public int insertClassroom(ClassroomDTO classroom);
+	public int insertClassroom(ClassroomDTO classroom) throws Exception;
 	public int updateClassroom(ClassroomDTO classroom);
 	public int insertOffice(OfficeDTO office);
 	public List<OfficeDTO> officelist();
@@ -86,6 +104,7 @@ public interface CodeMgDAO {
 	public List<OfiiceBuildingDTO> officebuilding();
 	
 	
+	
 	//최대 코드번호 가져오기
 	public String getMaxBuildingCode();	
 	public String getMaxClassroomCode();
@@ -97,6 +116,9 @@ public interface CodeMgDAO {
 	public String getMaxCollegeCode();
 	public String getMaxCalendarCode();
 	public String getMaxDepartmentCode();
+	public int insertmjrecord(String code, String department_code);
+	public List<CodeMgDTO> typeofcodelist(int code_type);
+	
 	
 	
 	
