@@ -39,11 +39,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import kr.or.initspring.dto.collegeRegister.StudentRegisterDTO;
 import kr.or.initspring.dto.commons.Academic_CalendarDTO;
+import kr.or.initspring.dto.commons.AdminDTO;
 import kr.or.initspring.dto.commons.BuildingDTO;
 import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CodeMgDTO;
@@ -68,6 +71,8 @@ import kr.or.initspring.dto.member.ClassBuildingDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
+import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.StudentCodeRegDTO;
 import kr.or.initspring.service.MemberService;
 
 @Controller
@@ -238,15 +243,31 @@ public class MemberController{
 	 * @description
 	 * 관리자가 코드 등록
 	*/
-	@RequestMapping(value="codeRegister.htm", method=RequestMethod.POST)
-	public String registerCode(CodeMgDTO code){
+	@RequestMapping(value="studentRegister.htm", method=RequestMethod.POST)
+	public String registerCode(StudentCodeRegDTO student, Model model) throws Exception{
 		
 		String viewpage = "";
 		
-		int result = codeservice.insertCode(code);
+		int result = codeservice.insertStudent(student);
 		
 		if(result == 1){
-			viewpage = "redirect:codelist.htm";
+			model.addAttribute("student", student);
+			
+			viewpage = "redirect:typeofcodelist.htm?code_type=0";
+		}
+		
+		return viewpage;
+	}
+	
+	@RequestMapping(value = "professorCodeRegister.htm", method = RequestMethod.POST)
+	public String registerProfessorCode(ProfessorCodeRegDTO professor){
+		
+		String viewpage = "";
+		
+		int result = codeservice.insertProfessor(professor);
+		
+		if(result == 1){
+			viewpage = "redirect:typeofcodelist.htm?code_type=1";
 		}
 		
 		return viewpage;
@@ -264,6 +285,17 @@ public class MemberController{
 		model.addAttribute("codelist", codelist);
 		return "codemg.codelist";
 	}
+	
+	@RequestMapping("typeofcodelist.htm")
+	public String viewtypecodelist(String code_type, Model model){
+		
+		System.out.println("컨트롤러에서의 코드타입 " +code_type);
+		List<CodeMgDTO> codelist = codeservice.conditioncodelist(Integer.parseInt(code_type));
+		model.addAttribute("codelist", codelist);
+		return "codemg.codelist";
+	}
+	
+	
 	/*
 	 * @method Name : detailCode
 	 * @Author : 성홍모
@@ -315,8 +347,21 @@ public class MemberController{
 	public ModelAndView download(HttpServletRequest request, HttpServletResponse response){
 		
 		String baseDir = request.getRealPath("/WEB-INF/Template");
+		System.out.println("파일 경로 =" + baseDir);
 		
-		File downloadFile = new File(baseDir,"code_mg.xlsx");
+		File downloadFile = new File(baseDir,"student_code.xlsx");
+		
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+	}
+	
+	//
+	@RequestMapping("professorexcel.htm")
+	public ModelAndView professordownload(HttpServletRequest request, HttpServletResponse response){
+		
+		String baseDir = request.getRealPath("/WEB-INF/Template");
+		System.out.println("파일 경로 =" + baseDir);
+		
+		File downloadFile = new File(baseDir,"professor_code.xlsx");
 		
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
@@ -327,8 +372,20 @@ public class MemberController{
 	 * 액셀로 코드 등록을 일괄처리하는 매소드
 	*/
 	@RequestMapping(value = "compExcelUpload.htm", method=RequestMethod.POST)
-	public View excelUpload(MultipartHttpServletRequest request, Model model){
+	public View excelUpload(MultipartHttpServletRequest request, Model model) throws Exception{
+
+		System.out.println("일괄처리 컨트롤러");
 		codeservice.insertExcelList(request, model);
+
+		return jsonview;
+	}
+	
+	//교수 일괄처리
+	@RequestMapping(value = "professorExcelUpload.htm", method=RequestMethod.POST)
+	public View professorexcelUpload(MultipartHttpServletRequest request, Model model) throws Exception{
+
+		System.out.println("교수일괄처리 컨트롤러");
+		codeservice.professorinsertExcelList(request, model);
 
 		return jsonview;
 	}
@@ -408,6 +465,13 @@ public class MemberController{
 		
 		codeservice.insertBuilding(building);
 		return "redirect:buildingList.htm";
+	}
+	
+	@RequestMapping(value = "adminCodeRegister.htm", method= RequestMethod.POST)
+	public String adminRegister(CodeMgDTO admin){
+		
+		codeservice.insertAdmin(admin);
+		return "redirect:typeofcodelist.htm?code_type=2";
 	}
 	
 	@RequestMapping("buildingList.htm")
@@ -552,11 +616,13 @@ public class MemberController{
 	}
 	//강의실 일괄등록
 	@RequestMapping(value = "classroomExcelUpload.htm", method=RequestMethod.POST)
-	public View classroomExcelUpload(MultipartHttpServletRequest request, Model model) throws Exception{
+	public View classroomExcelUpload(MultipartHttpServletRequest request, Model model){
 		
 		boolean result = false;
 		
+	
 		result = codeservice.classroomExcelList(request, model);
+	
 		
 		model.addAttribute("result", result);
 
@@ -674,13 +740,13 @@ public class MemberController{
 	}
 	
 	@RequestMapping(value = "registerClassroom.htm", method=RequestMethod.POST)
-	public String insertClassroom(ClassroomDTO classroom){
+	public String insertClassroom(ClassroomDTO classroom) throws Exception{
 
 		int result = codeservice.insertClassroom(classroom);
 		String view = "";
 		
 		if(result == 1){
-			view = "redirect:classroomList.htm";
+			view = "redirect:showclasslist.htm";
 		}
 		
 		return view;
@@ -707,7 +773,7 @@ public class MemberController{
 		int result = codeservice.insertOffice(office);
 		
 		if(result == 1){
-			view = "redirect:officeList.htm";
+			view = "redirect:showofficelist.htm";
 		}
 		return view;
 	}
@@ -746,7 +812,7 @@ public class MemberController{
 		String view = "";
 		
 		if(result ==1){
-			view = "redirect:labList.htm";
+			view = "redirect:showlablist.htm";
 		}
 		
 		return view;
@@ -1118,6 +1184,7 @@ public class MemberController{
 	public String insertRegister(RegisterDTO register){
 		
 		String view = "";
+		System.out.println(register.toString());
 		int result = codeservice.insertRegister(register);
 		
 		if(result == 1){
