@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sun.mail.smtp.SMTPSSLTransport;
+import com.sun.xml.internal.stream.dtd.DTDGrammarUtil;
 
 import kr.or.initspring.dao.CodeMgDAO;
 import kr.or.initspring.dto.collegeRegister.StudentRegisterDTO;
@@ -81,12 +82,15 @@ public class CodeService {
 
 		System.out.println(student.toString());
 		student.setCode_type(0);
+		System.out.println("학생 단일등록시 학적상태에 구분되는 코드 = " + student.getCode());
 
 		try {
 			dao.insertStudentCode(student);
 			dao.insertstudentmj(student);
+			dao.insertIntoStState(student.getCode());
 			result = 1;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			result = 0;
 		}
 		return result;
@@ -263,6 +267,8 @@ public class CodeService {
 					mj.setDepartment_code(department_code);
 
 					codedao.insertMjRecord(mj);
+					
+					codedao.insertIntoStState(code);
 					result = true;
 					
 				}
