@@ -8,7 +8,10 @@
 package kr.or.initspring.service;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -231,17 +234,16 @@ public class RequestCourseService {
 				if(enroll_active==0) { viewpage = "requestCourse.notRequestPeriod"; }
 				else if(enroll_active==1) { viewpage = "requestCourse.realRegisterCourse";}
 				else if(enroll_active==2) {
-					String [] porfArray= {};
+					String [] profArray= {};
 					if(stStateDto.getGrade()==1){
-						porfArray=realOneStart.split(" ");
+						profArray=realOneStart.split(" ");
 					}else if(stStateDto.getGrade()==2){
-						porfArray=realTwoStart.split(" ");
+						profArray=realTwoStart.split(" ");
 					}else if(stStateDto.getGrade()==3){
-						porfArray=realTwoStart.split(" ");
+						profArray=realTwoStart.split(" ");
 					}else if(stStateDto.getGrade()==4){
-						porfArray=realTwoStart.split(" ");
+						profArray=realTwoStart.split(" ");
 					}
-					
 					viewpage = "requestCourse.before24Hours";}
 			}else{
 				viewpage = "requestCourse.realRegisterCourse";
