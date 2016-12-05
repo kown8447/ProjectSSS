@@ -137,11 +137,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 서브젝트코드넣을때 +1해서 넣어주긔 -->
 	<select id="maxSubject_code" resultType="String">
-		SELECT subject_idx.nextval as subject_code FROM double
+		SELECT subject_idx.nextval as subject_code FROM dual
 	</select>
 		
 	<select id="maxRecord_code" resultType="String">
-		SELECT record_idx.nextval as record_code FROM double
+		SELECT record_idx.nextval as record_code FROM dual
 	</select>
 	
 	
@@ -185,9 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_Studentlist" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		    select * from timetable t join student s on t.student_code = s.student_code 
 		     join member m on m.member_id = s.MEMBER_ID join opened o on o.subject_code = t.subject_code
-		      join record r on s.student_code = r.student_code
 		      where t.SUBJECT_CODE = #{param1} 
-
 	</select>
 	
 	<select id="select_myClass" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
@@ -213,12 +211,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="select_Recordlevel" resultType="String">
-		select * from record where student_code = #{param1} AND subject_code = #{param2}
+		select record_level from record where student_code = #{param1} AND subject_code = #{param2}
 	</select>
 	
 	<select id="select_reStudy" resultType="String">
-		  select record_code from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE 
-		  where s.subject_code = #{param1} and r.STUDENT_CODE = #{param2}
+		  select record_code from record r join subject s on r.SUBJECT_NAME = s.SUBJECT_NAME 
+		  where s.subject_name = #{param1} and r.STUDENT_CODE = #{param2}
 	</select>
 	
 	<update id="update_RetakeCheck">

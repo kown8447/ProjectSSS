@@ -19,7 +19,7 @@ $(function(){
                
                   $.each(data.buildinglist,function(index,value){
                      console.log(value.building_name);
-                     $("#building").append("<option value='B_"+index+"'>"+value+"</option>");
+                     $("#building").append("<option value='B_00"+index+"'>"+value+"</option>");
                   })
                   $.each(data.periodlist,function(index,value){
                      $('#PERIOD_START_'+index).html(value.period_start);
@@ -139,7 +139,7 @@ $(function(){
             return false;
          }
          else{
-            $("#period").append("<input type=hidden name=period_code value="+i+">");
+            $("#period").append("<input type=hidden class=myclass name=period_code value="+i+">");
             count+=1;
          }
             console.log(count);

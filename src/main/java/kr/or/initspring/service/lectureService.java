@@ -124,7 +124,7 @@ public class lectureService {
 	 */
 	
 	public void selectBefore(String memberid, Model model) {
-	
+		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		PfMajorDTO dto = lecturedao.select_departmentcode(memberid);
 		System.out.println(dto.toString());
@@ -405,15 +405,16 @@ public class lectureService {
 		
 		dto.setRecord_code(record_code);
 		CustomLectureMgDTO state = lecturedao.select_stState(dto.getStudent_code());
-		dto.setRecord_code(record_code);
+	/*	dto.setRecord_code(record_code);*/
 		System.out.println("꼭확인해야됨"+dto.toString());
 		
 		String inselectlevel = lecturedao.select_Recordlevel(dto.getStudent_code(), dto.getSubject_code());
 		
-		if(inselectlevel == null || inselectlevel.equals("")){
-			List<String> secondsubject = lecturedao.select_reStudy(dto.getSubject_code(), dto.getStudent_code());
-			if(secondsubject.equals("") || secondsubject == null){
-				for(int i=0; i<secondsubject.size();i++){
+		if(inselectlevel == null || inselectlevel.equals("")){  //현재 성적이 없다면
+			List<String> secondsubject = lecturedao.select_reStudy(dto.getSubject_name(), dto.getStudent_code());
+			/*if(secondsubject.equals("") || secondsubject == null){*/
+			if(secondsubject != null){	
+			for(int i = 0; i < secondsubject.size(); i++){
 					System.out.println("재수강탔음");
 					lecturedao.update_RetakeCheck(dto.getRecord_code());
 				}
