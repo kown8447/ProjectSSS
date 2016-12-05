@@ -11,25 +11,25 @@
 </script>
 <div id="codeRegisterTabs">
 	<ul>
-		<li><a href="#studentRegister">학생등록</a></li>
+		<!-- <li><a href="#studentRegister">학생등록</a></li> -->
 		<li><a href="#professorRegister">교수등록</a></li>
 		<li><a href="#adminRegister">관리자 등록</a></li>
-		<li><a href="#buildingRegister">건물</a></li>
+<!-- 		<li><a href="#buildingRegister">건물</a></li>
 		<li><a href="#classroomRegister">강의실</a></li>
 		<li><a href="#officeRegister">사무실</a></li>
-		<li><a href="#laboratoryRegister">연구실</a></li>
-		<li><a href="#scSystemRegister">장학제도</a></li>	
-		<li><a href="#scholarshipRegister">장학</a></li>
+		<li><a href="#laboratoryRegister">연구실</a></li> -->
+		<!--  --><li><a href="#scSystemRegister">장학제도</a></li>	
+		<!--  --><li><a href="#scholarshipRegister">장학</a></li>
 		<li><a href="#semesterRegister">학기</a></li>
-		<li><a href="#colleageRegister">단과대학</a></li>
-		<li><a href="#departmentRegister">학부</a></li>
-		<li><a href="#mjRecordRegister">복수전공</a></li>
+		<!--  --><li><a href="#colleageRegister">단과대학</a></li>
+		<!--  --><li><a href="#departmentRegister">학부</a></li>
+		<!--  --><li><a href="#fRegister">복수전공</a></li>
 		<li><a href="#opened">개설강의현황</a></li>
-		<li><a href="#register">등록</a></li>
+		<!--  --><li><a href="#register">등록</a></li>
 		<li><a href="#initSemester">학기 초기화</a></li>
 		<li><a href="#changeProfessorLevel">학부장 등록</a></li>
 	</ul>
-	<div id="studentRegister">
+	<%-- <div id="studentRegister">
 		<hr>
 		CODE_MG(STUDENT)
 		<form action="studentRegister.htm" method="post">
@@ -77,7 +77,7 @@
 				<td><a href="excel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
+	</div> --%>
 	<div id="professorRegister">
 		<hr>
 		CODE_MG(PROFESSOR)
@@ -164,7 +164,7 @@
 		<a href="typeofcodelist.htm?code_type=2">리스트</a>
 		<hr>
 	</div>	
-	<div id="buildingRegister">
+<%-- 	<div id="buildingRegister">
 		<hr>
 		BUILDING
 		<form action="registerBuilding.htm" method="post">
@@ -331,8 +331,8 @@
 				<td><a href="lbexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
-	<div id="scSystemRegister">
+	</div> --%>
+	<!-- <div id="scSystemRegister">
 		<hr>
 		SC_SYSTEM
 		<form action="insertScSystem.htm" method="post">
@@ -385,8 +385,8 @@
 				<td><a href="scsexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
-	<div id="scholarshipRegister">
+	</div> -->
+	<%-- <div id="scholarshipRegister">
 		<hr>
 		SCHOLARSHIP
 		<form action="insertScholarship.htm" method="post">
@@ -447,7 +447,7 @@
 				<td><a href="sclexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
+	</div> --%>
 	<div id="semesterRegister">
 		<hr>
 		SEMESTER
@@ -483,7 +483,7 @@
 		<a href="semesterList.htm">리스트</a>
 		<hr>
 	</div>
-	<div id="colleageRegister">
+	<%-- <div id="colleageRegister">
 		<hr>
 		COLLEGE
 		<form action="insertCollege.htm" method="post">
@@ -524,8 +524,8 @@
 				<td><a href="colexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
-	<div id="departmentRegister">
+	</div> --%>
+	<%-- <div id="departmentRegister">
 		<hr>
 		DEPARTMENT
 		<form action="insertDepartment.htm" method="post">
@@ -595,8 +595,8 @@
 				<td><a href="depexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
-	<div id="mjRecordRegister">
+	</div> --%>
+	<%-- <div id="mjRecordRegister">
 		<hr>
 		MJ_RECORD
 		<form action="insertMjRecord.htm" method="post">
@@ -637,7 +637,7 @@
 				<td><a href="mjexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
+	</div> --%>
 	<div id="opened">
 		<hr>
 		OPENED
@@ -660,7 +660,7 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div id="register">
+	<%-- <div id="register">
 		<hr>
 		REGISTER
 		<form action="insertRegister.htm" method="post">
@@ -716,7 +716,7 @@
 				<td><a href="regexcel.htm"> 양식다운로드 </a></td>
 			</tr>
 		</table>
-	</div>
+	</div> --%>
 	
 	<div id="initSemester">
 		<input type="button" id="initBtn" value="학기 초기화" />

@@ -63,10 +63,13 @@ $(function() {
 </table>
 <input type="text" value="${de.subject_code}" name="code"><br>
 	<c:if test="${de.success_check==3}">
-		<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>
 		<input id="reject" type="button" value="거절">
 	</c:if>
 </form>
+<c:if test="${de.success_check==3}">
+	<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>		
+</c:if>
+
 <button><a href="list.htm">목록</a></button>
 <input type="hidden" id="subject_state" value="${de.subject_state}"/>
 </div>

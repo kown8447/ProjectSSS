@@ -4,7 +4,7 @@
 <c:set value="${code}" var="c"></c:set>
 <form action="updateCode.htm" method="post">
  코드 번호:<input type="text" value="${c.code }" readonly="readonly" name="code" id="code"><br>
- 구분:<%-- <input type="text" value="${c.code_type }" name="code_type" id="code_type"><br> --%>
+ 구분:<input type="hidden" value="${c.code_type }" name="code_type" id="code_type">
  
  	<c:choose>
  		<c:when test="${c.code_type==0 }">
