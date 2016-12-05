@@ -64,6 +64,7 @@ public class QnaController {
 		model.addAttribute("end", map.get("end"));
 		model.addAttribute("keyword", map.get("keyword"));
 		model.addAttribute("searchType", map.get("searchType"));
+		model.addAttribute("total", map.get("total"));
 		return "qnanotice.qnaNotice";
 	}
 

@@ -11,8 +11,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div id="content">
-	<h2>QnA</h2>
+
+	<h4>▶&nbsp;Q&A 상세보기</h4> <br><br>
 	
 	<form method="post">
 	<table class="table table-bordered" style="width:70%; margin: auto;">
@@ -84,11 +84,8 @@
 					<button type="button" id="commentBtn" name="commentBtn" class="btn btn-default" style="width: 100px; height: 55px;">등록</button>
 				</td>	
 			</tr>	
-		</table>
-		
-		
+		</table>		
 	</form>
-</div>
 
 <input type="hidden" id="writerId" value="${qna.member_id}">
 <input type="hidden" id="readerId" value="${readerId}">

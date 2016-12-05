@@ -7,8 +7,8 @@
 -->   
 
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div id="content">
-	<h2>QnA 수정</h2>
+
+<h4>▶&nbsp;Q&A 수정</h4> <br><br>
 	
 	<form action="" method="post" enctype="multipart/form-data">
 		
@@ -56,5 +56,5 @@
 			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm" style="width: 15%;">취소</a>	
 		</div>
 	</form>
-</div>
+
  

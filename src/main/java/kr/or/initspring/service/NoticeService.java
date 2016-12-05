@@ -159,6 +159,7 @@ public class NoticeService {
 		map.put("toPage", toPage);
 		map.put("start", start);
 		map.put("end", end);
+		map.put("total", total);
 		
 		return map;
 	}

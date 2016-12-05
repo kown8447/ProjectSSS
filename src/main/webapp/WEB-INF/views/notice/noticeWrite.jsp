@@ -8,9 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<h4 style="margin-left: 10%">
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항 작성</h4>
-<br><br>
+<h4>▶&nbsp;공지사항 작성</h4> <br><br>
 
 <div id="content">
 	<form method="post" action="" enctype="multipart/form-data">

@@ -6,8 +6,7 @@
    @Desc : qna게시판 글쓰기페이지
 -->   
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div id="content">
-	<h2>QnA</h2>
+<h4>▶&nbsp;Q&A 작성</h4> <br><br>
 	
 	<form action="" method="post" enctype="multipart/form-data">
 		<table class="table table-bordered" style="width: 70%; margin: auto;">

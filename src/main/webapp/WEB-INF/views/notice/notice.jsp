@@ -11,16 +11,15 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항</h4>
+<h4>▶&nbsp;공지사항</h4>
 <br><br>
 
 	<form method="post">
-			<div style="margin-left: 60%">
-				<div class="form-inline">
-					<input type="text" id="keyword" name="keyword" class="form-control" > 
-					<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
-				</div>
-			</div>
+		<div class="form-inline">
+			<font class="col-sm-offset-2">◎&nbsp;게시물 갯수: ${total}</font>
+			<input type="text" id="keyword" name="keyword" class="form-control col-sm-offset-4" > 
+			<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
+		</div>
 	</form>
 	<br>
 	
@@ -70,7 +69,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div style="margin-left: 80%">
+	<div class="col-md-offset-9">
 		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
 		</se:authorize>

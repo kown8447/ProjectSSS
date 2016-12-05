@@ -7,8 +7,7 @@
 -->   
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div id="content">
-	<h2>QnA 답글</h2>
+<h4>▶&nbsp;Q&A 답글</h4> <br><br>
 	<form action="" method="post" enctype="multipart/form-data">
 	
 	<!-- 히든 필드로 정보 보내기 -->
@@ -56,4 +55,3 @@
 			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" style="width: 15%;" class="btn btn-default btn-sm">취소</a>	
 		</div>
 	</form>
-</div>

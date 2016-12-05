@@ -10,14 +10,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;Q&A</h4>
-<br><br>
-<div id="content">
+<h4>▶&nbsp;Q&A</h4> <br><br>
 
-	<div align="right" style="margin-right: 15%;">
 		<form>
 			<div class="form-inline" >
-				<select id="searchType" name="searchType" class="form-control"  style="width:120px;margin-right:5px;">
+						<font class="col-sm-offset-2">◎&nbsp;게시물 갯수: ${total}</font>
+				<select id="searchType" name="searchType" class="form-control col-sm-offset-2" >
 					<option value="0">제목</option>
 					<option value="1">제목+내용</option>
 					<option value="2">글쓴이</option>
@@ -26,7 +24,6 @@
 				<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">			
 			</div>
 		</form>
-	</div>
 	<br>
 	
 	<div style="width:70%; margin: auto;">
@@ -93,36 +90,36 @@
 			<!-- 처음 이전 링크 --> 
 			<c:if test="${pg>fromPage}">
 			<!-- 5>10 : false / 15>10 : true -->
-     	    [<a href="qnanotice.htm?pg=1&keyword=${keyword}&searchType=${searchType}">◀◀</a>]
-     	    [<a href="qnanotice.htm?pg=${pg-1}&keyword=${keyword}&searchType=${searchType}">◀</a>]      
+     	    <li><a href="qnanotice.htm?pg=1&keyword=${keyword}&searchType=${searchType}">◀◀</a></li>
+     	    <li><a href="qnanotice.htm?pg=${pg-1}&keyword=${keyword}&searchType=${searchType}">◀</a></li>   
      		</c:if> 
      		
      		<c:if test="${pg<=fromPage}">
 			<!-- 5<=10 :true / 15<=10:false --> 
-         	[<span style="color: gray">◀◀</span>]   
-         	[<span style="color: gray">◀</span>]
+         	<li><span style="color: gray">◀◀</span></li>   
+         	<li><span style="color: gray">◀</span></li>
       		</c:if> <!-- 블록 범위 찍기 --> 
       		
       		<c:forEach begin="${fromPage}" end="${toPage}" var="i">
-				<c:if test="${i==pg}">[${i}]</c:if>
-				<c:if test="${i!=pg}">[<a href="qnanotice.htm?pg=${i}&keyword=${keyword}&searchType=${searchType}">${i}</a>]</c:if>
+				<c:if test="${i==pg}"><li>${i}</li></c:if>
+				<c:if test="${i!=pg}"><li><a href="qnanotice.htm?pg=${i}&keyword=${keyword}&searchType=${searchType}">${i}</a></li></c:if>
 			</c:forEach> <!-- 다음, 이후 --> 
 			
 			<c:if test="${pg<allPage}">
 			<!-- 20<21 : true -->
-            [<a href="qnanotice.htm?pg=${pg+1}&keyword=${keyword}&searchType=${searchType}">▶</a>]
-            [<a href="qnanotice.htm?pg=${allPage}&keyword=${keyword}&searchType=${searchType}">▶▶</a>]
+            <li><a href="qnanotice.htm?pg=${pg+1}&keyword=${keyword}&searchType=${searchType}">▶</a></li>
+            <li><a href="qnanotice.htm?pg=${allPage}&keyword=${keyword}&searchType=${searchType}">▶▶</a></li>
       		</c:if> 
       		
       		<c:if test="${pg>=allPage}">
       		
 			<!-- 21>=21 :true -->
-            [<span style="color: gray">▶</span>]
-            [<span style="color: gray">▶▶</span>]  
+            <li><span style="color: gray">▶</span></li>
+            <li><span style="color: gray">▶▶</span></li>  
     		</c:if>
 		</ul>
 	</div>
-</div>	
+
 
 
 

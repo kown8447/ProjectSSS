@@ -11,8 +11,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
-<h4 style="margin-left: 10%">
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항 상세보기</h4>
+<h4>▶&nbsp;공지사항 상세보기</h4>
 <br><br>
 <div id="content">
    <form method="post">
