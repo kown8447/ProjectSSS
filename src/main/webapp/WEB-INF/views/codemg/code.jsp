@@ -684,8 +684,8 @@
 				<tr>
 					<td>등록구분</td>
 					<td>
-					<input type="radio" value="0" id="register_state" name="register_type">등록안함
-					<input type="radio" value="1" id="register_state" name="register_type">등록
+					<input type="radio" value="0" id="register_state" name="register_state">등록안함
+					<input type="radio" value="1" id="register_state" name="register_state">등록
 					</td>
 				</tr>
 				<tr>
@@ -695,9 +695,9 @@
 				<tr>
 					<td>등록여부</td>
 					<td>
-					<input type="radio" value="0" id="register_type" name="register_state">일반학기
-					<input type="radio" value="1" id="register_type" name="register_state">계절학기 
-					<input type="radio" value="2" id="register_type" name="register_state">졸업연기
+					<input type="radio" value="0" id="register_type" name="register_type">일반학기
+					<input type="radio" value="1" id="register_type" name="register_type">계절학기 
+					<input type="radio" value="2" id="register_type" name="register_type">졸업연기
 					</td>
 				</tr>
 			</table>

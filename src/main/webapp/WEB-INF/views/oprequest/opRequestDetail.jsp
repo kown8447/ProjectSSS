@@ -62,7 +62,7 @@ $(function() {
 	</tr>
 </table>
 <input type="text" value="${de.subject_code}" name="code"><br>
-	<c:if test="${de.subject_state==1 && de.success_check==0}">
+	<c:if test="${de.success_check==3}">
 		<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>
 		<input id="reject" type="button" value="거절">
 	</c:if>

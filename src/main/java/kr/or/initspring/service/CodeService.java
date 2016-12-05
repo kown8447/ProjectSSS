@@ -1284,6 +1284,7 @@ public class CodeService {
 				try{
 					dao.insertIntoSmstate(smstatedto);
 				}catch(Exception e3){
+					System.out.println("e3 : " + e3.getMessage());
 					throw e3;
 				}
 				
@@ -1309,6 +1310,7 @@ public class CodeService {
 				
 			}
 			
+			dao.deletePlan();
 			dao.deleteTimetalbe();
 			dao.deleteReserve();
 			dao.deleteEnrollment();
