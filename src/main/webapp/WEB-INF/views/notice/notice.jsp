@@ -11,8 +11,7 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4>▶&nbsp;공지사항</h4>
-<br><br>
+<h4>▶&nbsp;공지사항</h4><br><br>
 
 	<form method="post">
 		<div class="form-inline">
