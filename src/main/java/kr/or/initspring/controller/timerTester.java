@@ -8,12 +8,12 @@ import java.util.Date;
 public class timerTester {
 
 	public static void main(String[] args) {
-		String[] profArray={"00","16","18","4","12","?"};
+		String[] profArray={"00","16","18","6","12","?"};
 		System.out.println("테스트!!");
 		Calendar cal=Calendar.getInstance();
 		SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date startday=null;
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int year = cal.get(Calendar.YEAR);
 		System.out.println(year);
 		
 		try {
