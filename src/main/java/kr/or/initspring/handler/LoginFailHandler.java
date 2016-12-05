@@ -51,11 +51,11 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 		isValidId = logindao.isValidID(member_id);
 		try{
 			if(isValidId == 0){
-				request.setAttribute("failmessage", "아이디가 없습니다. 회원가입 후 이용해 주세요.");
+				request.setAttribute("failmessage", "아이디가 없습니다." + "<br>"+ "회원가입 후 이용해 주세요.");
 			}else{
 				encpwd = logindao.getPwdByUserid(member_id);
 				if(bCryptPasswordEncoder.matches(member_pwd, encpwd) == false){
-					request.setAttribute("failmessage", "비밀번호가 일치하지 않습니다. 다시 로그인 해 주세요.");
+					request.setAttribute("failmessage", "비밀번호가 일치하지 않습니다." + "<br>"+ "다시 로그인 해 주세요.");
 				}
 			}
 		}catch(Exception e){

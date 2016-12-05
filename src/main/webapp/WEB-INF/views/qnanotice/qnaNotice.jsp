@@ -91,18 +91,21 @@
 			<c:if test="${pg>fromPage}">
 			<!-- 5>10 : false / 15>10 : true -->
      	    <li><a href="qnanotice.htm?pg=1&keyword=${keyword}&searchType=${searchType}">◀◀</a></li>
-     	    <li><a href="qnanotice.htm?pg=${pg-1}&keyword=${keyword}&searchType=${searchType}">◀</a></li>   
+     	    <li><a href="qnanotice.htm?pg=${pg-1}&keyword=${keyword}&searchType=${searchType}">◀</a></li>     
      		</c:if> 
      		
      		<c:if test="${pg<=fromPage}">
 			<!-- 5<=10 :true / 15<=10:false --> 
          	<li><span style="color: gray">◀◀</span></li>   
          	<li><span style="color: gray">◀</span></li>
-      		</c:if> <!-- 블록 범위 찍기 --> 
+      		</c:if> 
       		
+      		<!-- 블록 범위 찍기 --> 
       		<c:forEach begin="${fromPage}" end="${toPage}" var="i">
-				<c:if test="${i==pg}"><li>${i}</li></c:if>
-				<c:if test="${i!=pg}"><li><a href="qnanotice.htm?pg=${i}&keyword=${keyword}&searchType=${searchType}">${i}</a></li></c:if>
+				<li><c:if test="${i==pg}"><a href="#">${i}</a></c:if></li>
+				<c:if test="${i!=pg}"><li>
+					<a href="qnanotice.htm?pg=${i}&keyword=${keyword}&searchType=${searchType}">${i}</a></li>
+				</c:if>
 			</c:forEach> <!-- 다음, 이후 --> 
 			
 			<c:if test="${pg<allPage}">
@@ -115,7 +118,7 @@
       		
 			<!-- 21>=21 :true -->
             <li><span style="color: gray">▶</span></li>
-            <li><span style="color: gray">▶▶</span></li>  
+            <li><span style="color: gray">▶▶</span></li>
     		</c:if>
 		</ul>
 	</div>
