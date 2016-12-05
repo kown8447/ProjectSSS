@@ -29,26 +29,15 @@ $(function(){
 				
 				$.each(data.lists, function(i, elt) {
 					correctGradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='correct_sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
+					
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
-							$('#'+obj.period_code+'_4').html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_4').html(text+hidden);
-							$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						if(elt.retake_check == 1){color="red";}
+						else{color="skyblue";}
+						$('#'+obj.period_code+'_4').html(text+hidden);
+						$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
 					});
 				});
 			}
