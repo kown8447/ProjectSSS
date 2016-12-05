@@ -170,7 +170,7 @@ public class CodeService {
 	public int updateCode(String code, int code_type, String code_name, Date code_birth) {
 
 		int result = 0;
-
+		System.out.println("수정서비스");
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
 		result = codedao.editCode(code, code_type, code_name, code_birth);
 

@@ -56,7 +56,6 @@
 							관리자
 						</c:otherwise>
 					</c:choose>
-				<%-- ${code.code_type} --%>
 				</td>
 				<td id="code${index.count}">${code.code}</td>
 				<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
@@ -66,8 +65,22 @@
 					<button class="deleteCode" id="deleteCodeBtn_${index.count}"
 						name="deleteCodeBtn">삭제하기</button>
 				</td>
+				<td>
+					<input value="${code.code_type}" type="hidden">
+				</td>
 			</tr>
 		</tbody>
-	</c:forEach>
+		
+		</c:forEach>
 </table>
-<a href="code.htm">되돌아가기</a>
+
+<c:if test="${typeofcode==0}">
+	<a href="registerstudent.htm">되돌아가기</a>
+</c:if>
+<c:if test="${typeofcode==1}">
+	<a href="registerprofessor.htm">되돌아가기</a>
+</c:if>
+<c:if test="${typeofcode==2}">
+	<a href="registeradmin.htm">되돌아가기</a>
+</c:if>
+
