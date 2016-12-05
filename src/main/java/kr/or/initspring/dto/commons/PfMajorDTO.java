@@ -11,12 +11,15 @@ public class PfMajorDTO {
 	
 	private String professor_code;	//교수코드
 	private String department_code;	//학과코드
+
+
 	public String getProfessor_code() {
 		return professor_code;
 	}
 	public void setProfessor_code(String professor_code) {
 		this.professor_code = professor_code;
 	}
+
 	public String getDepartment_code() {
 		return department_code;
 	}
@@ -26,6 +29,6 @@ public class PfMajorDTO {
 	@Override
 	public String toString() {
 		return "PfMajorDTO [professor_code=" + professor_code + ", department_code=" + department_code + "]";
+
 	}
-	
 }

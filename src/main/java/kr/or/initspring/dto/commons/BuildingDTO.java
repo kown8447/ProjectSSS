@@ -35,8 +35,4 @@ public class BuildingDTO {
 		return "BuildingDTO [building_code=" + building_code + ", building_name=" + building_name + ", building_addr="
 				+ building_addr + "]";
 	}
-	
-	
-	
-
 }

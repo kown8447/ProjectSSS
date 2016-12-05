@@ -4,17 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
-  .thumb {
-    height: 75px;
-    border: 1px solid #000;
-    margin: 10px 5px 0 0;
-  }
-</style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/memberEdit.css">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/memberEdit.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- 다음 api -->
@@ -26,6 +19,7 @@
 
 <script type="text/javascript">
 	$(function() {
+		$("#wrapper").toggleClass("toggled");
 		$('#preloader').fadeOut('slow');
 		$('body').css({
 			'overflow' : 'visible'
@@ -36,9 +30,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body style="background-image: url('${pageContext.request.contextPath}/images/back.jpg'); background-repeat: no-repeat; background-size: cover; overflow: hidden;">
+<body>
 	<tiles:insertAttribute name="header" />
-	<div id="wrapper">
+	<div id="wrapper" style="width:10%">
 		<div id="sidebar-wrapper" style="display: block;">
 			<tiles:insertAttribute name="aside" />
 		</div>
@@ -55,7 +49,6 @@
 
 	<!-- Menu Toggle Script -->
 	<script>
-		$('#page-content-wrapper').hide();
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$('#page-content-wrapper').hide();
@@ -63,9 +56,9 @@
 		});
 	</script>
 
-	<div id="preloader">
+	<!-- <div id="preloader">
 		<div id="loader"> </div>
-	</div>
+	</div> -->
 	<div class="row container">
 		<tiles:insertAttribute name="content" />
 	</div>

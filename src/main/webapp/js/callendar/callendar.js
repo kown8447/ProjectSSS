@@ -35,16 +35,16 @@ $(function() {
    $('#insert').click(function() {
 	   
       if ($("#title").val() == "") {
-         alert("제목을  꼭 입력하세요!");
+         alert("제목을  입력하세요.");
             $("#title").focus();
       }else if ($("#content").val() == "") {
-         alert("내용을 꼭 입력하세요!");
+         alert("내용을 입력하세요.");
             $("#content").focus();
       }else if ($("#startdate").val() == "") {
-         alert("시작일을 꼭 입력하세요!");
+         alert("시작일을 입력하세요.");
             $("#startdate").focus();
       }else if ($("#enddate").val() == "") {
-         alert("종료일을 꼭 입력하세요!");
+         alert("종료일을 입력하세요.");
             $("#enddate").focus();
       }else if($("#startdate").val() > $("#enddate").val()){
          alert("시작일보다 종료일이 이릅니다 ");
@@ -62,7 +62,6 @@ $(function() {
                   dataType : "json",
                   success : function(data) {
                      if (data.result > 0) {
-                        alert('입력성공');
                         $('#basicModal').modal('hide');
                         var insertend = $('#enddate').val();
                         var month = insertend.substring(0, 2);
@@ -202,7 +201,7 @@ $(function() {
       $('#calendar').fullCalendar(
             {
                header : {
-            	   left:   'title',
+            	   left:  'title',
             	   center: '',
             	   right:  'today prev,next'
             	    
@@ -229,7 +228,7 @@ $(function() {
                                        .getDate() + 1));
                            b[index] = value.calendar_code;
                            request.push({
-                              color : "#EAEAEA",
+                              color : "#D8E5E8",
                               textColor : "#000000",
                               id : value.calendar_code,
                               title : value.calendar_title,
@@ -371,7 +370,12 @@ function check() {
    }
 }
 
+
 /*
+ * @JavaScript : callendar
+ * @Date : 2016.11.30
+ * @Author : 송아름
+ * @Desc
  * 파일 업로드 할 경우 파일 경로와 이름 표시 
 */
 (function(global, $) {

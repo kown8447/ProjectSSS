@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select admin_code FROM admin where member_Id = #{param1}
 	</select>
 	
+	<select id="getWriterCode" resultType="String" >
+		select admin_code from notice where notice_index = #{param1}
+	</select>
 	<insert id="insert">
 
 		<selectKey order="BEFORE" keyProperty="notice_refer" resultType="Integer">
@@ -47,17 +50,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		insert into notice(notice_index, admin_code, notice_depth,
 		notice_step, notice_refer, notice_file, notice_title ,notice_content, notice_date )
-		values( notice_index.nextval, #{admin_code}, 0, 0, #{notice_refer},
+		values( notice_idx.nextval, #{admin_code}, 0, 0, #{notice_refer},
 		#{notice_file,jdbcType=VARCHAR}, #{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
 	
 	
-	<update id="increase">
+	<update id="increase" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
 		update notice set notice_count = notice_count + 1
 		where notice_index = #{notice_index}	
 	</update>
 
-	<update id="addStep">
+	<update id="addStep" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
 		update notice set notice_step = notice_step + 1
 		where notice_refer = #{notice_refer} and notice_step > #{notice_step}
 	</update>
@@ -66,15 +69,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		insert into notice(notice_index, admin_code, notice_depth, notice_step,
 		notice_refer, notice_file, notice_title ,notice_content, notice_date )
-		values( notice_index.nextval, #{admin_code}, #{notice_depth},
+		values( notice_idx.nextval, #{admin_code}, #{notice_depth},
 		#{notice_step}, #{notice_refer},
 		#{notice_file,jdbcType=VARCHAR},
 		#{notice_title}, #{notice_content}, SYSDATE)
 	</insert>
 	
-	<select id="lastReplyStep" resultType="Integer" parameterType="kr.or.initspring.dto.notice.CustomerNoticeDTO">
-        SELECT nvl(max(notice_step),0) from notice where notice_refer=${notice_refer} and notice_depth=${notice_depth}+1
-   </select>
-	
+	<update id="noticeDeleteAndUpdate">
+   		UPDATE NOTICE set NOTICE_STATUS =1 where NOTICE_REFER=#{param1}
+   </update>   
 
 </mapper>

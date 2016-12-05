@@ -7,23 +7,25 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<h4 style="margin-left: 10%">
+	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항 작성</h4>
+<br><br>
+
 <div id="content">
-	<h2>공지사항</h2>
 	<form method="post" action="" enctype="multipart/form-data">
 		<table class="table table-bordered" style="width: 70%; margin: auto;">
 			<tr>
-				<th style="text-align: center;width:120px">제목</th>
+				<th style="text-align: center;width:120px;background-color: #F8F4EC;">제목</th>
 				<td>
 					<input type="text" name="notice_title" id="notice_title" class="form-control"></td>
 			</tr>
-			<tr style="height: 45%">
-				<th style="text-align: center;">내용</th>
-				<!-- <td>
-					<textarea id="notice_content" style="height:180px;" name="notice_content" class="form-control"></textarea></td> -->
-					<td><textarea name="notice_content" id="notice_content" rows="22" style="width:645px;"></textarea></td>
+			<tr>
+				<th style="text-align: center;background-color: #F8F4EC;margin-top: 20px;">내용</th>
+					<td><textarea name="notice_content" id="notice_content" rows="12" style="resize:none;"class="form-control"></textarea></td>
 			</tr>
 			<tr>
-				<th style="text-align: center;">첨부파일</th>
+				<th style="text-align: center;background-color: #F8F4EC;">첨부파일</th>
 				<td><input type="file" id="file" name="file"></td>	
 			</tr>
 			<tr>
@@ -31,9 +33,9 @@
 		
 		<br>
 
-		<div align="center">
-			<button type="submit" id="writeBtn" class="btn btn-success">저장</button>
-			<a href="notice.htm" class="btn btn-success">취소</a>
+		<div align="center" style="margin-left:55%;">
+			<button type="submit" id="writeBtn" class="btn btn-success btn-sm" style="width:15%;">저장</button>
+			<a href="notice.htm" class="btn btn-default btn-sm" style="width:15%;">취소</a>
 		</div>
 	</form>
 </div>

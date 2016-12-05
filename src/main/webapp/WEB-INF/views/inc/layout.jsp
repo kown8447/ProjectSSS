@@ -6,7 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
@@ -18,6 +19,7 @@
 
 <script type="text/javascript">
 	$(function() {
+		$("#wrapper").toggleClass("toggled");
 		$('#preloader').fadeOut('slow');
 		$('body').css({
 			'overflow' : 'visible'
@@ -27,15 +29,15 @@
 
 <title>Insert title here</title>
 </head>
-<body style="background-image: url('${pageContext.request.contextPath}/images/back.jpg'); background-repeat: no-repeat; background-size: cover; overflow: hidden;">
-		
+<body>
+
 	<tiles:insertAttribute name="header"/>
-	<div id="wrapper">
+	<div id="wrapper" style="width:10%">
 		<div id="sidebar-wrapper" style="display: block;">
 			<tiles:insertAttribute name="aside" />
 		</div>
 		<div id="page-content-wrapper" class="col-md-1" style="display: block;">
-			<div>
+			<div width="10%">
 				<div class="row">
 					<div class="col-lg-1">
 						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
@@ -47,7 +49,6 @@
 
 	<!-- Menu Toggle Script -->
 	<script>
-		$('#page-content-wrapper').hide();
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$('#page-content-wrapper').hide();

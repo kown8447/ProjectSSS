@@ -136,6 +136,7 @@ public class JoinController {
 
 		result = joinservice.joinCheck1(codemg);
 		result2 = joinservice.joinCheck2(codemg);
+		System.out.println(result+" / "+result2);
 		if (result == true && result2 == true) {
 			member.setCode(codemg.getCode());
 			member.setMember_name(codemg.getCode_name());
@@ -242,7 +243,7 @@ public class JoinController {
 			System.out.println("joinController / joinStep3 : " + e.getMessage());
 		}
 		if(result){
-			viewpage = "redirect:welcome.htm";
+			viewpage = "redirect:/login.htm";
 		}else{
 			System.out.println("멤버가입 실패");
 			viewpage = "redirect:join1.htm";

@@ -44,6 +44,9 @@ public class CollegeStudentService {
 
 		StudentInfoDTO student = collegestudentdao.getStudent(userid);
 		student.setEnterYear(Integer.parseInt(student.getStudent_code().substring(0, 4)));
+		String address = student.getMember_addr();
+	    String [] array = address.split("\\?");
+	    student.setMember_addr(array[1] +" "+ array[2]);
 
 		model.addAttribute("student", student);
 
@@ -203,9 +206,9 @@ public class CollegeStudentService {
 		for (int i = 0; i < registerList.size(); i++) {
 			String[] semesterparts = registerList.get(i).getSemester_code().split("_");
 			registerList.get(i).setSemesterYear(semesterparts[1] + "년");
-			if (semesterparts[2].equals("01")) {
+			if (semesterparts[2].equals("1")) {
 				registerList.get(i).setSemesterType("전반기");
-			} else if (semesterparts[2].equals("02")) {
+			} else if (semesterparts[2].equals("2")) {
 				registerList.get(i).setSemesterType("후반기");
 			}
 		}
@@ -214,9 +217,9 @@ public class CollegeStudentService {
 		for (int i = 0; i < studentSemesterList.size(); i++) {
 			String[] semesterparts = studentSemesterList.get(i).getSemester_code().split("_");
 			studentSemesterList.get(i).setSemesterYear(semesterparts[1] + "년");
-			if (semesterparts[2].equals("01")) {
+			if (semesterparts[2].equals("1")) {
 				studentSemesterList.get(i).setSemesterType("전반기");
-			} else if (semesterparts[2].equals("02")) {
+			} else if (semesterparts[2].equals("2")) {
 				studentSemesterList.get(i).setSemesterType("후반기");
 			}
 		}
@@ -225,9 +228,9 @@ public class CollegeStudentService {
 		for (int i = 0; i < scholarshipList.size(); i++) {
 			String[] semesterparts = scholarshipList.get(i).getSemester_code().split("_");
 			scholarshipList.get(i).setSemesterYear(semesterparts[1] + "년");
-			if (semesterparts[2].equals("01")) {
+			if (semesterparts[2].equals("1")) {
 				scholarshipList.get(i).setSemesterType("전반기");
-			} else if (semesterparts[2].equals("02")) {
+			} else if (semesterparts[2].equals("2")) {
 				scholarshipList.get(i).setSemesterType("후반기");
 			}
 		}
@@ -256,23 +259,23 @@ public class CollegeStudentService {
 				totalCredit += recordList.get(i).getSubject_credit();
 				String level = recordList.get(i).getRecord_level();
 				if (level.equals("A+")) {
-					totalScore += 4.5f;
+					totalScore += 4.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("A")) {
-					totalScore += 4.0f;
+					totalScore += 4.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("B+")) {
-					totalScore += 3.5f;
+					totalScore += 3.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("B")) {
-					totalScore += 3.0f;
+					totalScore += 3.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("C+")) {
-					totalScore += 2.5f;
+					totalScore += 2.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("C")) {
-					totalScore += 2.0f;
+					totalScore += 2.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("D+")) {
-					totalScore += 1.5f;
+					totalScore += 1.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("D")) {
-					totalScore += 1.0f;
+					totalScore += 1.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("F")) {
-					totalScore += 0;
+					totalScore += 0*recordList.get(i).getSubject_credit();;
 				}
 			}
 		}
@@ -298,28 +301,28 @@ public class CollegeStudentService {
 				String level = recordList.get(i).getRecord_level();
 				if (level.equals("A+")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 4.5f;
+					totalScore += 4.5f*recordList.get(i).getSubject_credit();
 				} else if (level.equals("A")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 4.0f;
+					totalScore += 4.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("B+")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 3.5f;
+					totalScore += 3.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("B")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 3.0f;
+					totalScore += 3.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("C+")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 2.5f;
+					totalScore += 2.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("C")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 2.0f;
+					totalScore += 2.0f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("D+")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 1.5f;
+					totalScore += 1.5f*recordList.get(i).getSubject_credit();;
 				} else if (level.equals("D")) {
 					totalCredit += recordList.get(i).getSubject_credit();
-					totalScore += 1.0f;
+					totalScore += 1.0f*recordList.get(i).getSubject_credit();;
 				}
 			}
 		}

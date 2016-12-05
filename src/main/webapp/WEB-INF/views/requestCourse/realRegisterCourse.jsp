@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
 <link href="${pageContext.request.contextPath}/css/requestCourse/realRegisterCourse.css" rel="stylesheet">
-
+<h4><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;수강신청</h4>
+<br><br>
 
 <div class="row">
 	<div class="col-md-5">
@@ -14,7 +15,7 @@
 					<option value="subject_code">과목코드</option>
 				</select> 
 				<input type="text" class="form-control" id="real_keyword" /> 
-				<input type="button" class="btn btn-default" id="real_searchBtn" value="검색"/>
+				<input type="button" class="btn btn-success" id="real_searchBtn" value="검색"/>
 
 				<div id="fail_result" class="row">
 				
@@ -25,25 +26,25 @@
 	</div>
 
 
-	<div class="col-md-7" style="overflow:auto;height:500px;">
+	<div class="col-md-7" style="overflow:auto;">
 		<form action="" method="post">
-			<table id="real_timetable" class="table table-hover" style="table-layout: fixed;" cellpadding="5" cellspacing="5" align="center">
-				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);'>
-					<th>시간</th>
-					<th>월</th>
-					<th>화</th>
-					<th>수</th>
-					<th>목</th>
-					<th>금</th>
+			<table id="real_timetable" class="table table-condensed" style="table-layout: fixed;font-size: 7pt;" cellpadding="5" cellspacing="5" align="center">
+				<tr style="font-size: 10pt;">
+					<th style="text-align: center;">시간</th>
+					<th style="text-align: center;">월</th>
+					<th style="text-align: center;">화</th>
+					<th style="text-align: center;">수</th>
+					<th style="text-align: center;">목</th>
+					<th style="text-align: center;">금</th>
 				</tr>
 				<c:forEach var="i" begin="1" end="20">
-					<tr style="font-size:small; text-align: center" height="20px">
+					<tr style="text-align: center" height="20px">
 						<td id="PERIOD_START_${i}_3" style="word-break: break-all; text-align: center"></td>
-						<td id="PR_MON_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
-						<td id="PR_TUE_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
-						<td id="PR_WEN_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
-						<td id="PR_THU_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
-						<td id="PR_FRI_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all; font-size:xx-samll"></td>
+						<td id="PR_MON_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_TUE_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_WEN_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_THU_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
+						<td id="PR_FRI_${i}_3" class="real_table_ele" height="auto" style="word-break: break-all;"></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -64,20 +65,19 @@
 			</div>
 			<!-- body -->
 			<div class="modal-body">
-
 				<table class="table table-bordered">
-					<tr>
-						<th>과목명</th>
-						<th>과목코드</th>
-						<th>교수명</th>
-						<th>강의실</th>
-						<th>강의 시간</th>
-						<th>대상 학년</th>
-						<th>필수/선택</th>
-						<th>정원</th>
-						<th>학점</th>
+					<tr class="info">
+						<th style="text-align: center;">과목명</th>
+						<th style="text-align: center;">과목코드</th>
+						<th style="text-align: center;">교수명</th>
+						<th style="text-align: center;">강의실</th>
+						<th style="text-align: center;">강의 시간</th>
+						<th style="text-align: center;">대상 학년</th>
+						<th style="text-align: center;">필수/선택</th>
+						<th style="text-align: center;">정원</th>
+						<th style="text-align: center;">학점</th>
 					</tr>
-					<tr>
+					<tr style="text-align: center;">
 						<td id="real_subject_name"></td>
 						<td id="real_subject_code"></td>
 						<td id="real_professor_name"></td>

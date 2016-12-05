@@ -23,18 +23,16 @@ $(function(){
 	
 	
 	$('#searchID').click(function(){
-		$('div.modal').modal({
+		$('#id_modal').modal({
             remote : 'login/searchID.htm'
           	  
       });
     });
 	
 	$('#searchPW').click(function(){
-		$('div.modal').modal({
+		$('#pwd_modal').modal({
             remote : 'login/searchPwd.htm'
           	  
       });
-    });
-
-    
+    });    
 });

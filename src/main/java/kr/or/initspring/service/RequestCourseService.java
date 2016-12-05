@@ -373,6 +373,7 @@ public class RequestCourseService {
 			System.out.println("예상 오류 지점 3333333333333");
 			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
 			System.out.println("예상 오류 지점 44444444444444");
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(), studentDto.getStudent_code());
 		}catch(NullPointerException e){
 			System.out.println("RequestCourseService / checkBeforeSubject : " + e.getMessage());
 			if(beforeSubjectDto == null){
@@ -396,7 +397,6 @@ public class RequestCourseService {
 	*/	
 	@Transactional(rollbackFor={Exception.class, SQLException.class,NullPointerException.class, RuntimeException.class})
 	public boolean requestReserve(String member_id, ArrayList<String> list, int timetable_share) throws Exception{
-		
 		boolean result = false;
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		StudentDTO studentDto = requestCourseDao.getStudentByMemberid(member_id);

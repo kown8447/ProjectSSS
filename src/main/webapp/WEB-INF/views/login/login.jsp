@@ -46,14 +46,22 @@
 			</p>
 
 			<p style="text-align: center; font-size: 8pt">
-				<a href="#" id="searchID" data-toggle="modal" style="color:#5F00FF;">아이디 찾기</a> / 
-				<a href="#" id="searchPW" data-toggle="modal" style="color:#5F00FF;">비밀번호 찾기</a>
+				<a href="#" id="searchID" style="color:#5F00FF;">아이디 찾기</a> / 
+				<a href="#" id="searchPW" style="color:#5F00FF;">비밀번호 찾기</a>
 			</p>
 		</form>
 	</div>
 </div>
 
-<div class="modal fade">
+<div class="modal fade" id="id_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- remote ajax call이 되는영역 -->
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="pwd_modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- remote ajax call이 되는영역 -->

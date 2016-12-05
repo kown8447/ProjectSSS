@@ -59,15 +59,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				on o.subject_code = s.SUBJECT_CODE
 			</when>
 			<when test="department_code.equals('100')">
-				select l.SUBJECT_CODE, l.REQUIRED_CHOICE, s.PROFESSOR_CODE, s.SUBJECT_NAME, 
-				s.SUBJECT_CREDIT, s.GRADE_LIMIT,s.SUBJECT_STATE,s.SUBJECT_SEATS,s.SUBJECT_TYPE
-				from liberal l join subject s
-				on l.subject_code = s.subject_code
+				select * from opened o join liberal l on o.subject_code = l.subject_code
+				join subject s on o.subject_code = s.subject_code
 			</when>
 			<otherwise>
 				select *
 				from (select * from major where department_code=#{department_code}) m join subject s
 				on m.subject_code = s.subject_code
+				join opened o on m.subject_code = o.subject_code
 				where s.subject_state=2
 			</otherwise>
 		</choose>

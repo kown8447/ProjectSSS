@@ -454,3 +454,58 @@ $(function() {
 	});
 
 });
+
+
+/*
+ * @JavaScript : join
+ * @Date : 2016.11.30
+ * @Author : 송아름
+ * @Desc
+ * 파일 업로드 할 경우 파일 경로와 이름 표시 
+*/
+(function(global, $) {
+
+	$(makeObjFile);
+
+	function makeObjFile() {
+		var inputFile = CustomFiletype();
+		inputFile.init($('.filetype'));
+	}
+
+	function CustomFiletype() {
+		if (this === window)
+			return new CustomFiletype;
+		this.$fileBox = null;
+		this.$fileUpload = null;
+	}
+
+	CustomFiletype.prototype = {
+
+		'init' : function(fileClass) {
+			this.$fileBox = fileClass || $('.filetype');
+			this.initEvent();
+		},
+
+		'initEvent' : function() {
+			this.fileUpload();
+		},
+
+		'fileUpload' : function() {
+			var _self = this;
+
+			$.each(_self.$fileBox, function(idx, item) {
+
+				var _$fileBox = _self.$fileBox.eq(idx), _$fileType = _$fileBox
+						.find('input[type=file]'), _$fileText = _$fileBox
+						.find('input[type=text]');
+				_$fileText.attr('disabled', 'disabled');
+
+				_$fileType.on('change', function() {
+					var filePath = $(this).val();
+					_$fileText.val(filePath);
+					;
+				})
+			})
+		}
+	}
+})(window, jQuery);
