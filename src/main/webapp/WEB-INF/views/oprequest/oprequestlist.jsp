@@ -29,7 +29,8 @@
 				<c:choose>
 					<c:when test="${oplist.success_check == 0}">대기</c:when>
 					<c:when test="${oplist.success_check == 1}">승인</c:when>
-					<c:otherwise>거절</c:otherwise>
+					<c:when test="${oplist.success_check == 2}">거절</c:when>
+					<c:otherwise>대기</c:otherwise>
 				</c:choose>	
 				</td>
 			</tr>
