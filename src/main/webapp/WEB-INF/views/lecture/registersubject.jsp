@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/lecture/registersubject.js"></script>
 <body>
    <div class="container">
    
@@ -65,7 +65,7 @@
          </div><br>
          <div align="center">
          <input type="button" value="취소" id="cancel" class="btn btn-default">
-         <input type="submit" value="등록하기" class="btn btn-success">
+         <input type="submit" id="submit" value="등록하기" class="btn btn-success">
       </div>
    </form>
    </div>

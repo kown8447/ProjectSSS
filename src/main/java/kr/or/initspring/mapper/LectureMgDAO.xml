@@ -47,8 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insert_BeforeName" parameterType="String">
-		insert into BEFORE_SUBJECT (subject_code,before_name) values (#{param1},
-		(select subject_name from SUBJECT where subject_name = #{param2}))
+		insert into BEFORE_SUBJECT (subject_code,before_name) values 
+		(#{param1},(select subject_name from SUBJECT where subject_name = #{param2}))
 	</insert>
 	
 	<insert id="insert_Liberal" parameterType="String">
@@ -117,7 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name}
-		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
+		,subject_seats=#{subject_seats},subject_credit=${subject_credit}
+		,grade_limit=#{grade_limit} where subject_code=#{subject_code}
 	</update>
 	
 	<!-- 선수과목을 수정하는 쿼리 -->

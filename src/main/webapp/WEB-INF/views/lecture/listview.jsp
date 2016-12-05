@@ -51,6 +51,7 @@
 					<c:when test = "${subject.success_check == 0}"> 대기 </c:when>
 					<c:when test = "${subject.success_check == 1}"> 승인 </c:when>
 					<c:when test = "${subject.success_check == 2}"> 거절 </c:when>
+					<c:when test = "${subject.success_check == 3}"> 신청 </c:when>
 				</c:choose>
       		</td>
       	</tr>

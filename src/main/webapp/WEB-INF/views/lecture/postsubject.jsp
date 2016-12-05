@@ -19,32 +19,6 @@
 </head>
 <style>
 
-table {
-	border : 1ex;
-	border-color:black;
-}
-
-table tr:nth-child(2n) {
-	background: #eff0f1;
-	
-	
-}
-
-table tr:nth-child(2n+3) {
-	background: #fff;
-	border-color: black;
-	border: 1em;
-}
-
-table th, table td {
-	padding: 1em;
-	border-color: black;
-	border: 1em;
-}
-
-
-
-
 </style>
 <body>
 
@@ -80,6 +54,7 @@ table th, table td {
 	
 	<input type="hidden" value="${list.subject_code }" name="subject_code">
 	<input type="hidden" value="${list.success_check }" name="success_check">
+	
 	<div class="row">
 		<!-- 건물  -->
 		<div class="col-sm-3">
@@ -95,7 +70,9 @@ table th, table td {
 		<div class="col-sm-3">
 		<select class="form-control" id="classroom" name="classroom_code">없음
 		<option value="0">없음</option>
-		</select>  
+		</select>
+		</div>  
+
 	
 	
 
@@ -113,11 +90,11 @@ table th, table td {
 				<c:forEach var="i" begin="1" end="20">
 					<tr bordercolor="black" style="font-size:small; text-align: center; border: 1px" height="20px">
 						<th id="PERIOD_START_${i}" style="word-break: break-all; text-align: center"></td>
-						<td id="PR_MON_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_MON_${i}")></td>
-						<td id="PR_TUE_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_TUE_${i}")></td>
-						<td id="PR_WEN_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_WEN_${i}")></td>
-						<td id="PR_THU_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_THU_${i}")></td>
-						<td id="PR_FRI_${i}" height="auto" style="word-break: break-all;"  onclick=getvalue("PR_FRI_${i}")></td>
+						<td id="PR_MON_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_MON_${i}")></td>
+						<td id="PR_TUE_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_TUE_${i}")></td>
+						<td id="PR_WEN_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_WEN_${i}")></td>
+						<td id="PR_THU_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_THU_${i}")></td>
+						<td id="PR_FRI_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${i}")></td>
 					</tr>
 				</c:forEach>
 			
@@ -126,11 +103,11 @@ table th, table td {
 				<input type="submit" id="submit" value="제출">
 			
 			</form>
-		</div>
+		</div>		
 	</div>
 
 
 	
-	<button id="back" class="btn btn-primary">돌아가기</button>
+	<!-- <button id="back" class="btn btn-primary">돌아가기</button> -->
 </body>
 </html>
