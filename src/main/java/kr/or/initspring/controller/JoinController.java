@@ -136,6 +136,7 @@ public class JoinController {
 
 		result = joinservice.joinCheck1(codemg);
 		result2 = joinservice.joinCheck2(codemg);
+		System.out.println(result+" / "+result2);
 		if (result == true && result2 == true) {
 			member.setCode(codemg.getCode());
 			member.setMember_name(codemg.getCode_name());

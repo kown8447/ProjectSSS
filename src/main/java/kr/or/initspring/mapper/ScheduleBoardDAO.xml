@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="insertScheduleBoard" > 
     insert into ACADEMIC_CALENDAR(calendar_Code,calendar_Title,calendar_Content,calendar_Start,calendar_End)
-      values(code.nextval, #{calendar_title},#{calendar_content},#{calendar_start},#{calendar_end} )
+      values(academicboard_idx.nextval, #{calendar_title},#{calendar_content},#{calendar_start},#{calendar_end} )
 </insert>
 
   <select id="getScheduleBoardList" resultType="kr.or.initspring.dto.commons.Academic_CalendarDTO">

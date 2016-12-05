@@ -5,27 +5,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="kr.or.initspring.dao.CodeMgDAO">
 	<insert id="insertCode">
-		insert into CODE_MG(code, code_type, code_name, code_birth) values(#{code}, #{code_type}, #{code_name}, #{code_birth})
+		insert into CODE_MG(code, code_type, code_name,
+		code_birth) values(#{code}, #{code_type}, #{code_name}, #{code_birth})
 	</insert>
 	<select id="codelist" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
 		select * from CODE_MG
 	</select>
 	<select id="codeDetail" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
-		select * from CODE_MG where code = #{code}
+		select * from CODE_MG where
+		code = #{code}
 	</select>
 	<update id="editCode">
-		update CODE_MG set code_type = ${param2}, code_name = #{param3}, code_birth = #{param4} where code = #{param1}
+		update CODE_MG set code_type = ${param2}, code_name =
+		#{param3}, code_birth = #{param4} where code = #{param1}
 	</update>
 	<insert id="insertExcel" parameterType="kr.or.initspring.dto.commons.CodeMgDTO">
-		insert into CODE_Mg(code_type, code, code_name, code_birth)
+		insert into
+		CODE_Mg(code_type, code, code_name, code_birth)
 		values
-		(${code_type}, #{code}, #{code_name}, #{code_birth})
+		(${code_type},
+		#{code}, #{code_name}, #{code_birth})
 	</insert>
 	<delete id="deleteCode">
 		DELETE from CODE_MG where CODE = #{param1}
 	</delete>
 	<insert id="insertBuilding">
-		insert into BUILDING(BUILDING_CODE, BUILDING_NAME, BUILDING_ADDR) VALUES(building_idx.nextval, #{building_name}, #{building_addr})
+		insert into BUILDING(BUILDING_CODE, BUILDING_NAME,
+		BUILDING_ADDR) VALUES(building_idx.nextval, #{building_name},
+		#{building_addr})
 	</insert>
 	<select id="buildingList" resultType="kr.or.initspring.dto.commons.BuildingDTO">
 		SELECT * FROM BUILDING
@@ -34,25 +41,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE BUILDING where BUILDING_CODE = #{param1}
 	</delete>
 	<select id="selectBuilding" resultType="kr.or.initspring.dto.commons.BuildingDTO">
-		SELECT * FROM BUILDING WHERE BUILDING_CODE = #{param1}
+		SELECT * FROM BUILDING
+		WHERE BUILDING_CODE = #{param1}
 	</select>
 	<update id="updateBuilding">
-		UPDATE BUILDING set BUILDING_NAME = #{param2}, BUILDING_ADDR = #{param3} where BUILDING_CODE = #{param1}
+		UPDATE BUILDING set BUILDING_NAME = #{param2},
+		BUILDING_ADDR = #{param3} where BUILDING_CODE = #{param1}
 	</update>
 	<select id="classlist" resultType="kr.or.initspring.dto.commons.ClassroomDTO">
 		SELECT * FROM CLASSROOM
 	</select>
-	<select id="selectClassroom" resultType="kr.or.initspring.dto.commons.ClassroomDTO"> 
+	<select id="selectClassroom" resultType="kr.or.initspring.dto.commons.ClassroomDTO">
 		SELECT * FROM CLASSROOM where CLASSROOM_CODE = #{param1}
 	</select>
 	<insert id="insertClassroom">
-		insert into CLASSROOM values(classroom_idx.nextval, #{building_code}, #{classroom_name}, ${seat}, ${classroom_type})
+		insert into CLASSROOM values(classroom_idx.nextval,
+		#{building_code}, #{classroom_name}, ${seat}, ${classroom_type})
 	</insert>
 	<update id="updateClassroom">
-		UPDATE CLASSROOM set BUILDING_CODE = #{building_code}, CLASSROOM_NAME = #{classroom_name}, SEAT = ${seat} ,CLASSROOM_TYPE = ${classroom_type} where CLASSROOM_CODE = #{classroom_code}
+		UPDATE CLASSROOM set BUILDING_CODE =
+		#{building_code}, CLASSROOM_NAME = #{classroom_name}, SEAT = ${seat}
+		,CLASSROOM_TYPE = ${classroom_type} where CLASSROOM_CODE =
+		#{classroom_code}
 	</update>
 	<insert id="insertOffice">
-		INSERT INTO OFFICE(OFFICE_CODE, BUILDING_CODE, office_Phone, office_Name) VALUES(office_idx.nextval, #{building_code}, #{office_phone}, #{office_name})
+		INSERT INTO OFFICE(OFFICE_CODE, BUILDING_CODE,
+		office_Phone, office_Name) VALUES(office_idx.nextval,
+		#{building_code}, #{office_phone}, #{office_name})
 	</insert>
 	<select id="officelist" resultType="kr.or.initspring.dto.commons.OfficeDTO">
 		SELECT * FROM OFFICE
@@ -60,152 +75,263 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="lablist" resultType="kr.or.initspring.dto.commons.LaboratoryDTO">
 		select * from LABORATORY
 	</select>
-	<insert id = "insertLab">
-		INSERT into LABORATORY(LAB_CODE, BUILDING_CODE, lab_name, lab_phone) VALUES (laboratory_idx.nextval, #{building_code}, #{lab_name}, #{lab_phone})
+	<insert id="insertLab">
+		INSERT into LABORATORY(LAB_CODE, BUILDING_CODE,
+		lab_name, lab_phone) VALUES (laboratory_idx.nextval, #{building_code},
+		#{lab_name}, #{lab_phone})
 	</insert>
 	<select id="labDetail" resultType="kr.or.initspring.dto.commons.LaboratoryDTO">
-		select * from LABORATORY where lab_code = #{param1}
+		select * from LABORATORY where
+		lab_code = #{param1}
 	</select>
 	<select id="scSystemList" resultType="kr.or.initspring.dto.commons.ScSystemDTO">
 		SELECT * FROM SC_SYSTEM
 	</select>
 	<select id="detailScSystem" resultType="kr.or.initspring.dto.commons.ScSystemDTO">
-		select * from SC_SYSTEM where sys_code = #{param1}
+		select * from SC_SYSTEM
+		where sys_code = #{param1}
 	</select>
 	<insert id="insertScSystem">
-		insert into SC_SYSTEM(sys_code, scholaship_Name, scholaship_Standard, scholaship_Member, scholaship_Amount, scholaship_Note) values
-		(scsystem_idx.nextval, #{scholaship_name}, #{scholaship_standard}, #{scholaship_member}, #{scholaship_amount}, #{scholaship_note} )
+		insert into SC_SYSTEM(sys_code, scholaship_Name,
+		scholaship_Standard, scholaship_Member, scholaship_Amount,
+		scholaship_Note) values
+		(scsystem_idx.nextval, #{scholaship_name},
+		#{scholaship_standard}, #{scholaship_member}, #{scholaship_amount},
+		#{scholaship_note} )
 	</insert>
 	<select id="scholarshipList" resultType="kr.or.initspring.dto.commons.ScholarshipDTO">
-		select * from SCHOLARSHIP
+		select * from
+		SCHOLARSHIP
 	</select>
 	<select id="detailScholarship" resultType="kr.or.initspring.dto.commons.ScholarshipDTO">
-		select * from scholarship where scholarship_code = #{param1}
+		select * from
+		scholarship where scholarship_code = #{param1}
 	</select>
 	<select id="semesterList" resultType="kr.or.initspring.dto.commons.SemesterDTO">
 		select * from semester
 	</select>
 	<select id="detailSemester" resultType="kr.or.initspring.dto.commons.SemesterDTO">
-		select * from semester where semester_code = #{param1}
+		select * from semester
+		where semester_code = #{param1}
 	</select>
 	<insert id="insertSemester">
-		insert into semester(semester_Code , semester_Name, semester_Start, semester_End) values(#{semester_code}, #{semester_name}, #{semester_start}, #{semester_end})
+		insert into semester(semester_Code , semester_Name,
+		semester_Start, semester_End) values(#{semester_code},
+		#{semester_name}, #{semester_start}, #{semester_end})
 	</insert>
 	<select id="">
-		select * from semester where semester_code = #{param1}
+		select * from semester where semester_code =
+		#{param1}
 	</select>
 	<select id="academicCalendarList" resultType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
-		SELECT * FROM ACADEMIC_CALENDAR
+		SELECT * FROM
+		ACADEMIC_CALENDAR
 	</select>
 	<insert id="insertAcademic">
-		insert into ACADEMIC_CALENDAR(calendar_Code, calendar_Title, calendar_Content, calendar_Start, calendar_End) values(#{calendar_code}, #{calendar_title}, #{calendar_content}, #{calendar_start}, #{calendar_end})
+		insert into ACADEMIC_CALENDAR(calendar_Code,
+		calendar_Title, calendar_Content, calendar_Start, calendar_End)
+		values(#{calendar_code}, #{calendar_title}, #{calendar_content},
+		#{calendar_start}, #{calendar_end})
 	</insert>
 	<select id="academicCalendarDetail" resultType="kr.or.initspring.dto.commons.Academic_CalendarDTO">
-		SELECT * FROM ACADEMIC_CALENDAR where CALENDAR_CODE = #{param}
+		SELECT * FROM
+		ACADEMIC_CALENDAR where CALENDAR_CODE = #{param}
 	</select>
 	<update id="updateOffice">
-		update OFFICE set BUILDING_CODE = #{building_code}, OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone} where OFFICE_CODE = #{office_code}
+		update OFFICE set BUILDING_CODE = #{building_code},
+		OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone} where
+		OFFICE_CODE = #{office_code}
 	</update>
 	<select id="selectOffice" resultType="kr.or.initspring.dto.commons.OfficeDTO">
-		SELECT * FROM OFFICE where OFFICE_CODE = #{param1}
+		SELECT * FROM OFFICE where
+		OFFICE_CODE = #{param1}
 	</select>
 	<update id="updateLab">
-		UPDATE LABORATORY set LAB_NAME = #{lab_name}, LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code} where LAB_CODE = #{lab_code}
+		UPDATE LABORATORY set LAB_NAME = #{lab_name},
+		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code} where
+		LAB_CODE = #{lab_code}
 	</update>
 	<update id="updateAcademic">
-		UPDATE ACADEMIC_CALENDAR set CALENDAR_TITLE = #{calendar_title}, CALENDAR_CONTENT = #{calendar_content},  CALENDAR_START = #{calendar_start} ,CALENDAR_END = #{calendar_end} where CALENDAR_CODE = #{calendar_code}
+		UPDATE ACADEMIC_CALENDAR set CALENDAR_TITLE =
+		#{calendar_title}, CALENDAR_CONTENT = #{calendar_content},
+		CALENDAR_START = #{calendar_start} ,CALENDAR_END = #{calendar_end}
+		where CALENDAR_CODE = #{calendar_code}
 	</update>
 	<update id="updateScSystemUpdate">
-		UPDATE SC_SYSTEM set SCHOLASHIP_NAME = #{scholaship_name}, SCHOLASHIP_MEMBER = #{scholaship_member}, SCHOLASHIP_STANDARD = #{scholaship_standard}, SCHOLASHIP_AMOUNT = #{scholaship_amount}, SCHOLASHIP_NOTE = #{scholaship_note} where SYS_CODE = #{sys_code}
+		UPDATE SC_SYSTEM set SCHOLASHIP_NAME =
+		#{scholaship_name}, SCHOLASHIP_MEMBER = #{scholaship_member},
+		SCHOLASHIP_STANDARD = #{scholaship_standard}, SCHOLASHIP_AMOUNT =
+		#{scholaship_amount}, SCHOLASHIP_NOTE = #{scholaship_note} where
+		SYS_CODE = #{sys_code}
 	</update>
 	<insert id="insertScholarship">
-		insert into scholarship(scholarship_code, student_code, sys_code, semester_code, scholarship_rcordavg, scholarship_payday) values(scholarship_idx.nextval, #{student_code}, #{sys_code}, #{semester_code}, ${scholarship_rcordavg}, #{scholarship_payday})
+		insert into scholarship(scholarship_code,
+		student_code, sys_code, semester_code, scholarship_rcordavg,
+		scholarship_payday) values(scholarship_idx.nextval, #{student_code},
+		#{sys_code}, #{semester_code}, ${scholarship_rcordavg},
+		#{scholarship_payday})
 	</insert>
 	<update id="updateScholarship">
-		UPDATE SCHOLARSHIP set STUDENT_CODE = #{student_code}, SEMESTER_CODE = #{semester_code}, SCHOLARSHIP_PAYDAY = #{scholarship_payday}, SCHOLARSHIP_RCORDAVG = ${scholarship_rcordavg}, SYS_CODE = #{sys_code} where SCHOLARSHIP_CODE = #{scholarship_code}
+		UPDATE SCHOLARSHIP set STUDENT_CODE =
+		#{student_code}, SEMESTER_CODE = #{semester_code}, SCHOLARSHIP_PAYDAY
+		= #{scholarship_payday}, SCHOLARSHIP_RCORDAVG =
+		${scholarship_rcordavg}, SYS_CODE = #{sys_code} where SCHOLARSHIP_CODE
+		= #{scholarship_code}
 	</update>
-	<update id = "updateSemester">
-		update SEMESTER set SEMESTER_NAME = #{semester_name}, SEMESTER_START = #{semester_start}, SEMESTER_END = #{semester_end} where SEMESTER_CODE = #{semester_code }
+	<update id="updateSemester">
+		update SEMESTER set SEMESTER_NAME = #{semester_name},
+		SEMESTER_START = #{semester_start}, SEMESTER_END = #{semester_end}
+		where SEMESTER_CODE = #{semester_code }
 	</update>
 	<select id="colleagelist" resultType="kr.or.initspring.dto.commons.CollegeDTO">
 		SELECT * FROM COLLEGE
 	</select>
 	<insert id="insertCollege">
-		insert into COLLEGE(COLLEGE_CODE, COLLEGE_NAME, professor_code, office_code, college_description) VALUES(college_idx.nextval, #{college_name}, #{professor_code}, #{office_code}, #{college_description})
+		insert into COLLEGE(COLLEGE_CODE, COLLEGE_NAME,
+		office_code, college_description) VALUES(college_idx.nextval,
+		#{college_name}, #{office_code}, #{college_description})
 	</insert>
 	<update id="updateCollege">
-		update COLLEGE set COLLEGE_NAME = #{college_name}, PROFESSOR_CODE = #{professor_code}, OFFICE_CODE = #{office_code}, COLLEGE_DESCRIPTION = #{college_description} where COLLEGE_CODE = #{college_code}
+		update COLLEGE set COLLEGE_NAME = #{college_name},
+		OFFICE_CODE = #{office_code}, COLLEGE_DESCRIPTION =
+		#{college_description} where COLLEGE_CODE = #{college_code}
 	</update>
 	<select id="selectCollege" resultType="kr.or.initspring.dto.commons.CollegeDTO">
-		select * from college where college_code = #{college_code}
+		select * from college
+		where college_code = #{college_code}
 	</select>
 	<select id="departmentList" resultType="kr.or.initspring.dto.commons.DepartmentDTO">
 		select * from department
 	</select>
 	<insert id="insertDepartment">
-		insert into department(department_code, college_code, professor_code, office_code, department_name, department_description, department_seat, graduation_credit, double_possible)
-		values(department_idx.nextval, #{college_code}, #{professor_code}, #{office_code}, #{department_name}, #{department_description}, ${department_seat}, ${graduation_credit}, ${double_possible})
+		insert into department(department_code, college_code,
+		office_code, department_name, department_description, department_seat,
+		graduation_credit, double_possible)
+		values(department_idx.nextval,
+		#{college_code}, #{office_code}, #{department_name},
+		#{department_description}, ${department_seat}, ${graduation_credit},
+		${double_possible})
 	</insert>
 	<select id="selectDepartment" resultType="kr.or.initspring.dto.commons.DepartmentDTO">
-		select * from department where department_code = #{param1}
+		select * from
+		department where department_code = #{param1}
 	</select>
 	<update id="updateDepartment">
-		UPDATE DEPARTMENT set COLLEGE_CODE = #{college_code}, PROFESSOR_CODE = #{professor_code}, office_Code = #{office_code}, department_Name = #{department_name}, department_Description = #{department_description}, department_Seat = ${department_seat}, graduation_Credit = ${graduation_credit}, double_Possible = ${double_possible}, department_Exist = ${department_exist} where DEPARTMENT_CODE = #{department_code}
+		UPDATE DEPARTMENT set COLLEGE_CODE = #{college_code},
+		office_Code = #{office_code}, department_Name = #{department_name},
+		department_Description = #{department_description}, department_Seat =
+		${department_seat}, graduation_Credit = ${graduation_credit},
+		double_Possible = ${double_possible}, department_Exist =
+		${department_exist} where DEPARTMENT_CODE = #{department_code}
 	</update>
 	<select id="mjRecordList" resultType="kr.or.initspring.dto.commons.MjRecordDTO">
 		SELECT * FROM MJ_RECORD
 	</select>
 	<insert id="insertMjRecord">
-		insert into MJ_RECORD(student_Code, department_Code, mj_Type) values(#{student_code}, #{department_code}, ${mj_type})
+		insert into MJ_RECORD(student_Code, department_Code,
+		mj_Type) values(#{student_code}, #{department_code}, ${mj_type})
 	</insert>
 	<select id="openedlist" resultType="kr.or.initspring.dto.commons.OpenedDTO">
 		select * from opened
 	</select>
 	<select id="openedInfolist" resultType="kr.or.initspring.dto.member.OpenedInfoDTO">
-		SELECT sj.SUBJECT_NAME, sm.SEMESTER_NAME, op.REGISTED_SEAT FROM OPENED op join SUBJECT sj on op.SUBJECT_CODE = sj.SUBJECT_CODE join SEMESTER sm on op.SEMESTER_CODE = sm.SEMESTER_CODE
+		SELECT sj.SUBJECT_NAME,
+		sm.SEMESTER_NAME, op.REGISTED_SEAT FROM OPENED op join SUBJECT sj on
+		op.SUBJECT_CODE = sj.SUBJECT_CODE join SEMESTER sm on op.SEMESTER_CODE
+		= sm.SEMESTER_CODE
 	</select>
 	<select id="registerlist" resultType="kr.or.initspring.dto.commons.RegisterDTO">
 		select * from REGISTER
 	</select>
 	<insert id="insertRegister">
-		insert into register(student_code, semester_code , register_type, tuition, register_state) values(register_idx.nextval, #{semester_code}, #{register_type}, #{tuition}, #{register_state})
+		insert into register(student_code, semester_code ,
+		register_type, tuition, register_state) values(#{student_code},
+		#{semester_code}, #{register_type}, #{tuition}, #{register_state})
 	</insert>
-	
-	
-	
+
+
+
 	<select id="getMaxBuildingCode" resultType="String">
-		SELECT nvl(max(building_code),'SJ_0') FROM building s ORDER BY s.building_CODE desc
+		SELECT
+		nvl(max(building_code),'SJ_0') FROM building s ORDER BY
+		s.building_CODE desc
 	</select>
 	<select id="getMaxClassroomCode" resultType="String">
-		SELECT nvl(max(classroom_code),'CL_0') FROM classroom c ORDER BY c.classroom_CODE desc
+		SELECT
+		nvl(max(classroom_code),'CL_0') FROM classroom c ORDER BY
+		c.classroom_CODE desc
 	</select>
 	<select id="getMaxOfficeCode" resultType="String">
-		SELECT nvl(max(office_code),'OF_0') FROM office o ORDER BY o.office_CODE desc
+		SELECT
+		nvl(max(office_code),'OF_0') FROM office o ORDER BY o.office_CODE desc
 	</select>
 	<select id="getMaxLaboratoryCode" resultType="String">
-		SELECT nvl(max(lab_code),'LB_0') FROM LABORATORY l ORDER BY l.lab_CODE desc
+		SELECT
+		nvl(max(lab_code),'LB_0') FROM LABORATORY l ORDER BY l.lab_CODE desc
 	</select>
 	<select id="getMaxScSystemCode" resultType="String">
-		SELECT nvl(max(sys_code),'SCS_0') FROM SC_SYSTEM sc ORDER BY sc.sys_CODE desc
+		SELECT
+		nvl(max(sys_code),'SCS_0') FROM SC_SYSTEM sc ORDER BY sc.sys_CODE desc
 	</select>
 	<select id="getMaxScholarshipCode" resultType="String">
-		SELECT nvl(max(scholarship_code),'SC_0') FROM scholarship sc ORDER BY sc.scholarship_code desc
+		SELECT
+		nvl(max(scholarship_code),'SC_0') FROM scholarship sc ORDER BY
+		sc.scholarship_code desc
 	</select>
 	<select id="getMaxCollegeCode" resultType="String">
-		SELECT nvl(max(college_code),'CLG_0') FROM college cl ORDER BY cl.college_code desc
+		SELECT
+		nvl(max(college_code),'CLG_0') FROM college cl ORDER BY
+		cl.college_code desc
 	</select>
 	<select id="getMaxCalendarCode" resultType="String">
-		SELECT nvl(max(calendar_code),'AC_0') FROM ACADEMIC_CALENDAR ac ORDER BY ac.calendar_code desc
+		SELECT
+		nvl(max(calendar_code),'AC_0') FROM ACADEMIC_CALENDAR ac ORDER BY
+		ac.calendar_code desc
 	</select>
 	<select id="getMaxDepartmentCode" resultType="String">
-		SELECT nvl(max(department_code),'DP_0') FROM DEPARTMENT dp ORDER BY dp.department_code desc
+		SELECT
+		nvl(max(department_code),'DP_0') FROM DEPARTMENT dp ORDER BY
+		dp.department_code desc
 	</select>
 	<select id="getMaxSemesterCode" resultType="String">
-		select max(semester_code) as semester_code from semester
+		select
+		max(semester_code) as semester_code from semester
 	</select>
-	
-	
-	
+	<insert id="insertmjrecord">
+		insert into MJ_RECORD(student_code, department_Code)
+		values(#{param1}, #{param2})
+	</insert>
+	<insert id="insertStudentCode">
+		insert into CODE_MG(code, code_type, code_name,
+		code_birth) values(#{code}, ${code_type}, #{code_name}, #{code_birth})
+	</insert>
+	<insert id="insertProfessorCode">
+		insert into CODE_MG(code, code_type, code_name,
+		code_birth) values(#{code}, ${code_type}, #{code_name}, #{code_birth})
+	</insert>
+	<insert id="insertstudentmj">
+		insert into MJ_RECORD(student_code, department_Code,
+		mj_Type) values(#{code}, #{department_code}, ${mj_type})
+	</insert>
+	<insert id="insertpfmajor">
+		insert into PF_MAJOR(PROFESSOR_CODE, DEPARTMENT_CODE)
+		VALUES(#{code}, #{department_code})
+	</insert>
+	<insert id="insertProfessorMajor">
+		insert into PF_MAJOR(professor_code, department_code)
+		VALUES(#{professor_code}, #{department_code})
+	</insert>
+	<insert id="insertAdmin">
+		insert into CODE_MG(CODE, CODE_NAME, code_Type,
+		code_Birth) VALUES(#{code}, #{code_name}, ${code_type}, #{code_birth})
+	</insert>
+	<select id="typeofcodelist" parameterType="Integer"
+		resultType="kr.or.initspring.dto.commons.CodeMgDTO">
+		SELECT * FROM CODE_MG where CODE_TYPE = #{param1}
+	</select>
+
+
+
 	<delete id="deleteTimetalbe">
 		delete from timetable
 	</delete>
@@ -230,52 +356,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteEnrollment">
 		delete from enrollment
 	</delete>
-	
-	
+
+
 	<select id="classbuilding" resultType="kr.or.initspring.dto.member.ClassBuildingDTO">
-		SELECT * FROM CLASSROOM cl join building bd on cl.building_code = bd.BUILDING_CODE
+		SELECT * FROM CLASSROOM cl
+		join building bd on cl.building_code = bd.BUILDING_CODE
 	</select>
 	<select id="labbuilding" resultType="kr.or.initspring.dto.member.LabBuildingDTO">
-		select * from laboratory lb join building bd on lb.building_code = bd.building_code
+		select * from laboratory lb
+		join building bd on lb.building_code = bd.building_code
 	</select>
 	<select id="officebuilding" resultType="kr.or.initspring.dto.member.OfiiceBuildingDTO">
-		SELECT * FROM OFFICE o join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+		SELECT * FROM OFFICE o
+		join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
 	</select>
-	
+
 	<select id="getRegister" resultType="kr.or.initspring.dto.commons.RegisterDTO">
-		select * from register where register_type=0 and semester_code = (select max(semester_code) from semester)
+		select * from register where
+		register_type=0 and semester_code = (select max(semester_code) from
+		semester)
 	</select>
-	
+
 	<select id="getStState" resultType="kr.or.initspring.dto.commons.StStateDTO">
-		select * from st_state where student_code = #{student_code}
+		select * from st_state where
+		student_code = #{student_code}
 	</select>
-	
+
 	<select id="getGetCreditBystudentCode" resultType="int">
-		select sum(s.subject_credit) as get_credit 
-		from timetable t join record r on t.subject_code = r.subject_code 
-		join subject s on r.subject_code=s.subject_code 
-		where t.student_code = #{student_code} and r.record_level != 'F' and r.semester_code = (select max(semester_code) from semester)
+		select
+		nvl(sum(s.subject_credit),0) as get_credit
+		from timetable t join record r on t.subject_code = r.subject_code
+		join subject s on r.subject_code=s.subject_code
+		where t.student_code = #{student_code} and r.record_level != 'F' and
+		r.semester_code = (select max(semester_code) from semester)
 	</select>
-	
+
 	<select id="getCurrentCreditByStudentCode" resultType="int">
-		select sum(s.subject_credit) as subject_credit 
-		from timetable t join subject s on t.subject_code = s.subject_code 
+		select
+		nvl(sum(s.subject_credit),0) as subject_credit
+		from timetable t join subject s on t.subject_code = s.subject_code
 		where t.student_code=#{student_code}
 	</select>
-	
+
 	<insert id="insertIntoSmstate" parameterType="kr.or.initspring.dto.commons.SmStateDTO">
-		insert into sm_state 
+		insert into
+		sm_state
 		values(#{student_code},#{semester_code},#{student_grade},#{student_semester},#{get_credit},#{request_credit})
 	</insert>
-	
+
 	<select id="getTotalCreditByStudentCode" resultType="int">
-		select sum(s.subject_credit) 
-		from record r join subject s on r.subject_code = s.subject_code 
-		where student_code=#{student_code} and record_level != 'F' and retake_check = 0
+		select
+		nvl(sum(s.subject_credit),0)
+		from record r join subject s on r.subject_code = s.subject_code
+		where student_code=#{student_code} and record_level != 'F' and retake_check
+		= 0
 	</select>
-	
+
 	<update id="updateStstate" parameterType="kr.or.initspring.dto.commons.StStateDTO">
-		update st_state set grade=#{grade}, personal_semester=#{personal_semester}, total_credit=#{total_credit}
+		update st_state set
+		grade=#{grade}, personal_semester=#{personal_semester},
+		total_credit=#{total_credit}
 		where student_code=#{student_code}
 	</update>
+
+	<insert id="insertIntoStState">
+		insert into ST_STATE VALUES(#{student_code},1,1,0)
+	</insert>
+
+	<select id="getProfessorListByDepartmentCode" resultType="kr.or.initspring.dto.member.ProfessorCodeRegDTO">
+		select
+		pf.professor_code as code, m.member_name as code_name from pf_major pf
+		join professor p on pf.PROFESSOR_CODE = p.PROFESSOR_CODE
+		join member m
+		on m.member_id = p.MEMBER_ID
+		where pf.DEPARTMENT_CODE =
+		#{department_code}
+	</select>
+
+	<update id="departmentLeaderReset">
+		UPDATE PF_MAJOR set professor_level =0 where DEPARTMENT_CODE =#{param1}
+	</update>
+	<update id="departmentLeaderSet">
+		UPDATE PF_MAJOR set professor_level=1 where DEPARTMENT_CODE
+		=#{department_code} and professor_code=#{professor_code}
+	</update>
+	<select id="getDepartmentLeaderList" resultType="kr.or.initspring.dto.member.DepartmentLeaderDTO">
+		SELECT
+		p.PROFESSOR_CODE,m.MEMBER_NAME,d.DEPARTMENT_CODE,d.DEPARTMENT_NAME,c.COLLEGE_NAME
+		FROM PF_MAJOR pm join PROFESSOR p on
+		pm.PROFESSOR_CODE=p.PROFESSOR_CODE join DEPARTMENT d on
+		pm.DEPARTMENT_CODE=d.DEPARTMENT_CODE join MEMBER m on
+		p.MEMBER_ID=m.MEMBER_ID join COLLEGE c on d.COLLEGE_CODE=
+		c.COLLEGE_CODE where pm.professor_level=1
+	</select>
+	
+	<delete id="deletePlan">
+		delete from plan
+	</delete>
 </mapper>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/requestCourse/viewOpLecture.js"></script>
-<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;개설강의</h4>
+<h4><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;개설강의</h4>
 <br><br>
 
 <div class="row" style="margin-left: 12%">

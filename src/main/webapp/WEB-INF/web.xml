@@ -59,5 +59,19 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- 에러 페이지 설정 -->
+	 <error-page>
+      <error-code>404</error-code>
+      <location>/Error404.htm</location>
+    </error-page>
+    <error-page>
+      <error-code>500</error-code>
+      <location>/Error500.htm</location>
+    </error-page>
+    <error-page>
+      <exception-type>java.lang.Throwable</exception-type>
+      <location>/ErrorEtc.htm</location>
+    </error-page>
 
 </web-app>

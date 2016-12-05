@@ -29,26 +29,15 @@ $(function(){
 				
 				$.each(data.lists, function(i, elt) {
 					correctGradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='correct_sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
+					
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
-							$('#'+obj.period_code+'_4').html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_4').html(text+hidden);
-							$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						if(elt.retake_check == 1){color="red";}
+						else{color="skyblue";}
+						$('#'+obj.period_code+'_4').html(text+hidden);
+						$('#'+obj.period_code+'_4').attr('style','background-color:'+color);
 					});
 				});
 			}
@@ -71,13 +60,13 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>검색 결과</td></tr><tr><th>과목코드</th><th>과목명</th><th>정원</th><th>학점</th><th>정보</th><th>등록</th></tr>"
+						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>검색 결과</td></tr><tr><th style='text-align:center'>과목코드</th><th style='text-align:center'>과목명</th><th style='text-align:center'>정원</th><th style='text-align:center'>학점</th><th style='text-align:center'>정보</th><th style='text-align:center'>등록</th></tr>"
 						$('#correct_result').empty();
 						$.each(data.lists, function(i, elt) {
 							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.registed_seat+"/"+elt.subject_seats+"</td>" +
-									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='correct_info' id='"+elt.subject_code+"'" +
+									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보'style='font-size:8pt;' class='correct_info btn btn-xs' id='"+elt.subject_code+"'" +
 											"data-target='#correct_layerpop' data-toggle='modal'/></td>" +
-									"<td><input type='button' value='강의 신청' class='correct_request' id='"+elt.subject_code+"'/></td></tr>";
+									"<td><input type='button' value='강의 신청' style='background-color:#FDCECE;font-size:8pt;' class='correct_request btn btn-xs' id='"+elt.subject_code+"'/></td></tr>";
 						});
 						$('#correct_result').append(text);
 					}
@@ -105,7 +94,7 @@ $(document).on("click",".correct_info",function(e){
 					var classroom="";
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
-						classroom+="<i>"+elt.classroom_name+"</i><br>";
+						classroom+=elt.classroom_name+"<br>";
 						/*$.each(elt.periodlist, function(i, p) {
 							period += p.period_day + " : " + p.period_start + " ~ " + p.period_end + "<br>";
 						})*/

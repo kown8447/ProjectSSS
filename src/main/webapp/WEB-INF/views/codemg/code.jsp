@@ -1,455 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"/>
+<script src="${pageContext.request.contextPath}/js/admin/codemg.js"/>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript">
-	$(function() {
-		$('#codeRegisterTabs').tabs();
-		
-		//빌딩
-		$('#bdexcelUp').click(function() {
-			var file = $("#bdexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
 
-						if (data.result) {
-							console.log("성공");
-							alert("등록에 성공 하였습니다.");
-							location.href = "buildingList.htm";
-						} else {
-							console.log("실패");
-							alert("등록에 실패 하였습니다.");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "buildingList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#bdexcelForm').ajaxSubmit(options);
-			}
-
-		});
-		
-		//강의실
-		$('#clexcelUp').click(function() {
-			var file = $("#clexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "classroomList.htm";
-						}else if(data.result==false){
-							console.log("실패");
-							alert("실패");
-						}else{
-							alert("error");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "classroomList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#clexcelForm').ajaxSubmit(options);
-			}
-
-		});
-		
-		//사무실
-		$('#ofexcelUp').click(function() {
-			var file = $("#ofexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "officeList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "officeList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#ofexcelForm').ajaxSubmit(options);
-			}
-
-		});
-		//연구실
-		$('#lbexcelUp').click(function() {
-			var file = $("#lbexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "labList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "labList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#lbexcelForm').ajaxSubmit(options);
-			}
-
-		});
-		//장학제도
-		$('#scsexcelUp').click(function() {
-			var file = $("#scsexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "scSystemList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "scSystemList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#scsexcelForm').ajaxSubmit(options);
-			}
-
-		});		
-		
-		//장학금
-		$('#sclexcelUp').click(function() {
-			var file = $("#sclexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "scholarshipList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "scholarshipList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#sclexcelForm').ajaxSubmit(options);
-			}
-
-		});		
-		
-		//단과대학
-		$('#colexcelUp').click(function() {
-			var file = $("#colexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "collegeList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "collegeList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#colexcelForm').ajaxSubmit(options);
-			}
-
-		});	
-		
-		//학부
-		$('#depexcelUp').click(function() {
-			var file = $("#depexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "departmentlist.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "departmentlist.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#depexcelForm').ajaxSubmit(options);
-			}
-
-		});	
-		
-		//전공
-		$('#mjexcelUp').click(function() {
-			var file = $("#mjexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "mjRecordList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "mjRecordList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#mjexcelForm').ajaxSubmit(options);
-			}
-
-		});
-
-		//등록
-		$('#regexcelUp').click(function() {
-			var file = $("#regexcel").val();
-			if (file == "" || file == null) {
-				alert("파일을 선택해 주세요");
-				return false;
-			} else if (!checkFileType(file)) {
-				alert("엑셀 파일만 업로드 해주세요");
-				return false
-			}
-			if (confirm("업로드 하시겠습니까?")) {
-				var options = {
-					success : function(data) {
-
-						if (data.result) {
-							console.log("성공");
-							alert("성공");
-							location.href = "mjRecordList.htm";
-						} else {
-							console.log("실패");
-							alert("실패");
-						}
-					},
-					statusCode : {
-						404 : function() {
-							alert("파일 내용이 잘못되었습니다.");
-							location.href = "mjRecordList.htm";
-						}
-					},
-
-					type : "POST"
-				};
-				$('#regexcelForm').ajaxSubmit(options);
-			}
-
-		});		
-		
-		$('#initBtn').click(function(){
-			
-			var r = confirm('학기를 초기화 하시겠습니까? 초기화 하게 되면 해당 학기 관련 수업/시간표 정보가 삭제 됩니다.')
-			
-			if(r==true){
-				$.ajax(
-						{
-							url:"initSemester.htm",
-							dataType:"json",
-							success:function(data){
-								if(data.result=='success'){
-									alert('학기 초기화 성공!');
-								}else{
-									alert('학기 초기화 실패..');
-								}
-							}
-						}		
-					);
-			}
-		});
-		
-		
-	});
-	function checkFileType(filepath) {
-		var fileForamt = filepath.split(".");
-		if (fileForamt.indexOf("xlsx") > -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	function check() {
-		var file = $("#excel").val();
-		if (file == "" || file == null) {
-			alert("파일을 선택해 주세요");
-			return false;
-		} else if (!checkFileType(file)) {
-			alert("엑셀 파일만 업로드 해주세요");
-			return false
-		}
-		if (confirm("업로드 하시겠습니까?")) {
-			var options = {
-				success : function(data) {
-
-					if (data.result) {
-						console.log("성공");
-						alert("성공");
-						location.href = "codelist.htm";
-					} else {
-						console.log("실패");
-						alert("실패");
-					}
-				},
-				statusCode : {
-					404 : function() {
-						alert("파일 내용이 잘못되었습니다.");
-						location.href = "codelist.htm";
-					}
-				},
-
-				type : "POST"
-			};
-			$('#excelForm').ajaxSubmit(options);
-		}
-
-		
-	}
 </script>
 <div id="codeRegisterTabs">
 	<ul>
-		<li><a href="#codeMgRegister">코드</a></li>
+		<li><a href="#studentRegister">학생등록</a></li>
+		<li><a href="#professorRegister">교수등록</a></li>
+		<li><a href="#adminRegister">관리자 등록</a></li>
 		<li><a href="#buildingRegister">건물</a></li>
 		<li><a href="#classroomRegister">강의실</a></li>
 		<li><a href="#officeRegister">사무실</a></li>
@@ -457,18 +21,118 @@
 		<li><a href="#scSystemRegister">장학제도</a></li>	
 		<li><a href="#scholarshipRegister">장학</a></li>
 		<li><a href="#semesterRegister">학기</a></li>
-		<li><a href="#academicCalendarRegister">학사일정</a></li>
 		<li><a href="#colleageRegister">단과대학</a></li>
 		<li><a href="#departmentRegister">학부</a></li>
-		<li><a href="#mjRecordRegister">학생전공</a></li>
+		<li><a href="#mjRecordRegister">복수전공</a></li>
 		<li><a href="#opened">개설강의현황</a></li>
 		<li><a href="#register">등록</a></li>
 		<li><a href="#initSemester">학기 초기화</a></li>
+		<li><a href="#changeProfessorLevel">학부장 등록</a></li>
 	</ul>
-	<div id="codeMgRegister">
+	<div id="studentRegister">
 		<hr>
-		CODE_MG
-		<form action="codeRegister.htm" method="post">
+		CODE_MG(STUDENT)
+		<form action="studentRegister.htm" method="post">
+			<table>
+				<tr>
+					<td>코드</td>
+					<td><input type="text" name="code" id="code"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="code_name" id="code_name">
+					</td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="text" name="code_birth" id="code_birth">
+					</td>
+				</tr>
+				<tr>
+					<td>학과코드</td>
+					<td>
+						
+						<select id="department_code" name="department_code">
+							<c:forEach items="${department }" var="dp">
+								<option value="${dp.department_code}">${dp.department_name}</option>
+							</c:forEach>
+						</select>
+						
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="등록">
+		</form>
+		
+		<a href="typeofcodelist.htm?code_type=0">리스트</a>
+		<hr>
+		<form id="excelForm" action="compExcelUpload.htm", method="post">
+			파일 일괄등록: <input id="excel" name="excel" type="file"
+				placeholder="Text input">
+			<button type="button" id="excelUp" onclick="check()">등록하기</button>
+		</form>
+
+		<table>
+			<tr>
+				<td><a href="excel.htm"> 양식다운로드 </a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="professorRegister">
+		<hr>
+		CODE_MG(PROFESSOR)
+		<form action="professorCodeRegister.htm" method="post">
+			<table>
+				<tr>
+					<td>코드</td>
+					<td><input type="text" name="code" id="code"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="code_name" id="code_name">
+					</td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="text" name="code_birth" id="code_birth">
+					</td>
+				</tr>
+				<tr>
+					<td>학과코드</td>
+					<td>
+						
+						<select id="department_code" name="department_code">
+							<c:forEach items="${department }" var="dp">
+								<option value="${dp.department_code}">${dp.department_name}</option>
+							</c:forEach>
+						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="등록"></td>
+				</tr>
+			</table>
+		</form>
+		<a href="typeofcodelist.htm?code_type=1">리스트</a>
+		<hr>
+		<form id="professorexcelForm" action="professorExcelUpload.htm", method="post">
+			파일 일괄등록: <input id="professorexcel" name="professorexcel" type="file"
+				placeholder="Text input">
+			<button type="button" id="professorexcelUp">등록하기</button>
+		</form>
+
+		<table>
+			<tr>
+				<td><a href="professorexcel.htm"> 양식다운로드 </a></td>
+			</tr>
+		</table>
+	</div>
+	
+<div id="adminRegister">
+		<hr>
+		CODE_MG(ADMIN)
+		<form action="adminCodeRegister.htm" method="post">
 			<table>
 				<tr>
 					<td>코드</td>
@@ -477,9 +141,9 @@
 				<tr>
 					<td>구분</td>
 					<td>
-						<input type="radio" value="0" name="code_type" id="code_type">학생 
-						<input type="radio" value="1" name="code_type" id="code_type">교수 
-						<input type="radio" value="2" name="code_type" id="code_type">관리자
+						<!-- <input type="radio" value="0" name="code_type" id="code_type">학생  -->
+						<input type="radio" value="2" name="code_type" id="code_type">관리자 
+						<!-- <input type="radio" value="2" name="code_type" id="code_type">관리자 -->
 					</td>
 				</tr>
 				<tr>
@@ -497,20 +161,9 @@
 				</tr>
 			</table>
 		</form>
-		<a href="codelist.htm">리스트</a>
+		<a href="typeofcodelist.htm?code_type=2">리스트</a>
 		<hr>
-		<form id="excelForm" action="compExcelUpload.htm">
-			파일 일괄등록: <input id="excel" name="excel" type="file"
-				placeholder="Text input">
-			<button type="button" id="excelUp" onclick="check()">등록하기</button>
-		</form>
-
-		<table>
-			<tr>
-				<td><a href="excel.htm"> 양식다운로드 </a></td>
-			</tr>
-		</table>
-	</div>
+	</div>	
 	<div id="buildingRegister">
 		<hr>
 		BUILDING
@@ -829,77 +482,12 @@
 		</form>
 		<a href="semesterList.htm">리스트</a>
 		<hr>
-		<form id="excelForm" action="compExcelUpload.htm">
-			파일 일괄등록: <input id="excel" name="excel" type="file"
-				placeholder="Text input">
-			<button type="button" id="excelUp">등록하기</button>
-		</form>
-
-		<table>
-			<tr>
-				<td><a href="excel.htm"> 양식다운로드 </a></td>
-			</tr>
-		</table>
-	</div>
-	<div id="academicCalendarRegister">
-		<hr>
-		ACADEMIC_CALENDAR
-		<form action="insertAcademicCalendar.htm" method="post">
-			<table>
-				<tr>
-					<td>제목</td>
-					<td>	
-						<input type="text" name="calendar_title" id="calendar_title">
-					</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>
-					<textarea id="calendar_content" name="calendar_content"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>시작일</td>
-					<td>
-					<input type="text" name="calendar_start" id="calendar_start">
-					</td>
-				</tr>
-				<tr>
-					<td>종료일</td>
-					<td>
-					<input type="text" name="calendar_end" id="calendar_end">
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="등록"></td>
-				</tr>
-			</table>
-		</form>
-		<a href="academicCalendarList.htm">리스트</a>
-		<hr>
-		<form id="excelForm" action="compExcelUpload.htm">
-			파일 일괄등록: <input id="excel" name="excel" type="file"
-				placeholder="Text input">
-			<button type="button" id="excelUp">등록하기</button>
-		</form>
-
-		<table>
-			<tr>
-				<td><a href="excel.htm"> 양식다운로드 </a></td>
-			</tr>
-		</table>
 	</div>
 	<div id="colleageRegister">
 		<hr>
 		COLLEGE
 		<form action="insertCollege.htm" method="post">
 			<table>
-				<tr>
-					<td>교수코드</td>
-					<td>	
-						<input type="text" name="professor_code" id="professor_code">
-					</td>
-				</tr>
 				<tr>
 					<td>사무실코드</td>
 					<td>
@@ -950,12 +538,6 @@
 							<option value="${cl.college_code}">${cl.college_name}</option>
 							</c:forEach>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>교수코드</td>
-					<td>	
-						<input type="text" name="professor_code" id="professor_code">
 					</td>
 				</tr>
 				<tr>
@@ -1035,9 +617,8 @@
 				</tr>
 				<tr>
 					<td>전공구분</td>
-					<td>	
-						<input type="radio" name="mj_type" id="mj_type" value="0">전공
-						<input type="radio" name="mj_type" id="mj_type" value="1">부전공
+					<td>
+						<input type="radio" name="mj_type" id="mj_type" value="1">복수전공
 					</td>
 				</tr>
 			</table>
@@ -1082,8 +663,8 @@
 	<div id="register">
 		<hr>
 		REGISTER
-		<table>
-			<form action="regExcelUpload.htm" , method="post">
+		<form action="insertRegister.htm" method="post">
+			<table>
 				<tr>
 					<td>학번</td>
 					<td>
@@ -1103,8 +684,8 @@
 				<tr>
 					<td>등록구분</td>
 					<td>
-					<input type="radio" value="0" id="register_type" name="register_type">등록안함
-					<input type="radio" value="1" id="register_type" name="register_type">등록
+					<input type="radio" value="0" id="register_state" name="register_state">등록안함
+					<input type="radio" value="1" id="register_state" name="register_state">등록
 					</td>
 				</tr>
 				<tr>
@@ -1114,9 +695,9 @@
 				<tr>
 					<td>등록여부</td>
 					<td>
-					<input type="radio" value="0" id="register_state" name="register_state">일반학기
-					<input type="radio" value="1" id="register_state" name="register_state">계절학기 
-					<input type="radio" value="2" id="register_state" name="register_state">졸업연기
+					<input type="radio" value="0" id="register_type" name="register_type">일반학기
+					<input type="radio" value="1" id="register_type" name="register_type">계절학기 
+					<input type="radio" value="2" id="register_type" name="register_type">졸업연기
 					</td>
 				</tr>
 			</table>
@@ -1139,5 +720,34 @@
 	
 	<div id="initSemester">
 		<input type="button" id="initBtn" value="학기 초기화" />
+	</div>
+	
+	<div id="changeProfessorLevel">
+		<hr>
+		학과장 등록
+		<form id="departmentLeaderRegist" action="departmentLeaderRegist.htm" method="post">
+			<table>
+				<tr>
+					<td>학과</td>
+					<td>
+						<select name="department_code" id="levelChangeTargetDepartment">
+							<c:forEach items="${department}" var="dp">
+								<option value="${dp.department_code}">${dp.department_name}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>교수</td>
+					<td>
+						<select name="professor_code" id="levelChangeTargetProfessor">
+							
+						</select>
+					</td>
+				</tr>
+			</table>
+			<input type="button" id="departmentLeaderButton" value="등록하기">
+		</form>
+		<a href="departmentLeaderList.htm">리스트</a>
 	</div>
 </div>

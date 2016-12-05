@@ -34,26 +34,14 @@ $(function(){
 				
 				$.each(data.lists, function(i, elt) {
 					preGradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code).attr('style','background-color:'+color);
-							$('#'+obj.period_code).html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code).html(text+hidden);
-							$('#'+obj.period_code).attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						if(elt.retake_check == 1){color="red";}
+						else{color="skyblue";}
+						$('#'+obj.period_code).html(text+hidden);
+						$('#'+obj.period_code).attr('style','background-color:'+color);
 					});
 				});
 			}
@@ -77,13 +65,13 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='margin-top:20px'><tr style='font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'><th>과목코드</th><th>과목명</th><th>신청/정원</th><th>학점</th><th>정보</th><th>등록</th><tr>"
+						var text="<table class='table table-hover' style='margin-top:40px'><tr><td colspan='6' style='color:blue; font-size:x-small; text-align: center; position:relative;top:expression(this.offsetParent.scrollTop);'>검색 결과</td></tr><tr><th style='text-align:center'>과목코드</th><th style='text-align:center'>과목명</th><th style='text-align:center'>정원</th><th style='text-align:center'>학점</th><th style='text-align:center'>학년</th><th style='text-align:center'>정보</th><th style='text-align:center'>등록</th></tr>"
 						$('#result').empty();
 						$.each(data.lists, function(i, elt) {
 							text+="<tr style='font-size:x-small; text-align: center;'><td>"+elt.subject_code+"</td><td>"+elt.subject_name+"</td><td>"+elt.reserve_seats+"/"+elt.subject_seats+"</td>" +
-									"<td>"+elt.subject_credit+"</td><td><input type='button' value='강의 정보' class='info' id='"+elt.subject_code+"'" +
+									"<td>"+elt.subject_credit+"</td><td>"+elt.grade_limit+"</td><td><input type='button' value='강의 정보' style='font-size:8pt;' class='info btn btn-xs' id='"+elt.subject_code+"'" +
 											"data-target='#layerpop' data-toggle='modal'/></td>" +
-									"<td><input type='button' value='강의 신청' class='request' id='"+elt.subject_code+"'/></td></tr>";
+									"<td><input type='button' value='강의 신청' style='background-color:#FDCECE;font-size:8pt;' class='request btn btn-xs' id='"+elt.subject_code+"'/></td></tr>";
 						});
 						$('#result').append(text);
 					}
@@ -111,7 +99,7 @@ $(document).on("click",".info",function(e){
 					var classroom="";
 					var period="";
 					$.each(data.subject_info.customClassroomDTO, function(i, elt) {
-						classroom+="<i>"+elt.classroom_name+"</i><br>";
+						classroom+=elt.classroom_name+"<br>";
 					});
 					$.each(data.subject_info.period, function(i, elt) {
 						period += elt.period_day + " : " + elt.period_start + " ~ " + elt.period_end + "<br>";
@@ -180,8 +168,6 @@ function insertTimeTable(e){
 				dataType:"json",
 				success:function(data){
 					console.log(data);
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=data.subject_info.subject_code+"<br>"+data.subject_info.subject_name+"<br>"+data.subject_info.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+data.subject_info.subject_code+"'/>";
@@ -198,20 +184,10 @@ function insertTimeTable(e){
 								preGradeSum-=data.subject_info.subject_credit;
 								return false;
 							}else{
-								var str = elt.period_code.split("_");
-								if(str[1] == prevDay && str[2] - prev == 1 && elt.period_code.substr(7,1) != 1){
-									if(data.subject_info.retake_check==1){color="red";}
-									else{color="skyblue";}
-									$('#'+elt.period_code).attr('style','background-color:'+color);
-									$('#'+elt.period_code).html(hidden);
-								}else{
-									if(data.subject_info.retake_check==1){color="red";}
-									else{color="skyblue";}
-									$('#'+elt.period_code).html(text+hidden);
-									$('#'+elt.period_code).attr('style','background-color:'+color);
-								}
-								prev = str[2];
-								prevDay = str[1];
+								if(data.subject_info.retake_check==1){color="red";}
+								else{color="skyblue";}
+								$('#'+elt.period_code).html(text+hidden);
+								$('#'+elt.period_code).attr('style','background-color:'+color);
 							}
 						})
 					}

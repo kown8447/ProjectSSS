@@ -8,27 +8,30 @@
 
 
 $(function(){
-      var count = 0;
-      var credit = $("#credit").val();
-      
-      $.ajax(
-            {
-               url : "lecturePeriod.htm",
-               dataType : "json",
-               success : function(data){
-               
-                  $.each(data.buildinglist,function(index,value){
-                     console.log(value.building_name);
-                     $("#building").append("<option value='B_00"+index+"'>"+value+"</option>");
-                  })
-                  $.each(data.periodlist,function(index,value){
-                     $('#PERIOD_START_'+index).html(value.period_start);
-                  })
-                  
-                  
-               }
-            }
-            )
+
+		var count = 0;
+		var credit = $("#credit").val();
+		
+		$.ajax(
+				{
+					url : "lecturePeriod.htm",
+					dataType : "json",
+					success : function(data){
+					
+						$.each(data.buildinglist,function(index,value){
+							
+							console.log(value.building_name);
+							$("#building").append("<option value='"+index+"'>"+value+"</option>");
+						})
+						$.each(data.periodlist,function(index,value){
+							$('#PERIOD_START_'+index).html(value.period_start);
+						})
+						
+						
+					}
+				}
+				)
+
 
       $("#building").change(function(){
 

@@ -93,4 +93,34 @@ public class IndexController {
 		model.addAttribute("periodList", periodList);
 		return jsonview;
 	}
+
+	/*
+	 * @method Name : Error404
+	 * @Author : 권기엽
+	 * @description 404page 링크
+	 */
+	@RequestMapping("/Error404.htm")
+	public String Error404(){
+		return "error/404Error";
+	}
+	
+	/*
+	 * @method Name : Error500
+	 * @Author : 권기엽
+	 * @description 500page 링크
+	 */
+	@RequestMapping("/Error500.htm")
+	public String Error500(){
+		return "error/500Error";
+	}
+	
+	/*
+	 * @method Name : ErrorEtc
+	 * @Author : 권기엽
+	 * @description 기타 에러 페이지 링크
+	 */
+	@RequestMapping("/ErrorEtc.htm")
+	public String ErrorEtc(){
+		return "error/Error";
+	}
 }

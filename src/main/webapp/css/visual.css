@@ -5,7 +5,7 @@
   font-weight:bold;
   font-weight: 200;
   height: 500px;
-  width:150px;
+  width:170px;
 }
 .nav-side-menu .brand {
   line-height: 50px;
@@ -87,7 +87,6 @@
     top: 10px;
     z-index: 10 !important;
     padding: 3px;
-    background-color: #ffffff;
     width: 40px;
     text-align: center;
   }

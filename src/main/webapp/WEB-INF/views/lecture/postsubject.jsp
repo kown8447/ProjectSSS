@@ -70,10 +70,10 @@
 		<div class="col-sm-3">
 		<select class="form-control" id="classroom" name="classroom_code">없음
 		<option value="0">없음</option>
-		</select>
-		</div>  
 
-	
+		</select>  
+	</div>
+
 	
 
 	 <div class="col-sm-6">

@@ -5,6 +5,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/excel.js"></script>  
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>  
+<script src="${pageContext.request.contextPath}/js/admin/codemg.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

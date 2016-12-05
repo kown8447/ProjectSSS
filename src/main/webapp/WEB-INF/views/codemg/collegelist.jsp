@@ -29,6 +29,5 @@
 			</tbody>
 		</c:forEach>
 	</table>
-		<input type="submit" value="수정하기">
 	</form>
 	<a href="code.htm">되돌아가기</a>
