@@ -173,8 +173,8 @@ public class QnaService {
 	 * @Author : 우명제 
 	 * @description : 글 수정페이지 service
 	 */
-	public CustomerQnaDTO qnaEdit(int qna_index) throws ClassNotFoundException, SQLException {
-
+	public CustomerQnaDTO qnaEdit(int qna_index, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+		
 		QnaDAO qnaDao = sqlsession.getMapper(QnaDAO.class);
 		CustomerQnaDTO qna = qnaDao.qnaDetail(qna_index);
 
@@ -188,28 +188,29 @@ public class QnaService {
 	 */
 	public String qnaEdit(CustomerQnaDTO qna, HttpServletRequest request)
 			throws IOException, ClassNotFoundException, SQLException {
+		
+		QnaDAO qnaDao = sqlsession.getMapper(QnaDAO.class);
 
-		CommonsMultipartFile file = qna.getFile();
-		String filenames = null;
+		if(qna.getFile() != null){
+			CommonsMultipartFile file = qna.getFile();
+			String filenames = null;
 
-		if (file != null && file.getSize() > 0) {
+			if (file != null && file.getSize() > 0) {
+				String fname = file.getOriginalFilename();
+				String path = request.getServletContext().getRealPath("/files/qnanotice");
+				String fullpath = path + "\\" + fname;
 
-			String fname = file.getOriginalFilename();
-			String path = request.getServletContext().getRealPath("/files/qnanotice");
-			String fullpath = path + "\\" + fname;
-
-			if (!fname.equals("")) {
 				FileOutputStream fs = new FileOutputStream(fullpath);
 				fs.write(file.getBytes());
 				fs.close();
+
+				filenames = fname;				
+				qna.setQna_file(filenames);		
+				qnaDao.qnaUpdate(qna);
+				}else{
+					qnaDao.qnaNotFileUpdate(qna);	
+				}
 			}
-			filenames = fname;
-
-		}
-		qna.setQna_file(filenames);
-
-		QnaDAO qnaDao = sqlsession.getMapper(QnaDAO.class);
-		qnaDao.qnaUpdate(qna);
 
 		return "redirect:qnaDetail.htm?qna_index=" + qna.getQna_index();
 	}

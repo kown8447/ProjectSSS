@@ -9,10 +9,10 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <h4>▶&nbsp;Q&A 수정</h4> <br><br>
-	
+<%-- 		<input type="hidden" value="${qna.file}"> --%>
 	<form action="" method="post" enctype="multipart/form-data">
-		
 		<table class="table table-bordered" style="width:70%; margin: auto;">
+		
 			<tr style="width:20%">
 				<th style="text-align: center; background-color: #F8F4EC;" >글번호</th>
 				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
@@ -40,10 +40,10 @@
 				<td colspan="3">
 					<div class="form-group">	
                			<span class="filetype"> 
-               				<input type="text" class="file-text" />
+               				<input type="text" class="file-text" value="${qna.qna_file}"/>
                   			<span class="file-btn">찾아보기</span> 
                   			<span class="file-select">
-                    			<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+                    			<input type="file" class="input-file" name="file" id="file">
                				</span>
                			</span>
             		</div>					

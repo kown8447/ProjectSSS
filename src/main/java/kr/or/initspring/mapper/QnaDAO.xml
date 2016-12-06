@@ -66,6 +66,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE qna_Index=#{qna_index}
 	</update>	
 	
+	<update id="qnaNotFileUpdate">
+		UPDATE QNA 
+			SET qna_Title=#{qna_title},
+	    		qna_Content=#{qna_content} 	    		
+			WHERE qna_Index=#{qna_index}
+	</update>
+	
     <update id="qnaCount">
   		UPDATE QNA
   			SET qna_Count = qna_Count +1

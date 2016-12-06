@@ -149,11 +149,12 @@ public class QnaController {
 	 * @description : QnA게시판 글 수정(두가지 처리 : 화면(select) , 처리(update))
 	 */
 	@RequestMapping(value = "/qnaEdit.htm", method = RequestMethod.GET)
-	public String qnaEdit(int qna_index, Model model) throws ClassNotFoundException, SQLException {
-
-		CustomerQnaDTO qna = qnaservice.qnaEdit(qna_index);
+	public String qnaEdit(int qna_index, Model model, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+		
+		CustomerQnaDTO qna = qnaservice.qnaEdit(qna_index, request);
+		System.out.println("파일이름:" + qna.getQna_file() + "/" + "파일 : " + qna.getFile());
 		model.addAttribute("qna", qna);
-
+		
 		return "qnanotice.qnaEdit";
 	}
 
