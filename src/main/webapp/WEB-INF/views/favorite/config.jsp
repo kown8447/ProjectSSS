@@ -12,80 +12,73 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4 style="margin-left: 10%">
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;즐겨찾기 메뉴 설정</h4>
-	<br><br>
+<h4>▶&nbsp;즐겨찾기 메뉴 설정</h4> <br><br>
 
 	<div class="ui-widget ui-helper-clearfix">
 		<div id="gallery">
-			<ul>
-				<c:if test="${fn:length(allUserLinks)>0}">
-					<li><a href="#allUserList">공통기능</a></li>
-				</c:if>
-				<c:if test="${fn:length(studentInfoLinks)>0}">
-					<li><a href="#studentInfoList">학생정보</a></li>
-				</c:if>
-				<c:if test="${fn:length(enrollLinks)>0}">
-					<li><a href="#enrollList">수강신청</a></li>
-				</c:if>
-				<c:if test="${fn:length(subjectLinks)>0}">
-					<li><a href="#profSubjectList">과목관리</a></li>
-				</c:if>
-				<c:if test="${fn:length(adminLinks)>0}">
-					<li><a href="#adminList">사이트관리</a></li>
-				</c:if>
-			</ul>
+			<table border="1px">
 			<c:if test="${fn:length(allUserLinks)>0}">
-				<ul id="allUserList">
+			<tr>
+				<td>공통기능</td>
+				<td id="allUserList">
 					<c:forEach items="${allUserLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="all_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="all_${link.link_code}" style="display: none;">
+									<button class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
+								
 							</c:when>
 							<c:otherwise>
-								<li id="all_${link.link_code}"><button
-										class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="all_${link.link_code}">
+								<button class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+				</td>
+			</tr>
 			</c:if>
 			<c:if test="${fn:length(studentInfoLinks)>0}">
-				<ul id="studentInfoList">
+			<tr>
+				<td>학적조회</td>
+				<td id="studentInfoList">
 					<c:forEach items="${studentInfoLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="stu_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="stu_${link.link_code}" style="display: none;">
+								<button class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="stu_${link.link_code}"><button
-										class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="stu_${link.link_code}">
+								<button class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
-
 					</c:forEach>
-				</ul>
+				</td>
+				</tr>
 			</c:if>
 			<c:if test="${fn:length(enrollLinks)>0}">
-				<ul id="enrollList">
+			<tr>
+				<td>수강신청</td>
+				<td id="enrollList">
 					<c:forEach items="${enrollLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="enr_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="enr_${link.link_code}" style="display: none;">
+									<button class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="enr_${link.link_code}"><button
-										class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="enr_${link.link_code}">
+									<button class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+					</td>
+				</tr>
 			</c:if>
 			<c:if test="${fn:length(subjectLinks)>0}">
-				<ul id="profSubjectList">
+			<tr>
+				<td>과목관리</td>
+				<td id="profSubjectList">
 					<c:forEach items="${subjectLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
@@ -93,29 +86,34 @@
 										class="btn btn-success" id="pro_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="pro_${link.link_code}"><button
-										class="btn btn-success" id="pro_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="pro_${link.link_code}">
+								<button class="btn btn-success" id="pro_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+					</td>
+				</tr>
 			</c:if>
 			<c:if test="${fn:length(adminLinks)>0}">
-				<ul id="adminList">
+			<tr>
+				<td>관리자메뉴</td>
+				<td id="adminList">
 					<c:forEach items="${adminLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="adm_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="adm_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="adm_${link.link_code}" style="display: none;">
+								<button class="btn btn-success" id="adm_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="adm_${link.link_code}"><button
-										class="btn btn-success" id="adm_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="adm_${link.link_code}">
+								<button class="btn btn-success" id="adm_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+					</td>
+				</tr>
 			</c:if>
+			</table>
 		</div>
 	</div>
 	
@@ -123,8 +121,7 @@
 		<h4 class="ui-widget-header">
 			<span>☆</span> 즐겨찾기
 		</h4>
-		<ui id="gallery_favorite"> <c:forEach items="${favoLinks}"
-			var="link">
+		<ui id="gallery_favorite"> <c:forEach items="${favoLinks}" var="link">
 			<c:choose>
 				<c:when test="${link.link_type==1}">
 					<li id="stu_${link.link_code}_favorite"><button
