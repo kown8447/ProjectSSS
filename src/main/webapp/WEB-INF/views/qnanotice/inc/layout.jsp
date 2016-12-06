@@ -5,74 +5,30 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<script src="${pageContext.request.contextPath}/js/member/updatePwd.js"></script>
 <script src="${pageContext.request.contextPath}/js/qnanotice/qnanotice.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
 
-<script type="text/javascript">
-	$(function() {
-		$("#wrapper").toggleClass("toggled");
-		$('#preloader').fadeOut('slow');
-		$('body').css({
-			'overflow' : 'visible'
-		});
-	})
-</script>
+<link href="${pageContext.request.contextPath}/css/inc/aside.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/inc/aside.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	
-		<div id="wrapper" style="width:10%">
-		<div id="sidebar-wrapper" style="display: block;">
-			<tiles:insertAttribute name="aside" />
-		</div>
-		<div id="page-content-wrapper" style="display: block;">
-			<div>
-				<div class="row">
-					<div class="col-lg-12">
-						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">=</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-
+	<tiles:insertAttribute name="aside" />
 	<div class="row">
 		<div class="col-sm-2">
-				<div class="navbar navbar-default" role="navigation">
-					<div class="navbar-collapse collapse sidebar-navbar-collapse">
-						<tiles:insertAttribute name="visual" />
-					</div>
-					<!--/.nav-collapse -->
-				</div>
+			<tiles:insertAttribute name="visual" />
 		</div>
 		<div class="col-sm-10">
 			<tiles:insertAttribute name="content" />
 		</div>
 	</div>
-
-	<tiles:insertAttribute name="footer" />
-	
-	<!-- Menu Toggle Script -->
-	<script>
-		$("#menu-toggle").click(function(e) {
-			e.preventDefault();
-			$('#page-content-wrapper').hide();
-			$("#wrapper").toggleClass("toggled");
-		});
-	</script>
-
-
+	<tiles:insertAttribute name="footer"/>
 	<div class="modal fade" id="tableviewer">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
