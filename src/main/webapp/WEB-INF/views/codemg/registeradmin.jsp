@@ -19,14 +19,6 @@
 					<td><input type="text" name="code" id="code"></td>
 				</tr>
 				<tr>
-					<td>구분</td>
-					<td>
-						<!-- <input type="radio" value="0" name="code_type" id="code_type">학생  -->
-						<input type="radio" value="2" name="code_type" id="code_type">관리자 
-						<!-- <input type="radio" value="2" name="code_type" id="code_type">관리자 -->
-					</td>
-				</tr>
-				<tr>
 					<td>이름</td>
 					<td><input type="text" name="code_name" id="code_name">
 					</td>
@@ -39,6 +31,7 @@
 				<tr>
 					<td><input type="submit" value="등록"></td>
 				</tr>
+				<input type="hidden" value="2" name="code_type" id="code_type">
 			</table>
 		</form>
 		<a href="typeofcodelist.htm?code_type=2">리스트</a>

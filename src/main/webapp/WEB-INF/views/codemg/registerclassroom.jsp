@@ -15,11 +15,11 @@
 		<form action="registerClassroom.htm" method="post">
 			<table>
 				<tr>
-					<td>건물코드</td>
+					<td>건물</td>
 					<td>	
 						<select id="building_code" name="building_code">
 							<c:forEach items="${building}" var="bd">
-							<option value="${bd.building_code}">${bd.building_name}</option>
+							<option value="${bd.building_code}">${bd.building_name}/code= ${bd.building_code}</option>
 							</c:forEach>
 						</select>
 					</td>

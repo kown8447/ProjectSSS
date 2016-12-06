@@ -19,7 +19,7 @@
 					<td>
 						<select name="college_code" id="college_code">
 							<c:forEach items="${college}" var="cl">
-							<option value="${cl.college_code}">${cl.college_name}</option>
+							<option value="${cl.college_code}">${cl.college_name}/code= ${cl.college_code}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -29,7 +29,7 @@
 					<td>
 						<select id="office_code" name="office_code">
 							<c:forEach items="${officelist}" var="of">
-							<option value="${of.office_code}">${of.office_name}</option>
+							<option value="${of.office_code}">${of.office_name}/code= ${of.office_code}</option>
 							</c:forEach>
 						</select>
 					</td>
