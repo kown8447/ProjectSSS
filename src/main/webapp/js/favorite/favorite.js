@@ -3,48 +3,16 @@ $(function() {
 	var $gallery = $("#gallery");
 	var $box = $("#box");
 
-	$gallery.tabs();
 
-	$("#allUserList li").draggable({
+	$("#gallery li").draggable({
 		cancel : "a.ui-icon",
 		revert : "invalid",
 		containment : "document",
 		helper : "clone",
 		cursor : "move",
 	});
-
-	$("#studentInfoList li").draggable({
-		cancel : "a.ui-icon",
-		revert : "invalid",
-		containment : "document",
-		helper : "clone",
-		cursor : "move",
-	});
-
-	$("#enrollList li").draggable({
-		cancel : "a.ui-icon",
-		revert : "invalid",
-		containment : "document",
-		helper : "clone",
-		cursor : "move",
-	});
-
-	$("#profSubjectList li").draggable({
-		cancel : "a.ui-icon",
-		revert : "invalid",
-		containment : "document",
-		helper : "clone",
-		cursor : "move",
-	});
-
-	$("#adminList li").draggable({
-		cancel : "a.ui-icon",
-		revert : "invalid",
-		containment : "document",
-		helper : "clone",
-		cursor : "move",
-	});
-
+	
+	
 	$("#box li").draggable({
 		cancel : "a.ui-icon",
 		revert : "invalid",
@@ -52,6 +20,9 @@ $(function() {
 		helper : "clone",
 		cursor : "move",
 	});
+	
+	
+	
 	$box.droppable({
 		accept : "#gallery li",
 		drop : function(event, ui) {

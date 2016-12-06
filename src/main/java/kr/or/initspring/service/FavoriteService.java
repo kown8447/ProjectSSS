@@ -46,12 +46,17 @@ public class FavoriteService {
 				configList.add(allList.get(i));
 			}
 		}
-		List<LinkDataDTO> subjectLinks = new ArrayList<LinkDataDTO>();
-		List<LinkDataDTO> allUserLinks = new ArrayList<LinkDataDTO>();
-		List<LinkDataDTO> studentInfoLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> studentLinks = new ArrayList<LinkDataDTO>();
 		List<LinkDataDTO> enrollLinks = new ArrayList<LinkDataDTO>();
-		List<LinkDataDTO> adminLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> professorLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> buildingLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> stuAdminLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> profAdminLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> otherAdminLinks = new ArrayList<LinkDataDTO>();
+		List<LinkDataDTO> allUserLinks = new ArrayList<LinkDataDTO>();
+		
 		List<LinkDataDTO> favoLinks = favoritedao.getUserFavoriteList(memberid);
+		
 		for (int i = 0; i < configList.size(); i++) {
 			for (int j = 0; j < favoLinks.size(); j++) {
 				if(configList.get(i).getLink_code().equals(favoLinks.get(j).getLink_code())){
@@ -59,24 +64,33 @@ public class FavoriteService {
 				}	
 			}
 			if (configList.get(i).getLink_type() == 0) {
-				allUserLinks.add(configList.get(i));
+				studentLinks.add(configList.get(i));
 			} else if (configList.get(i).getLink_type() == 1) {
-				studentInfoLinks.add(configList.get(i));
-			} else if (configList.get(i).getLink_type() == 2) {
 				enrollLinks.add(configList.get(i));
+			} else if (configList.get(i).getLink_type() == 2) {
+				professorLinks.add(configList.get(i));
 			} else if (configList.get(i).getLink_type() == 3) {
-				subjectLinks.add(configList.get(i));
+				buildingLinks.add(configList.get(i));
 			} else if (configList.get(i).getLink_type() == 4) {
-				adminLinks.add(configList.get(i));
+				stuAdminLinks.add(configList.get(i));
+			}else if (configList.get(i).getLink_type() == 5) {
+				profAdminLinks.add(configList.get(i));
+			}else if (configList.get(i).getLink_type() == 6) {
+				otherAdminLinks.add(configList.get(i));
+			}else if (configList.get(i).getLink_type() == 7) {
+				allUserLinks.add(configList.get(i));
 			}
 		}
 
 		model.addAttribute("favoLinks", favoLinks);
-		model.addAttribute("allUserLinks", allUserLinks);
-		model.addAttribute("studentInfoLinks", studentInfoLinks);
+		model.addAttribute("studentLinks", studentLinks);
 		model.addAttribute("enrollLinks", enrollLinks);
-		model.addAttribute("subjectLinks", subjectLinks);
-		model.addAttribute("adminLinks", adminLinks);
+		model.addAttribute("professorLinks", professorLinks);
+		model.addAttribute("buildingLinks", buildingLinks);
+		model.addAttribute("stuAdminLinks", stuAdminLinks);
+		model.addAttribute("profAdminLinks", profAdminLinks);
+		model.addAttribute("otherAdminLinks", otherAdminLinks);
+		model.addAttribute("allUserLinks", allUserLinks);
 
 	}
 	/*
