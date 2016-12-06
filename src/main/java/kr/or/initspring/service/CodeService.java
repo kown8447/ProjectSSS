@@ -42,11 +42,13 @@ import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 
 @Service
@@ -655,9 +657,7 @@ public class CodeService {
 					String student_code = row.getCell(0, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 					String sys_code = row.getCell(1, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 					String semester_code = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					int scholarship_rcordavg = Integer
-							.parseInt(row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
-					String StringPayday = row.getCell(4, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String StringPayday = row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 
 					java.util.Date date = null;
 
@@ -673,7 +673,6 @@ public class CodeService {
 					scholarship.setStudent_code(student_code);
 					scholarship.setSys_code(sys_code);
 					scholarship.setSemester_code(semester_code);
-					scholarship.setScholarship_rcordavg(scholarship_rcordavg);
 					scholarship.setScholarship_payday(scholarship_payday);
 
 					System.out.println(scholarship.toString());
@@ -711,12 +710,10 @@ public class CodeService {
 
 					Row row = sheet.getRow(i);
 
-					String professor_code = row.getCell(0, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String office_code = row.getCell(1, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String college_name = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String college_description = row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String office_code = row.getCell(0, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String college_name = row.getCell(1, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String college_description = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 
-					college.setProfessor_code(professor_code);
 					college.setOffice_code(office_code);
 					college.setCollege_name(college_name);
 					college.setCollege_description(college_description);
@@ -1397,5 +1394,28 @@ public class CodeService {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentLeaderDTO> list=dao.getDepartmentLeaderList();
 		return list;
+	}
+	
+	public List<DepartmentDTO> doubleDepartmentlist(){
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<DepartmentDTO> doublistdepartmentlist = dao.doubleDepartment();
+		return doublistdepartmentlist;
+		
+	}
+	
+	//학부리스트를 뿌려주기 위한 매소드
+	public List<DepartmentInfoDTO> departmentInfoList(){
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<DepartmentInfoDTO> departmentinfolist = dao.departmentinfolist();
+		
+		return departmentinfolist;
+	}
+	
+	//장학정보 리스트 뿌려주기 위한 매소드
+	public List<ScholarshipInfoDTO> scholarshipInfoList(){
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<ScholarshipInfoDTO> scholarshipinfolist = dao.scholarshipinfolist();
+		
+		return scholarshipinfolist;
 	}
 }

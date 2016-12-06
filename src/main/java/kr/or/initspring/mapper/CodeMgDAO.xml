@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateOffice">
 		update OFFICE set BUILDING_CODE = #{building_code},
-		OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone} where
+		OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone}, OFFICE_POSSIBLE = ${office_possible} where
 		OFFICE_CODE = #{office_code}
 	</update>
 	<select id="selectOffice" resultType="kr.or.initspring.dto.commons.OfficeDTO">
@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateLab">
 		UPDATE LABORATORY set LAB_NAME = #{lab_name},
-		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code} where
+		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code}, LAB_POSSIBLE = #{lab_possible} where
 		LAB_CODE = #{lab_code}
 	</update>
 	<update id="updateAcademic">
@@ -166,10 +166,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<insert id="insertScholarship">
 		insert into scholarship(scholarship_code,
-		student_code, sys_code, semester_code, scholarship_rcordavg,
+		student_code, sys_code, semester_code,
 		scholarship_payday) values(scholarship_idx.nextval, #{student_code},
-		#{sys_code}, #{semester_code}, ${scholarship_rcordavg},
-		#{scholarship_payday})
+		#{sys_code}, #{semester_code},#{scholarship_payday})
 	</insert>
 	<update id="updateScholarship">
 		UPDATE SCHOLARSHIP set STUDENT_CODE =
@@ -453,4 +452,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deletePlan">
 		delete from plan
 	</delete>
+	<select id="doubleDepartment" resultType="kr.or.initspring.dto.commons.DepartmentDTO">
+		SELECT * FROM DEPARTMENT where DOUBLE_POSSIBLE = 1
+	</select>
+	<select id="departmentinfolist" resultType="kr.or.initspring.dto.member.DepartmentInfoDTO">
+		SELECT * FROM DEPARTMENT dp join COLLEGE col on dp.COLLEGE_CODE = col.COLLEGE_CODE join OFFICE o on dp.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+	</select>
+	<select id="scholarshipinfolist" resultType="kr.or.initspring.dto.member.ScholarshipInfoDTO">
+		SELECT * FROM SCHOLARSHIP sch join CODE_MG cm on sch.STUDENT_CODE = cm.CODE join SEMESTER sm on sch.SEMESTER_CODE = sm.SEMESTER_CODE join SC_SYSTEM sc on sch.SYS_CODE = sc.SYS_CODE
+	</select>
 </mapper>

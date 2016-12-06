@@ -34,7 +34,7 @@
 						
 						<select id="department_code" name="department_code">
 							<c:forEach items="${department }" var="dp">
-								<option value="${dp.department_code}">${dp.department_name}</option>
+								<option value="${dp.department_code}">${dp.department_name}/code= ${dp.department_code}</option>
 							</c:forEach>
 						</select>
 						

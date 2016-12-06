@@ -23,17 +23,12 @@
 					<td>
 						<select name="department_code" id="department_code">
 							<c:forEach items="${department}" var="dp">
-								<option value="${dp.department_code}">${dp.department_name}</option>
+								<option value="${dp.department_code}">${dp.department_name}/code= ${dp.department_code}</option>
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td>전공구분</td>
-					<td>
-						<input type="radio" name="mj_type" id="mj_type" value="1">복수전공
-					</td>
-				</tr>
+				<input type="hidden" name="mj_type" id="mj_type" value="1">
 			</table>
 			<input type="submit" value="등록하기">
 		</form>

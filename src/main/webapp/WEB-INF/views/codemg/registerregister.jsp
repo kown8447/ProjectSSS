@@ -25,7 +25,7 @@
 					<td>
 						<select id="semester_code " name="semester_code">
 							<c:forEach items="${semester}" var="sm">
-								<option value="${sm.semester_code}">${sm.semester_name}</option>
+								<option value="${sm.semester_code}">${sm.semester_name}/code= ${sm.semester_code}</option>
 							</c:forEach>
 						</select>
 					</td>

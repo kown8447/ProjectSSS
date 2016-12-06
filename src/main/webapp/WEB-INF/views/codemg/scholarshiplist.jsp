@@ -6,9 +6,9 @@
 			<tr>
 				<td>장학수혜코드</td>
 				<td>학번</td>
-				<td>장학코드</td>
-				<td>학기코드</td>
-				<td>평점</td>
+				<td>이름</td>
+				<td>장학명</td>
+				<td>학기</td>
 				<td>지급일</td>
 			</tr>
 		</thead>
@@ -24,13 +24,13 @@
 					${ss.student_code }
 				</td>
 				<td>
-					${ss.sys_code }
+					${ss.code_name }
 				</td>
 				<td>
-					${ss.semester_code  }
+					${ss.scholaship_name }
 				</td>
 				<td>
-					${ss.scholarship_rcordavg }
+					${ss.semester_name  }
 				</td>
 				<td>
 					${ss.scholarship_payday }

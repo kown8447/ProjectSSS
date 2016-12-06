@@ -68,11 +68,13 @@ import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.AsideService;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 import kr.or.initspring.service.MemberService;
 
@@ -441,7 +443,7 @@ public class MemberController{
 		List<DepartmentDTO> department = codeservice.departmentList();
 		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
 		List<OfficeDTO> officelist = codeservice.officelist();
-	
+		
 		model.addAttribute("building", building);
 		model.addAttribute("sc", scsystem);
 		model.addAttribute("semester", semester);
@@ -449,7 +451,7 @@ public class MemberController{
 		model.addAttribute("department", department);
 		model.addAttribute("opened", openedinfolist);
 		model.addAttribute("officelist", officelist);
-				
+			
 	return "codemg.registerdepartment";
 }
 	
@@ -478,22 +480,9 @@ public class MemberController{
 	//장학등록
 	@RequestMapping("registermjrecord.htm")
 	public String registerMjRecord(Model model){
-						
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-			
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
+		
+		List<DepartmentDTO> doubledepartmentlist = codeservice.doubleDepartmentlist();
+		model.addAttribute("department", doubledepartmentlist);
 						
 		return "codemg.registermjrecord";
 	}		
@@ -940,13 +929,12 @@ public class MemberController{
 								
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 		}	
-	//연구실 기본양식
+	//단과대학 기본양식
 	@RequestMapping("colexcel.htm")
 	public ModelAndView collegedownload(HttpServletRequest request, HttpServletResponse response){
 								
 		String baseDir = request.getRealPath("/WEB-INF/Template");
-									
-			File downloadFile = new File(baseDir,"college.xlsx");
+		File downloadFile = new File(baseDir,"college.xlsx");
 									
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 		}
@@ -1241,8 +1229,11 @@ public class MemberController{
 	@RequestMapping("scholarshipList.htm")
 	public String scholarshipList(Model model){
 		
-		List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
-		model.addAttribute("scholarshipList", scholarshipList);	
+		/*List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
+		model.addAttribute("scholarshipList", scholarshipList);	*/
+		
+		List<ScholarshipInfoDTO> scholarshipinfolist = codeservice.scholarshipInfoList();
+		model.addAttribute("scholarshipList", scholarshipinfolist);	
 
 		return "codemg.scholarshiplist";
 	}
@@ -1472,7 +1463,10 @@ public class MemberController{
 	public String departmentList(Model model){
 		
 		List<DepartmentDTO> departmentlist = codeservice.departmentList();
-		model.addAttribute("department", departmentlist);
+		
+		
+		List<DepartmentInfoDTO> departmentinfolist = codeservice.departmentInfoList();
+		model.addAttribute("department", departmentinfolist);
 		
 		return "codemg.departmentlist";
 	}

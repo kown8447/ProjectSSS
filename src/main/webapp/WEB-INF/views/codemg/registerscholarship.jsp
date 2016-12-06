@@ -25,7 +25,7 @@
 					<td>
 						<select id="sys_code" name="sys_code">
 							<c:forEach items="${sc}" var="sc">
-							<option value="${sc.sys_code}">${sc.scholaship_name}</option>
+							<option value="${sc.sys_code}">${sc.scholaship_name}/code= ${sc.sys_code}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -35,15 +35,9 @@
 					<td>
 						<select id="semester_code " name="semester_code">
 							<c:forEach items="${semester}" var="sm">
-								<option value="${sm.semester_code}">${sm.semester_name}</option>
+								<option value="${sm.semester_code}">${sm.semester_name}/code= ${sm.semester_code}</option>
 							</c:forEach>
 						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>평점</td>
-					<td>
-					<input type="text" name="scholarship_rcordavg" id="scholarship_rcordavg">
 					</td>
 				</tr>
 				<tr>
