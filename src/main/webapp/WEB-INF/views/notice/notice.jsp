@@ -25,11 +25,11 @@
 	
 	<table class="table table-hover">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th style="text-align:center">번호</th>
+			<th style="text-align:center;width:35%;">제목</th>
+			<th style="text-align:center">작성자</th>
+			<th style="text-align:center">작성일</th>
+			<th style="text-align:center">조회수</th>
 		</tr>
 		<tbody>
 			<c:if test="${empty list}">
@@ -39,7 +39,7 @@
 			</c:if>
 			<c:forEach items="${list}" var="n">
 				<tr>
-					<td>${n.notice_index}</td>
+					<td style="text-align: center">${n.notice_index}</td>
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
@@ -62,9 +62,9 @@
 								</c:if>
 								<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
 							</c:if></td>
-					<td>관리자</td>
-					<td>${n.notice_date}</td>
-					<td>${n.notice_count}</td>
+					<td style="text-align: center">관리자</td>
+					<td style="text-align: center">${n.notice_date}</td>
+					<td style="text-align: center">${n.notice_count}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

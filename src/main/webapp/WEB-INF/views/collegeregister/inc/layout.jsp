@@ -54,9 +54,7 @@
 			<div class="sidebar-nav">
 				<div class="navbar navbar-default" role="navigation">
 					<div class="navbar-header"></div>
-					<div class="navbar-collapse collapse sidebar-navbar-collapse">
 						<tiles:insertAttribute name="visual" />
-					</div>
 					<!--/.nav-collapse -->
 				</div>
 			</div>

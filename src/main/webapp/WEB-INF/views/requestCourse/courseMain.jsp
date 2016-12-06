@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <div class="row" style="width: 80%; margin: auto;">
-	<img src="${pageContext.request.contextPath}/images/information.jpg"/>
+	<img src="${pageContext.request.contextPath}/images/registerGuide.jpg"/>
 </div>
