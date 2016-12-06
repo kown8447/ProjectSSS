@@ -31,4 +31,4 @@
 			</tbody>
 		</c:forEach>
 	</table>
-	<a href="code.htm">되돌아가기</a>
+	<a href="registermjrecord.htm">되돌아가기</a>

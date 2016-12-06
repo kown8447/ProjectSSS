@@ -58,13 +58,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>	
 	
 	<update id="qnaUpdate">
-		UPDATE QNA 
-			SET qna_Title=#{qna_title},
-	    		qna_File=#{qna_file,jdbcType=VARCHAR},
-	    		qna_Content=#{qna_content} 
-	    		
-			WHERE qna_Index=#{qna_index}
-	</update>	
+      UPDATE QNA 
+         SET qna_Title=#{qna_title},
+             qna_File=#{qna_file,jdbcType=VARCHAR},
+             qna_Content=#{qna_content} 
+             
+         WHERE qna_Index=#{qna_index}
+   </update>   
+   
+   <update id="qnaNotFileUpdate">
+      UPDATE QNA 
+         SET qna_Title=#{qna_title},
+             qna_Content=#{qna_content}              
+         WHERE qna_Index=#{qna_index}
+   </update>
+	
 	
     <update id="qnaCount">
   		UPDATE QNA

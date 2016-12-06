@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.or.initspring.dto.notice.CustomerNoticeDTO;
+import kr.or.initspring.dto.qna.CustomerQnaDTO;
 
 public interface NoticeDAO {
 	// 게시물 갯수
@@ -24,7 +25,10 @@ public interface NoticeDAO {
 
 	// 게시물 수정
 	public int update(CustomerNoticeDTO noticedto) throws ClassNotFoundException, SQLException;
-
+	
+	//글 수정(파일 없을시)
+	public int notFileUpdate(CustomerNoticeDTO noticedto) throws ClassNotFoundException, SQLException; 
+	
 	// 게시물 상세
 	public CustomerNoticeDTO getNotice(int notice_index) throws ClassNotFoundException, SQLException;
 

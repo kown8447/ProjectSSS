@@ -55,7 +55,7 @@
 				<label class="col-sm-2 control-label col-sm-offset-2">생년월일</label>
 				<div>
 					<div class="col-sm-2">
-						<select class="form-control" id="year" style="width: 110%;">
+						<select class="form-control" id="year" style="width: 100%;">
 							<option id="year" value="0">년도</option>
 							<c:forEach var="i" begin="1940" end="2017">
 								<option value="${i}">${i}</option>

@@ -11,14 +11,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div id="content">
-	<h2>QnA</h2>
-	
+<h4>▶&nbsp;Q&A 상세보기</h4> <br><br>
+
+<div class="row" style="width: 70%; margin: auto;">	
 	<form method="post">
-	<table class="table table-bordered" style="width:70%; margin: auto;">
+		<table class="table table-bordered">
 			<tr>
 				<th style="text-align: center; background-color: #F8F4EC;">글번호</th>
-				<td style="text-align: center;">${qna.qna_index}</td>
+				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
 				<th style="text-align: center; background-color: #F8F4EC;">작성일</th>
 				<td>${qna.qna_date}</td>
 			</tr>				
@@ -44,7 +44,7 @@
 		<br>
 		
 		<!-- 기능 -->
-		<div align="center" style="margin-left: 34%">
+		<div class="col-md-offset-8">
 			<a href="qnaDel.htm?qna_index=${qna.qna_index}" id="qnaDelete" class="btn btn-warning btn-sm">삭제</a>		
 			<a href="qnaEdit.htm?qna_index=${qna.qna_index}" id="qnaUpdate" class="btn btn-success btn-sm">수정</a>
 			<a href="qnaReply.htm?qna_index=${qna.qna_index}" class="btn btn-success btn-sm" >답변</a>
@@ -53,8 +53,8 @@
 		<br>		
 		<!-- 댓글 -->
 		<input type="hidden" id="qna_index" name="qna_index" value="${qna.qna_index}" />
-	<div align="center">
-		<div id="replyList" style="background-color: #f9f9f9;width:52%;text-align: left;">
+
+		<div id="replyList" style="background-color: #f9f9f9;text-align: left;">
 			<c:forEach items="${rqna}" var="rqna" varStatus="index">
 				<div id="replyView_${index.count}">
 				<input type="hidden" id="cmt_index_${index.count}" value="${rqna.reply_index}"> 
@@ -72,23 +72,22 @@
 				 </div> 
 			</c:forEach>
 		</div>
-	</div>
+
 		<!--댓글 올리는부분-->
-		<table align="center">
+		<table style="width:100%;">
 			<tr>
 				<td>
-					<textarea id="insertReply_content" name="insertReply_content"  rows="2" cols="75" class="form-control" style="resize: none;"></textarea>
+					<textarea id="insertReply_content" name="insertReply_content"  rows="2"  class="form-control" style="resize: none;"></textarea>
 				</td>
 					<br>
 				<td>
 					<button type="button" id="commentBtn" name="commentBtn" class="btn btn-default" style="width: 100px; height: 55px;">등록</button>
 				</td>	
 			</tr>	
-		</table>
-		
-		
+		</table>		
 	</form>
-</div>
 
-<input type="hidden" id="writerId" value="${qna.member_id}">
-<input type="hidden" id="readerId" value="${readerId}">
+
+	<input type="hidden" id="writerId" value="${qna.member_id}">
+	<input type="hidden" id="readerId" value="${readerId}">
+</div>

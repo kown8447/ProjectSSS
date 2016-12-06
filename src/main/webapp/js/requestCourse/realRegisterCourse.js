@@ -114,26 +114,14 @@ function onloadRealtable(){
 				
 				$.each(data.lists, function(i, elt) {
 					realGradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='real_sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
-							$('#'+obj.period_code+'_3').html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code+'_3').html(text+hidden);
-							$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						if(elt.retake_check == 1){color="red";}
+						else{color="skyblue";}
+						$('#'+obj.period_code+'_3').html(text+hidden);
+						$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
 					});
 				});
 				console.log('첫 로딩시 가져오는 학점 : ' + realGradeSum);
@@ -227,7 +215,7 @@ function insertRealDbSubject(e,c){
 	var subject_code = e;
 	var subject_credit = c;
 
-	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
+	socket1 = new WebSocket("ws://192.168.0.105:8090/initspring/wait.htm");
 	
 	socket1.onmessage = function(evt) {
 		$('#waitlist').empty();

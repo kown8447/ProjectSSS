@@ -64,6 +64,7 @@ public class QnaController {
 		model.addAttribute("end", map.get("end"));
 		model.addAttribute("keyword", map.get("keyword"));
 		model.addAttribute("searchType", map.get("searchType"));
+		model.addAttribute("total", map.get("total"));
 		return "qnanotice.qnaNotice";
 	}
 
@@ -200,7 +201,7 @@ public class QnaController {
 	/*
 	 * @method Name : qnaReply
 	 * @Author: 우명제
-	 * @description : QnA게시판 답글 작성 페이지 이동
+	 * @description : QnA게시판 답글 처리
 	 */
 	@RequestMapping(value = "/qnaReply.htm", method = RequestMethod.POST)
 	public String qnaReply(Principal principal, CustomerQnaDTO qna, HttpServletRequest request)

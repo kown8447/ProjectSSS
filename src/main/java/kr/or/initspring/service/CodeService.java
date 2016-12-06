@@ -170,7 +170,7 @@ public class CodeService {
 	public int updateCode(String code, int code_type, String code_name, Date code_birth) {
 
 		int result = 0;
-
+		System.out.println("수정서비스");
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
 		result = codedao.editCode(code, code_type, code_name, code_birth);
 
@@ -1254,9 +1254,7 @@ public class CodeService {
 		List<RegisterDTO> registerdto = null;
 		List<StStateDTO> ststatedto = new ArrayList<StStateDTO>();
 		try{
-			
 			registerdto = dao.getRegister();
-			
 			for(RegisterDTO dto : registerdto){
 				ststatedto.add(dao.getStState(dto.getStudent_code()));
 			}
@@ -1280,7 +1278,6 @@ public class CodeService {
 				smstatedto.setSemester_code(dao.getMaxSemesterCode());
 				smstatedto.setStudent_grade(dto.getGrade());
 				smstatedto.setStudent_semester(dto.getPersonal_semester());
-				
 				try{
 					dao.insertIntoSmstate(smstatedto);
 				}catch(Exception e3){

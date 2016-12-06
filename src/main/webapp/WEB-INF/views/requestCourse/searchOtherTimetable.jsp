@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
-<h4>
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;타학생 시간표 조회</h4>
-<br>
+
+<h4>▶&nbsp;타학생 시간표 조회</h4><br><br>
 
 <form onSubmit="return false">
 	<div class="form-group" align="center">
@@ -13,9 +12,9 @@
 			<input type="button" class="btn btn-success" id="searchScBtn" value="조회"/>
 		</div>
 	</div>
-	
+	<br>
 	<div class="row" align="center" id="result">
-		<table id="timetable_2" class="table table-hover" style="table-layout: fixed;width:85%;margin-top: 5%;" cellpadding="5" cellspacing="5" align="center" >
+		<table id="timetable_2" class="table table-hover" style="table-layout: fixed;width:85%;" cellpadding="5" cellspacing="5" align="center" >
 			<tr>
 				<th style="text-align: center">시간</th>
 				<th style="text-align: center">월</th>

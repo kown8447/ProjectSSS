@@ -6,13 +6,13 @@
    @Desc : qna게시판 글 수정
 -->   
 
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div id="content">
-	<h2>QnA 수정</h2>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<h4>▶&nbsp;Q&A 수정</h4> <br><br>
+
+<div class="row" style="width: 70%; margin: auto;">	
 	<form action="" method="post" enctype="multipart/form-data">
-		
-		<table class="table table-bordered" style="width:70%; margin: auto;">
+		<table class="table table-bordered">
 			<tr style="width:20%">
 				<th style="text-align: center; background-color: #F8F4EC;" >글번호</th>
 				<td style="text-align: center; width:30%;">${qna.qna_index}</td>
@@ -40,10 +40,10 @@
 				<td colspan="3">
 					<div class="form-group">	
                			<span class="filetype"> 
-               				<input type="text" class="file-text" />
+               				<input type="text" class="file-text" value="${qna.qna_file}"/>
                   			<span class="file-btn">찾아보기</span> 
                   			<span class="file-select">
-                    			<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+                    			<input type="file" class="input-file" name="file" id="file" readonly>
                				</span>
                			</span>
             		</div>					
@@ -51,9 +51,9 @@
 			</tr>
 		</table>
 		<br>
-		<div align="center" style="margin-left: 40%">
-			<input type="submit" id="editBtn" name="editBtn" value="수정하기" class="btn btn-success btn-sm" style="width: 15%;"/> 
-			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm" style="width: 15%;">취소</a>	
+		<div class="col-md-offset-9">
+			<input type="submit" id="editBtn" name="editBtn" value="수정하기" class="btn btn-success btn-sm"/> 
+			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" class="btn btn-default btn-sm">취소</a>	
 		</div>
 	</form>
 </div>

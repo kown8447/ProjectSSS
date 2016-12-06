@@ -11,12 +11,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
-<h4 style="margin-left: 10%">
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항 상세보기</h4>
-<br><br>
-<div id="content">
+<h4>▶&nbsp;공지사항 상세보기</h4><br><br>
+
+<div class="row" style="width: 70%; margin: auto;">
    <form method="post">
-      <table class="table table-bordered" style="width:70%; margin: auto;">
+      <table class="table table-bordered">
          <tr>
             <th style="text-align: center;background-color: #F8F4EC;" >글번호</th>
             <td style="text-align: center; width:30%;">${notice.notice_index}</td>
@@ -46,13 +45,13 @@
       </table>
       <br>
       
-      <div align ="center" style="margin-left:45%;">
-      <se:authorize access="hasAnyRole('ROLE_ADMIN')">
-      <a  href="noticeDel.htm?notice_index=${notice.notice_index}" class="btn btn-warning btn-sm" style="width:10%;">삭제</a>
-      <a  href="noticeEdit.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm" style="width:10%;">수정</a>
-      <a  href="replyWrite.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm" style="width:10%;">답글</a>
-      </se:authorize>
-      <a  href="notice.htm" class="btn btn-success btn-sm" style="width:10%;">목록</a> 
+      <div class="col-md-offset-8">
+      	<se:authorize access="hasAnyRole('ROLE_ADMIN')">
+      		<a  href="noticeDel.htm?notice_index=${notice.notice_index}" class="btn btn-warning btn-sm" >삭제</a>
+      		<a  href="noticeEdit.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm" >수정</a>
+      		<a  href="replyWrite.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm">답글</a>
+      	</se:authorize>
+      		<a  href="notice.htm" class="btn btn-success btn-sm" >목록</a> 
       </div>
    </form>
 </div>
