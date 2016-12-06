@@ -12,10 +12,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4 style="margin-left: 10%">
-	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;즐겨찾기 메뉴 설정</h4>
-	<br><br>
-
+<h4>▶&nbsp;즐겨찾기 메뉴 설정</h4> <br><br>
 	<div class="ui-widget ui-helper-clearfix">
 		<div id="gallery">
 			<c:if test="${fn:length(studentLinks)>0}">
@@ -23,32 +20,36 @@
 					<c:forEach items="${studentLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="stu_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="stu_${link.link_code}" style="display: none;">
+								<button class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="stu_${link.link_code}"><button
-										class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="stu_${link.link_code}">
+								<button class="btn btn-success" id="stu_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+				</td>
+				</tr>
 			</c:if>
 			<c:if test="${fn:length(enrollLinks)>0}">
-				<ul id="enrollList">
+			<tr>
+				<td>수강신청</td>
+				<td id="enrollList">
 					<c:forEach items="${enrollLinks}" var="link">
 						<c:choose>
 							<c:when test="${link.favorite}">
-								<li id="enr_${link.link_code}" style="display: none;"><button
-										class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="enr_${link.link_code}" style="display: none;">
+									<button class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:when>
 							<c:otherwise>
-								<li id="enr_${link.link_code}"><button
-										class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
+								<li id="enr_${link.link_code}">
+									<button class="btn btn-success" id="enr_${link.link_code}_btn">${link.link_name}</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+					</td>
+				</tr>
 			</c:if>
 			<c:if test="${fn:length(professorLinks)>0}">
 				<ul id="professorList">
@@ -96,9 +97,9 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
-			</c:if>
-			
+					</td>
+				</tr>
+			</c:if>	
 			<c:if test="${fn:length(profAdminLinks)>0}">
 				<ul id="profAdminList">
 					<c:forEach items="${profAdminLinks}" var="link">
@@ -115,7 +116,6 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			
 			<c:if test="${fn:length(otherAdminLinks)>0}">
 				<ul id="otherAdminList">
 					<c:forEach items="${otherAdminLinks}" var="link">
@@ -132,7 +132,6 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			
 			<c:if test="${fn:length(allUserLinks)>0}">
 				<ul id="allUserList">
 					<c:forEach items="${allUserLinks}" var="link">
@@ -147,8 +146,10 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</ul>
+					</td>
+				</tr>
 			</c:if>
+			</table>
 		</div>
 	</div>
 	
@@ -156,8 +157,7 @@
 		<h4 class="ui-widget-header">
 			<span>☆</span> 즐겨찾기
 		</h4>
-		<ui id="gallery_favorite"> <c:forEach items="${favoLinks}"
-			var="link">
+		<ui id="gallery_favorite"> <c:forEach items="${favoLinks}" var="link">
 			<c:choose>
 				<c:when test="${link.link_type==0}">
 					<li id="stu_${link.link_code}_favorite"><button

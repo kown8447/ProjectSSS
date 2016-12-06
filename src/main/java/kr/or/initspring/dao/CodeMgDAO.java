@@ -25,11 +25,13 @@ import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 
 public interface CodeMgDAO {
@@ -103,8 +105,8 @@ public interface CodeMgDAO {
 	public List<ClassBuildingDTO> classbuilding();
 	public List<LabBuildingDTO> labbuilding();
 	public List<OfiiceBuildingDTO> officebuilding();
-	
-	
+	public List<DepartmentDTO> doubleDepartment();
+	public List<DepartmentInfoDTO> departmentinfolist();
 	
 	//최대 코드번호 가져오기
 	public String getMaxBuildingCode();	
@@ -148,4 +150,5 @@ public interface CodeMgDAO {
 	public int departmentLeaderReset(String department_code)throws Exception;
 	public int departmentLeaderSet(DepartmentLeaderDTO leader)throws Exception;
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList();
+	public List<ScholarshipInfoDTO>  scholarshipinfolist();
 }

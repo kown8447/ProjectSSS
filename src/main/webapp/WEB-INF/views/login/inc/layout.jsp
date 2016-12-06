@@ -11,8 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
