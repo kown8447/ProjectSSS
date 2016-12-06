@@ -31,6 +31,7 @@ import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 
 public interface CodeMgDAO {
@@ -149,4 +150,5 @@ public interface CodeMgDAO {
 	public int departmentLeaderReset(String department_code)throws Exception;
 	public int departmentLeaderSet(DepartmentLeaderDTO leader)throws Exception;
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList();
+	public List<ScholarshipInfoDTO>  scholarshipinfolist();
 }

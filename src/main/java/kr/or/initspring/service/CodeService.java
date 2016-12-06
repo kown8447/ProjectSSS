@@ -48,6 +48,7 @@ import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 
 @Service
@@ -1411,5 +1412,13 @@ public class CodeService {
 		List<DepartmentInfoDTO> departmentinfolist = dao.departmentinfolist();
 		
 		return departmentinfolist;
+	}
+	
+	//장학정보 리스트 뿌려주기 위한 매소드
+	public List<ScholarshipInfoDTO> scholarshipInfoList(){
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<ScholarshipInfoDTO> scholarshipinfolist = dao.scholarshipinfolist();
+		
+		return scholarshipinfolist;
 	}
 }

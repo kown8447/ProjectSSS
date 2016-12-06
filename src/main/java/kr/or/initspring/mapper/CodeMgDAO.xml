@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateLab">
 		UPDATE LABORATORY set LAB_NAME = #{lab_name},
-		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code} where
+		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code}, LAB_POSSIBLE = #{lab_possible} where
 		LAB_CODE = #{lab_code}
 	</update>
 	<update id="updateAcademic">
@@ -457,5 +457,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="departmentinfolist" resultType="kr.or.initspring.dto.member.DepartmentInfoDTO">
 		SELECT * FROM DEPARTMENT dp join COLLEGE col on dp.COLLEGE_CODE = col.COLLEGE_CODE join OFFICE o on dp.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+	</select>
+	<select id="scholarshipinfolist" resultType="kr.or.initspring.dto.member.ScholarshipInfoDTO">
+		SELECT * FROM SCHOLARSHIP sch join CODE_MG cm on sch.STUDENT_CODE = cm.CODE join SEMESTER sm on sch.SEMESTER_CODE = sm.SEMESTER_CODE join SC_SYSTEM sc on sch.SYS_CODE = sc.SYS_CODE
 	</select>
 </mapper>

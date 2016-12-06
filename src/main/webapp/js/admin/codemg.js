@@ -1,5 +1,31 @@
 $(function() {
-		$('#codeRegisterTabs').tabs();
+	
+	
+    $('#buildingreg').click(function(){
+        $('#registerBuilding_form').submit();
+     });
+     $('#edit_building').click(function(){
+        $('#updateBuilbilding_form').submit();
+     });
+     $('#classreg').click(function(){
+        $('#registerClassroom_form').submit();
+     });
+     $('#edit_classroom').click(function(){
+        $('#updateClassroom_form').submit();
+     });
+     $('#edit_office').click(function(){
+        $('#updateOffice_form').submit();
+     });
+     $('#officereg').click(function(){
+        $('#insertOffice_form').submit();
+     });
+     $('#edit_lab').click(function(){
+        $('#updateLab_form').submit();
+     });
+     $('#labreg').click(function(){
+        $('#insertLab_form').submit();
+     });
+	
 		
 		//빌딩
 		$('#bdexcelUp').click(function() {
@@ -506,3 +532,59 @@ $(function() {
 		
 		
 	}
+	
+	
+	   /*
+	    * @JavaScript : codemg
+	    * @Date : 2016.12.06
+	    * @Author : 김영빈
+	    * @Desc
+	    * 파일 업로드 할 경우 파일 경로와 이름 표시 
+	   */
+	   (function(global, $) {
+
+	     $(makeObjFile);
+
+	     function makeObjFile() {
+	       var inputFile = CustomFiletype();
+	       inputFile.init($('.filetype'));
+	     }
+
+	     function CustomFiletype() {
+	       if (this === window) return new CustomFiletype;
+	       this.$fileBox = null;
+	       this.$fileUpload = null;
+	     }
+
+	     CustomFiletype.prototype = {
+
+	       'init': function(fileClass) {
+	         this.$fileBox = fileClass || $('.filetype');
+	         this.initEvent();
+	       },
+
+	       'initEvent': function() {
+	         this.fileUpload();
+	       },
+
+	       'fileUpload': function() {
+	         var _self = this;
+
+	         $.each(_self.$fileBox, function(idx, item) {
+
+	           var _$fileBox = _self.$fileBox.eq(idx),
+	             _$fileType = _$fileBox.find('input[type=file]'),
+	             _$fileText = _$fileBox.find('input[type=text]');
+	           _$fileText.attr('disabled', 'disabled');
+
+	           _$fileType.on('change', function() {
+	             var filePath = $(this).val();
+	             _$fileText.val(filePath);
+	           })
+
+	         })
+	       }
+
+	     }
+
+	   })(window, jQuery);

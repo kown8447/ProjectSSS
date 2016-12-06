@@ -74,6 +74,7 @@ import kr.or.initspring.dto.member.LabBuildingDTO;
 import kr.or.initspring.dto.member.OfiiceBuildingDTO;
 import kr.or.initspring.dto.member.OpenedInfoDTO;
 import kr.or.initspring.dto.member.ProfessorCodeRegDTO;
+import kr.or.initspring.dto.member.ScholarshipInfoDTO;
 import kr.or.initspring.dto.member.StudentCodeRegDTO;
 import kr.or.initspring.service.MemberService;
 
@@ -1228,8 +1229,11 @@ public class MemberController{
 	@RequestMapping("scholarshipList.htm")
 	public String scholarshipList(Model model){
 		
-		List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
-		model.addAttribute("scholarshipList", scholarshipList);	
+		/*List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
+		model.addAttribute("scholarshipList", scholarshipList);	*/
+		
+		List<ScholarshipInfoDTO> scholarshipinfolist = codeservice.scholarshipInfoList();
+		model.addAttribute("scholarshipList", scholarshipinfolist);	
 
 		return "codemg.scholarshiplist";
 	}
