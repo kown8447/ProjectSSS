@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-	<img src="${pageContext.request.contextPath}/images/registerGuide.jpg"/><br><br>
+<img src="${pageContext.request.contextPath}/images/registerGuide.jpg"/><br><br>
 	
 <div class="row" style="width: 75%; margin: auto;">	
 	<font style="color:#311CAC;font-size: 13pt;">▶ 예비수강신청기간 </font><br><br>
