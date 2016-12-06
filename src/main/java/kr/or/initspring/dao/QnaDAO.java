@@ -25,6 +25,7 @@ public interface QnaDAO {
 	public int qnaDelete(int qna_index) throws ClassNotFoundException, SQLException; // 글 삭제
 	public int qnaDeleteAndUpdate(int qna_refer)throws ClassNotFoundException, SQLException; // 글 삭제전 답글 업뎃
 	public int qnaUpdate(CustomerQnaDTO qna) throws ClassNotFoundException, SQLException; //글 수정
+	public int qnaNotFileUpdate(CustomerQnaDTO qna) throws ClassNotFoundException, SQLException; //글 수정(파일 없을시)
 	public void qnaCount(int qna_index) throws ClassNotFoundException, SQLException;  //조회수 증가	
 	public void qnaInsertReply(CustomerQnaDTO qna); //답글 구분
 	public void qnaUpdateStep(CustomerQnaDTO qna);  //답글 순번 처리 

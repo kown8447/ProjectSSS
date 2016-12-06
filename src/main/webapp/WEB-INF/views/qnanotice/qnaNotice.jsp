@@ -10,23 +10,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <h4>▶&nbsp;Q&A</h4> <br><br>
 
+<div class="row" style="width: 80%; margin: auto;">
 		<form>
 			<div class="form-inline" >
-						<font class="col-sm-offset-2">◎&nbsp;게시물 갯수: ${total}</font>
-				<select id="searchType" name="searchType" class="form-control col-sm-offset-2" >
+				<font>◎&nbsp;게시물 갯수: ${total}</font>
+				<select id="searchType" name="searchType" class="form-control col-sm-offset-4" >
 					<option value="0">제목</option>
 					<option value="1">제목+내용</option>
 					<option value="2">글쓴이</option>
 				</select>	
-				<input type="text" id="keyword" name="keyword" class="form-control" style="width:250px;margin-right:5px;"/> 
+				<input type="text" id="keyword" name="keyword" class="form-control" style="margin-right:5px;"/> 
 				<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">			
 			</div>
 		</form>
 	<br>
 	
-	<div style="width:70%; margin: auto;">
 	<table class="table table-hover">
 		<tr>
 			<th style="text-align:center">번호</th>
@@ -45,8 +46,7 @@
 			<c:forEach items="${list}" var="qna">		
 				<tr>
 					<td style="text-align: center;">${qna.qna_index}</td>
-					<td>	
-					 <div class="form-group">				
+					<td>					
 						<c:choose>
 								<c:when test="${qna.qna_depth != 0 }">
 									<c:forEach var="depth"  begin="0" end="${qna.qna_depth*2}" step="1">
@@ -69,8 +69,7 @@
 			                  		<font color="red">[삭제된 글의 답글입니다]</font>
 			                 </c:if>
 			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}">${qna.qna_title}</a>
-			            </c:if>
-			         </div>		
+			            </c:if>		
                    </td>
 														
 				<td style="text-align: center;">${qna.member_id}</td>
@@ -80,10 +79,9 @@
 			</c:forEach>
 	</tbody>
 	</table>			
-	<div style="margin-left: 90%">
+	<div class="col-md-offset-11">
 		<a href="${pageContext.request.contextPath}/qnanotice/qnaWrite.htm" class="btn btn-success btn-sm">글쓰기</a>
 	</div>
-</div>	
 
 	<div align = "center">
 		<ul class="pagination">
@@ -122,8 +120,7 @@
     		</c:if>
 		</ul>
 	</div>
-
-
+</div>	
 
 
 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="se"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <script src="${pageContext.request.contextPath}/js/inc/aside.js"></script>
 
 
@@ -9,8 +8,7 @@
 	<div align="right">
 		<button class="btn btn-default" id="menu_toggle2">X</button>
 	</div>
-	<image id="asidePicture" class="img-circle" width="150" height="150"
-		src="${pageContext.request.contextPath}/profiles/eunji.jpg">
+	<image id="asidePicture" class="img-circle" width="150" height="150" src="${pageContext.request.contextPath}/profiles/eunji.jpg">
 	 <se:authorize
 		access="hasRole('ROLE_STUDENT')">
 		<li id="asideStuCode">학번 : </li>

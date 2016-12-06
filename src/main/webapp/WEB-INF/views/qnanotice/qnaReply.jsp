@@ -8,6 +8,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <h4>▶&nbsp;Q&A 답글</h4> <br><br>
+
+<div class="row" style="width: 70%; margin: auto;">
 	<form action="" method="post" enctype="multipart/form-data">
 	
 	<!-- 히든 필드로 정보 보내기 -->
@@ -17,7 +19,7 @@
 	<input type="hidden" name="qna_refer" value="${qna.qna_refer}" />
 	<!-- 히든 필드로 정보 보내기 -->
 	
-	<table class="table table-bordered" style="width: 70%; margin: auto;">
+	<table class="table table-bordered">
 		<tr>
 			<th style="background-color: #F8F4EC; text-align: center;"><b>작성자</b></th>
 			<td>${id}</td>
@@ -31,7 +33,7 @@
 		<tr>
 			<th style="background-color: #F8F4EC; text-align: center;">글내용</th>
 			<td  colspan="3">
-				<textarea name="qna_content" id="qna_content" rows="7" style="resize: none;"class="form-control"></textarea>
+				<textarea name="qna_content" id="qna_content" rows="8" style="resize: none;"class="form-control"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -42,7 +44,7 @@
                				<input type="text" class="file-text" />
                   			<span class="file-btn">찾아보기</span> 
                   			<span class="file-select">
-                    			<input type="file" class="input-file" name="file" id="file"  value="${notice.notice_file }" readonly>
+                    			<input type="file" class="input-file" name="file" id="file"  readonly>
                				</span>
                			</span>
             		</div>
@@ -50,8 +52,9 @@
 		</tr>
 	</table>
 	<br>
-		<div align="center" style="margin-left: 40%">
-			<input type="submit" id="replyBtn" value="저장" style="width: 15%;" class="btn btn-success btn-sm"/>
-			<a href="qnaDetail.htm?qna_index=${qna.qna_index}" style="width: 15%;" class="btn btn-default btn-sm">취소</a>	
+		<div class="col-md-offset-10">
+			<input type="submit" id="replyBtn" value="저장"  class="btn btn-success btn-sm"/>
+			<a href="qnaDetail.htm?qna_index=${qna.qna_index}"  class="btn btn-default btn-sm">취소</a>	
 		</div>
 	</form>
+</div>

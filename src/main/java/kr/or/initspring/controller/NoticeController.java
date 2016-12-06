@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.initspring.dto.notice.CustomerNoticeDTO;
+import kr.or.initspring.dto.qna.CustomerQnaDTO;
 import kr.or.initspring.service.NoticeService;
 
 @Controller
@@ -178,6 +179,7 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		return "notice.replyWrite";
 	}
+	
 	
 	/*
 	 * @method Name : replyWrite

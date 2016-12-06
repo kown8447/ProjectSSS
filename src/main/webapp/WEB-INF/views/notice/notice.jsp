@@ -13,16 +13,17 @@
 
 <h4>▶&nbsp;공지사항</h4><br><br>
 
+<div class="row" style="width: 80%; margin: auto;">
 	<form method="post">
 		<div class="form-inline">
-			<font class="col-sm-offset-2">◎&nbsp;게시물 갯수: ${total}</font>
-			<input type="text" id="keyword" name="keyword" class="form-control col-sm-offset-4" > 
+			<font>◎&nbsp;게시물 갯수: ${total}</font>
+			<input type="text" id="keyword" name="keyword" class="form-control col-sm-offset-6" > 
 			<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
 		</div>
 	</form>
 	<br>
 	
-	<table class="table table-hover" style="width:75%;margin: auto;">
+	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -42,7 +43,7 @@
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
-								&emsp;&emsp;
+								&emsp;
                            		</c:forEach>
 								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>
@@ -68,7 +69,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="col-md-offset-9">
+	<div class="col-md-offset-11">
 		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
 		</se:authorize>
@@ -107,4 +108,4 @@
 		</c:if>
 	</ul>
 	</div>
-
+</div>

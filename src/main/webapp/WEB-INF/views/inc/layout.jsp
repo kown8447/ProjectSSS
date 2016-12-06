@@ -12,7 +12,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
 <link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">
