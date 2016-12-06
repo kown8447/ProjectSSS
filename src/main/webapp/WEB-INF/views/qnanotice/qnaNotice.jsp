@@ -68,7 +68,11 @@
 			            	<c:if test="${qna.qna_status==1}">
 			                  		<font color="red">[삭제된 글의 답글입니다]</font>
 			                 </c:if>
-			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}">${qna.qna_title}</a>
+			                    <a href="qnaDetail.htm?qna_index=${qna.qna_index}" >${qna.qna_title}&nbsp;
+				                    <c:if test="${qna.qna_cmtCount!= 0}"> 
+				                    	<font color="orange">[${qna.qna_cmtCount}]</font>
+				                    </c:if>
+			                    </a>
 			            </c:if>		
                    </td>
 														
