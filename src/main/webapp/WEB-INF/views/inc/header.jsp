@@ -73,11 +73,48 @@
 					</li>
 					
 					<se:authorize access="hasRole('ROLE_ADMIN')">
-						<li class="dropdown fadeInDown animated d2">
+						<%-- <li class="dropdown fadeInDown animated d2">
 							<a href="#">관리자 메뉴</a>
 							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
 								<li><a href="${pageContext.request.contextPath}/member/code.htm">코드관리</a></li>
 								<li><a href="${pageContext.request.contextPath}/oprequest/list.htm">개설과목 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerstructure.htm">건물 관리</a></li>
+							</ul>
+						</li> --%>
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">건물관리</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/registerbuilding.htm">건물 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerclassroom.htm">강의실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registeroffice.htm">사무실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerlaboratory.htm">연구실 관리</a></li>
+							</ul>
+						</li>
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">학생관리</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/registerstudent.htm">학생등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerregister.htm">등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registercollege.htm">단대 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerdepartment.htm">학부 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerscsystem.htm">장학제도 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerscholarship.htm">장학 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registermjrecord.htm">전공 등록</a></li>
+							</ul>
+						</li>
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">교수관리</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/registerprofessor.htm">교수등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/oprequest/list.htm">개설신청 과목 승인</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registeropen.htm">개설신청 현황</a></li>
+							</ul>
+						</li>
+						<li class="dropdown fadeInDown animated d2">
+							<a href="#">기타</a>
+							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
+								<li><a href="${pageContext.request.contextPath}/member/registeradmin.htm">관리자 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registersemester.htm">학기 관리</a></li>
 							</ul>
 						</li>
 					</se:authorize>

@@ -87,7 +87,7 @@ public class QnaService {
 		map.put("toPage", toPage);
 		map.put("start", start);
 		map.put("end", end);
-
+		map.put("total",total);
 		return map;
 	}
 
@@ -181,38 +181,37 @@ public class QnaService {
 		return qna;
 	}
 
-	/*
-	 * @method Name : qnaEdit 
-	 * @Author : 우명제 
-	 * @description : 글 수정 처리 service
-	 */
-	public String qnaEdit(CustomerQnaDTO qna, HttpServletRequest request)
-			throws IOException, ClassNotFoundException, SQLException {
+	 /*
+	    * @method Name : qnaEdit 
+	    * @Author : 우명제 
+	    * @description : 글 수정 처리 service
+	    */
+	   public String qnaEdit(CustomerQnaDTO qna, HttpServletRequest request)
+	         throws IOException, ClassNotFoundException, SQLException {
+	      
+	      QnaDAO qnaDao = sqlsession.getMapper(QnaDAO.class);
+	      if(qna.getFile() != null){
+	         CommonsMultipartFile file = qna.getFile();
+	         String filenames = null;
+	         if (file != null && file.getSize() > 0) {
+	            String fname = file.getOriginalFilename();
+	            String path = request.getServletContext().getRealPath("/files/qnanotice");
+	            String fullpath = path + "\\" + fname;
+	            
+	            FileOutputStream fs = new FileOutputStream(fullpath);    
+	            fs.write(file.getBytes());
+	            fs.close();
+	            filenames = fname;        
+	            
+	            qna.setQna_file(filenames);      
+	            qnaDao.qnaUpdate(qna);
+	            }else{
+	               qnaDao.qnaNotFileUpdate(qna);   
+	            }
+	         }
+	      return "redirect:qnaDetail.htm?qna_index=" + qna.getQna_index();
+	   }
 
-		CommonsMultipartFile file = qna.getFile();
-		String filenames = null;
-
-		if (file != null && file.getSize() > 0) {
-
-			String fname = file.getOriginalFilename();
-			String path = request.getServletContext().getRealPath("/files/qnanotice");
-			String fullpath = path + "\\" + fname;
-
-			if (!fname.equals("")) {
-				FileOutputStream fs = new FileOutputStream(fullpath);
-				fs.write(file.getBytes());
-				fs.close();
-			}
-			filenames = fname;
-
-		}
-		qna.setQna_file(filenames);
-
-		QnaDAO qnaDao = sqlsession.getMapper(QnaDAO.class);
-		qnaDao.qnaUpdate(qna);
-
-		return "redirect:qnaDetail.htm?qna_index=" + qna.getQna_index();
-	}
 
 	/*
 	 * @method Name : download 

@@ -30,4 +30,4 @@
 		</c:forEach>
 	</table>
 	</form>
-	<a href="code.htm">되돌아가기</a>
+	<a href="registercollege.htm">되돌아가기</a>

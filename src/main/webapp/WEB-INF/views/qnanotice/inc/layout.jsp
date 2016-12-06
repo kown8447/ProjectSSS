@@ -9,10 +9,8 @@
 <script src="${pageContext.request.contextPath}/js/qnanotice/qnanotice.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
 <link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
-
 <link href="${pageContext.request.contextPath}/css/inc/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/hover.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/inc/sidebar.css" rel="stylesheet">

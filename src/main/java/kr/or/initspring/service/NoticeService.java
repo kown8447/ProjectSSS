@@ -98,18 +98,6 @@ public class NoticeService {
 
 		return "redirect:notice.htm";
 	}
-	
-	/*
-	 * @method Name : replyWrite
-	 * @Author : 송아름
-	 * @description : 답글 화면처리(원본글 제목그대로 가져오기)
-	 */
-	public CustomerNoticeDTO replyWrite(int notice_index) throws ClassNotFoundException, SQLException {
-		
-		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		CustomerNoticeDTO noticedto = noticedao.getNotice(notice_index);
-		return noticedto;
-	}
 
 
 
@@ -159,6 +147,7 @@ public class NoticeService {
 		map.put("toPage", toPage);
 		map.put("start", start);
 		map.put("end", end);
+		map.put("total", total);
 		
 		return map;
 	}
@@ -233,7 +222,9 @@ public class NoticeService {
 	 */
 	public String noticeEdit(CustomerNoticeDTO cn, HttpServletRequest request)
 			throws ClassNotFoundException, SQLException, IOException {
-
+		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
+		
+		if(cn.getFile() != null){
 		CommonsMultipartFile file = cn.getFile();
 		String filenames = null;
 
@@ -243,19 +234,18 @@ public class NoticeService {
 			String path = request.getServletContext().getRealPath("/files/notice");
 			String fullpath = path + "\\" + fname;
 
-			if (!fname.equals("")) {
-				FileOutputStream fs = new FileOutputStream(fullpath);
-				fs.write(file.getBytes());
-				fs.close();
-			}
+			FileOutputStream fs = new FileOutputStream(fullpath);
+			fs.write(file.getBytes());
+			fs.close();
+			
 			filenames = fname;
+			cn.setNotice_file(filenames);
+			noticedao.update(cn);
+		}else{
+				noticedao.notFileUpdate(cn);
+			}
 		}
-
-		cn.setNotice_file(filenames);
-
-		NoticeDAO noticedao = sqlsession.getMapper(NoticeDAO.class);
-		noticedao.update(cn);
-		
+	      
 		return "redirect:noticeDetail.htm?notice_index=" + cn.getNotice_index();
 	}
 	

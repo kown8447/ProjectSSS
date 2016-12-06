@@ -30,3 +30,4 @@
 		</tbody>
 		</c:forEach>
 	</table>
+<a href="registersemester.htm">되돌아가기</a>	
