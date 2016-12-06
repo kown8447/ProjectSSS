@@ -172,7 +172,7 @@ public class RequestCourseController {
 	public String preRegisterForm(Principal principal, Model model){
 		String viewpage = "";
 		String member_id = principal.getName();
-		viewpage = requestCourseService.possiblePreRegister(member_id);
+		viewpage = requestCourseService.possiblePreRegister(member_id,model);
 		return viewpage;
 	}
 	
@@ -186,7 +186,7 @@ public class RequestCourseController {
 		HttpSession session = request.getSession();
 		String viewpage = "";
 		String member_id = principal.getName();
-		viewpage = requestCourseService.possibleRealRegister(member_id);
+		viewpage = requestCourseService.possibleRealRegister(member_id, model);
 		session.setAttribute("member_id", principal.getName());
 		return viewpage;
 	}
@@ -200,7 +200,7 @@ public class RequestCourseController {
 	public String correctRegiserForm(Principal principal, Model model){
 		String viewpage = "";
 		String member_id = principal.getName();
-		viewpage = requestCourseService.possibleCorrectRegister(member_id);
+		viewpage = requestCourseService.possibleCorrectRegister(member_id, model);
 		return viewpage;
 	}
 	
