@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
 <link href="${pageContext.request.contextPath}/css/requestCourse/realRegisterCourse.css" rel="stylesheet">
-<h4><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;수강신청</h4>
-<br><br>
+<h4>▶&nbsp;수강신청</h4><br><br>
 
 <div class="row">
 	<div class="col-md-5">

@@ -25,15 +25,16 @@ public interface QnaDAO {
 	public int qnaDelete(int qna_index) throws ClassNotFoundException, SQLException; // 글 삭제
 	public int qnaDeleteAndUpdate(int qna_refer)throws ClassNotFoundException, SQLException; // 글 삭제전 답글 업뎃
 	public int qnaUpdate(CustomerQnaDTO qna) throws ClassNotFoundException, SQLException; //글 수정
+	public int qnaNotFileUpdate(CustomerQnaDTO qna) throws ClassNotFoundException, SQLException; //글 수정(파일 없을시)
 	public void qnaCount(int qna_index) throws ClassNotFoundException, SQLException;  //조회수 증가	
 	public void qnaInsertReply(CustomerQnaDTO qna); //답글 구분
 	public void qnaUpdateStep(CustomerQnaDTO qna);  //답글 순번 처리 
 	public int qnaDeleteBeforeWork(int qna_index); // 글 삭제 전 댓글 삭제 
-	
 	public int insertComment(CustomerQnaReplyDTO rqna); // 코멘트(댓글) 등록
 	public List<CustomerQnaReplyDTO> listComment(int qna_index)throws Exception; // 코멘트 조회
 	public List<CustomerQnaReplyDTO> getReplyList(int qna_index);	//인덱스로 코멘트 조회
 	public int qnaCmtDelete(int reply_index); //댓글 삭제
 	public int qnaCmtUpdate(int reply_index, String reply_content); //댓글 수정
+	public int qnaCmtCount(int cmtnum); //댓글수
 	
 }

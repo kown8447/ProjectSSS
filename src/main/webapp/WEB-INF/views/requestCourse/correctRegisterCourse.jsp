@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
-<h4><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;수강정정</h4>
-<br><br>
-<div class="row">
+<h4>▶&nbsp;수강정정</h4><br><br> 
+
+<div class="row" style="width: 80%; margin: auto;">
 	<div class="col-md-5">
 			<form class="form-inline" onSubmit='return false'>
 				<select id="real_searchType" class="form-control" style="font-size: small">

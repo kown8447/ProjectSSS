@@ -126,8 +126,8 @@
 		</form>
 	</div>
 </div>
-
-<div class="col-sm-6 control-label col-sm-offset-5" style="margin-top: 3%;">
+<br> <br>
+<div align="center">
 	<input type="button" value="취소" id="cancel" class="btn btn-default"> &nbsp;&nbsp;
 	<input type="button" value="회원가입" id="complete" class="btn btn-success">
 </div>

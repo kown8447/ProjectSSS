@@ -3,7 +3,7 @@ $(function() {
 	var $gallery = $("#gallery");
 	var $box = $("#box");
 
-	$gallery.tabs();
+
 
 	$("#allUserList li").draggable({
 		cancel : "a.ui-icon",

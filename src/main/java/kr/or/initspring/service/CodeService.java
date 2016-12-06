@@ -1283,11 +1283,10 @@ public class CodeService {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<RegisterDTO> registerdto = null;
 		List<StStateDTO> ststatedto = new ArrayList<StStateDTO>();
-		try {
 
+		try{
 			registerdto = dao.getRegister();
-
-			for (RegisterDTO dto : registerdto) {
+			for(RegisterDTO dto : registerdto){
 				ststatedto.add(dao.getStState(dto.getStudent_code()));
 			}
 
@@ -1311,7 +1310,7 @@ public class CodeService {
 				smstatedto.setStudent_grade(dto.getGrade());
 				smstatedto.setStudent_semester(dto.getPersonal_semester());
 
-				try {
+				try{
 					dao.insertIntoSmstate(smstatedto);
 				} catch (Exception e3) {
 					System.out.println("e3 : " + e3.getMessage());

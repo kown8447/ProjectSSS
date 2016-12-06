@@ -34,6 +34,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    notice_file=#{notice_file,jdbcType=VARCHAR}
 	where notice_index=#{notice_index}
 	</update>
+	
+	<update id="notFileUpdate" >
+	update notice
+	set notice_title=#{notice_title}, 
+	    notice_content=#{notice_content}
+	where notice_index=#{notice_index}
+	</update>
 
 	<select id="selectAdmin" resultType="String">
 		select admin_code FROM admin where member_Id = #{param1}

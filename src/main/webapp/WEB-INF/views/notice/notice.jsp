@@ -11,26 +11,25 @@
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4 style="margin-left: 10%"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;공지사항</h4>
-<br><br>
+<h4>▶&nbsp;공지사항</h4><br><br>
 
+<div class="row" style="width: 80%; margin: auto;">
 	<form method="post">
-			<div style="margin-left: 60%">
-				<div class="form-inline">
-					<input type="text" id="keyword" name="keyword" class="form-control" > 
-					<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
-				</div>
-			</div>
+		<div class="form-inline">
+			<font>◎&nbsp;게시물 갯수: ${total}</font>
+			<input type="text" id="keyword" name="keyword" class="form-control col-sm-offset-6" > 
+			<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
+		</div>
 	</form>
 	<br>
 	
-	<table class="table table-hover" style="width:75%;margin: auto;">
+	<table class="table table-hover">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th style="text-align:center">번호</th>
+			<th style="text-align:center;width:35%;">제목</th>
+			<th style="text-align:center">작성자</th>
+			<th style="text-align:center">작성일</th>
+			<th style="text-align:center">조회수</th>
 		</tr>
 		<tbody>
 			<c:if test="${empty list}">
@@ -40,11 +39,11 @@
 			</c:if>
 			<c:forEach items="${list}" var="n">
 				<tr>
-					<td>${n.notice_index}</td>
+					<td style="text-align: center">${n.notice_index}</td>
 					<td><c:choose>
 							<c:when test="${n.notice_depth != 0 }">
 								<c:forEach var="depth" begin="0" end="${n.notice_depth*2}" step="1"> 
-								&emsp;&emsp;
+								&emsp;
                            		</c:forEach>
 								<img src="../images/reply.png">&nbsp;   
                        		 </c:when>
@@ -63,14 +62,14 @@
 								</c:if>
 								<a href="noticeDetail.htm?notice_index=${n.notice_index}">${n.notice_title}</a>
 							</c:if></td>
-					<td>관리자</td>
-					<td>${n.notice_date}</td>
-					<td>${n.notice_count}</td>
+					<td style="text-align: center">관리자</td>
+					<td style="text-align: center">${n.notice_date}</td>
+					<td style="text-align: center">${n.notice_count}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<div style="margin-left: 80%">
+	<div class="col-md-offset-11">
 		<se:authorize access="hasAnyRole('ROLE_ADMIN')">
 			<a href="${pageContext.request.contextPath}/notice/noticeWrite.htm" class="btn btn-success" >글쓰기</a>
 		</se:authorize>
@@ -109,4 +108,4 @@
 		</c:if>
 	</ul>
 	</div>
-
+</div>

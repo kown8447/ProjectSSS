@@ -34,26 +34,14 @@ $(function(){
 				
 				$.each(data.lists, function(i, elt) {
 					preGradeSum+=elt.subject_credit;
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code).attr('style','background-color:'+color);
-							$('#'+obj.period_code).html(hidden);
-						}else{
-							if(elt.retake_check == 1){color="red";}
-							else{color="skyblue";}
-							$('#'+obj.period_code).html(text+hidden);
-							$('#'+obj.period_code).attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						if(elt.retake_check == 1){color="red";}
+						else{color="skyblue";}
+						$('#'+obj.period_code).html(text+hidden);
+						$('#'+obj.period_code).attr('style','background-color:'+color);
 					});
 				});
 			}
@@ -180,8 +168,6 @@ function insertTimeTable(e){
 				dataType:"json",
 				success:function(data){
 					console.log(data);
-					var prev = 0;
-					var prevDay = "";
 					var color="";
 					var text=data.subject_info.subject_code+"<br>"+data.subject_info.subject_name+"<br>"+data.subject_info.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+data.subject_info.subject_code+"'/>";
@@ -198,20 +184,10 @@ function insertTimeTable(e){
 								preGradeSum-=data.subject_info.subject_credit;
 								return false;
 							}else{
-								var str = elt.period_code.split("_");
-								if(str[1] == prevDay && str[2] - prev == 1 && elt.period_code.substr(7,1) != 1){
-									if(data.subject_info.retake_check==1){color="red";}
-									else{color="skyblue";}
-									$('#'+elt.period_code).attr('style','background-color:'+color);
-									$('#'+elt.period_code).html(hidden);
-								}else{
-									if(data.subject_info.retake_check==1){color="red";}
-									else{color="skyblue";}
-									$('#'+elt.period_code).html(text+hidden);
-									$('#'+elt.period_code).attr('style','background-color:'+color);
-								}
-								prev = str[2];
-								prevDay = str[1];
+								if(data.subject_info.retake_check==1){color="red";}
+								else{color="skyblue";}
+								$('#'+elt.period_code).html(text+hidden);
+								$('#'+elt.period_code).attr('style','background-color:'+color);
 							}
 						})
 					}

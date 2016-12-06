@@ -338,7 +338,7 @@ $(function() {
 					pathEnd = $('#files').val().length;
 					extName = $('#files').val().substring(pathMiddle + 1,
 							pathEnd);
-					if (extName != "png" && extName != "jpg") {
+					if (extName != "png" && extName != "jpg" && extName != "JPG") {
 						alert("사진파일이 유효하지 않습니다.");
 						$("#files").focus();
 						return false;

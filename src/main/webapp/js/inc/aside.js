@@ -5,11 +5,8 @@ $(function() {
 		});
 	});
 
-	$('#menu_toggle2').click(function(e) {
-		console.log('클릭 되냐 안되냐');
-		e.preventDefault();
-		$('#page-content-wrapper').show();
-		$("#wrapper").toggleClass("toggled");
+	$('#sidebar-btn').click(function() {
+		$('#sidebar').toggleClass('visible');
 	});
 
 	$.ajax({
