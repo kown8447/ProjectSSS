@@ -79,7 +79,7 @@ $(function() {
 						dataType : "json",
 						success : function(data) {
 							if (data.result == 'success') {
-								alert("성공");
+								
 								$('#replyList').empty();
 								replyReset(data.list);
 								cmtdeleteSetting();
@@ -154,7 +154,7 @@ $(function() {
 							dataType : "json",
 							success : function(data) {
 								if (data.result == 'success') {
-									alert("성공");
+									
 									$('#replyList').empty();
 									replyReset(data.list);
 									cmtdeleteSetting();
@@ -212,7 +212,7 @@ $(function() {
     			dataType : "json",
     			success : function(data) {
     				if (data.result == 'success') {
-    					alert("성공");
+    			
     					$('#replyList').empty();
     					replyReset(data.list);
     					cmtdeleteSetting();

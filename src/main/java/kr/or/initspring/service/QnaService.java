@@ -36,7 +36,7 @@ public class QnaService {
 	/*
 	 * @method Name : qnaNotices
 	 * @Author : 우명제
-	 * @description : qna게시판 list + 검색 service
+	 * @description : qna게시판 list + 검색 service + 댓글 수 출력
 	 */
 	public HashMap<String, Object> qnaNotices(int pg, String searchType, String keyword)
 			throws ClassNotFoundException, SQLException {
@@ -68,7 +68,11 @@ public class QnaService {
 		}
 
 		int total = qnaDao.getCount(field, query);
-
+		
+     	for(int i=0;i<list.size();i++){
+          int cmtCount = qnaDao.qnaCmtCount(list.get(i).getQna_index());
+          list.get(i).setQna_cmtCount(cmtCount);
+     	}
 		int allPage = (int) Math.ceil(total / (double) pagesize);
 
 		int block = 10;

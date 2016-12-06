@@ -26,7 +26,7 @@ public class CustomerQnaDTO {
 	private Date qna_date;
 	private int qna_count;     
 	private int qna_status;
-	
+	private int qna_cmtCount;
 	public int getQna_index() {
 		return qna_index;
 	}
@@ -99,14 +99,19 @@ public class CustomerQnaDTO {
 	public void setQna_status(int qna_status) {
 		this.qna_status = qna_status;
 	}
+	public int getQna_cmtCount() {
+		return qna_cmtCount;
+	}
+	public void setQna_cmtCount(int qna_cmtCount) {
+		this.qna_cmtCount = qna_cmtCount;
+	}
+	
 	@Override
 	public String toString() {
 		return "CustomerQnaDTO [qna_index=" + qna_index + ", member_id=" + member_id + ", qna_depth=" + qna_depth
 				+ ", qna_step=" + qna_step + ", qna_refer=" + qna_refer + ", qna_file=" + qna_file + ", file=" + file
 				+ ", qna_title=" + qna_title + ", qna_content=" + qna_content + ", qna_date=" + qna_date
-				+ ", qna_count=" + qna_count + ", qna_status=" + qna_status + "]";
+				+ ", qna_count=" + qna_count + ", qna_status=" + qna_status + ", qna_cmtCount=" + qna_cmtCount + "]";
 	}
-	
-	
-	
+		
 }
