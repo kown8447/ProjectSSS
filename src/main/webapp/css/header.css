@@ -1,6 +1,6 @@
 .header_top {
 	height: 10px;
-	background: #71BB1E;
+	background: #3EAB0C;
 }
 
 .menu {
@@ -34,7 +34,7 @@
 }
 
 .navbar .nav>li>a {
-	color: #71BB1E !important;
+	color: #3EAB0C !important;
 	float: none;
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
@@ -86,7 +86,7 @@
 	font-family: 'Roboto', sans-serif;
 	letter-spacing: 1.322px;
 	color: #000 !important;
-	border-right: 6px solid #71BB1E;
+	border-right: 6px solid #3EAB0C;
 	border-left: 1px solid #efefef;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
-	background-color: #71BB1E;
+	background-color: #3EAB0C;
 	color: #262626;
 	text-decoration: none;
 }

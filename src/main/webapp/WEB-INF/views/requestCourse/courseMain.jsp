@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h4><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>&nbsp;수강안내</h4>
-<br><br>
-<img src="${pageContext.request.contextPath}/images/information.png"/>
+
+<div class="row" style="width: 80%; margin: auto;">
+	<img src="${pageContext.request.contextPath}/images/information.jpg"/>
+</div>
