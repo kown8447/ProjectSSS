@@ -52,8 +52,10 @@
 		<input type="hidden" id="subject_name" value=${list.subject_name }>
 	<form action="postRequestSubject.htm" enctype="multipart/form-data" method="post">
 	
+	<input type="hidden" id="professor_code" value=${list.professor_code }>
 	<input type="hidden" value="${list.subject_code }" name="subject_code">
 	<input type="hidden" value="${list.success_check }" name="success_check">
+
 	
 	<div class="row">
 		<!-- 건물  -->
@@ -63,7 +65,7 @@
 
 		</select>
 		<label>시간</label> <div id="period" name="period"></div>
-	
+		<div id="mytime" name="mytime"></div>
 		<label>강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filename"><br>
 			
 		</div>

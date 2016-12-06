@@ -87,7 +87,6 @@ var select = '';
 						   	semester_code : $("#semester"+btnIndex).val(), 
 						   	record_level: $('#grade_'+btnIndex).val(), 
 							
-							
 						},
 						success : (function(data){
 							alert("성공스");

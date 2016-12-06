@@ -77,9 +77,11 @@ public interface LectureMgDAO {
 	public RecordDTO select_record(String student_code);
 	public String maxRecord_code(); 
 	public void update_record(CustomLectureMgDTO dto);
-	public String select_Recordlevel(String student_code,String subject_code);
-	public List<String> select_reStudy(String subject_code,String student_code);
+	public String select_Recordlevel(String student_code,String subject_name);
+	public List<String> select_reStudy(String subject_name,String student_code);
 	public void update_RetakeCheck(String record_code);
 	public String select_Rejection(String subject_code);
 	public List<String> select_BuildingName();
+	public List<String> select_MyTime(String professor_code); 
+	public String select_subjectname(String subject_code);
 }

@@ -35,22 +35,37 @@ public class CustomLectureMgDTO {
 	private String member_phone;  //학생폰번
 	private String record_code;    //성적코드
 	private String record_level;  //성적
-	private int personal_Semester;
+	private int personal_semester;
 	private String reject_reason;
+	private int grade;
+	private int record_semester;
 	
 	
 
+	
+	public int getRecord_semester() {
+		return record_semester;
+	}
+	public void setRecord_semester(int record_semester) {
+		this.record_semester = record_semester;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	public String getReject_reason() {
 		return reject_reason;
 	}
 	public void setReject_reason(String reject_reason) {
 		this.reject_reason = reject_reason;
 	}
-	public int getPersonal_Semester() {
-		return personal_Semester;
+	public int getPersonal_semester() {
+		return personal_semester;
 	}
-	public void setPersonal_Semester(int personal_Semester) {
-		this.personal_Semester = personal_Semester;
+	public void setPersonal_semester(int personal_semester) {
+		this.personal_semester = personal_semester;
 	}
 	public String getStudent_code() {
 		return student_code;
@@ -254,7 +269,8 @@ public class CustomLectureMgDTO {
 				+ before_name + ", classroom_name=" + classroom_name + ", member_id=" + member_id + ", member_name="
 				+ member_name + ", student_code=" + student_code + ", member_email=" + member_email + ", member_phone="
 				+ member_phone + ", record_code=" + record_code + ", record_level=" + record_level
-				+ ", personal_Semester=" + personal_Semester + "]";
+				+ ", personal_Semester=" + personal_semester + ", reject_reason=" + reject_reason + ", grade=" + grade
+				+ ", record_semester=" + record_semester + "]";
 	}
 	
 	

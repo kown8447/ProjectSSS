@@ -16,17 +16,23 @@ $(function(){
 				{
 					url : "lecturePeriod.htm",
 					dataType : "json",
+					data :{
+						professor_code : $("#professor_code").val()
+					},
 					success : function(data){
 					
 						$.each(data.buildinglist,function(index,value){
 							
 							console.log(value.building_name);
-							$("#building").append("<option value='"+index+"'>"+value+"</option>");
+							$("#building").append("<option value='B_00"+index+"'>"+value+"</option>");
 						})
 						$.each(data.periodlist,function(index,value){
 							$('#PERIOD_START_'+index).html(value.period_start);
 						})
 						
+						$(data.myclass).each(function(index,elt){
+							$("#mytime").append("<ul>"+elt+"</ul>");
+						})
 						
 					}
 				}
@@ -64,7 +70,7 @@ $(function(){
                   url : "requestclassroom.htm",
                   data : {
                      classroom_code : $("#classroom").val(),
-   
+                     
                   },
                   dataType : "json",
                   success : function(data){
@@ -84,66 +90,104 @@ $(function(){
                   }
                   
                }
-               )
+      		)
          
       
       })
 
-      $("td").click(function(){
-         
+    /*  $("td").click(function(){
+         }
 
-         if($("#classroom").val()=="없음" || $("#classroom").val()=="" || $("#building").val()=="없음" || 
-               $("#building").val() == ""){
-            alert("강의실을 선택해주세요");      
-            return false;
-         }else{
-               if(($(this).html()) != ""){
-                  alert("중복입니다")
-                  return false;}
-               else{
-               
-                     if(credit <= count){
-                     alert("그만넣어");
-                     return false;
-                     }else{
-                        console.log("else탐");
-                     $(this).text($('#subject_name').val());
-                     $(this).css("background","#47C83E");
-                     count+=1;
-                  }
-                 }
-                  
-               }
-               
-            })
-            
-            $("#submit").click(function(){
-               if(count != credit){
-                  alert("과목을 다 채워주세요");
-                  return false;
-               }
-               if($("#subject_filesrc").val() == "" || $("#subject_filesrc").val() == null){
-                  alert("강의계획서를 등록해주세요");
-                  return false;
-               }
-            })
-            
-            $("#back").click(function(){
-                  history.go(-1)();
-      })
-         })
-   
+         	  */
+				  
+	  
+         
+		});
+		
       var count = 0;
+      var array = new Array;
+     
       function getvalue(i){ 
-      
+      alert($("#professor_code").val());
       var credit = $("#credit").val();
          
       if(count >= credit){
             return false;
          }
-         else{
-            $("#period").append("<input type=hidden class=myclass name=period_code value="+i+">");
-            count+=1;
+         else{    	 
+        	 var choice = true;
+        	 console.log("들어오는 i값 : "+i)
+        	 	for(var a = 0; a < array.length+1 ; a++ ){
+        	 		if(array[a] == i){
+        	 			alert("중복입니당당숭당당");
+        	 			
+        	 			return choice;
+            	}
+            }
          }
-            console.log(count);
-         }
+      		$.ajax(
+      				{
+      					url : "lectureRemoveTime.htm",
+      					
+      					data : {
+      						professor_code : $("#professor_code").val(),
+      						choice_code : i
+      					},
+      					dataType : "json",
+      					success : function(data){
+      						 if($("#classroom").val()=="없음" || $("#classroom").val()=="" || $("#building").val()=="없음" || 
+        				               $("#building").val() == ""){
+        				            alert("강의실을 선택해주세요");  
+        				            return false;
+      						 }else{
+					         			if($("#"+i).html() != ""){
+					         				alert("이미 다른 과목이 있습니다.");
+						         			return false;
+					         			}
+					         			else{
+					         					console.log("성공");
+					         					if(data.choice == "성공"){
+				      							$("#period").append("<input type=text class=myclass name=period_code value="+i+">");
+				          			      		array.push(i); 
+				          			      		
+				          			            console.log("배열:"+array);
+				          			            $("#"+i).text($('#subject_name').val());
+				          			            $("#"+i).css("background","#47C83E");
+				          			            count+=1;
+					         					}
+					         					else{
+				      							alert("이미 다른 강의가 있는 시간입니다.");
+				      							return false;
+				      						}
+					         			}
+      						 		}
+	      				            	   	if(credit < count){
+	      				                     alert("더 이상 추가하실 수 없습니다.");
+	      				                     return false;
+	      				                    
+      				                     }
+      				            	   	}
+
+      							}
+      				
+      			  			);
+      		
+      				}
+      
+      $("#submit").click(function(){
+          
+          if(count != credit){
+             alert("과목을 다 채워주세요");
+             return false;
+          }
+          if($("#subject_filesrc").val() == "" || $("#subject_filesrc").val() == null){
+             alert("강의계획서를 등록해주세요");
+             return false;
+          }
+       })
+       
+       $("#back").click(function(){
+             history.go(-1)();
+       })
+       
+ 
