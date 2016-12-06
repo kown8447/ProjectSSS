@@ -26,6 +26,22 @@ $(function() {
         $('#insertLab_form').submit();
      });
 	
+     $('#edit_college').click(function(){
+         $('#updateColleage_form').submit();
+     });
+     $('#college_reg').click(function(){
+         $('#insertCollege_form').submit();
+     });
+     
+     $('#edit_depart').click(function(){
+         $('#updateDepartment_form').submit();
+     });
+     $('#departmentreg').click(function(){
+         $('#insertDepartment_form').submit();
+     });
+     
+     
+     
 		
 		//빌딩
 		$('#bdexcelUp').click(function() {
