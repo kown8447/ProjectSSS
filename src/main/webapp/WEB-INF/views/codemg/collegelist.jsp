@@ -7,6 +7,8 @@
 		<thead>
 			<tr>
 				<td>단대코드</td>
+				<td>건물이름</td>
+				<td>사무실이름</td>
 				<td>사무실코드</td>
 				<td>이름</td>
 				<td>설명</td>
@@ -16,6 +18,8 @@
 			<tbody>
 				<tr>
 					<td>${cl.college_code}</td>
+					<td>${cl.building_name}</td>
+					<td>${cl.college_name}</td>
 					<td>${cl.office_code}</td>
 					<td>
 						<a href="selectCollege.htm?college_code=${cl.college_code}">

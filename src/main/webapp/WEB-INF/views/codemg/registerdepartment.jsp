@@ -56,13 +56,7 @@
 						<input type="text" id="graduation_credit " name="graduation_credit">
 					</td>
 				</tr>
-				<tr>
-					<td>복수전공 가능여부</td>
-					<td>
-						불가능<input type="radio" id="double_possible " name="double_possible" value="0">
-						가능<input type="radio" id="double_possible " name="double_possible" value="1"><br>
-					</td>
-				</tr>
+				<input type="hidden" id="double_possible " name="double_possible" value="1"><br>
 			</table>
 			<input type="submit" value="등록하기">
 		</form>

@@ -73,14 +73,6 @@
 					</li>
 					
 					<se:authorize access="hasRole('ROLE_ADMIN')">
-						<%-- <li class="dropdown fadeInDown animated d2">
-							<a href="#">관리자 메뉴</a>
-							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
-								<li><a href="${pageContext.request.contextPath}/member/code.htm">코드관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/oprequest/list.htm">개설과목 관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registerstructure.htm">건물 관리</a></li>
-							</ul>
-						</li> --%>
 						<li class="dropdown fadeInDown animated d2">
 							<a href="#">건물관리</a>
 							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
@@ -96,7 +88,7 @@
 								<li><a href="${pageContext.request.contextPath}/member/registerstudent.htm">학생등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerregister.htm">등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registercollege.htm">단대 등록</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registerdepartment.htm">학부 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerdepartment.htm">학과 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerscsystem.htm">장학제도 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerscholarship.htm">장학 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registermjrecord.htm">부전공 등록</a></li>
