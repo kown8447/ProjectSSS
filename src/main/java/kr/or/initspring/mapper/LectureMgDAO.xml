@@ -235,4 +235,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_subjectname" resultType="String">
 		select subject_name from subject where subject_code = #{param1}
 	</select>
+	
+	<select id="select_recordlevel" resultType="String">
+		select record_level from record where student_code = #{param1} AND semester_code = #{param2} AND subject_code= #{param3}
+	</select>
+	
 </mapper>

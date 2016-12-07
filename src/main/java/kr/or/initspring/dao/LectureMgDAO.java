@@ -84,4 +84,5 @@ public interface LectureMgDAO {
 	public List<String> select_BuildingName();
 	public List<String> select_MyTime(String professor_code); 
 	public String select_subjectname(String subject_code);
+	public String select_recordlevel(String student_code ,String semester_code,String subject_code);
 }

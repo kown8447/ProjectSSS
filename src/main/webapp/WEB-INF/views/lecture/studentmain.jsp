@@ -29,6 +29,7 @@
 	
 	<c:forEach items="${myclass }" var="y">
 		<input type="hidden" id="d" value="${y.subject_code }">
+		<input type="hidden" id="f" value="${y.student_code }">
 	</c:forEach>
 	
 	

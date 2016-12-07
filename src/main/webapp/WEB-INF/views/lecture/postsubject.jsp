@@ -102,7 +102,8 @@
 			
 			</table>
 		
-				<input type="submit" id="submit" value="제출">
+				<button id="submit" class="btn btn-success">제출</button>
+				<button id="back" class="btn btn-danger">돌아가기</button>
 			
 			</form>
 		</div>		
