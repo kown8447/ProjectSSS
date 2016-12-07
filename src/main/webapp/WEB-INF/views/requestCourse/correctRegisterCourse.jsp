@@ -4,7 +4,7 @@
 <script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
 <h4>▶&nbsp;수강정정</h4><br><br> 
 
-<div class="row" style="width: 80%; margin: auto;">
+<div class="row">
 	<div class="col-md-5">
 			<form class="form-inline" onSubmit='return false'>
 				<select id="real_searchType" class="form-control" style="font-size: small">
