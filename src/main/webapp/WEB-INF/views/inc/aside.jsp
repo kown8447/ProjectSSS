@@ -27,13 +27,12 @@
 		</se:authorize> <br><br><br>
 		<div style="margin: auto;">
 			<se:authorize access="hasAnyRole('ROLE_STUDENT','ROLE_PROFESSOR','ROLE_ADMIN')">
-				<a href="${pageContext.request.contextPath}/member/edit.htm"> <input
-					type="button" class="btn btn-sm btn-warning" value="회원정보수정">
+				<a href="${pageContext.request.contextPath}/member/edit.htm"> 
+				<input type="button" class="btn btn-sm btn-success" value="회원정보수정">
 				</a>
 			</se:authorize>
 			<se:authorize access="hasRole('ROLE_STUDENT')">
-				<button class="btn btn-success btn-sm" id="viewTimetable"
-					data-toggle="modal">시간표조회</button>
+				<button class="btn btn-sm btn-danger" id="viewTimetable" data-toggle="modal">시간표조회</button>
 			</se:authorize>
 		</div>
 	</ul>
