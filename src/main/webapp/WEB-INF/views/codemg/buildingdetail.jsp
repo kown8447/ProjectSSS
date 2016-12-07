@@ -33,10 +33,11 @@
       </div>         
    </div>
    <br><br>
-   
 </form>
 <div align="center">
-   <a href="buildingList.htm"><button class="btn btn-default">목록</button></a> &nbsp;&nbsp;<button type="submit" id="edit_building" class="btn btn-success">수정하기</button>
+   <a href="buildingList.htm"><button class="btn btn-default">목록</button></a> &nbsp;&nbsp;
+   <button type="submit" id="edit_building" class="btn btn-success">수정하기</button>
 </div>
+<div style="height:15%;"></div>	
 </div>
    

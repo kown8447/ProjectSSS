@@ -76,10 +76,10 @@
 						<li class="dropdown fadeInDown animated d2">
 							<a href="#">건물관리</a>
 							<ul class="firstlevel dropdown-menu sub-menu" id="adminMenu" style="display: none;">
-								<li><a href="${pageContext.request.contextPath}/member/registerbuilding.htm">건물 관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registerclassroom.htm">강의실 관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registeroffice.htm">사무실 관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registerlaboratory.htm">연구실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/buildingList.htm">건물 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/showclasslist.htm">강의실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/showofficelist.htm">사무실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/lablist.htm">연구실 관리</a></li>
 							</ul>
 						</li>
 						<li class="dropdown fadeInDown animated d2">

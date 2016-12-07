@@ -13,8 +13,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class = "row">
-<div class = "col-sm-1"></div>
-<div class="col-sm-7"  >
+<div class = "col-sm-2"></div>
+<div class="col-sm-6"  >
 <h4>▶&nbsp;즐겨찾기 설정 </h4><br><br>
 <p style="color:blue;">(즐겨찾기 바구니 안에  원하는 메뉴를 드레그 해주세요.)</p>
 		<div id="gallery">
@@ -212,5 +212,5 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<div class="col-sm-1"></div>
+	<div class="col-sm-2"></div>
 </div>

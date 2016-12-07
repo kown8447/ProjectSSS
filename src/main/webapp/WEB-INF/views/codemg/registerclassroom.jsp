@@ -3,65 +3,60 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
-<script type="text/javascript">
 
-</script>
-<div class="container" style="width:60%">
-   <h4>▶&nbsp;강의실 등록 </h4>
-   <br><br>
-   <div id="classroomRegister" style="width:90%; margin: auto;">
+<div class="container" style="width:65%">
+   <h4>▶&nbsp;강의실 등록 </h4> <br><br>
+   
       <form action="registerClassroom.htm" method="post" id="registerClassroom_form">
-         <table class="table">
-            <tr>
-               <td>건물코드</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <select id="building_code" name="building_code" class="form-control">
+        <div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">건물코드</label>
+			<div class="col-sm-6">
+				<select id="building_code" name="building_code" class="form-control">
                         <c:forEach items="${building}" var="bd">
                            <option value="${bd.building_code}">${bd.building_name}(${bd.building_code})</option>
                         </c:forEach>
-                     </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>강의실 이름</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <input type="text" name="classroom_name" id="classroom_name" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>수용인원</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <input type="text" name="seat" id="seat" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>강의실 타입</td>
-               <td>
-                  <div class="form-group">   
-                     <label class="radio-inline">
+                 </select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">주소</label>
+			<div class="col-sm-6">
+				<input type="text" name="classroom_name" id="classroom_name" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">수용인원</label>
+			<div class="col-sm-6">
+				<input type="text" name="seat" id="seat" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">강의실 타입</label>
+			<div class="col-sm-6">
+				 <label class="radio-inline">
                         일반강의실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0" id="classroom_type" name="classroom_type">
                      </label>
                      <label class="radio-inline">
                         실습실&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="1" id="classroom_type" name="classroom_type">
                      </label>
-                  </div>
-               </td>
-            </tr>
-         </table>
+			</div>
+		</div>
+		</div>
       </form>
+      
+      <br><br>
       <div align="center">
          <a href="showclasslist.htm"><button class="btn btn-default">강의실 목록</button></a>
          <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
          <input type="button" value="등록" class="btn btn-success" id="classreg">
       </div>
+      <div style="height:15%;"></div>
    </div>   
-</div>
+
 
 <div class="modal fade" id="layerpop">
    <div class="modal-dialog modal-sm">
