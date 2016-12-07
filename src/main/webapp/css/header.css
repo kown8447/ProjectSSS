@@ -1,6 +1,6 @@
 .header_top {
 	height: 10px;
-	background: #3EAB0C;
+	background: #006f37;
 }
 
 .menu {
@@ -29,12 +29,12 @@
 .navbar .nav>li>a:hover, .navbar .nav>li>a:active, .navbar .nav>li>a:focus,
 	.navbar .nav>li>a.active, .navbar .nav>.active>a, .navbar .nav>.active>a:hover,
 	.navbar .nav>.active>a:focus, .active-menu {
-	background: #3EAB0C !important;
+	background: #efefef !important;
 	color: #000 !important;
 }
 
 .navbar .nav>li>a {
-	color: #3EAB0C !important;
+	color: #000000 !important;
 	float: none;
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
@@ -86,7 +86,7 @@
 	font-family: 'Roboto', sans-serif;
 	letter-spacing: 1.322px;
 	color: #000 !important;
-	border-right: 6px solid #3EAB0C;
+	border-right: 6px solid #006f37;
 	border-left: 1px solid #efefef;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
-	background-color: #3EAB0C;
+	background-color: #efefef;
 	color: #262626;
 	text-decoration: none;
 }
