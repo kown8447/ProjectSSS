@@ -16,7 +16,7 @@
 <br>
 <br>
 <div class="row">
-	<div class="col-sm-5">
+	<div class="col-sm-4">
 		<div id="gallery">
 			<table class="table table-hover">
 				<tr>
@@ -179,47 +179,53 @@
 		</div>
 	</div>
 
-	<div id="box" class="col-sm-5">
-		<h4>
-			<span>☆</span> 즐겨찾기
-		</h4>
-		<ul id="gallery_favorite">
-			<c:forEach items="${favoLinks}" var="link">
-				<c:choose>
-					<c:when test="${link.link_type==0}">
-						<li id="stu_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==1}">
-						<li id="enr_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==2}">
-						<li id="prof_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==3}">
-						<li id="bui_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==4}">
-						<li id="aAdmin_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==5}">
-						<li id="pAdmin_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:when test="${link.link_type==6}">
-						<li id="oAdmin_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:when>
-					<c:otherwise>
-						<li id="all_${link.link_code}_favorite"><button
-								class="btn btn-success">${link.link_name}</button></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		</ul>
+	<div id="box" class="col-sm-4">
+		<table class="table table-hover">
+			<tr>
+				<th>즐겨찾기</th>
+			</tr>
+			<tr>
+				<td>
+					<ul id="gallery_favorite">
+						<c:forEach items="${favoLinks}" var="link">
+							<c:choose>
+								<c:when test="${link.link_type==0}">
+									<li id="stu_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==1}">
+									<li id="enr_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==2}">
+									<li id="prof_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==3}">
+									<li id="bui_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==4}">
+									<li id="aAdmin_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==5}">
+									<li id="pAdmin_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:when test="${link.link_type==6}">
+									<li id="oAdmin_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:when>
+								<c:otherwise>
+									<li id="all_${link.link_code}_favorite"><button
+											class="btn btn-success">${link.link_name}</button></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>

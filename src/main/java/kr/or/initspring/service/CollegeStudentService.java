@@ -72,9 +72,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : viewStudentRecordInfo
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description 학생이 자신의 성적정보 열람을 요청했을시 전체성적을 가져오는 함수
 	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
@@ -91,9 +89,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : viewStudentRecordAjax
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description 학생의 비동기 요청에 대해 학기별 성적정보를 찾아주는 함수
 	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
@@ -111,9 +107,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : recordListModelSeting
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description 비동기 요청과 일반 요청의 공통 로직을 분리하여 정리
 	 */
 	public void recordListModelSeting(CollegeStudentDAO collegestudentdao, Model model,
@@ -191,9 +185,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : viewRegisterInfo
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description 학생의 등록, 장학 정보를 열람하는 함수
 	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
@@ -246,9 +238,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : creditCalculatorInF
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description F학점을 포함한 학점평균을 구하는 함수
 	 */
 	public float creditCalculatorInF(List<StudentRecordDTO> recordList) {
@@ -288,9 +278,7 @@ public class CollegeStudentService {
 
 	/*
 	 * @method Name : creditCalculatorOutF
-	 * 
 	 * @Author : 최준호
-	 * 
 	 * @description F학점을 제외한 학점평균을 구하는 함수
 	 */
 	public float creditCalculatorOutF(List<StudentRecordDTO> recordList) {
