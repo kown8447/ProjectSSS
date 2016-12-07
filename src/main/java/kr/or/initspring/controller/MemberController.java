@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -491,10 +492,10 @@ public class MemberController{
 	}
 	
 	@RequestMapping("typeofcodelist.htm")
-	public String viewtypecodelist(String code_type, Model model){
+	public String viewtypecodelist(String code_type,String keyword,String searchType, Model model){
 		
 		System.out.println("컨트롤러에서의 코드타입 " +code_type);
-		List<CodeMgDTO> codelist = codeservice.conditioncodelist(Integer.parseInt(code_type));
+		List<CodeMgDTO> codelist = codeservice.conditioncodelist(Integer.parseInt(code_type),keyword,searchType);
 		model.addAttribute("codelist", codelist);
 		model.addAttribute("typeofcode", code_type);
 		return "codemg.codelist";
@@ -684,7 +685,6 @@ public class MemberController{
 		
 		List<BuildingDTO> buildingList = codeservice.buildingList();
 		model.addAttribute("building", buildingList);
-		
 		return "codemg.buildinglist";
 	}
 	
@@ -927,6 +927,7 @@ public class MemberController{
 		
 		List<ClassroomDTO> classlsit =  codeservice.classList();
 		model.addAttribute("classlist", classlsit);
+		
 		return "codemg.classroomlist";
 	}
 	
@@ -1414,10 +1415,10 @@ public class MemberController{
 	
 	@RequestMapping("showclasslist.htm")
 	public String showclasslist(Model model){
-		
 		List<ClassBuildingDTO> classlist = codeservice.showclasslist();
 		model.addAttribute("classlist", classlist);
-		
+		List<BuildingDTO> buildingList = codeservice.buildingList();
+		model.addAttribute("buildingList", buildingList);
 		return "codemg.classroomlist";
 	}
 	
@@ -1468,6 +1469,17 @@ public class MemberController{
 		List<DepartmentLeaderDTO> list= codeservice.getDepartmentLeaderList();
 		model.addAttribute("departmentLeaderList",list );
 		return "codemg.departmentLeaderList";
+	}
+	
+	@RequestMapping("classroomBuildingSelect.htm")
+	public View classroomBuildingSelect(String buildingCode,Model model){
+		List<ClassBuildingDTO> classroomList= new ArrayList<ClassBuildingDTO>();
+		List<ClassBuildingDTO> list=codeservice.classroomBuildinSelect(buildingCode);
+		if(list!=null&&list.size()!=0){
+			classroomList=list;
+		}
+		model.addAttribute("classroomList", classroomList);
+		return jsonview;
 	}
 }
 

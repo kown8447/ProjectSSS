@@ -136,13 +136,16 @@ public class CodeService {
 		return codelist;
 	}
 
-	public List<CodeMgDTO> conditioncodelist(int code_type) {
+	public List<CodeMgDTO> conditioncodelist(int code_type, String keyword, String searchType) {
 
 		System.out.println("서비스에서의 코드 타입" + code_type);
-
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-		List<CodeMgDTO> codelist = dao.typeofcodelist(code_type);
-
+		List<CodeMgDTO> codelist= new ArrayList<CodeMgDTO>();
+		if(keyword==null||searchType==null){
+			codelist = dao.typeofcodelist(code_type);
+		}else{
+			codelist = dao.typeofcodelistSearch(code_type,keyword,searchType);
+		}
 		return codelist;
 	}
 
@@ -896,7 +899,6 @@ public class CodeService {
 	}
 
 	public List<ClassroomDTO> classList() {
-
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ClassroomDTO> classroomlist = dao.classlist();
 		return classroomlist;
@@ -1158,7 +1160,7 @@ public class CodeService {
 
 		try {
 			int state = dao.getOfficeState(office_code);
-			if (state == 0){
+			if (state == 0) {
 				dao.insertCollege(college);
 				result = dao.updateofficepossible(office_code);
 			} else {
@@ -1194,18 +1196,18 @@ public class CodeService {
 
 		return departmentlist;
 	}
-	
-	//학부 등록 서비스
+
+	// 학부 등록 서비스
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public synchronized int insertDepartment(DepartmentDTO department) {
-		
+
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		String office_code = department.getOffice_code();
 		int result = 0;
-		
+
 		try {
 			int state = dao.getOfficeState(office_code);
-			if (state == 0){
+			if (state == 0) {
 				dao.insertDepartment(department);
 				result = dao.updateofficepossible(office_code);
 			} else {
@@ -1216,9 +1218,8 @@ public class CodeService {
 		}
 
 		return result;
-		
+
 	}
-	
 
 	public DepartmentDTO selectDepartment(String department_code) {
 
@@ -1284,9 +1285,9 @@ public class CodeService {
 		List<RegisterDTO> registerdto = null;
 		List<StStateDTO> ststatedto = new ArrayList<StStateDTO>();
 
-		try{
+		try {
 			registerdto = dao.getRegister();
-			for(RegisterDTO dto : registerdto){
+			for (RegisterDTO dto : registerdto) {
 				ststatedto.add(dao.getStState(dto.getStudent_code()));
 			}
 
@@ -1310,7 +1311,7 @@ public class CodeService {
 				smstatedto.setStudent_grade(dto.getGrade());
 				smstatedto.setStudent_semester(dto.getPersonal_semester());
 
-				try{
+				try {
 					dao.insertIntoSmstate(smstatedto);
 				} catch (Exception e3) {
 					System.out.println("e3 : " + e3.getMessage());
@@ -1462,12 +1463,25 @@ public class CodeService {
 
 		return collegeinfolist;
 	}
-	
-	//사용가능 강의실
-	public List<OfficeDTO> possibleOffice(){
+
+	// 사용가능 강의실
+	public List<OfficeDTO> possibleOffice() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<OfficeDTO> officelist = dao.possibleOffice();
-		
+
 		return officelist;
 	}
+
+	public List<ClassBuildingDTO> classroomBuildinSelect(String buildingCode) {
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<ClassBuildingDTO> list = null;
+		if (buildingCode.equals("default")) {
+			list = dao.classbuilding();
+		} else {
+			list = dao.classroomBuildinSelect(buildingCode);
+		}
+		return list;
+	}
+
+
 }

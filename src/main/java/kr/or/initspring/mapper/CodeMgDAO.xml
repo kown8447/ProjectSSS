@@ -52,7 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM CLASSROOM
 	</select>
 	<select id="selectClassroom" resultType="kr.or.initspring.dto.commons.ClassroomDTO">
-		SELECT * FROM CLASSROOM where CLASSROOM_CODE = #{param1}
+		SELECT * FROM CLASSROOM
+		where CLASSROOM_CODE = #{param1}
 	</select>
 	<insert id="insertClassroom">
 		insert into CLASSROOM values(classroom_idx.nextval,
@@ -139,7 +140,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateOffice">
 		update OFFICE set BUILDING_CODE = #{building_code},
-		OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone}, OFFICE_POSSIBLE = ${office_possible} where
+		OFFICE_NAME = #{office_name}, OFFICE_PHONE = #{office_phone},
+		OFFICE_POSSIBLE = ${office_possible} where
 		OFFICE_CODE = #{office_code}
 	</update>
 	<select id="selectOffice" resultType="kr.or.initspring.dto.commons.OfficeDTO">
@@ -148,7 +150,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateLab">
 		UPDATE LABORATORY set LAB_NAME = #{lab_name},
-		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code}, LAB_POSSIBLE = #{lab_possible} where
+		LAB_PHONE = #{lab_phone}, BUILDING_CODE = #{building_code},
+		LAB_POSSIBLE = #{lab_possible} where
 		LAB_CODE = #{lab_code}
 	</update>
 	<update id="updateAcademic">
@@ -167,8 +170,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertScholarship">
 		insert into scholarship(scholarship_code,
 		student_code, sys_code, semester_code,
-		scholarship_payday) values(scholarship_idx.nextval, #{student_code},
-		#{sys_code}, #{semester_code},#{scholarship_payday})
+		scholarship_payday)
+		values(scholarship_idx.nextval, #{student_code},
+		#{sys_code},
+		#{semester_code},#{scholarship_payday})
 	</insert>
 	<update id="updateScholarship">
 		UPDATE SCHOLARSHIP set STUDENT_CODE =
@@ -237,7 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT sj.SUBJECT_NAME,
 		sm.SEMESTER_NAME, op.REGISTED_SEAT FROM OPENED op join SUBJECT sj on
 		op.SUBJECT_CODE = sj.SUBJECT_CODE join SEMESTER sm on op.SEMESTER_CODE
-		= sm.SEMESTER_CODE
+		= sm.SEMESTER_CODE ORDER by sj.SUBJECT_STATE desc
 	</select>
 	<select id="registerlist" resultType="kr.or.initspring.dto.commons.RegisterDTO">
 		select * from REGISTER
@@ -359,7 +364,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="classbuilding" resultType="kr.or.initspring.dto.member.ClassBuildingDTO">
 		SELECT * FROM CLASSROOM cl
-		join building bd on cl.building_code = bd.BUILDING_CODE
+		join building bd on cl.building_code = bd.BUILDING_CODE order by classroom_Code
 	</select>
 	<select id="labbuilding" resultType="kr.or.initspring.dto.member.LabBuildingDTO">
 		select * from laboratory lb
@@ -384,17 +389,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getGetCreditBystudentCode" resultType="int">
 		select
 		nvl(sum(s.subject_credit),0) as get_credit
-		from timetable t join record r on t.subject_code = r.subject_code
-		join subject s on r.subject_code=s.subject_code
-		where t.student_code = #{student_code} and r.record_level != 'F' and
-		r.semester_code = (select max(semester_code) from semester)
+		from timetable t join record
+		r on t.subject_code = r.subject_code
+		join subject s on
+		r.subject_code=s.subject_code
+		where t.student_code = #{student_code}
+		and r.record_level != 'F' and
+		r.semester_code = (select
+		max(semester_code) from semester)
 	</select>
 
 	<select id="getCurrentCreditByStudentCode" resultType="int">
 		select
 		nvl(sum(s.subject_credit),0) as subject_credit
-		from timetable t join subject s on t.subject_code = s.subject_code
-		where t.student_code=#{student_code}
+		from timetable t join
+		subject s on t.subject_code = s.subject_code
+		where
+		t.student_code=#{student_code}
 	</select>
 
 	<insert id="insertIntoSmstate" parameterType="kr.or.initspring.dto.commons.SmStateDTO">
@@ -406,8 +417,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotalCreditByStudentCode" resultType="int">
 		select
 		nvl(sum(s.subject_credit),0)
-		from record r join subject s on r.subject_code = s.subject_code
-		where student_code=#{student_code} and record_level != 'F' and retake_check
+		from record r join subject s on
+		r.subject_code = s.subject_code
+		where student_code=#{student_code} and
+		record_level != 'F' and retake_check
 		= 0
 	</select>
 
@@ -433,11 +446,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="departmentLeaderReset">
-		UPDATE PF_MAJOR set professor_level =0 where DEPARTMENT_CODE =#{param1}
+		UPDATE PF_MAJOR set professor_level =0 where
+		DEPARTMENT_CODE =#{param1}
 	</update>
 	<update id="departmentLeaderSet">
-		UPDATE PF_MAJOR set professor_level=1 where DEPARTMENT_CODE
-		=#{department_code} and professor_code=#{professor_code}
+		UPDATE PF_MAJOR set professor_level=1 where
+		DEPARTMENT_CODE
+		=#{department_code} and
+		professor_code=#{professor_code}
 	</update>
 	<select id="getDepartmentLeaderList" resultType="kr.or.initspring.dto.member.DepartmentLeaderDTO">
 		SELECT
@@ -448,29 +464,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p.MEMBER_ID=m.MEMBER_ID join COLLEGE c on d.COLLEGE_CODE=
 		c.COLLEGE_CODE where pm.professor_level=1
 	</select>
-	
+
 	<delete id="deletePlan">
 		delete from plan
 	</delete>
 	<select id="doubleDepartment" resultType="kr.or.initspring.dto.commons.DepartmentDTO">
-		SELECT * FROM DEPARTMENT where DOUBLE_POSSIBLE = 1
+		SELECT * FROM
+		DEPARTMENT where DOUBLE_POSSIBLE = 1
 	</select>
 	<select id="departmentinfolist" resultType="kr.or.initspring.dto.member.DepartmentInfoDTO">
-		SELECT * FROM DEPARTMENT dp join COLLEGE col on dp.COLLEGE_CODE = col.COLLEGE_CODE join OFFICE o on dp.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+		SELECT * FROM
+		DEPARTMENT dp join COLLEGE col on dp.COLLEGE_CODE = col.COLLEGE_CODE
+		join OFFICE o on dp.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on
+		o.BUILDING_CODE = bd.BUILDING_CODE
 	</select>
 	<select id="scholarshipinfolist" resultType="kr.or.initspring.dto.member.ScholarshipInfoDTO">
-		SELECT * FROM SCHOLARSHIP sch join CODE_MG cm on sch.STUDENT_CODE = cm.CODE join SEMESTER sm on sch.SEMESTER_CODE = sm.SEMESTER_CODE join SC_SYSTEM sc on sch.SYS_CODE = sc.SYS_CODE
+		SELECT * FROM
+		SCHOLARSHIP sch join CODE_MG cm on sch.STUDENT_CODE = cm.CODE join
+		SEMESTER sm on sch.SEMESTER_CODE = sm.SEMESTER_CODE join SC_SYSTEM sc
+		on sch.SYS_CODE = sc.SYS_CODE
 	</select>
 	<select id="collegeinfolist" resultType="kr.or.initspring.dto.member.CollegeInfoDTO">
-		SELECT * FROM COLLEGE col join office o on col.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+		SELECT * FROM COLLEGE
+		col join office o on col.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd
+		on o.BUILDING_CODE = bd.BUILDING_CODE
 	</select>
 	<update id="updateofficepossible">
-		update OFFICE set OFFICE_POSSIBLE = 1 where OFFICE_CODE = #{param1}
+		update OFFICE set OFFICE_POSSIBLE = 1 where
+		OFFICE_CODE = #{param1}
 	</update>
 	<select id="getOfficeState" resultType="integer">
-		SELECT OFFICE_POSSIBLE FROM OFFICE where OFFICE_CODE = #{param1}
+		SELECT OFFICE_POSSIBLE
+		FROM OFFICE where OFFICE_CODE = #{param1}
 	</select>
 	<select id="possibleOffice" resultType="kr.or.initspring.dto.commons.OfficeDTO">
-		SELECT * FROM OFFICE where OFFICE_POSSIBLE = 0
+		SELECT * FROM OFFICE
+		where OFFICE_POSSIBLE = 0
+	</select>
+	<select id="classroomBuildinSelect" resultType="kr.or.initspring.dto.member.ClassBuildingDTO">
+		SELECT * FROM
+		CLASSROOM cl
+		join building bd on cl.building_code = bd.BUILDING_CODE
+		where cl.BUILDING_CODE=#{param1} order by classroom_Code
+	</select>
+	<select id="typeofcodelistSearch" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
+			SELECT * FROM CODE_MG where CODE_TYPE = #{param1} and ${param3} like '%${param2}%'
 	</select>
 </mapper>

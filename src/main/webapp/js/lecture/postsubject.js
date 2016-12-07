@@ -24,7 +24,7 @@ $(function() {
 
 				console.log(value.building_name);
 				$("#building").append(
-						"<option value='B_00" + index + "'>" + value
+						"<option value='" + value.building_code + "'>" + value
 								+ "</option>");
 			})
 			$.each(data.periodlist, function(index, value) {

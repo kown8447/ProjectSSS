@@ -1,6 +1,7 @@
 package kr.or.initspring.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -154,4 +155,6 @@ public interface CodeMgDAO {
 	public List<ScholarshipInfoDTO>  scholarshipinfolist();
 	public int getOfficeState(String office_code);
 	public List<OfficeDTO> possibleOffice();
+	public ArrayList<ClassBuildingDTO> classroomBuildinSelect(String buildingCode);
+	public List<CodeMgDTO> typeofcodelistSearch(int code_type, String keyword, String searchType);
 }
