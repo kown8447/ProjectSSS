@@ -13,12 +13,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class = "row">
-<div class = "col-sm-3"></div>
-<div class="col-sm-4"  >
+<div class = "col-sm-1"></div>
+<div class="col-sm-7"  >
 <h4>▶&nbsp;즐겨찾기 설정 </h4><br><br>
 <p style="color:blue;">(즐겨찾기 바구니 안에  원하는 메뉴를 드레그 해주세요.)</p>
 		<div id="gallery">
-			<table class="table table-hover" style="text-align: center;width:50%;">
+			<table class="table table-hover" style="text-align: center;">
 				<tr>
 					<c:if test="${fn:length(studentLinks)>0}">
 						<th style="text-align: center;">학적조회</th>
@@ -172,7 +172,7 @@
 	<h4 align="left">
 		<span>☆</span> 즐겨찾기 바구니
 	</h4>
-	<div id="box" class="col-sm-2" style="border: 1px solid;border-color: gray;">
+	<div id="box" class="col-sm-3" style="border: 1px solid;">
 		<ul id="gallery_favorite">
 			<c:forEach items="${favoLinks}" var="link">
 				<c:choose>
@@ -212,4 +212,5 @@
 			</c:forEach>
 		</ul>
 	</div>
+	<div class="col-sm-1"></div>
 </div>
