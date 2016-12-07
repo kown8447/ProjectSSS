@@ -87,7 +87,11 @@ public class LectureMgController {
 	
 	@RequestMapping(value="lectureEditOk.htm")
 	public String EditComplete(CustomLectureMgDTO dto){
-		lectureservice.updatesubject(dto);
+		try {
+			lectureservice.updatesubject(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "redirect:lectureView.htm";
 	}
@@ -105,8 +109,6 @@ public class LectureMgController {
 		return "lecture.listview";
 	}
 	
-	
-	
 	@RequestMapping(value="lectureDelete.htm")
 	public String deleteSubject(String subject_code){
 		lectureservice.deleteSubject(subject_code);
@@ -116,7 +118,15 @@ public class LectureMgController {
 	
 	@RequestMapping(value="lecturePost.htm")
 	public String postSubject(String subject_code,Model model,String success_check){
-		CustomLectureMgDTO list = lectureservice.subjectDetail(subject_code);
+		CustomLectureMgDTO list = new CustomLectureMgDTO();
+		
+		//if == 재신청할때
+		if(success_check.equals("2")){
+			lectureservice.deleteForReSubject(subject_code);
+			list = lectureservice.subjectDetail(subject_code);		
+		}else{
+			list = lectureservice.subjectDetail(subject_code);
+		}
 		System.out.println(success_check);
 		
 		List<SemesterDTO> semester = lectureservice.getSemester();
@@ -126,13 +136,14 @@ public class LectureMgController {
 	}
 	
 	@RequestMapping(value="lecturePeriod.htm")
-	public View getPeriod(Model model){
+	public View getPeriod(Model model,String professor_code){
 		List<PeriodDTO> periodlist = lectureservice.getPeriodList();
 		List<String> buildinglist = lectureservice.getBuildingName();
+		List<String> myclass = lectureservice.selectMyTime(professor_code);
 		
-		System.out.println("빌딩이름 : "+buildinglist.get(0));
 		model.addAttribute("periodlist",periodlist);
 		model.addAttribute("buildinglist",buildinglist);
+		model.addAttribute("myclass", myclass);
 		return jsonview;
 	}
 	
@@ -186,13 +197,13 @@ public class LectureMgController {
 	
 	@RequestMapping(value="insertGrade.htm")
 	
-	public String insertGrade(String subject_code,String student_code,String semester_code,String record_level){
+	public String insertGrade(String subject_code,String student_code,String semester_code,String record_level,String subject_name){
 		
 		System.out.println(subject_code);
 		System.out.println(student_code);
 		System.out.println(semester_code);
 		System.out.println(record_level);
-		
+
 		CustomLectureMgDTO dto = new CustomLectureMgDTO();
 		dto.setSubject_code(subject_code);
 		dto.setStudent_code(student_code);
@@ -204,6 +215,30 @@ public class LectureMgController {
 		return "lecture.studentmain";
 		
 	}
+	
+	@RequestMapping(value="lectureRemoveTime.htm")
+	public View selectTimetable(String professor_code,String choice_code,Model model){
+		
+		System.out.println("폴페서코더드:"+professor_code);
+		System.out.println("선택한 코드:"+choice_code);
+		
+		String choice = "성공";
+		
+		List<String> mytime = lectureservice.selectMyTime(professor_code);
+		System.out.println("마타임:"+mytime.size());
+		
+		for(int i = 0; i < mytime.size() ; i++){
+			if(mytime.get(i).equals(choice_code)){
+				choice = "실패";
+			}
+		}
+		model.addAttribute("choice", choice);
+		System.out.println("초이스"+choice);
+		return jsonview;
+		
+	}
+
+	
 	
 	
 	

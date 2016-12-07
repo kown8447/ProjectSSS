@@ -45,3 +45,4 @@
    <button id="delete" class="btn btn-danger">삭제</button>
    <button id="request" class="btn btn-success">신청</button>
    </div>
+
