@@ -88,7 +88,7 @@
 								<li><a href="${pageContext.request.contextPath}/member/registerstudent.htm">학생등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerregister.htm">등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registercollege.htm">단대 등록</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/registerdepartment.htm">학부 등록</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/registerdepartment.htm">학과 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerscsystem.htm">장학제도 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registerscholarship.htm">장학 등록</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/registermjrecord.htm">부전공 등록</a></li>

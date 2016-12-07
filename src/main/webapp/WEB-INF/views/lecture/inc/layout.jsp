@@ -9,6 +9,7 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/requestCourse/layout.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/requestCourse/preRegisterCourse.css" rel="stylesheet">
 
 <link href="${pageContext.request.contextPath}/css/inc/aside.css" rel="stylesheet">

@@ -32,7 +32,7 @@ $(function(){
 					data:{department_code:$('#departmentList').val()},
 					dataType:"json",
 					success:function(data){
-						var text="<table class='table table-hover' style='width:75%;'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_subject_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
+						var text="<table class='table table-hover'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_subject_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 						$.each(data.lists, function(i, elt) {
 							var major="";
 							if(elt.subject_type=='0'){
@@ -86,10 +86,10 @@ $(document).on("click","#order_subject_name",function(){
 			success:function(data){
 				var text="";
 				if($('#order_subject_name').attr('class')=='asc'){
-					text="<table class='table table-hover' style='width:75%;'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='desc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='desc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
+					text="<table class='table table-hover'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='desc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='desc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 				}
 				else{
-					text="<table class='table table-hover' style='width:75%;'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
+					text="<table class='table table-hover'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 				}
 
 				$.each(data.searchList, function(i, elt) {
@@ -148,10 +148,10 @@ $(document).on("click","#order_professor_name",function(){
 			success:function(data){
 				var text="";
 				if($('#order_professor_name').attr('class')=='asc'){
-					text="<table class='table table-hover' style='width:75%;'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='desc'>강의 이름(클릭시 정렬)</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='desc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
+					text="<table class='table table-hover'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='desc'>강의 이름(클릭시 정렬)</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='desc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 				}
 				else{
-					text="<table class='table table-hover' style='width:75%;'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름(클릭시 정렬)</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
+					text="<table class='table table-hover'><tr style='text-align : center;' class='active'><th style='text-align: center'>구분</th><th style='text-align: center' id='order_subject_name' class='asc'>강의 이름(클릭시 정렬)</th><th style='text-align: center'>시간</th><th style='text-align: center' id='order_professor_name' class='asc'>지도 교수</th><th style='text-align: center'>강의 계획서</th><th style='text-align: center'>모집 인원</th></tr>";
 				}
 
 				$.each(data.searchList, function(i, elt) {

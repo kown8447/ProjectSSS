@@ -18,6 +18,11 @@
 	</div>
 	
 	<div class="col-md-7" style="overflow:auto;">
+		<div class="row" style="text-align: left">
+			<p>
+				현재까지의 신청 학점 : <span style="color: blue" id="pre_sum_grade"></span>
+			</p>
+		</div>
 		<form action="" method="post">
 			<table id="timetable" class="table table-condensed" style="table-layout: fixed;font-size: 7pt;" cellpadding="5" align="center">
 				<tr style="font-size: 10pt;">

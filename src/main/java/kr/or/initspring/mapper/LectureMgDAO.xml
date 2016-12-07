@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into BEFORE_SUBJECT (subject_code,before_name) values (#{param1},
 		(select distinct subject_name from SUBJECT where subject_name = #{param2}))
 	</insert>
-	
+
 	<insert id="insert_Liberal" parameterType="String">
 	 	insert into LIBERAL (subject_code,required_choice) values (#{param1},#{param2})
 	</insert>
@@ -117,7 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="update_Subject" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		update SUBJECT set subject_type=#{subject_type},subject_name=#{subject_name}
-		,subject_seats=#{subject_seats},grade_limit=#{grade_limit} where subject_code=#{subject_code}
+		,subject_seats=#{subject_seats},subject_credit=${subject_credit}
+		,grade_limit=#{grade_limit} where subject_code=#{subject_code}
 	</update>
 	
 	<!-- 선수과목을 수정하는 쿼리 -->
@@ -198,7 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
 		insert into RECORD(record_code,student_code,subject_code,semester_code,record_level,record_grade,record_semester,retake_check)
-		values (#{record_code},#{student_code},#{subject_code},#{semester_code},#{record_level},#{record_grade},#{personal_Semester},0)
+		values (#{record_code},#{student_code},#{subject_code},#{semester_code},#{record_level},#{record_grade},#{record_semester},0)
 	</insert>
 	
 	<select id="select_record" resultType="kr.or.initspring.dto.commons.RecordDTO">
@@ -210,12 +211,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="select_Recordlevel" resultType="String">
-		select * from record where student_code = #{param1} AND subject_code = #{param2}
+		 select record_level from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE where student_code = #{param1} AND subject_name = #{param2}
 	</select>
 	
 	<select id="select_reStudy" resultType="String">
 		  select record_code from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE 
-		  where s.subject_code = #{param1} and r.STUDENT_CODE = #{param2}
+		  where s.subject_name = #{param1} and r.STUDENT_CODE = #{param2}
 	</select>
 	
 	<update id="update_RetakeCheck">
@@ -225,4 +226,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_Rejection" resultType="String">
 		  select reject_reason from REJECTION where subject_code = #{param1}
 	</select>
+	
+	<select id="select_MyTime" resultType="String">
+		select period_code from PROFESSOR p join subject s on p.PROFESSOR_CODE = s.PROFESSOR_CODE
+		 join ASK_TIME a on s.subject_code = a.subject_code where p.professor_code = #{param1}
+	</select>
+	
+	<select id="select_subjectname" resultType="String">
+		select subject_name from subject where subject_code = #{param1}
+	</select>
+	
+	<select id="select_recordlevel" resultType="String">
+		select record_level from record where student_code = #{param1} AND semester_code = #{param2} AND subject_code= #{param3}
+	</select>
+	
 </mapper>

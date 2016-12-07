@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="${pageContext.request.contextPath}/js/lecture/subjectupdate.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -56,7 +57,7 @@
 		<tr>
 		<td>과목명</td><td colspan="3"><input type="text" name="subject_name"value="${list.subject_name}"></td></tr>
 		<tr>
-		<td>학점</td><td><input type="number" name="subject_credit" value="${list.subject_credit}"></td>
+		<td>학점</td><td><input type="number" id="subject_credit" name="subject_credit" value="${list.subject_credit}"></td>
 		<td>정원</td><td><input type="number" name="subject_seats" value="${list.subject_seats}"></td></tr>
 		<input type="hidden" name="subject_code" value="${list.subject_code }">
 		<tr>
@@ -64,9 +65,9 @@
 	</table>
 	</div>
 	</div>
-	<input type="submit" value="전송쓰">
+	<button type="submit" id="submit" class="btn btn-success">수정하기</button>
 	</form>
-	<button id="back">돌아가기</button>  
+	<button id="back" class="btn btn-danger">돌아가기</button>  
 
 </body>
 </html>

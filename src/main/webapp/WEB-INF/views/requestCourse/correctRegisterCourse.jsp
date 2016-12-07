@@ -4,7 +4,7 @@
 <script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
 <h4>▶&nbsp;수강정정</h4><br><br> 
 
-<div class="row" style="width: 80%; margin: auto;">
+<div class="row">
 	<div class="col-md-5">
 			<form class="form-inline" onSubmit='return false'>
 				<select id="real_searchType" class="form-control" style="font-size: small">
@@ -19,6 +19,11 @@
 
 
 	<div class="col-md-7" style="overflow:auto;">
+		<div class="row" style="text-align: left">
+			<p>
+				현재까지의 신청 학점 : <span style="color: blue" id="correct_sum_grade"></span>
+			</p>
+		</div>
 		<form action="" method="post">
 			<table id="correct_timetable" class="table table-condensed" style="table-layout: fixed;font-size: 7pt" cellpadding="5" cellspacing="5" align="center">
 				<tr style="font-size: 10pt;">

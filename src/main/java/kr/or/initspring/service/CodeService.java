@@ -42,6 +42,7 @@ import kr.or.initspring.dto.commons.SemesterDTO;
 import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.CollegeInfoDTO;
 import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
@@ -78,7 +79,7 @@ public class CodeService {
 
 	// 학생코드등록
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int insertStudent(StudentCodeRegDTO student){
+	public int insertStudent(StudentCodeRegDTO student) {
 
 		int result = 0;
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -232,20 +233,22 @@ public class CodeService {
 					String StringBirth = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 					String department_code = row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 					int mj_type = Integer.parseInt(row.getCell(4, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
-					
-					
-					if(code==null||code_name==null||StringBirth==null||department_code==null){
+
+					if (code == null || code_name == null || StringBirth == null || department_code == null) {
 						System.out.println("null에러 걸림");
-						System.out.println("Code" + code + "code_type" + code_type + "code_name" + code_name + "StringBirth" + StringBirth 
-								+ "department_code" + department_code + "mj_type" + mj_type);
-						result=false;
+						System.out.println(
+								"Code" + code + "code_type" + code_type + "code_name" + code_name + "StringBirth"
+										+ StringBirth + "department_code" + department_code + "mj_type" + mj_type);
+						result = false;
 						break;
 					}
-					if(code.equals("")||code_name.equals("")||StringBirth.equals("")||department_code.equals("")){
+					if (code.equals("") || code_name.equals("") || StringBirth.equals("")
+							|| department_code.equals("")) {
 						System.out.println("null에러 걸림");
-						System.out.println("Code" + code + "code_type" + code_type + "code_name" + code_name + "StringBirth" + StringBirth 
-								+ "department_code" + department_code + "mj_type" + mj_type);
-						result=false;
+						System.out.println(
+								"Code" + code + "code_type" + code_type + "code_name" + code_name + "StringBirth"
+										+ StringBirth + "department_code" + department_code + "mj_type" + mj_type);
+						result = false;
 						break;
 					}
 					java.util.Date date = null;
@@ -254,7 +257,7 @@ public class CodeService {
 						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 						date = (java.util.Date) formatter.parse(StringBirth.trim());
 					} catch (Exception e) {
-						result=false;
+						result = false;
 					}
 
 					java.sql.Date code_birth = new java.sql.Date(date.getTime());
@@ -270,10 +273,10 @@ public class CodeService {
 					mj.setDepartment_code(department_code);
 
 					codedao.insertMjRecord(mj);
-					
+
 					codedao.insertIntoStState(code);
 					result = true;
-					
+
 				}
 			} catch (Exception e) {
 				System.out.println("insertExcelList : " + e.getMessage());
@@ -351,7 +354,7 @@ public class CodeService {
 				throw e;
 			}
 		}
-		
+
 		model.addAttribute("result", result);
 
 	}
@@ -456,7 +459,7 @@ public class CodeService {
 
 	// 강의실 일괄등록
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public boolean classroomExcelList(MultipartHttpServletRequest request, Model model){
+	public boolean classroomExcelList(MultipartHttpServletRequest request, Model model) {
 
 		System.out.println("파일일괄등록 서비스");
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
@@ -488,7 +491,6 @@ public class CodeService {
 
 					codedao.insertClassroom(classroom);
 
-					
 				}
 			} catch (Exception e) {
 				model.addAttribute("error", "등록에 실패하였습니다.");
@@ -576,11 +578,11 @@ public class CodeService {
 					codedao.insertLab(lab);
 				}
 			} catch (Exception e) {
-				result= false;
+				result = false;
 			}
 
 		}
-	
+
 		model.addAttribute("result", result);
 
 	}
@@ -753,19 +755,17 @@ public class CodeService {
 					Row row = sheet.getRow(i);
 
 					String college_code = row.getCell(0, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String professor_code = row.getCell(1, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String office_code = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String department_name = row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-					String department_description = row.getCell(4, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String office_code = row.getCell(1, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String department_name = row.getCell(2, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+					String department_description = row.getCell(3, Row.CREATE_NULL_AS_BLANK).getStringCellValue();
 					int department_seat = Integer
-							.parseInt(row.getCell(5, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
+							.parseInt(row.getCell(4, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
 					int graduation_credit = Integer
-							.parseInt(row.getCell(6, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
+							.parseInt(row.getCell(5, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
 					int double_possible = Integer
-							.parseInt(row.getCell(7, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
+							.parseInt(row.getCell(6, Row.CREATE_NULL_AS_BLANK).getStringCellValue());
 
 					department.setCollege_code(college_code);
-					department.setProfessor_code(professor_code);
 					department.setOffice_code(office_code);
 					department.setDepartment_name(department_name);
 					department.setDepartment_description(department_description);
@@ -781,7 +781,7 @@ public class CodeService {
 			}
 
 		}
-		
+
 		model.addAttribute("result", result);
 
 	}
@@ -1149,11 +1149,24 @@ public class CodeService {
 		return collegelist;
 	}
 
-	public int insertCollege(CollegeDTO college) {
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	public synchronized int insertCollege(CollegeDTO college) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		String office_code = college.getOffice_code();
+		int result = 0;
 
-		int result = dao.insertCollege(college);
+		try {
+			int state = dao.getOfficeState(office_code);
+			if (state == 0){
+				dao.insertCollege(college);
+				result = dao.updateofficepossible(office_code);
+			} else {
+				return 0;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
 
 		return result;
 	}
@@ -1181,15 +1194,31 @@ public class CodeService {
 
 		return departmentlist;
 	}
-
-	public int insertDepartment(DepartmentDTO department) {
-
+	
+	//학부 등록 서비스
+	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	public synchronized int insertDepartment(DepartmentDTO department) {
+		
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-
-		int result = dao.insertDepartment(department);
+		String office_code = department.getOffice_code();
+		int result = 0;
+		
+		try {
+			int state = dao.getOfficeState(office_code);
+			if (state == 0){
+				dao.insertDepartment(department);
+				result = dao.updateofficepossible(office_code);
+			} else {
+				return 0;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
 
 		return result;
+		
 	}
+	
 
 	public DepartmentDTO selectDepartment(String department_code) {
 
@@ -1241,69 +1270,75 @@ public class CodeService {
 
 	/*
 	 * @method Name : initSemester
+	 * 
 	 * @Author : 권기엽
-	 * @description 학기 초기화 버튼 클릭 시, 관련 테이블 삭제 및 ST_STATE TABLE 상태 업데이트 및 SM_STATE TABLE INSERT 실행
+	 * 
+	 * @description 학기 초기화 버튼 클릭 시, 관련 테이블 삭제 및 ST_STATE TABLE 상태 업데이트 및
+	 * SM_STATE TABLE INSERT 실행
 	 */
-	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class, RuntimeException.class})
-	public boolean initSemester() throws Exception{
+	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
+			RuntimeException.class })
+	public boolean initSemester() throws Exception {
 		boolean result = true;
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<RegisterDTO> registerdto = null;
 		List<StStateDTO> ststatedto = new ArrayList<StStateDTO>();
+
 		try{
 			registerdto = dao.getRegister();
 			for(RegisterDTO dto : registerdto){
 				ststatedto.add(dao.getStState(dto.getStudent_code()));
 			}
-			
-			for(StStateDTO dto : ststatedto){
+
+			for (StStateDTO dto : ststatedto) {
 				SmStateDTO smstatedto = new SmStateDTO();
 				int getCredit = 0;
 				int currentcredit = 0;
 				int totlaCredit = 0;
-				
-				try{
+
+				try {
 					getCredit = dao.getGetCreditBystudentCode(dto.getStudent_code());
 					currentcredit = dao.getCurrentCreditByStudentCode(dto.getStudent_code());
-				}catch(NullPointerException e2){
+				} catch (NullPointerException e2) {
 					throw e2;
 				}
-				
+
 				smstatedto.setGet_credit(getCredit);
 				smstatedto.setRequest_credit(currentcredit);
 				smstatedto.setStudent_code(dto.getStudent_code());
 				smstatedto.setSemester_code(dao.getMaxSemesterCode());
 				smstatedto.setStudent_grade(dto.getGrade());
 				smstatedto.setStudent_semester(dto.getPersonal_semester());
+
 				try{
 					dao.insertIntoSmstate(smstatedto);
-				}catch(Exception e3){
+				} catch (Exception e3) {
 					System.out.println("e3 : " + e3.getMessage());
 					throw e3;
 				}
-				
-				if(dto.getPersonal_semester()==2){
+
+				if (dto.getPersonal_semester() == 2) {
 					dto.setPersonal_semester(1);
-					dto.setGrade(dto.getGrade()+1);
-				}else{
+					dto.setGrade(dto.getGrade() + 1);
+				} else {
 					dto.setPersonal_semester(2);
 				}
-				
-				try{
+
+				try {
 					totlaCredit = dao.getTotalCreditByStudentCode(dto.getStudent_code());
 					dto.setTotal_credit(totlaCredit);
-				}catch(NullPointerException e4){
+				} catch (NullPointerException e4) {
 					throw e4;
 				}
-				try{
+				try {
 					dao.updateStstate(dto);
-				}catch(Exception e5){
+				} catch (Exception e5) {
 					System.out.println("dao.updateStstate(dto) : " + e5.getMessage());
 					throw e5;
 				}
-				
+
 			}
-			
+
 			dao.deletePlan();
 			dao.deleteTimetalbe();
 			dao.deleteReserve();
@@ -1313,7 +1348,7 @@ public class CodeService {
 			dao.deleteLecture();
 			dao.deleteOpened();
 			dao.deleteOpRequest();
-			
+
 		} catch (Exception e) {
 			System.out.println("initSemester : " + e.getMessage());
 			result = false;
@@ -1363,59 +1398,76 @@ public class CodeService {
 
 		return officelist;
 	}
-	
-	public List<ProfessorCodeRegDTO> getProfessorList(String department_code){
-		
+
+	public List<ProfessorCodeRegDTO> getProfessorList(String department_code) {
+
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ProfessorCodeRegDTO> pf_list = dao.getProfessorListByDepartmentCode(department_code);
 		return pf_list;
 	}
-	
-	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class, RuntimeException.class})
+
+	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
+			RuntimeException.class })
 	public boolean setDepartmentLeader(DepartmentLeaderDTO leader) {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-		int result=0;
-		int result2=0;
+		int result = 0;
+		int result2 = 0;
 		try {
-			result= dao.departmentLeaderReset(leader.getDepartment_code());
-			result2=dao.departmentLeaderSet(leader);
+			result = dao.departmentLeaderReset(leader.getDepartment_code());
+			result2 = dao.departmentLeaderSet(leader);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			return false;
 		}
-		if(result==0||result2==0){
+		if (result == 0 || result2 == 0) {
 			return false;
-		}else{
-			return true;	
+		} else {
+			return true;
 		}
 	}
 
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-		List<DepartmentLeaderDTO> list=dao.getDepartmentLeaderList();
+		List<DepartmentLeaderDTO> list = dao.getDepartmentLeaderList();
 		return list;
 	}
-	
-	public List<DepartmentDTO> doubleDepartmentlist(){
+
+	public List<DepartmentDTO> doubleDepartmentlist() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentDTO> doublistdepartmentlist = dao.doubleDepartment();
 		return doublistdepartmentlist;
-		
+
 	}
-	
-	//학부리스트를 뿌려주기 위한 매소드
-	public List<DepartmentInfoDTO> departmentInfoList(){
+
+	// 학부리스트를 뿌려주기 위한 매소드
+	public List<DepartmentInfoDTO> departmentInfoList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentInfoDTO> departmentinfolist = dao.departmentinfolist();
-		
+
 		return departmentinfolist;
 	}
-	
-	//장학정보 리스트 뿌려주기 위한 매소드
-	public List<ScholarshipInfoDTO> scholarshipInfoList(){
+
+	// 장학정보 리스트 뿌려주기 위한 매소드
+	public List<ScholarshipInfoDTO> scholarshipInfoList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ScholarshipInfoDTO> scholarshipinfolist = dao.scholarshipinfolist();
-		
+
 		return scholarshipinfolist;
+	}
+
+	// 단대 정보 리스트를 뿌려주기 위한 매소드
+	public List<CollegeInfoDTO> collegeInfoList() {
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<CollegeInfoDTO> collegeinfolist = dao.collegeinfolist();
+
+		return collegeinfolist;
+	}
+	
+	//사용가능 강의실
+	public List<OfficeDTO> possibleOffice(){
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		List<OfficeDTO> officelist = dao.possibleOffice();
+		
+		return officelist;
 	}
 }

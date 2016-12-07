@@ -12,6 +12,7 @@ import kr.or.initspring.dto.commons.ClassroomDTO;
 import kr.or.initspring.dto.commons.CodeMgDTO;
 import kr.or.initspring.dto.commons.CollegeDTO;
 import kr.or.initspring.dto.commons.DepartmentDTO;
+import kr.or.initspring.dto.commons.DoubleDTO;
 import kr.or.initspring.dto.commons.LaboratoryDTO;
 import kr.or.initspring.dto.commons.MjRecordDTO;
 import kr.or.initspring.dto.commons.OfficeDTO;
@@ -25,6 +26,7 @@ import kr.or.initspring.dto.commons.SmStateDTO;
 import kr.or.initspring.dto.commons.StStateDTO;
 import kr.or.initspring.dto.commons.StudentDTO;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.CollegeInfoDTO;
 import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
@@ -107,6 +109,9 @@ public interface CodeMgDAO {
 	public List<OfiiceBuildingDTO> officebuilding();
 	public List<DepartmentDTO> doubleDepartment();
 	public List<DepartmentInfoDTO> departmentinfolist();
+	public List<CollegeInfoDTO> collegeinfolist();
+	public int updateofficepossible(String office_code);
+	
 	
 	//최대 코드번호 가져오기
 	public String getMaxBuildingCode();	
@@ -121,10 +126,6 @@ public interface CodeMgDAO {
 	public String getMaxDepartmentCode();
 	public int insertmjrecord(String code, String department_code);
 	public List<CodeMgDTO> typeofcodelist(int code_type);
-	
-	
-	
-	
 	
 	///////////// 학기 초기화 시 Transaction 되는 삭제 함수들///////////////
 	public int deleteTimetalbe();
@@ -151,4 +152,6 @@ public interface CodeMgDAO {
 	public int departmentLeaderSet(DepartmentLeaderDTO leader)throws Exception;
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList();
 	public List<ScholarshipInfoDTO>  scholarshipinfolist();
+	public int getOfficeState(String office_code);
+	public List<OfficeDTO> possibleOffice();
 }

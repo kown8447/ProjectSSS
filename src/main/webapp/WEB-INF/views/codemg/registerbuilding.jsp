@@ -14,7 +14,7 @@
                <td>건물명</td>
                <td>
                   <div class="col-sm-6 ">
-                     <input type="text" name="building_name" id=building_name class="form-control ">
+                     <input type="text" name="building_name" id=building_name class="form-control">
                   </div>
                </td>
             </tr>

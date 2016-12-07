@@ -20,12 +20,14 @@ var select = '';
 						url : "selectStudent.htm",
 						data: {
 							subject_code : subject_code,
+			
 						},
 						dataType : "json",
 						success : function(data){
+					
 							$("td").remove();
-							console.log(data);
-						
+							console.log("데이타는:"+data);
+							alert("성공");
 							
 							$.each(data.student,function(index){
 								grade = data.student[index].record_level;
@@ -86,7 +88,6 @@ var select = '';
 							student_code : $("#student_code_"+btnIndex).text(),
 						   	semester_code : $("#semester"+btnIndex).val(), 
 						   	record_level: $('#grade_'+btnIndex).val(), 
-							
 							
 						},
 						success : (function(data){

@@ -461,4 +461,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="scholarshipinfolist" resultType="kr.or.initspring.dto.member.ScholarshipInfoDTO">
 		SELECT * FROM SCHOLARSHIP sch join CODE_MG cm on sch.STUDENT_CODE = cm.CODE join SEMESTER sm on sch.SEMESTER_CODE = sm.SEMESTER_CODE join SC_SYSTEM sc on sch.SYS_CODE = sc.SYS_CODE
 	</select>
+	<select id="collegeinfolist" resultType="kr.or.initspring.dto.member.CollegeInfoDTO">
+		SELECT * FROM COLLEGE col join office o on col.OFFICE_CODE = o.OFFICE_CODE join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
+	</select>
+	<update id="updateofficepossible">
+		update OFFICE set OFFICE_POSSIBLE = 1 where OFFICE_CODE = #{param1}
+	</update>
+	<select id="getOfficeState" resultType="integer">
+		SELECT OFFICE_POSSIBLE FROM OFFICE where OFFICE_CODE = #{param1}
+	</select>
+	<select id="possibleOffice" resultType="kr.or.initspring.dto.commons.OfficeDTO">
+		SELECT * FROM OFFICE where OFFICE_POSSIBLE = 0
+	</select>
 </mapper>

@@ -15,7 +15,7 @@
 				</select> 
 				<input type="text" class="form-control" id="real_keyword" /> 
 				<input type="button" class="btn btn-success" id="real_searchBtn" value="검색"/>
-
+				
 				<div id="fail_result" class="row">
 				
 				</div>
@@ -26,6 +26,11 @@
 
 
 	<div class="col-md-7" style="overflow:auto;">
+		<div class="row" style="text-align: left">
+			<p>
+				현재까지의 신청 학점 : <span style="color: blue" id="sum_grade"></span>
+			</p>
+		</div>
 		<form action="" method="post">
 			<table id="real_timetable" class="table table-condensed" style="table-layout: fixed;font-size: 7pt;" cellpadding="5" cellspacing="5" align="center">
 				<tr style="font-size: 10pt;">

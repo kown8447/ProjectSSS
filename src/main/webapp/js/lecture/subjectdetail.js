@@ -18,6 +18,7 @@ $(function(){
 		});
 		
 		$("#update").click(function(){
+			
 			if(success_check != 0){
 				alert("신청중이므로 수정할 수 없습니다");
 				return false;
@@ -28,16 +29,17 @@ $(function(){
 		});
 		
 		$("#request").click(function(){
-			if(success_check != 0){
-				alert("이미 신청된 과목입니다");
-				return false;
-			}else{
+			if(success_check == 0 || success_check == 2){
 				location.replace("lecturePost.htm?subject_code="+subject_code+"&success_check="+success_check);
 			}
+			else{
+				alert("이미 신청된 과목입니다");
+				return false;
+		}
 		})
 		
 		$("#back").click(function(){
 			history.go(-1)();
 		})
-		
+	
 	})

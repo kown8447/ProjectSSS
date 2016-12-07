@@ -63,9 +63,9 @@ public class lectureService {
 	 * @description : 과목 등록
 	 */
 
-	@Transactional(rollbackFor = { Exception.class, SQLException.class })
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class})
 	public synchronized int insert_Subject(SubjectDTO dto, String subject_name, Principal principal, String required_choice,
-			BeforeSubjectDTO beforedto, MajorDTO majordto, LiberalDTO liberdto, String department_code) {
+			BeforeSubjectDTO beforedto, MajorDTO majordto, LiberalDTO liberdto, String department_code) throws Exception {
 		
 		int result = 0;
 		int before = 0;
@@ -124,7 +124,7 @@ public class lectureService {
 	 */
 	
 	public void selectBefore(String memberid, Model model) {
-	
+		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		PfMajorDTO dto = lecturedao.select_departmentcode(memberid);
 		System.out.println(dto.toString());
@@ -181,8 +181,8 @@ public class lectureService {
 	 * @Author : 조장현
 	 * @description : 과목수정
 	 */
-	@Transactional(rollbackFor = { Exception.class, SQLException.class })
-	public int updatesubject(CustomLectureMgDTO dto){
+	@Transactional(rollbackFor = { Exception.class, SQLException.class, NullPointerException.class, RuntimeException.class})
+	public int updatesubject(CustomLectureMgDTO dto)  throws Exception{
 	
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		
@@ -387,6 +387,18 @@ public class lectureService {
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		List<CustomLectureMgDTO> dto = lecturedao.select_Studentlist(subject_code);
+		//현재 학기코드를 구한다
+		//과목코드, 현재 학기코드, 학번을 조건으로 record 테이블을 select한다
+		
+		System.out.println(dto.get(0).getStudent_code()+"/"+dto.get(0).getSemester_code()+"/"+subject_code);
+		
+		for(int i=0;i<dto.size();i++){
+		String recordLevel=lecturedao.select_recordlevel(dto.get(i).getStudent_code(),dto.get(i).getSemester_code(),subject_code);
+		
+			dto.get(i).setRecord_level(recordLevel);
+			System.out.println("이것이 성적이다:"+dto.get(i).getRecord_level());
+		
+		}
 		
 		return dto;
 	}
@@ -402,18 +414,26 @@ public class lectureService {
 		System.out.println(dto.getStudent_code());
 		String record = lecturedao.maxRecord_code();
 		String record_code = "RC_"+record;
+		String subject_name = lecturedao.select_subjectname(dto.getSubject_code());
 		
 		dto.setRecord_code(record_code);
 		CustomLectureMgDTO state = lecturedao.select_stState(dto.getStudent_code());
-		dto.setRecord_code(record_code);
+		System.out.println("state 정보:"+state.toString());
 		System.out.println("꼭확인해야됨"+dto.toString());
+	
 		
-		String inselectlevel = lecturedao.select_Recordlevel(dto.getStudent_code(), dto.getSubject_code());
+		String inselectlevel = lecturedao.select_Recordlevel(dto.getStudent_code(), subject_name);
 		
-		if(inselectlevel == null || inselectlevel.equals("")){
-			List<String> secondsubject = lecturedao.select_reStudy(dto.getSubject_code(), dto.getStudent_code());
-			if(secondsubject.equals("") || secondsubject == null){
-				for(int i=0; i<secondsubject.size();i++){
+		if(inselectlevel == null || inselectlevel.equals("")){  //현재 성적이 없다면
+			List<String> secondsubject = lecturedao.select_reStudy(subject_name, dto.getStudent_code());
+			System.out.println(secondsubject);
+			
+			dto.setRecord_grade(state.getGrade());
+			dto.setRecord_semester(state.getPersonal_semester());
+		
+			System.out.println("디티오에들어간 record_semester:"+dto.getRecord_semester());
+			if(secondsubject != null){	
+			for(int i = 0; i < secondsubject.size(); i++){
 					System.out.println("재수강탔음");
 					lecturedao.update_RetakeCheck(dto.getRecord_code());
 				}
@@ -430,5 +450,38 @@ public class lectureService {
 		
 		return dto;
 	}
+	
+	/*
+	 * @method Name : deleteForReSubject
+	 * @Author : 조장현
+	 * @description : 재신청 삭제
+	 */
+	
+	public void deleteForReSubject(String subject_code){
+	
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		lecturedao.delete_Rejection(subject_code);
+		lecturedao.delete_Plan(subject_code);
+		lecturedao.delete_Oprequest(subject_code);
+		lecturedao.delete_Ask_Time(subject_code);
+	
+	}
+	
+	/*
+	 * @method Name : selectMyTime
+	 * @Author : 조장현
+	 * @description : 교수가 강의하는 전체 시간 조회
+	 */
+	
+		public List<String> selectMyTime(String professor_code){
+		
+		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		List<String> myclass = lecturedao.select_MyTime(professor_code);
+		
+		return myclass;
+		
+	}
+	
+	
 	
 }

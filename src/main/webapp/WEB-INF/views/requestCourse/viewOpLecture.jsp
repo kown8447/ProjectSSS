@@ -24,7 +24,7 @@
 			<th style="text-align: center">구분</th>
 			<th style="text-align: center" id="order_subject_name" class="asc">강의이름</th>
 			<th style="text-align: center">시간</th>
-			<th style="text-align: center" id="order_professor_name" class="asc">지도교수</th>
+			<th style="text-align: center" id="order_professor_name" class="asc">지도 교수</th>
 			<th style="text-align: center">강의 계획서</th>
 			<th style="text-align: center">모집 인원</th>
 		</tr>
