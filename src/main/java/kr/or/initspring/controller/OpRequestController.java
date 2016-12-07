@@ -89,7 +89,7 @@ public class OpRequestController {
 	*/
 	@RequestMapping("UpdateReject.htm")
 	public String UpdateReject(@RequestParam("code") String subject_code, @RequestParam("rejectReason") String reject_reason) throws Exception{
-		
+		System.out.println(subject_code);
 		String view = "";
 		boolean result = oprequestservice.UpdateReject(subject_code, reject_reason);
 		

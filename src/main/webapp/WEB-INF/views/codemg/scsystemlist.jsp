@@ -4,7 +4,7 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-<h4>▶&nbsp;장학 리스트 </h4>
+<h4>▶&nbsp;장학제도 리스트 </h4>
 <br><br>
 <table class="table" style="text-align: center">
       <thead>

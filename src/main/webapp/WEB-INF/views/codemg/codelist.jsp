@@ -31,17 +31,13 @@
 			<c:forEach items="${codelist}" var="code" varStatus="index">
 				<tbody>
 					<tr>
-						<td><c:choose>
-								<c:when test="${code.code_type ==0}">
-                     학생
-                  </c:when>
-								<c:when test="${code.code_type ==1}">
-                     교수
-                  </c:when>
-								<c:otherwise>
-                     관리자
-                  </c:otherwise>
-							</c:choose></td>
+						<td>
+							<c:choose>
+								<c:when test="${code.code_type ==0}">학생</c:when>
+								<c:when test="${code.code_type ==1}">교수</c:when>
+							<c:otherwise>관리자</c:otherwise>
+							</c:choose>
+						</td>
 						<td id="code${index.count}">${code.code}</td>
 						<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
 						</td>
@@ -53,15 +49,16 @@
 
 			</c:forEach>
 		</table>
+
+		<c:if test="${typeofcode==0}">
+			<a href="registerstudent.htm"><button style="float: right;" class="btn btn-danger">되돌아가기</button></a>
+		</c:if>
+		<c:if test="${typeofcode==1}">
+			<a href="registerprofessor.htm"><button style="float: right;" class="btn btn-danger">되돌아가기</button></a>
+		</c:if>
+		<c:if test="${typeofcode==2}">
+			<a href="registeradmin.htm"><button style="float: right;" class="btn btn-danger">되돌아가기</button></a>
+		</c:if>
+
 	</div>
 </div>
-
-<c:if test="${typeofcode==0}">
-	<a href="registerstudent.htm">되돌아가기</a>
-</c:if>
-<c:if test="${typeofcode==1}">
-	<a href="registerprofessor.htm">되돌아가기</a>
-</c:if>
-<c:if test="${typeofcode==2}">
-	<a href="registeradmin.htm">되돌아가기</a>
-</c:if>

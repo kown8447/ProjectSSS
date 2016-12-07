@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<table>
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="container" style="width:75%">
+<h4>▶&nbsp;리스트 </h4>
+<br><br> 
+<div class="container" style="width:95%">
+<table class="table" style="text-align: center">
 		<thead>
 			<tr>
-				<td>학기코드</td>
-				<td>학기 이름</td>
-				<td>학기 시작일</td>
-				<td>학기 종료일</td>
+				<th style="text-align: center">학기코드</th>
+				<th style="text-align: center">학기 이름</th>
+				<th style="text-align: center">학기 시작일</th>
+				<th style="text-align: center">학기 종료일</th>
 			</tr>
 		</thead>
 		<c:forEach items="${semesterlist}" var="sm" varStatus="index">
@@ -30,4 +34,7 @@
 		</tbody>
 		</c:forEach>
 	</table>
-<a href="registersemester.htm">되돌아가기</a>	
+		<a href="registersemester.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>	
+	</div>
+	
+</div>

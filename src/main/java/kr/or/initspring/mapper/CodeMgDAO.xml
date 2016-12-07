@@ -178,8 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateScholarship">
 		UPDATE SCHOLARSHIP set STUDENT_CODE =
 		#{student_code}, SEMESTER_CODE = #{semester_code}, SCHOLARSHIP_PAYDAY
-		= #{scholarship_payday}, SCHOLARSHIP_RCORDAVG =
-		${scholarship_rcordavg}, SYS_CODE = #{sys_code} where SCHOLARSHIP_CODE
+		= #{scholarship_payday}, SYS_CODE = #{sys_code} where SCHOLARSHIP_CODE
 		= #{scholarship_code}
 	</update>
 	<update id="updateSemester">
