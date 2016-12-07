@@ -33,7 +33,7 @@
                </td>
             </tr>
             <tr>
-               <td>이름</td>
+               <td>학과명</td>
                <td>
                   <div class="col-sm-6 ">
                      <input type="text" name="department_name" id="department_name" class="form-control">
@@ -44,7 +44,7 @@
                <td>정원</td>
                <td>
                   <div class="col-sm-6 ">
-                     <input type="text" id="department_seat " name="department_seat" class="form-control">
+                     <input type="text" id="department_seat" name="department_seat" class="form-control">
                   </div>
                </td>
             </tr>
@@ -52,31 +52,19 @@
                <td>졸업학점(전공,교양)</td>
                <td>
                   <div class="col-sm-6 ">
-                     <input type="text" id="graduation_credit " name="graduation_credit" class="form-control">
+                     <input type="text" id="graduation_credit" name="graduation_credit" class="form-control">
                   </div>
-               </td>
-            </tr>
-            <tr>
-               <td>복수전공 가능여부</td>
-               <td>
-                  <div class="form-group">   
-                           <label class="radio-inline">
-                              불가능&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="double_possible " name="double_possible" value="0">
-                           </label>
-                           <label class="radio-inline">
-                              가능&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="double_possible " name="double_possible" value="1">
-                           </label>
-                       </div>
                </td>
             </tr>
             <tr>
                <td>설명</td>
                <td>
                   <div class="col-sm-12 ">
-                     <textarea id="department_description " name="department_description" class="form-control"></textarea>
+                     <textarea id="department_description" name="department_description" class="form-control"></textarea>
                   </div>
                </td>
             </tr>
+            <input type="hidden" id="double_possible" name="double_possible" value="1">
          </table>
       </form>
       <div align="center">

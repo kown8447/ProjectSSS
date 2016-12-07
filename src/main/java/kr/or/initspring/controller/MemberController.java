@@ -1328,8 +1328,10 @@ public class MemberController{
 	public String selectDepartment(String department_code, Model model){
 		
 		DepartmentDTO department = codeservice.selectDepartment(department_code);
+		List<OfficeDTO> officeslist = codeservice.possibleOffice();
 		System.out.println(department.toString());
 		model.addAttribute("department", department);
+		model.addAttribute("office", officeslist);
 		
 		return "codemg.departmentdetail";
 	}
