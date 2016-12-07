@@ -44,15 +44,16 @@
       
       </c:forEach>
 </table>
-</div>
-</div>
 
 <c:if test="${typeofcode==0}">
-   <a href="registerstudent.htm">되돌아가기</a>
+   <a href="registerstudent.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
 </c:if>
 <c:if test="${typeofcode==1}">
-   <a href="registerprofessor.htm">되돌아가기</a>
+   <a href="registerprofessor.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
 </c:if>
 <c:if test="${typeofcode==2}">
-   <a href="registeradmin.htm">되돌아가기</a>
+   <a href="registeradmin.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
 </c:if>
+
+</div>
+</div>

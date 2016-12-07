@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<table>
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script> 
+<div class="container" style="width:75%">
+<h4>▶&nbsp;등록 리스트 </h4>
+<br><br>
+<div class="container" style="width:95%">
+	<table class="table" style="text-align: center">
 		<thead>
 			<tr>
 				<td>학번</td>
@@ -51,4 +56,6 @@
 			</tbody>
 		</c:forEach>
 	</table>
-	<a href="registerregister.htm">되돌아가기</a>
+	<a href="registerregister.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
+</div>	
+</div>	

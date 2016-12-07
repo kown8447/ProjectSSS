@@ -1277,10 +1277,13 @@ public class MemberController{
 	}
 	
 	@RequestMapping("updateColleage.htm")
-	public String updateCollege(CollegeDTO college){
+	public String updateCollege(CollegeDTO college, Model model){
 		
 		String view = "";
 		int result = codeservice.updateCollege(college);
+		
+		List<OfficeDTO> officelist = codeservice.possibleOffice();
+		model.addAttribute("officelist", officelist);
 		
 		if(result == 1){
 			view = "redirect:collegeList.htm";
@@ -1293,7 +1296,9 @@ public class MemberController{
 	public String collegeDetail(String college_code, Model model){
 		
 		CollegeDTO college = codeservice.collegeDetail(college_code);
+		List<OfficeDTO> officelist = codeservice.possibleOffice();
 		model.addAttribute("college", college);
+		model.addAttribute("officelist", officelist);
 		System.out.println(college.toString());
 		
 		return "codemg.collegedetail";

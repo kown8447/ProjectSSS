@@ -2,18 +2,19 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
    <h4>▶&nbsp;장학 등록 </h4>
    <br><br>
     <div  style="width:90%; margin: auto;">
-      <form action="insertScholarship.htm" method="post" id="studentRegister_form">
+      <form action="insertScholarship.htm" method="post" id="insertScholarship_form">
          <table class="table">
             <tr>
                <td>학번</td>
                <td>   
-                  <div class="col-sm-6"  >   
+                  <div class="col-sm-9"  >   
                      <input type="text" name="student_code" id="student_code"  class="form-control">
                   </div>
                </td>
@@ -21,7 +22,7 @@
             <tr>
                <td>장학코드</td>
                <td>
-                  <div class="col-sm-6" >   
+                  <div class="col-sm-9" >   
                      <select id="sys_code" name="sys_code" class="form-control">
                         <c:forEach items="${sc}" var="sc">
                            <option value="${sc.sys_code}">${sc.scholaship_name}(${sc.sys_code})</option>
@@ -33,10 +34,10 @@
             <tr>
                <td>학기코드</td>
                <td>
-                  <div class="col-sm-6"  >   
+                  <div class="col-sm-9"  >   
                      <select id="semester_code " name="semester_code" class="form-control">
                         <c:forEach items="${semester}" var="sm">
-                           <option value="${sm.semester_code}">${sm.semester_name}/code= ${sm.semester_code}</option>
+                           <option value="${sm.semester_code}">${sm.semester_name}(${sm.semester_code})</option>
                         </c:forEach>
                   </select>
                   </div>
@@ -45,7 +46,7 @@
             <tr>
                <td>지급일</td>
                <td>
-                  <div class="col-sm-6"  >   
+                  <div class="col-sm-9"  >   
                      <input type="text" name="scholarship_payday" id="scholarship_payday" class="form-control">
                   </div>
                </td>

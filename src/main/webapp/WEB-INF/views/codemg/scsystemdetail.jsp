@@ -5,7 +5,7 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-<h4>▶&nbsp;장학 상세정보 </h4>
+<h4>▶&nbsp;장학제도 상세정보 </h4>
 <br><br>
 <form action="scsytemUpdate.htm" id="scsytemUpdate_form">
    <div style="border: 1px solid green; padding: 3%; border-radius: 1em;  margin: auto;">

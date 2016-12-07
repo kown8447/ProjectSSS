@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="${department}" var="dp"></c:set>
-<h4>▶&nbsp;학부 상세정보 </h4>
+<h4>▶&nbsp;학과 상세정보 </h4>
 <br><br>   
 <form action="updateDepartment.htm" id="updateDepartment_form">
    <div style="width:60%; margin: auto;">

@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:set value="${detail}" var="de"/>
 <c:set value="${room}" var="c"/>
 <c:set value="${opcheck}" var="oc"/>
-<div>
-<script type="text/javascript">
-$(function() {
-	$('#reject').click(function() {
-		$('#rejectForm').submit();
-	});
-});
 
-</script>
+<div class = "row">
+<div class = "col-sm-3"></div>
+<div class="col-sm-6"  >
+<h4>▶&nbsp;개설신청  상세정보 </h4>
+<br><br>
 <form id="rejectForm" action="UpdateReject.htm?code=${de.subject_code}">
-<table style="table-layout: auto;">
+<table class="table table-bordered" style="text-align: center; ">
 	<tr>
 		<td>구분</td>
 		<td>${oc.required_choice}</td>
@@ -31,7 +27,7 @@ $(function() {
 		<td colspan="3">${de.subject_name}</td>
 	</tr>
 	<tr>
-		<td>시간</td>	
+		<td style="display: table-cell; vertical-align: middle;">시간</td>	
 		<td colspan="3">
 		<c:forEach items="${period}" var="pl">
 		${pl.period_day} ${pl.period_start} ${pl.period_end}<Br>
@@ -54,22 +50,30 @@ $(function() {
 		<td>강의 계획서</td>
 		<td colspan="3">${de.subject_Filesrc}</td>
 	</tr>
+	<c:if test="${de.success_check==3}">
 	<tr>
-		<td>거절사유</td>
+		<td style="display: table-cell; vertical-align: middle;">거절사유</td>
 		<td colspan="3">
-			<textarea placeholder="거절사유" name="rejectReason" id="rejectReason"></textarea>	
+			<textarea placeholder="거절사유" class="form-control" name="rejectReason" id="rejectReason"></textarea>	
 		</td>
 	</tr>
-</table>
-<input type="text" value="${de.subject_code}" name="code"><br>
-	<c:if test="${de.success_check==3}">
-		<input id="reject" type="button" value="거절">
 	</c:if>
+	<input type="hidden" value="${de.subject_code}" name="code">
+</table>
 </form>
+
+<div align="center">
+	
 <c:if test="${de.success_check==3}">
-	<button><a href="updateSuccess.htm?code=${de.subject_code}">승인</a></button>		
+		<!-- <input id="reject" type="button" value="거절"> -->
+		<button class="btn btn-default" type="button" value="거절" id="rejectbtn">거절</button>
+	</c:if>
+<c:if test="${de.success_check==3}">
+	<a href="updateSuccess.htm?code=${de.subject_code}"><button class="btn btn-default" >승인</button></a>
 </c:if>
 
-<button><a href="list.htm">목록</a></button>
-<input type="hidden" id="subject_state" value="${de.subject_state}"/>
+<a href="list.htm"><button class="btn btn-success">목록</button></a>
+</div>
+
+</div>
 </div>
