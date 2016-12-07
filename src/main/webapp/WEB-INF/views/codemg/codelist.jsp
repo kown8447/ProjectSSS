@@ -1,86 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$('.deleteCode').click(function() {
+<div class="container" style="width:75%">
+<h4>▶&nbsp;리스트 </h4>
+<br><br>
+ <div class="container" style="width:95%">
+   <table class="table" style="text-align: center">
+   <thead>
+      <tr>
+         <th style="text-align: center">구분</th>
+         <th style="text-align: center">코드</th>
+         <th style="text-align: center">이름</th>
+         <th style="text-align: center">생년월일</th>
 
-			var strArray = $(this).attr("id").split("_");
-			var btnNum = strArray[strArray.length - 1];
-
-			$.ajax({
-				url : "codeDelete.htm",
-				method : "post",
-				dataType : "json",
-				data : {
-					code : $('#code' + btnNum).text()
-				},
-				success : function(data) {
-					console.log(data);
-					 if (data.result) {
-						alert("성공!!!");
-						location.href = "codelist.htm";
-					} else {
-						alert(data.reason);
-					} 
-				}
-			});
-
-		});
-	});
-</script>
-
-<table>
-	<thead>
-		<tr>
-			<td>구분</td>
-			<td>코드</td>
-			<td>이름</td>
-			<td>생년월일</td>
-
-		</tr>
-	</thead>
-	<c:forEach items="${codelist}" var="code" varStatus="index">
-		<tbody>
-			<tr>
-				<td>
-					<c:choose>
-						<c:when test="${code.code_type ==0}">
-							학생
-						</c:when>
-						<c:when test="${code.code_type ==1}">
-							교수
-						</c:when>
-						<c:otherwise>
-							관리자
-						</c:otherwise>
-					</c:choose>
-				</td>
-				<td id="code${index.count}">${code.code}</td>
-				<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
-				</td>
-				<td>${code.code_birth}</td>
-				<td>
-					<button class="deleteCode" id="deleteCodeBtn_${index.count}"
-						name="deleteCodeBtn">삭제하기</button>
-				</td>
-				<td>
-					<input value="${code.code_type}" type="hidden">
-				</td>
-			</tr>
-		</tbody>
-		
-		</c:forEach>
+      </tr>
+   </thead>
+   <c:forEach items="${codelist}" var="code" varStatus="index">
+      <tbody>
+         <tr>
+            <td>
+               <c:choose>
+                  <c:when test="${code.code_type ==0}">
+                     학생
+                  </c:when>
+                  <c:when test="${code.code_type ==1}">
+                     교수
+                  </c:when>
+                  <c:otherwise>
+                     관리자
+                  </c:otherwise>
+               </c:choose>
+            </td>
+            <td id="code${index.count}">${code.code}</td>
+            <td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
+            </td>
+            <td>${code.code_birth}</td>
+            
+            <td>
+               <input value="${code.code_type}" type="hidden">
+            </td>
+         </tr>
+      </tbody>
+      
+      </c:forEach>
 </table>
+</div>
+</div>
 
 <c:if test="${typeofcode==0}">
-	<a href="registerstudent.htm">되돌아가기</a>
+   <a href="registerstudent.htm">되돌아가기</a>
 </c:if>
 <c:if test="${typeofcode==1}">
-	<a href="registerprofessor.htm">되돌아가기</a>
+   <a href="registerprofessor.htm">되돌아가기</a>
 </c:if>
 <c:if test="${typeofcode==2}">
-	<a href="registeradmin.htm">되돌아가기</a>
+   <a href="registeradmin.htm">되돌아가기</a>
 </c:if>
-

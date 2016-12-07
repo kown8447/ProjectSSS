@@ -68,6 +68,7 @@ import kr.or.initspring.dto.join.MemberDTO;
 import kr.or.initspring.dto.requestCourse.OpenedLectureDTO;
 import kr.or.initspring.service.AsideService;
 import kr.or.initspring.dto.member.ClassBuildingDTO;
+import kr.or.initspring.dto.member.CollegeInfoDTO;
 import kr.or.initspring.dto.member.DepartmentInfoDTO;
 import kr.or.initspring.dto.member.DepartmentLeaderDTO;
 import kr.or.initspring.dto.member.LabBuildingDTO;
@@ -241,10 +242,11 @@ public class MemberController{
 		
 	}
 	/*
-	 * 
-	 * 이동 컨트롤러
-	 * 
-	 * */
+	 * @method Name : registerStructure
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 건물 등록 뷰로 이동
+	*/
 	
 	//건물등록
 	@RequestMapping("registerstructure.htm")
@@ -271,48 +273,31 @@ public class MemberController{
 		return "codemg.registerstructure";
 	}
 	
-	//빌딩
+	/*
+	 * @method Name : registerBuilding
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 빌딩 등록 뷰로 이동
+	*/
 	@RequestMapping("registerbuilding.htm")
 	public String registerBuilding(Model model){
 		
 		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-	
 		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
 		
 		return "codemg.registerbuilding";
 	}
-	
-	//강의실
+	/*
+	 * @method Name : registerClassroom
+	 * @Author : 성홍모
+	 * @description
+	 * 관리자가 강의실 등록 뷰로 이동
+	*/
 	@RequestMapping("registerclassroom.htm")
 	public String registerClassroom(Model model){
 		
 		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-	
 		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
 		
 		return "codemg.registerclassroom";
 	}
@@ -323,44 +308,17 @@ public class MemberController{
 	public String registerOffice(Model model){
 		
 		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-	
 		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
 		
 		return "codemg.registeroffice";
 	}
 	
 	//연구실
-	//사무실
 	@RequestMapping("registerlaboratory.htm")
 	public String registerLaboratory(Model model){
 			
-			List<BuildingDTO> building = codeservice.buildingList();
-			List<ScSystemDTO> scsystem = codeservice.scSystemList();
-			List<SemesterDTO> semester = codeservice.semesterList();
-			List<CollegeDTO> college = codeservice.collegelist();
-			List<DepartmentDTO> department = codeservice.departmentList();
-			List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-			List<OfficeDTO> officelist = codeservice.officelist();
-		
-			model.addAttribute("building", building);
-			model.addAttribute("sc", scsystem);
-			model.addAttribute("semester", semester);
-			model.addAttribute("college", college);
-			model.addAttribute("department", department);
-			model.addAttribute("opened", openedinfolist);
-			model.addAttribute("officelist", officelist);
+		List<BuildingDTO> building = codeservice.buildingList();
+		model.addAttribute("building", building);
 			
 		return "codemg.registerlaboratory";
 	}
@@ -368,21 +326,8 @@ public class MemberController{
 	@RequestMapping("registerstudent.htm")
 	public String registerStudent(Model model){
 			
-			List<BuildingDTO> building = codeservice.buildingList();
-			List<ScSystemDTO> scsystem = codeservice.scSystemList();
-			List<SemesterDTO> semester = codeservice.semesterList();
-			List<CollegeDTO> college = codeservice.collegelist();
-			List<DepartmentDTO> department = codeservice.departmentList();
-			List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-			List<OfficeDTO> officelist = codeservice.officelist();
-		
-			model.addAttribute("building", building);
-			model.addAttribute("sc", scsystem);
-			model.addAttribute("semester", semester);
-			model.addAttribute("college", college);
-			model.addAttribute("department", department);
-			model.addAttribute("opened", openedinfolist);
-			model.addAttribute("officelist", officelist);
+		List<DepartmentDTO> department = codeservice.departmentList();
+		model.addAttribute("department", department);
 			
 		return "codemg.registerstudent";
 	}	
@@ -391,42 +336,16 @@ public class MemberController{
 	@RequestMapping("registerregister.htm")
 	public String registerRegister(Model model){
 			
-			List<BuildingDTO> building = codeservice.buildingList();
-			List<ScSystemDTO> scsystem = codeservice.scSystemList();
-			List<SemesterDTO> semester = codeservice.semesterList();
-			List<CollegeDTO> college = codeservice.collegelist();
-			List<DepartmentDTO> department = codeservice.departmentList();
-			List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-			List<OfficeDTO> officelist = codeservice.officelist();
+		List<SemesterDTO> semester = codeservice.semesterList();		
+		model.addAttribute("semester", semester);
 		
-			model.addAttribute("building", building);
-			model.addAttribute("sc", scsystem);
-			model.addAttribute("semester", semester);
-			model.addAttribute("college", college);
-			model.addAttribute("department", department);
-			model.addAttribute("opened", openedinfolist);
-			model.addAttribute("officelist", officelist);
-			
 		return "codemg.registerregister";
 	}		
 	//대학등록
 	@RequestMapping("registercollege.htm")
 	public String registerCollege(Model model){
-				
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-	
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
+
+		List<OfficeDTO> officelist = codeservice.possibleOffice();
 		model.addAttribute("officelist", officelist);
 				
 	return "codemg.registercollege";
@@ -436,47 +355,26 @@ public class MemberController{
 	@RequestMapping("registerdepartment.htm")
 	public String registerDepartment(Model model){
 				
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
 		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-		
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
+		List<OfficeDTO> officepossiblelist = codeservice.possibleOffice();
 		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
+		model.addAttribute("officelist", officepossiblelist);
 			
 	return "codemg.registerdepartment";
 }
 	
-//장학등록
+	//장학등록
 	@RequestMapping("registerscholarship.htm")
 	public String registerScholarship(Model model){
 					
-		List<BuildingDTO> building = codeservice.buildingList();
 		List<ScSystemDTO> scsystem = codeservice.scSystemList();
 		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-		
-		model.addAttribute("building", building);
 		model.addAttribute("sc", scsystem);
 		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
 					
 	return "codemg.registerscholarship";
 	}
+	
 	//장학등록
 	@RequestMapping("registermjrecord.htm")
 	public String registerMjRecord(Model model){
@@ -487,47 +385,19 @@ public class MemberController{
 		return "codemg.registermjrecord";
 	}		
 		
-		//장학제도등록
-			@RequestMapping("registerscsystem.htm")
-			public String registerScsystem(Model model){
-						
-				List<BuildingDTO> building = codeservice.buildingList();
-				List<ScSystemDTO> scsystem = codeservice.scSystemList();
-				List<SemesterDTO> semester = codeservice.semesterList();
-				List<CollegeDTO> college = codeservice.collegelist();
-				List<DepartmentDTO> department = codeservice.departmentList();
-				List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-				List<OfficeDTO> officelist = codeservice.officelist();
-			
-				model.addAttribute("building", building);
-				model.addAttribute("sc", scsystem);
-				model.addAttribute("semester", semester);
-				model.addAttribute("college", college);
-				model.addAttribute("department", department);
-				model.addAttribute("opened", openedinfolist);
-				model.addAttribute("officelist", officelist);
-						
-			return "codemg.registerscsystem";
-		}	
+	//장학제도등록
+	@RequestMapping("registerscsystem.htm")
+	public String registerScsystem(Model model){
+		
+	return "codemg.registerscsystem";
+}	
+	
 	//교수등록
 	@RequestMapping("registerprofessor.htm")
 	public String registerProfessor(Model model){
 						
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
 		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-			
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
 		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
 						
 	return "codemg.registerprofessor";
 	}
@@ -561,45 +431,13 @@ public class MemberController{
 	@RequestMapping("registeradmin.htm")
 	public String registerAdmin(Model model){
 						
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-			
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
-						
 	return "codemg.registeradmin";
 	}
 	
 	//학기등록
 	@RequestMapping("registersemester.htm")
 	public String registerSemester(Model model){
-						
-		List<BuildingDTO> building = codeservice.buildingList();
-		List<ScSystemDTO> scsystem = codeservice.scSystemList();
-		List<SemesterDTO> semester = codeservice.semesterList();
-		List<CollegeDTO> college = codeservice.collegelist();
-		List<DepartmentDTO> department = codeservice.departmentList();
-		List<OpenedInfoDTO> openedinfolist = codeservice.openedInfoList();
-		List<OfficeDTO> officelist = codeservice.officelist();
-			
-		model.addAttribute("building", building);
-		model.addAttribute("sc", scsystem);
-		model.addAttribute("semester", semester);
-		model.addAttribute("college", college);
-		model.addAttribute("department", department);
-		model.addAttribute("opened", openedinfolist);
-		model.addAttribute("officelist", officelist);
-						
+				
 	return "codemg.registersemester";
 	}		
 	
@@ -939,15 +777,16 @@ public class MemberController{
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 		}
 	//학부 기본양식
-		@RequestMapping("depexcel.htm")
-		public ModelAndView departmentdownload(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping("depexcel.htm")
+	public ModelAndView departmentdownload(HttpServletRequest request, HttpServletResponse response){
 									
-			String baseDir = request.getRealPath("/WEB-INF/Template");
+		String baseDir = request.getRealPath("/WEB-INF/Template");
 										
-				File downloadFile = new File(baseDir,"department.xlsx");
+			File downloadFile = new File(baseDir,"department.xlsx");
+			System.out.println(baseDir);
 										
-			return new ModelAndView("pageView", "downloadFile", downloadFile);
-			}	
+		return new ModelAndView("pageView", "downloadFile", downloadFile);
+		}	
 		
 	//학부 기본양식
 		@RequestMapping("mjexcel.htm")
@@ -1032,7 +871,7 @@ public class MemberController{
 		@RequestMapping(value = "colExcelUpload.htm", method=RequestMethod.POST)
 		public View collegeExcelUpload(MultipartHttpServletRequest request, Model model){
 				
-			System.out.println("장학금 파일일괄등록 컨트롤");
+			System.out.println("단과대학 파일일괄등록 컨트롤");
 			codeservice.collegeExcelList(request, model);
 			return jsonview;
 			}
@@ -1417,8 +1256,9 @@ public class MemberController{
 	@RequestMapping("collegeList.htm")
 	public String colleageList(Model model){
 		
-		List<CollegeDTO> collegelsit = codeservice.collegelist();
-		model.addAttribute("college", collegelsit);
+		/*List<CollegeDTO> collegelsit = codeservice.collegelist();*/
+		List<CollegeInfoDTO> collegeinfolist = codeservice.collegeInfoList();
+		model.addAttribute("college", collegeinfolist);
 		
 		return "codemg.collegelist";
 	}
@@ -1488,8 +1328,10 @@ public class MemberController{
 	public String selectDepartment(String department_code, Model model){
 		
 		DepartmentDTO department = codeservice.selectDepartment(department_code);
+		List<OfficeDTO> officeslist = codeservice.possibleOffice();
 		System.out.println(department.toString());
 		model.addAttribute("department", department);
+		model.addAttribute("office", officeslist);
 		
 		return "codemg.departmentdetail";
 	}

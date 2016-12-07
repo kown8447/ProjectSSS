@@ -1,31 +1,230 @@
 $(function() {
 	
-	
+	//빌딩 등록
     $('#buildingreg').click(function(){
+    	if($('#building_name').val().trim()==''){
+    		alert("빌딩 이름을 입력해주세요");
+    		$('#building_name').focus();
+    		return false;
+    	}
+    	if($('#building_addr').val().trim()==''){
+			alert("빌딩 주소를 입력해주세요");
+    		$('#building_addr').focus();
+    		return false;
+		}
         $('#registerBuilding_form').submit();
      });
+    
+    //강의실 등록
+    $('#classreg').click(function(){
+   	 if($('#classroom_name').val().trim()==''){
+    		alert("강의실 이름을 입력해주세요");
+    		$('#classroom_name').focus();
+    		return false;
+    	}
+    	else if($('#seat').val().trim()==''){
+    		alert("수용인원을 입력해주세요");
+    		$('#seat').focus();
+    		return false;
+    	}
+    	else if($('#classroom_type').val().trim()==''){
+    		alert("강의실 타입을 정해주세요");
+    		$('#classroom_type').focus();
+    		return false;
+    	}else{
+    	$('#registerClassroom_form').submit();
+    	}
+    });
+    //사무실 등록
+    $('#officereg').click(function(){
+    	if($('#office_phone').val().trim()==''){
+    		alert('전화번호를 입력하세요');
+    		$('#office_phone').focus();
+    		return false;
+    	}
+    	if($('#office_name').val().trim()==''){
+    		alert('사무실 이름을 입력하세요');
+    		$('#office_name').focus();
+    		return false;
+    	}
+    	 $('#insertOffice_form').submit();
+    });
+    //연구실 등록
+    $('#labreg').click(function(){
+    	if($('#lab_name').val().trim()==''){
+    		alert('연구실 이름을 입력하세요');
+    		$('#lab_name').focus();
+    		return false;
+    	}
+    	if($('#lab_phone').val().trim()==''){
+    		alert('연구실 전화번호를 입력하세요');
+    		$('#lab_phone').focus();
+    		return false;
+    	}
+        $('#insertLab_form').submit();
+     });
+	//단과대학
+    $('#college_reg').click(function(){
+    	if($('#college_name').val().trim()==""){
+    		alert('대학 이름을 입력하세요');
+    		$('#college_name').focus();
+    		return false;
+    	}
+    	if($('#college_description').val().trim()==""){
+    		alert('설명을 입력하세요');
+    		$('#college_description').focus();
+    		return false;
+    	}
+        $('#insertCollege_form').submit();
+    });
+    //학과등록
+    $('#departmentreg').click(function(){
+    	if($('#department_name').val().trim()==""){
+    		alert('학과명을 입력하세요');
+    		$('#department_name').focus();
+    		return false;
+    	}
+    	if($('#department_seat').val().trim()==""){
+    		alert('정원을 입력하세요');
+    		$('#department_seat').focus();
+    		return false;
+    	}
+    	if($('#graduation_credit').val().trim()==""){
+    		alert('졸업 학점을 입력하세요');
+    		$('#graduation_credit').focus();
+    		return false;
+    	}
+    	if($('#department_description').val().trim()==""){
+    		alert('설명을 입력하세요');
+    		$('#department_description').focus();
+    		return false;
+    	}
+        $('#insertDepartment_form').submit();
+    });
+    //관리자 등록
+    $('#adminreg').click(function(){
+    	if($('#code').val().trim()==""){
+    		alert('코드를 입력하세요');
+    		$('#code').focus();
+    		return false;
+    	}
+    	if($('#code_name').val().trim()==""){
+    		alert('이름을 입력하세요');
+    		$('#code_name').focus();
+    		return false;
+    	}
+    	if($('#code_birth').val().trim()==""){
+    		alert('생년월일을 입력하세요');
+    		$('#code_birth').focus();
+    		return false;
+    	}
+        $('#adminCodeRegister_form').submit();
+    });
+    //장학제도 등록
+    $('#sc_reg').click(function(){
+    	if($('#scholaship_name').val().trim()==""){
+    		alert('장학 제도 이름을 입력하세요');
+    		$('#scholaship_name').focus();
+    		return false;
+    	}
+    	if($('#scholaship_standard').val().trim()==""){
+    		alert('선발기준을 입력하세요');
+    		$('#scholaship_standard').focus();
+    		return false;
+    	}
+    	if($('#scholaship_member').val().trim()==""){
+    		alert('수혜인원을 입력하세요');
+    		$('#scholaship_member').focus();
+    		return false;
+    	}
+    	if($('#scholaship_amount').val().trim()==""){
+    		alert('장학 금액을 입력하세요');
+    		$('#scholaship_amount').focus();
+    		return false;
+    	}
+        $('#insertScSystem_form').submit();
+    });
+  //장학생 등록
+    $('#scholar_reg').click(function(){
+    	if($('#student_code').val().trim()==""){
+    		alert('학생코드를 입력하세요');
+    		$('#student_code').focus();
+    		return false;
+    	}
+    	if($('#scholarship_payday').val().trim()==""){
+    		alert('지급일을 입력하세요');
+    		$('#scholarship_payday').focus();
+    		return false;
+    	}
+        $('#insertScholarship_form').submit();
+    });
+  //학생 등록
+    $('#student_reg').click(function(){
+    	if($('#code').val().trim()==""){
+    		alert('코드를 입력하세요');
+    		$('#code').focus();
+    		return false;
+    	}
+    	if($('#code_name').val().trim()==""){
+    		alert('이름을 입력하세요');
+    		$('#code_name').focus();
+    		return false;
+    	}
+    	if($('#code_birth').val().trim()==""){
+    		alert('생년월일을 입력하세요');
+    		$('#code_birth').focus();
+    		return false;
+    	}
+        $('#studentRegister_form').submit();
+    });
+  //학기 등록
+    $('#semester_reg').click(function(){
+    	if($('#semester_code').val().trim()==""){
+    		alert('학기 코드를 입력하세요');
+    		$('#semester_code').focus();
+    		return false;
+    	}
+    	if($('#semester_name').val().trim()==""){
+    		alert('학기 이름을 입력하세요');
+    		$('#semester_name').focus();
+    		return false;
+    	}
+    	if($('#semester_start').val().trim()==""){
+    		alert('시작일을 입력하세요');
+    		$('#semester_start').focus();
+    		return false;
+    	}
+    	if($('#semester_end').val().trim()==""){
+    		alert('종료일을 입력하세요');
+    		$('#semester_end').focus();
+    		return false;
+    	}
+        $('#insertSemester_form').submit();
+    });
+    
      $('#edit_building').click(function(){
         $('#updateBuilbilding_form').submit();
      });
-     $('#classreg').click(function(){
-        $('#registerClassroom_form').submit();
-     });
+     
      $('#edit_classroom').click(function(){
         $('#updateClassroom_form').submit();
      });
      $('#edit_office').click(function(){
         $('#updateOffice_form').submit();
      });
-     $('#officereg').click(function(){
-        $('#insertOffice_form').submit();
-     });
      $('#edit_lab').click(function(){
         $('#updateLab_form').submit();
      });
-     $('#labreg').click(function(){
-        $('#insertLab_form').submit();
+     $('#edit_college').click(function(){
+         $('#updateColleage_form').submit();
      });
-	
+     $('#edit_depart').click(function(){
+         $('#updateDepartment_form').submit();
+     });
+     
+     
+     
+     
 		
 		//빌딩
 		$('#bdexcelUp').click(function() {
