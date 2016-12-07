@@ -1,3 +1,11 @@
+/*
+ * @JavaScript : header.js
+ * @Date : 2016.11.21
+ * @Author : 최준호
+ * @Desc
+ * 즐겨찾기 설정 페이지 용
+ * 버튼의 li의 drag, drop 기능 조정
+*/
 function favoriteRenew() {
 	$.ajax({
 		url : "/initspring/favorite/favoriteCall.htm",
