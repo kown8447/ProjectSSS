@@ -17,6 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h4>▶&nbsp;과목수정</h4><br><br>
 	<form action="lectureEditOk.htm">
 	<div class="container">
 	<div class="row">

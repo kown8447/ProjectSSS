@@ -19,12 +19,10 @@ $(function() {
 			professor_code : $("#professor_code").val()
 		},
 		success : function(data) {
-
+			
 			$.each(data.buildinglist, function(index, value) {
-
-				console.log(value.building_name);
 				$("#building").append(
-						"<option value='B_00" + index + "'>" + value
+						"<option value='" + value.building_code + "'>" + value.building_name
 								+ "</option>");
 			})
 			$.each(data.periodlist, function(index, value) {
@@ -67,7 +65,6 @@ $(function() {
 
 	$("#classroom").change(
 			function() {
-				// alert($("#classroom").val());
 				$.ajax({
 					url : "requestclassroom.htm",
 					data : {
@@ -126,7 +123,7 @@ function getvalue(i) {
 
 	var credit = $("#credit").val();
 
-	if (insertcount > credit) {
+	if (insertcount >= credit) {
 		alert("신청할 수 있는 시간을 초과했습니다.");
 		return false;
 	}

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dao.LectureMgDAO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
+import kr.or.initspring.dto.commons.BuildingDTO;
 import kr.or.initspring.dto.commons.LiberalDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
@@ -242,12 +243,13 @@ public class lectureService {
 	public void RequestSubject(CustomLectureMgDTO dto,HttpServletRequest request,String success_check) throws Exception{
 		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		System.out.println("이것이 작업할 :"+success_check);
-		
+
+		//재신청 할 경우
 		if(success_check.equals("2")){
 			lecturedao.delete_Ask_Time(dto.getSubject_code());
 			lecturedao.delete_Oprequest(dto.getSubject_code());
 			lecturedao.delete_Rejection(dto.getSubject_code());
+			lecturedao.delete_Plan(dto.getSubject_code());
 		}
 		
 		String period_code = dto.getPeriod_code();
@@ -255,7 +257,6 @@ public class lectureService {
 		String code[] = period_code.split(",");
 		String subject_code = dto.getSubject_code();
 		String classroom_code = dto.getClassroom_code();
-		System.out.println(classroom_code+code[0]+subject_code);
 	
 		try{
 			lecturedao.setOprequest(dto);
@@ -340,12 +341,13 @@ public class lectureService {
 	 * @Author : 조장현
 	 * @description : 건물 이름 출력
 	 */
-	public List<String> getBuildingName(){
+	public List<BuildingDTO> getBuildingName(){
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		List<String> building = lecturedao.select_BuildingName();
+		List<BuildingDTO> building = lecturedao.select_BuildingName();
 		
 		return building;		
 	}
+
 	
 	/*
 	 * @method Name : getSemester
@@ -383,22 +385,21 @@ public class lectureService {
 	 * @description : 내 과목 수강생 조회
 	 */
 	public List<CustomLectureMgDTO> select_Studentlist(String subject_code){
-		System.out.println("스투던트서비스탐"+subject_code);
-		
+	
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
 		List<CustomLectureMgDTO> dto = lecturedao.select_Studentlist(subject_code);
-		//현재 학기코드를 구한다
-		//과목코드, 현재 학기코드, 학번을 조건으로 record 테이블을 select한다
-		
-		System.out.println(dto.get(0).getStudent_code()+"/"+dto.get(0).getSemester_code()+"/"+subject_code);
-		
-		for(int i=0;i<dto.size();i++){
-		String recordLevel=lecturedao.select_recordlevel(dto.get(i).getStudent_code(),dto.get(i).getSemester_code(),subject_code);
-		
-			dto.get(i).setRecord_level(recordLevel);
-			System.out.println("이것이 성적이다:"+dto.get(i).getRecord_level());
-		
+		if(dto!=null||dto.size()!=0){
+			for(int i=0;i<dto.size();i++){
+				String recordLevel=lecturedao.select_recordlevel(dto.get(i).getStudent_code(),dto.get(i).getSemester_code(),subject_code);
+				
+					dto.get(i).setRecord_level(recordLevel);
+					System.out.println("이것이 성적이다:"+dto.get(i).getRecord_level());
+				
+				}
+		}else{
+			dto = new ArrayList<CustomLectureMgDTO>();
 		}
+		
 		
 		return dto;
 	}
@@ -418,36 +419,28 @@ public class lectureService {
 		
 		dto.setRecord_code(record_code);
 		CustomLectureMgDTO state = lecturedao.select_stState(dto.getStudent_code());
-		System.out.println("state 정보:"+state.toString());
-		System.out.println("꼭확인해야됨"+dto.toString());
-	
 		
 		String inselectlevel = lecturedao.select_Recordlevel(dto.getStudent_code(), subject_name);
 		
 		if(inselectlevel == null || inselectlevel.equals("")){  //현재 성적이 없다면
 			List<String> secondsubject = lecturedao.select_reStudy(subject_name, dto.getStudent_code());
-			System.out.println(secondsubject);
-			
+		
 			dto.setRecord_grade(state.getGrade());
 			dto.setRecord_semester(state.getPersonal_semester());
-		
-			System.out.println("디티오에들어간 record_semester:"+dto.getRecord_semester());
+
 			if(secondsubject != null){	
 			for(int i = 0; i < secondsubject.size(); i++){
 					System.out.println("재수강탔음");
 					lecturedao.update_RetakeCheck(dto.getRecord_code());
 				}
 			}
-			System.out.println("값이없으므로 인설트");
+			System.out.println("RECORD INSERT");
 			lecturedao.insert_record(dto);
 		}else{
-			System.out.println("값이있으므로 수정쓰");
+			System.out.println("RECORD UPDATE");
 			lecturedao.update_record(dto);
 		}
 	
-		System.out.println("인설트성공");
-		
-		
 		return dto;
 	}
 	

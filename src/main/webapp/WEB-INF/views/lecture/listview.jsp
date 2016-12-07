@@ -15,17 +15,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<title>Insert title here</title>
-<script type="text/javascript">
-	$(function(){
-		$("#register").click(function(){
-			location.replace("lectureRegister.htm");
-		})
-	})
-</script>
+<script src="${pageContext.request.contextPath}/js/lecture/listview.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+<h4>▶&nbsp;과목 목록</h4><br><br>
    <div class="container" style="width:70%">
    <table id="list" class="table table-bordered" style="text-align: center">
       <tr>
@@ -57,7 +51,9 @@
       	</tr>
    	</c:forEach>
    </table>
+   <button class="btn btn-danger btn-sm" id="back"  style="float:right;">돌아가기</button>
    <a href="lectureRegister.htm"><button class="btn btn-success btn-sm"  style="float:right;">등록하기</button></a>
+   
 	</div>
 
 </body>

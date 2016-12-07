@@ -24,6 +24,7 @@
 
 <div class="container">
 
+<h4>▶&nbsp;과목 신청</h4><br><br>
 	<table border=1px class="table">
 		<tr>
 		<th>구분</th><th>선수과목</th><th>과목명</th><th>학점</th><th>정원</th><th>수강대상</th>
@@ -64,9 +65,9 @@
 			<option>없음</option>
 
 		</select>
-		<label>시간</label> <div id="period" name="period"></div>
-		<div id="mytime" name="mytime"></div>
-		<label>강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filename"><br>
+		<label>선택한 강의 시간</label> <div id="period" name="period"></div>
+		<label>전체 강의 시간 </label> <div id="mytime" name="mytime"></div>
+		<label class="label label-primary">강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filename"><br>
 			
 		</div>
 		<div class="col-sm-3">

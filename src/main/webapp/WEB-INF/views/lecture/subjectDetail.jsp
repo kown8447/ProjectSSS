@@ -11,7 +11,7 @@
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <script src="${pageContext.request.contextPath}/js/lecture/subjectdetail.js"></script>
-
+<h4>▶&nbsp;과목 상세보기</h4><br><br>
    <div class="container" style="width:70%">
    <table class="table table-bordered" style="text-align: center">
       <tr>
