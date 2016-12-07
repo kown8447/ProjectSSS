@@ -12,72 +12,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<h4>▶&nbsp;즐겨찾기 메뉴 설정</h4>
-<br>
-<br>
-<div class="row">
-	<div class="col-sm-5">
+<div class = "row">
+<div class = "col-sm-3"></div>
+<div class="col-sm-4"  >
+<h4>▶&nbsp;즐겨찾기 설정 </h4><br><br>
+<p style="color:blue;">(즐겨찾기 바구니 안에  원하는 메뉴를 드레그 해주세요.)</p>
 		<div id="gallery">
-			<table class="table table-hover">
+			<table class="table table-hover" style="text-align: center;width:50%;">
 				<tr>
 					<c:if test="${fn:length(studentLinks)>0}">
-						<th>학적조회</th>
+						<th style="text-align: center;">학적조회</th>
 					</c:if>
 					<c:if test="${fn:length(enrollLinks)>0}">
-						<th>수강신청</th>
+						<th style="text-align: center;">수강신청</th>
 					</c:if>
 					<c:if test="${fn:length(professorLinks)>0}">
-						<th>교수메뉴</th>
+						<th style="text-align: center;">교수메뉴</th>
 					</c:if>
 					<c:if test="${fn:length(buildingLinks)>0}">
-						<th>빌딩관리</th>
+						<th style="text-align: center;">빌딩관리</th>
 					</c:if>
 					<c:if test="${fn:length(stuAdminLinks)>0}">
-						<th>학생관리</th>
+						<th style="text-align: center;">학생관리</th>
 					</c:if>
 					<c:if test="${fn:length(profAdminLinks)>0}">
-						<th>교수관리</th>
+						<th style="text-align: center;">교수관리</th>
 					</c:if>
 					<c:if test="${fn:length(otherAdminLinks)>0}">
-						<th>기타</th>
+						<th style="text-align: center;">기타</th>
 					</c:if>
 					<c:if test="${fn:length(allUserLinks)>0}">
-						<th>게시판</th>
+						<th style="text-align: center;">게시판</th>
 					</c:if>
 				</tr>
 				<tr>
 					<c:if test="${fn:length(studentLinks)>0}">
-						<td id="studentList"><c:forEach items="${studentLinks}"
-								var="link">
+						<td id="studentList" style="list-style:none;"><c:forEach items="${studentLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="stu_${link.link_code}" style="display: none;">
-											<button class="btn btn-success"
-												id="stu_${link.link_code}_btn">${link.link_name}</button>
+											<button class="btn btn-info" id="stu_${link.link_code}_btn">${link.link_name}</button>
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li id="stu_${link.link_code}">
-											<button class="btn btn-success"
-												id="stu_${link.link_code}_btn">${link.link_name}</button>
+											<button class="btn btn-info" id="stu_${link.link_code}_btn">${link.link_name}</button>
 										</li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(enrollLinks)>0}">
-						<td id="enrollList"><c:forEach items="${enrollLinks}"
-								var="link">
+						<td id="enrollList" style="list-style:none;"><c:forEach items="${enrollLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="enr_${link.link_code}" style="display: none;">
-											<button class="btn btn-success"
+											<button class="btn btn-info"
 												id="enr_${link.link_code}_btn">${link.link_name}</button>
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li id="enr_${link.link_code}">
-											<button class="btn btn-success"
+											<button class="btn btn-info"
 												id="enr_${link.link_code}_btn">${link.link_name}</button>
 										</li>
 									</c:otherwise>
@@ -85,91 +81,85 @@
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(professorLinks)>0}">
-						<td id="professorList"><c:forEach items="${professorLinks}"
-								var="link">
+						<td id="professorList" style="list-style:none;"><c:forEach items="${professorLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="prof_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="prof_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="prof_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="prof_${link.link_code}"><button
-												class="btn btn-success" id="prof_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="prof_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(buildingLinks)>0}">
-						<td id="buildingList"><c:forEach items="${buildingLinks}"
-								var="link">
+						<td id="buildingList" style="list-style:none;"><c:forEach items="${buildingLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="bui_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="bui_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="bui_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="bui_${link.link_code}"><button
-												class="btn btn-success" id="bui_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="bui_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(stuAdminLinks)>0}">
-						<td id="stuAdminList"><c:forEach items="${stuAdminLinks}"
-								var="link">
+						<td id="stuAdminList" style="list-style:none;"><c:forEach items="${stuAdminLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="aAdmin_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="aAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="aAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="aAdmin_${link.link_code}"><button
-												class="btn btn-success" id="aAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="aAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(profAdminLinks)>0}">
-						<td id="profAdminList"><c:forEach items="${profAdminLinks}"
-								var="link">
+						<td id="profAdminList" style="list-style:none;"><c:forEach items="${profAdminLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="pAdmin_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="pAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="pAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="pAdmin_${link.link_code}"><button
-												class="btn btn-success" id="pAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="pAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(otherAdminLinks)>0}">
-						<td id="otherAdminList"><c:forEach items="${otherAdminLinks}"
-								var="link">
+						<td id="otherAdminList" style="list-style:none;"><c:forEach items="${otherAdminLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="oAdmin_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="oAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="oAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="oAdmin_${link.link_code}"><button
-												class="btn btn-success" id="oAdmin_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="oAdmin_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
 					</c:if>
 					<c:if test="${fn:length(allUserLinks)>0}">
-						<td id="allUserList"><c:forEach items="${allUserLinks}"
-								var="link">
+						<td id="allUserList" style="list-style:none;"><c:forEach items="${allUserLinks}" var="link">
 								<c:choose>
 									<c:when test="${link.favorite}">
 										<li id="all_${link.link_code}" style="display: none;"><button
-												class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="all_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:when>
 									<c:otherwise>
 										<li id="all_${link.link_code}"><button
-												class="btn btn-success" id="all_${link.link_code}_btn">${link.link_name}</button></li>
+												class="btn btn-info" id="all_${link.link_code}_btn">${link.link_name}</button></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach></td>
@@ -178,11 +168,11 @@
 			</table>
 		</div>
 	</div>
-
-	<div id="box" class="col-sm-5">
-		<h4>
-			<span>☆</span> 즐겨찾기
-		</h4>
+	<br><br><br>
+	<h4 align="left">
+		<span>☆</span> 즐겨찾기 바구니
+	</h4>
+	<div id="box" class="col-sm-2" style="border: 1px solid;border-color: gray;">
 		<ul id="gallery_favorite">
 			<c:forEach items="${favoLinks}" var="link">
 				<c:choose>

@@ -10,7 +10,6 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
-
 <link href="${pageContext.request.contextPath}/css/inc/aside.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/inc/aside.js"></script>
 
