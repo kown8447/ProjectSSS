@@ -161,9 +161,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from classroom where building_code = #{param1}
 	</select>
 
-	<select id="select_BuildingName" resultType="String">
-		select building_name from BUILDING order by building_code
+	<select id="select_BuildingName" resultType="kr.or.initspring.dto.commons.BuildingDTO">
+		select * from BUILDING order by building_code
 	</select>
+	
 	
 	<select id="getPeriodList" resultType="kr.or.initspring.dto.commons.PeriodDTO">
 		select * from Period

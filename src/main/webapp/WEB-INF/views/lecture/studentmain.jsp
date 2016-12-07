@@ -20,7 +20,8 @@
 
 </head>
 <body>
-	<select id="subject">
+<h4>▶&nbsp;학생조회</h4><br><br>
+	<select id="subject" class="form-control" >
 		<option value="0">선택하세요</option>
 		<c:forEach items="${myclass}" var="i">
 			<option value="${i.subject_code }">${i.subject_name }</option>		
@@ -31,7 +32,6 @@
 		<input type="hidden" id="d" value="${y.subject_code }">
 		<input type="hidden" id="f" value="${y.student_code }">
 	</c:forEach>
-	
 	
 	
 		<div class="container">

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.initspring.dto.commons.AskTimeDTO;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
+import kr.or.initspring.dto.commons.BuildingDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.commons.OpenedDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
@@ -81,7 +82,7 @@ public interface LectureMgDAO {
 	public List<String> select_reStudy(String subject_name,String student_code);
 	public void update_RetakeCheck(String record_code);
 	public String select_Rejection(String subject_code);
-	public List<String> select_BuildingName();
+	public List<BuildingDTO> select_BuildingName();
 	public List<String> select_MyTime(String professor_code); 
 	public String select_subjectname(String subject_code);
 	public String select_recordlevel(String student_code ,String semester_code,String subject_code);

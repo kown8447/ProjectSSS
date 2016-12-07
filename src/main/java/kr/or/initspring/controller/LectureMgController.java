@@ -26,6 +26,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.MethodType;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import kr.or.initspring.dto.commons.BeforeSubjectDTO;
+import kr.or.initspring.dto.commons.BuildingDTO;
 import kr.or.initspring.dto.commons.LiberalDTO;
 import kr.or.initspring.dto.commons.MajorDTO;
 import kr.or.initspring.dto.commons.PeriodDTO;
@@ -138,7 +139,7 @@ public class LectureMgController {
 	@RequestMapping(value="lecturePeriod.htm")
 	public View getPeriod(Model model,String professor_code){
 		List<PeriodDTO> periodlist = lectureservice.getPeriodList();
-		List<String> buildinglist = lectureservice.getBuildingName();
+		List<BuildingDTO> buildinglist = lectureservice.getBuildingName();
 		List<String> myclass = lectureservice.selectMyTime(professor_code);
 		
 		model.addAttribute("periodlist",periodlist);
