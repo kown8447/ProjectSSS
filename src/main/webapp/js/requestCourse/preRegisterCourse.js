@@ -43,10 +43,13 @@ $(function(){
 						$('#'+obj.period_code).html(text+hidden);
 						$('#'+obj.period_code).attr('style','background-color:'+color);
 					});
+					$('#pre_sum_grade').text(preGradeSum+' 학점');
 				});
 			}
 		}
 	);
+	
+	
 	
 	$('#dialog').hide();
 	
@@ -189,6 +192,7 @@ function insertTimeTable(e){
 								$('#'+elt.period_code).html(text+hidden);
 								$('#'+elt.period_code).attr('style','background-color:'+color);
 							}
+							$('#pre_sum_grade').text(preGradeSum+' 학점');
 						})
 					}
 				}
@@ -214,6 +218,7 @@ $(document).on("click",".table_ele",function(e){
 						if(data.subject_credit){
 							preGradeSum -= data.subject_credit;
 						}
+						$('#pre_sum_grade').text(preGradeSum+' 학점');
 					}
 					
 				}
@@ -249,6 +254,7 @@ $(document).on("click",".table_ele",function(e){
 	}else{
 		return false;
 	}
+	
 });
 
 /*
