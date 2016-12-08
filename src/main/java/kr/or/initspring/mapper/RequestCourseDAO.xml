@@ -64,9 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<otherwise>
 				select *
-				from (select * from major where department_code=#{department_code}) m join subject s
-				on m.subject_code = s.subject_code
-				join opened o on m.subject_code = o.subject_code
+				from (select * from major where department_code=#{department_code}) m join opened o
+				on m.subject_code = o.subject_code
+				join subject s on o.subject_code = s.subject_code
 				where s.subject_state=2
 			</otherwise>
 		</choose>
