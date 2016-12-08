@@ -218,7 +218,7 @@ function insertRealDbSubject(e,c){
 	var subject_code = e;
 	var subject_credit = c;
 
-	socket1 = new WebSocket("ws://192.168.0.105:8090/initspring/wait.htm");
+	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
 	
 	socket1.onmessage = function(evt) {
 		$('#waitlist').empty();
