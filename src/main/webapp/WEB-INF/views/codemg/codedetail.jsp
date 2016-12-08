@@ -27,10 +27,10 @@
                          <input type="text" value="학생" readonly="readonly" class="form-control">
                       </c:when>
                       <c:when test="${c.code_type==1 }">
-                         <input type="text" value="교수" readonly="readonly" >
+                         <input type="text" value="교수" readonly="readonly"  class="form-control">
                       </c:when>
                       <c:when test="${c.code_type==2 }">
-                         <input type="text" value="관리자" readonly="readonly" >   
+                         <input type="text" value="관리자" readonly="readonly"  class="form-control">   
                       </c:when>
                    </c:choose>
 				</div>

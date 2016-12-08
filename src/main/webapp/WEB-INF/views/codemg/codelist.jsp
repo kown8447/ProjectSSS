@@ -4,7 +4,7 @@
 
 
 <div class="row  col-sm-offset-2">
-	<h4>▶&nbsp;학생목록</h4><br><br>
+	<h4>▶&nbsp;교수목록</h4><br><br>
 	
 	<div class="col-sm-10">
 		<form>
@@ -26,7 +26,6 @@
 					<th style="text-align: center">코드</th>
 					<th style="text-align: center">이름</th>
 					<th style="text-align: center">생년월일</th>
-
 				</tr>
 			</thead>
 			<c:forEach items="${codelist}" var="code" varStatus="index">
@@ -40,17 +39,15 @@
 							</c:choose>
 						</td>
 						<td id="code${index.count}">${code.code}</td>
-						<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
-						</td>
+						<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a></td>
 						<td>${code.code_birth}</td>
-
-						<td><input value="${code.code_type}" type="hidden"></td>
 					</tr>
 				</tbody>
-
 			</c:forEach>
 		</table>
 
+		<input value="${code.code_type}" type="hidden">
+	
 		<c:if test="${typeofcode==0}">
 			<a href="registerstudent.htm"><button style="float: right;" class="btn btn-danger">되돌아가기</button></a>
 		</c:if>

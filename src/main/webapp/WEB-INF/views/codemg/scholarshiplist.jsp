@@ -4,7 +4,7 @@
 
 
 <div class="row  col-sm-offset-2">
-<h4>▶&nbsp;장학생 리스트 </h4><br><br>
+<h4>▶&nbsp;장학생 목록 </h4><br><br>
 
 <div class="col-sm-10">
 <table class="table table-bordered" style="text-align: center" >

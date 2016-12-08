@@ -79,7 +79,7 @@
 								<li><a href="${pageContext.request.contextPath}/member/buildingList.htm">건물 관리</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/showclasslist.htm">강의실 관리</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/showofficelist.htm">사무실 관리</a></li>
-								<li><a href="${pageContext.request.contextPath}/member/lablist.htm">연구실 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/member/showlablist.htm">연구실 관리</a></li>
 							</ul>
 						</li>
 						<li class="dropdown fadeInDown animated d2">

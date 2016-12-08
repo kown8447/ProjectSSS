@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row  col-sm-offset-2">
-	<h4>▶&nbsp;장학제도 리스트 </h4><br><br>
+	<h4>▶&nbsp;장학제도 목록 </h4><br><br>
 	
 <div class="col-sm-10">
 <table class="table table-bordered" style="text-align: center" >

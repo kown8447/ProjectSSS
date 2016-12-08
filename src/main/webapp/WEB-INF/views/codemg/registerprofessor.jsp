@@ -6,53 +6,50 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
    <div class="col-sm-6"  >
-   <h4>▶&nbsp;교수 등록 </h4>
-   <br><br>
+   <h4>▶&nbsp;교수 등록 </h4><br><br>
+   
       <form action="professorCodeRegister.htm" method="post" id="professorCodeRegister_form">
-         <table class="table" style="text-align: center">
-            <tr>
-               <td>코드</td>
-               <td>
-                  <div class="col-sm-6"  > 
-                     <input type="text" name="code" id="code" class="form-control">
-                  </div>   
-               </td>
-            </tr>
-            <tr>
-               <td>학과코드</td>
-               <td>
-                  <div class="col-sm-6"  >
-                  <select id="department_code" name="department_code" class="form-control">
+         <div class="form-horizontal">
+            <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">교수코드</label>
+				<div class="col-sm-6">
+					<input type="text" name="code" id="code" class="form-control">
+				</div>
+			</div>
+			
+			 <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학과코드</label>
+				<div class="col-sm-6">
+					<select id="department_code" name="department_code" class="form-control">
                      <c:forEach items="${department }" var="dp">
                         <option value="${dp.department_code}">${dp.department_name}(${dp.department_code})</option>
                      </c:forEach>
                   </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>이름</td>
-               <td>
-                  <div class="col-sm-6"  >
-                     <input type="text" name="code_name" id="code_name" class="form-control">
-                  </div>   
-               </td>
-            </tr>
-            <tr>
-               <td>생년월일</td>
-               <td>
-                  <div class="col-sm-6"  >
-                     <input type="text" name="code_birth" id="code_birth" class="form-control">
-                  </div>   
-               </td>
-            </tr>
-         </table>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">이름</label>
+				<div class="col-sm-6">
+					<input type="text" name="code_name" id="code_name" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">생년월일</label>
+				<div class="col-sm-6">
+					<input type="text" name="code_birth" id="code_birth" class="form-control" placeholder="ex)1993-01-15">
+				</div>
+			</div>
+         </div>
       </form>
+      <br><br>
       <div align="center">
-               <a href="typeofcodelist.htm?code_type=1"><button class="btn btn-default">교수 목록</button></a>
+               <a href="typeofcodelist.htm?code_type=1"  class="btn btn-default">교수 목록</a>
                <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
               <input type="button" value="등록" class="btn btn-success" id="professor_reg">
          </div>
+         <div style="height: 10%;"></div>
    </div>
 </div>
 

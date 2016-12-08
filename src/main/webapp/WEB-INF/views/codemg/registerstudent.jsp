@@ -38,7 +38,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label col-sm-offset-2">생년월일</label>
 				<div class="col-sm-6">
-					 <input type="text" name="code_birth" id="code_birth" class="form-control">
+					 <input type="text" name="code_birth" id="code_birth" class="form-control"  placeholder="ex)1993-01-15">
 				</div>
 			</div>  
          </div>

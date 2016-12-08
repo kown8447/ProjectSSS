@@ -83,7 +83,7 @@
    </div>   
    <input type="hidden" id="double_possible" class="form-control"  name="double_possible" value="${dp.double_possible}" class="form-control" >                  
 </form>
-
+</div>
 <br><br>
 <div align="center">
       <a href="departmentlist.htm" class="btn btn-default">목록</a> &nbsp;&nbsp;
