@@ -56,15 +56,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		System.out.println("여긴 모르겠음");
+		
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		try {
 			System.out.println("afterConnectionClosed 실행.. +" + status);
-			//timer.shutdown();
-			//session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("closeSession : " + e.getMessage());

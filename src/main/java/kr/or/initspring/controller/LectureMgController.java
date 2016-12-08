@@ -49,10 +49,7 @@ public class LectureMgController {
 	@RequestMapping(value="lectureRegister.htm",method=RequestMethod.GET)
     public String insertSubject(Model model,Principal principal){
 
-		System.out.println(principal.getName());
 		lectureservice.selectBefore(principal.getName(),model);
-		
-		
     	return "lecture.registersubject";
     }
 	

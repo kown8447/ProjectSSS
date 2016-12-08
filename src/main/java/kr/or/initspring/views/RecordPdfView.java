@@ -77,7 +77,7 @@ public class RecordPdfView extends AbstractPdfView {
 		studentTable.addCell(new Cell(new Paragraph(student.getMember_name(), font)));
 		studentTable.addCell(new Cell(new Paragraph("전공", font)));
 		Cell majorcell = new Cell(
-				new Paragraph(major.getCollege_name() + " " + major.getDepartment_name() + " 학과", font));
+				new Paragraph(major.getCollege_name() + " " + major.getDepartment_name(), font));
 		majorcell.setColspan(3);
 		studentTable.addCell(majorcell);
 

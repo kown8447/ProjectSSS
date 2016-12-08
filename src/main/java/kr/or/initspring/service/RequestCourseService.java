@@ -493,16 +493,10 @@ public class RequestCourseService {
 		StudentDTO studentDto = null;
 		int count = 0;
 		try {
-			System.out.println("예상 오류 지점 11111111111");
 			beforeSubjectDto = requestCourseDao.getBeforeSubjectBySubjectCode(subject_code);
-			System.out.println("예상 오류 지점 22222222222");
 			studentDto = requestCourseDao.getStudentByMemberid(member_id);
-			System.out.println("예상 오류 지점 3333333333333");
-			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(),
-					studentDto.getStudent_code());
-			System.out.println("예상 오류 지점 44444444444444");
-			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(),
-					studentDto.getStudent_code());
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(),studentDto.getStudent_code());
+			count = requestCourseDao.checkBeforeSubjectByRecord(beforeSubjectDto.getBefore_name(),studentDto.getStudent_code());
 		} catch (NullPointerException e) {
 			System.out.println("RequestCourseService / checkBeforeSubject : " + e.getMessage());
 			if (beforeSubjectDto == null) {

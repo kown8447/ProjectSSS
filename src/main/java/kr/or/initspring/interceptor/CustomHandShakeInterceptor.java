@@ -15,14 +15,12 @@ public class CustomHandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception ex) {
-		System.out.println("afterHandshake 호출");
 	}
 
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
 		
-		System.out.println("beforeHandshake 호출");
 		ServletServerHttpRequest ssre = (ServletServerHttpRequest) request;
 		
 		HttpServletRequest req = ssre.getServletRequest();

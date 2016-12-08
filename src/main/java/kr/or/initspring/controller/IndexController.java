@@ -72,12 +72,9 @@ public class IndexController {
 	 * @Author : 권기엽
 	 * @description 시간표 형태 출력을 위한 페이지 이동
 	 */
-	/*@RequestMapping(value={"goTimetableForm.htm","/member/goTimetableForm.htm","/collegeregister/goTimetableForm.htm",
-			"/favorite/goTimetableForm.htm","/notice/goTimetableForm.htm","/requestcourse/goTimetableForm.htm"})*/
 	@RequestMapping(value={"goTimetableForm.htm","*/goTimetableForm.htm"})
 	@Secured({"ROLE_STUDENT"})
 	public String goTimetableForm(){
-		System.out.println("시간표 에러체크");
 		return "member/viewTimetable";
 	}
 	

@@ -43,7 +43,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 		String member_id = request.getParameter("member_id");
 		String member_pwd = request.getParameter("member_pwd");
 		String encpwd = "";
-		System.out.println("핸들러에서 member_id : " + member_id);
 		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
 		String url = "login/loginFail.htm";
 		

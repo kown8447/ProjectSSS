@@ -74,8 +74,6 @@ public class ScheduleBoardService {
       @Transactional(rollbackFor = { Exception.class, SQLException.class })
       public int insertExcel(Academic_CalendarDTO dto){
          int result = 0;
-         System.out.println("액셀넣기 서비스");
-         System.out.println(dto.toString());
          ScheduleBoardDAO scheduleBoardDAO = sqlsession.getMapper(ScheduleBoardDAO.class);
          result = scheduleBoardDAO.insertScheduleBoard(dto);
          return result;

@@ -87,8 +87,6 @@ public class LoginController {
 		
 		String member_id = null;
 
-		System.out.println("비동기 요청 : " + member_email + "/" + member_name);
-
 		member_id = loginservice.searchID(member_name, member_email);
 
 		model.addAttribute("member_id", member_id);
@@ -117,10 +115,7 @@ public class LoginController {
 		boolean result = false;
 		
 		String confirmEmail = loginservice.getEmailByUserid(member_id);
-		
-		System.out.println("member_email : " + member_email);
-		System.out.println("confirmEmail : " + confirmEmail);
-		
+
 		if(member_email.equals(confirmEmail)){
 			try {
 				result = loginservice.updatePwd(member_id, bCryptPasswordEncoder.encode(temp_pwd));
