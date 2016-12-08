@@ -4,43 +4,36 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 
-   <div class="container" style="width:50%">
+ <div class="container" style="width:65%">
    <h4>▶&nbsp;빌딩 등록 </h4>
       <br><br>   
-      <div  style="width:90%; margin: auto;">
       <form action="registerBuilding.htm" method="post" id="registerBuilding_form">
-         <table class="table ">
-            <tr>
-               <td>건물명</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <input type="text" name="building_name" id=building_name class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>주소</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <input type="text" name="building_addr" id="building_addr" class="form-control ">
-                  </div>
-               </td>
-            </tr>
-         </table>
-         <br>
-         
-         
+      <div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">건물명</label>
+			<div class="col-sm-6">
+				<input type="text" name="building_name" id=building_name class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">주소</label>
+			<div class="col-sm-6">
+				<input type="text" name="building_addr" id="building_addr" class="form-control ">
+			</div>
+		</div>
+      </div>           
       </form>
       
+      <br><br>
       <div align="center">
          <a href="buildingList.htm"><button class="btn btn-default">빌딩목록</button></a>
          <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
          <input type="button" value="등록" class="btn btn-success" id="buildingreg">
       </div>
-      <br>
+     <div style="height:15%;"></div>
+</div>
    
-      </div>
-   </div>
 <div class="modal fade" id="layerpop">
    <div class="modal-dialog modal-sm">
       <div class="modal-content">

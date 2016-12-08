@@ -6,47 +6,39 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-   <h4>▶&nbsp;부전공 등록</h4>
-   <br><br>
-    <div  style="margin: auto;">
+   <h4>▶&nbsp;부전공 등록</h4><br><br>
+   
       <form action="insertMjRecord.htm" method="post" id="insertMjRecord_form">
-         <table class="table">
-            <tr>
-               <td>학번코드</td>
-               <td>
-                  <div class="col-sm-6"  >   
-                     <input type="text" name="student_code" id="student_code" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>   
-               <td>학과코드</td>
-               <td>
-                  <div class="col-sm-6"  >
-                  <select name="department_code" id="department_code" class="form-control">
-                     <c:forEach items="${department}" var="dp">
-                        <option value="${dp.department_code}">${dp.department_name} (${dp.department_code})</option>
-                     </c:forEach>
-                  </select>
-                  </div>
-               </td>
-            </tr>
+         <div class="form-horizontal">
+         	<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학번코드</label>
+				<div class="col-sm-6">
+					<input type="text" name="student_code" id="student_code" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학과코드</label>
+				<div class="col-sm-6">
+					<select name="department_code" id="department_code" class="form-control">
+                    	 <c:forEach items="${department}" var="dp">
+                        	<option value="${dp.department_code}">${dp.department_name} (${dp.department_code})</option>
+                     	</c:forEach>
+                  	</select>
+				</div>
+			</div>           
                <input type="hidden" name="mj_type" id="mj_type" value="1">
-         </table>
-         
+         </div>      
       </form>
-      <br>
+      <br><br>
       <div align="center">
-               <a href="mjRecordList.htm"><button class="btn btn-default">전공/부전공 목록</button></a>
+               <a href="mjRecordList.htm" class="btn btn-default">전공/부전공 목록</a>
                <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
               <input type="button" value="등록" class="btn btn-success" id="mjrecord_reg">
-         </div>
-      
-      
+         </div>   
+         <div style="height:15%;"></div>  
       </div>
    </div>
-</div>
-
 
 
 <div class="modal fade" id="layerpop">

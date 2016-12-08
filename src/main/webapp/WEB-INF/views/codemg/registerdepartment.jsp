@@ -4,78 +4,72 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="container" style="width:60%">
-   <h4>▶&nbsp;학부 등록 </h4>
-   <br><br>
-   <div id="classroomRegister" style="width:90%; margin: auto;">
+   <h4>▶&nbsp;학부 등록 </h4><br><br>
+   
+  
       <form action="insertDepartment.htm" method="post" id="insertDepartment_form">
-         <table class="table">
-            <tr>
-               <td>단대코드</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <select name="college_code" id="college_code" class="form-control">
+         <div class="form-horizontal">
+            <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">단대코드</label>
+				<div class="col-sm-6">
+					<select name="college_code" id="college_code" class="form-control">
                         <c:forEach items="${college}" var="cl">
                            <option value="${cl.college_code}">${cl.college_name}(${cl.college_code})</option>
                         </c:forEach>
                      </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>사무실코드</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <select id="office_code" name="office_code" class="form-control">
+				</div>
+			</div> 
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">사무실 코드</label>
+				<div class="col-sm-6">
+					<select id="office_code" name="office_code" class="form-control">
                         <c:forEach items="${officelist}" var="of">
                            <option value="${of.office_code}">${of.office_name}(${of.office_code})</option>
                         </c:forEach>
                      </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>학과명</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <input type="text" name="department_name" id="department_name" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>정원</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <input type="text" id="department_seat" name="department_seat" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>졸업학점(전공,교양)</td>
-               <td>
-                  <div class="col-sm-6 ">
-                     <input type="text" id="graduation_credit" name="graduation_credit" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>설명</td>
-               <td>
-                  <div class="col-sm-12 ">
-                     <textarea id="department_description" name="department_description" class="form-control"></textarea>
-                  </div>
-               </td>
-            </tr>
-            <input type="hidden" id="double_possible" name="double_possible" value="1">
-         </table>
+				</div>
+			</div>
+                     
+            <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학과명</label>
+				<div class="col-sm-6">
+					<input type="text" name="department_name" id="department_name" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">정원</label>
+				<div class="col-sm-6">
+					 <input type="text" id="department_seat" name="department_seat" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">졸업학점(전체)</label>
+				<div class="col-sm-6">
+					 <input type="text" id="graduation_credit" name="graduation_credit" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">설명</label>
+				<div class="col-sm-6">
+					 <textarea id="department_description" rows="7" name="department_description" class="form-control"></textarea>
+				</div>
+			</div>
+			
+			<input type="hidden" id="double_possible" name="double_possible" value="1">      
+         </div>
       </form>
+      
+      <br><br>
       <div align="center">
-            <a href="departmentlist.htm"><button class="btn btn-default">학부 목록</button></a>
+            <a href="departmentlist.htm" class="btn btn-default">학부 목록</a>
             <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
             <input type="button" value="등록" class="btn btn-success" id="departmentreg">
          </div>
    </div>
-</div>   
-
 
 
 <div class="modal fade" id="layerpop">

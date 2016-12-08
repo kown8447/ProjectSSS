@@ -8,8 +8,7 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-<h4>▶&nbsp;개설신청  상세정보 </h4>
-<br><br>
+<h4>▶&nbsp;개설신청  상세정보 </h4><br><br>
 <form id="rejectForm" action="UpdateReject.htm?code=${de.subject_code}">
 <table class="table table-bordered" style="text-align: center; ">
 	<tr>

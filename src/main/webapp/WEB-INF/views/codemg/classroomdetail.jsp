@@ -4,7 +4,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <h4>▶&nbsp;강의실 상세정보 </h4>
 <br><br>
-
 <form action="updateClassroom.htm" id="updateClassroom_form">
    <div style="border: 1px solid green; padding: 3%; border-radius: 1em; width: 40%; margin: auto;">
       <div class="form-horizontal">
@@ -14,8 +13,8 @@
                <input type="text" value="${classroom.classroom_code }" class ="form-control" readonly="readonly" id="classroom_code" name="classroom_code">
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+      
+      
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">건물코드</label>
             <div class="col-sm-6">
@@ -26,25 +25,25 @@
                </select>
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+    
+      
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">강의실 이름</label>
             <div class="col-sm-6">
                <input type="text" value="${classroom.classroom_name}" class ="form-control" id="classroom_name" name="classroom_name">
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+     
+     
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">수용인원</label>
             <div class="col-sm-6">
                <input type="text" value="${classroom.seat}" class ="form-control" id="seat" name="seat">
             </div>
-         </div>
-      </div>
+         
+      	</div>
       
-      <div class="form-horizontal">
+      
          <label class="col-sm-2 control-label col-sm-offset-2">종류</label>&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="col-sm-6">
                <label class="radio-inline">
@@ -61,8 +60,9 @@
                </label> 
             </div>
       </div>
+    </div>
    
-   </div>
+
    <br><br>
       
 </form>

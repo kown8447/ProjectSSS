@@ -2,18 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-<div class="container" style="width:75%">
-<h4>▶&nbsp;사무실 리스트 </h4>
-<br><br>
-<div class="container" style="width:70%">
-   <table class="table" style="text-align: center">
+<div class="row  col-sm-offset-2">
+<h4>▶&nbsp;사무실 리스트 </h4><br><br>
+<div class="col-sm-10">
+	<a href="registeroffice.htm" style="float:right;" class="btn btn-success">사무실 등록</a>
+	<br><br><br>
+   <table class="table table-bordered" style="text-align: center" >
       <thead>
-         <tr>
-            <td>사무실코드</td>
-            <td>건물코드</td>
-            <td>전화번호</td>
-            <td>사무실 이름</td>
-            <td>사용가능 여부</td>
+         <tr class="active">
+            <th style="text-align: center">사무실코드</th>
+            <th style="text-align: center">건물코드</th>
+            <th style="text-align: center">전화번호</th>
+            <th style="text-align: center">사무실 이름</th>
+            <th style="text-align: center">사용가능 여부</th>
          </tr>
       </thead>
       <c:forEach items="${officelist}" var="office" varStatus="index">
@@ -41,6 +42,5 @@
          </tbody>
       </c:forEach>
    </table>
-   <a href="registeroffice.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
 </div>   
 </div>

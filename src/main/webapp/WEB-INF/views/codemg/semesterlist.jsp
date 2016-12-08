@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="container" style="width:75%">
-<h4>▶&nbsp;리스트 </h4>
+<h4>▶&nbsp;학기목록 </h4>
 <br><br> 
-<div class="container" style="width:95%">
-<table class="table" style="text-align: center">
+
+<table class="table table-bordered" style="text-align: center" >
 		<thead>
-			<tr>
+			<tr class="active">
 				<th style="text-align: center">학기코드</th>
 				<th style="text-align: center">학기 이름</th>
 				<th style="text-align: center">학기 시작일</th>
@@ -38,4 +38,3 @@
 		<a href="registersemester.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>	
 	</div>
 	
-</div>

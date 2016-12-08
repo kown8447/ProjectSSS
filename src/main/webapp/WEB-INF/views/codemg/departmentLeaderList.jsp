@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div>
-<table>
+<table class="table table-bordered" style="text-align: center" >
 		<thead>
-			<tr>
-				<td>교수이름</td>
-				<td>학과이름</td>
-				<td>단과대학</td>
+			<tr class="active">
+				<th style="text-align: center">교수이름</th>
+				<th style="text-align: center">학과이름</th>
+				<th style="text-align: center">단과대학</th>
 			</tr>
 		</thead>
 		<c:forEach items="${departmentLeaderList}" var="dp" varStatus="index">

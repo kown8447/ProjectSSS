@@ -2,22 +2,27 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
-<div class="container" style="width:75%">
-<h4>▶&nbsp;개설과목 신청 현황 리스트 </h4>
-<br><br>
-	<div class="container" style="width:95%">
-	<table class="table" style="text-align: center">
+<div class="container" style="width:65%">
+<h4>▶&nbsp;개설과목 신청 현황 리스트 </h4><br><br>
+
+	<table class="table table-bordered" style="text-align: center" >
 		<thead>
-			<tr>
-				<td>구분</td>
-				<td>학년</td>
-				<td>과목</td>
-				<td>교수</td>
-				<td>상태</td>
+			 <tr class="active">
+				<th style="text-align: center">구분</th>
+				<th style="text-align: center">학년</th>
+				<th style="text-align: center">과목</th>
+				<th style="text-align: center">교수</th>
+				<th style="text-align: center">상태</th>
 			</tr>
 		</thead>
-		<c:forEach items="${oprequest}" var="oplist">
+	
 		<tbody>
+		<c:if test="${empty oprequest}">
+            <tr>
+               <td colspan="5" style="text-align: center">등록된 정보가 없습니다.</td>
+            </tr>
+         </c:if>
+         	<c:forEach items="${oprequest}" var="oplist">
 			<tr>
 				<td>${oplist.required_choice}</td>
 				<td>${oplist.grade_limit}</td>
@@ -32,8 +37,8 @@
 				</c:choose>	
 				</td>
 			</tr>
-		</tbody>
-		</c:forEach>
+			</c:forEach>
+		</tbody>	
 	</table>
 	</div>
-</div>	
+

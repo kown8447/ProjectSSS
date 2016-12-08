@@ -13,8 +13,7 @@
                <input type="text" id="office_code" name="office_code" value="${office.office_code }" readonly="readonly" class="form-control">
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+      
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">건물</label>
             <div class="col-sm-6">
@@ -25,24 +24,21 @@
                </select>
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+     
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">전화번호</label>
             <div class="col-sm-6">
                <input type="text" id="office_phone" name="office_phone" value="${office.office_phone }" class="form-control">
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+     
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">사무실 이름</label>
             <div class="col-sm-6">
                <input type="text" id="office_name" name="office_name" value="${office.office_name }" class="form-control">
             </div>
          </div>
-      </div>
-      <div class="form-horizontal">
+      
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">사용가능 여부</label>
             <div class="col-sm-6">
