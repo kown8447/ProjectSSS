@@ -159,7 +159,7 @@ public class ModifyTermScheduler {
 	
 	@Scheduled(cron="${mid.thirdGrade.startDate}")
 	public void thirdGradeMidStart() throws Exception { 
-		setEnrollActive(3,1, 1);	
+		setEnrollActive(3,1, 1);
 		System.out.println("3학년 시작");
 	}
 	
@@ -172,7 +172,7 @@ public class ModifyTermScheduler {
 	
 	@Scheduled(cron="${mid.fourthGrade.startDate}")
 	public void fourthGradeMidStart() throws Exception { 
-		setEnrollActive(4,1, 1);	
+		setEnrollActive(4,1, 1);
 		System.out.println("4학년 시작");
 	}
 	

@@ -17,7 +17,6 @@ $(function(){
 					});
 					
 					$.each(data.lists, function(i, elt) {
-		
 						var color="skyblue";
 						var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 

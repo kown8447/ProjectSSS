@@ -50,15 +50,20 @@ public class IndexController {
 	   */
 	@RequestMapping("/index.htm")
 	public String goLoginHome(Principal principal) {
-		String member_id = principal.getName();
-		if (memberservice.getRole(member_id).equals("ROLE_STUDENT")) {
-			return "home.student_Main";
-		} else if (memberservice.getRole(member_id).equals("ROLE_PROFESSOR")) {
-			return "home.professor_Main";
-		} else if (memberservice.getRole(member_id).equals("ROLE_ADMIN")) {
-			return "home.admin_Main";
-		} else{
-			return  "login.login";
+		
+		try{
+			String member_id = principal.getName();
+			if (memberservice.getRole(member_id).equals("ROLE_STUDENT")) {
+				return "home.student_Main";
+			} else if (memberservice.getRole(member_id).equals("ROLE_PROFESSOR")) {
+				return "home.professor_Main";
+			} else if (memberservice.getRole(member_id).equals("ROLE_ADMIN")) {
+				return "home.admin_Main";
+			} else{
+				return  "login.login";
+			}
+		}catch(NullPointerException e){
+			return "login.login";
 		}
 	}
 	

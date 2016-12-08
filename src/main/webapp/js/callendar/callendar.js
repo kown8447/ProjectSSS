@@ -38,8 +38,7 @@ $(function() {
         
        var ed =  $("#enddate").val();
        var endDateArr = ed.split('/');
-       console.log("시작"+startDateArr[2]+","+ startDateArr[0]+","+ startDateArr[1]);
-       console.log("끝"+endDateArr[2]+","+ endDateArr[0]+","+ endDateArr[1]);
+    
        var startDateCompare = new Date(startDateArr[2], startDateArr[0], startDateArr[1]);
        var endDateCompare = new Date(endDateArr[2], endDateArr[0], endDateArr[1]);
       if ($("#title").val() == "") {
@@ -142,8 +141,7 @@ $(function() {
         
        var ed =  $("#enddate").val();
        var endDateArr = ed.split('/');
-       console.log("시작"+startDateArr[2]+","+ startDateArr[0]+","+ startDateArr[1]);
-       console.log("끝"+endDateArr[2]+","+ endDateArr[0]+","+ endDateArr[1]);
+   
        var startDateCompare = new Date(startDateArr[2], startDateArr[0], startDateArr[1]);
        var endDateCompare = new Date(endDateArr[2], endDateArr[0], endDateArr[1]);
       if ($("#title1").val() == "") {

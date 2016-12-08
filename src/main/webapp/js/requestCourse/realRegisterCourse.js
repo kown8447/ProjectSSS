@@ -185,6 +185,7 @@ function realInsertTimeTable(e){
 					realGradeSum+=data.subject_info.subject_credit;
 					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
+						flag=false;
 						realGradeSum-=data.subject_info.subject_credit;
 						flag=false;
 					}else{
