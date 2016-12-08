@@ -11,7 +11,7 @@
       <form action="insertScholarship.htm" method="post" id="insertScholarship_form">
          <div class="form-horizontal">
             <div class="form-group">
-				<label class="col-sm-2 control-label col-sm-offset-2">주소</label>
+				<label class="col-sm-2 control-label col-sm-offset-2">학번 코드</label>
 				<div class="col-sm-6">
 					<input type="text" name="student_code" id="student_code"  class="form-control">
 				</div>

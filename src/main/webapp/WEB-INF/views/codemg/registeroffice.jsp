@@ -17,20 +17,21 @@
                  </select>
 			</div>
 		</div>
-		
-		<div class="form-group">
-			<label class="col-sm-2 control-label col-sm-offset-2">전화번호</label>
-			<div class="col-sm-6">
-				<input type="text" name="office_phone" id="office_phone" class="form-control">
-			</div>
-		</div>
-		
 		<div class="form-group">
 			<label class="col-sm-2 control-label col-sm-offset-2">사무실 이름</label>
 			<div class="col-sm-6">
 				<input type="text" name="office_name" id="office_name" class="form-control">
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">전화번호</label>
+			<div class="col-sm-6">
+				<input type="text" name="office_phone" id="office_phone_insert" class="form-control" placeholder="ex)000-0000-0000">
+			</div>
+		</div>
+		<div class="form-group" style="text-align: center;">
+     		<div id="officeInsertPhoneCheck"></div>
+     	</div>
 	</div>
 	</form>
     

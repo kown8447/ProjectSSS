@@ -24,13 +24,15 @@
 				<input type="text" name="lab_name" id="lab_name" class="form-control">
 			</div>
 		</div>
-		
 		<div class="form-group">
 			<label class="col-sm-2 control-label col-sm-offset-2">전화번호</label>
 			<div class="col-sm-6">
-				<input type="text" name="lab_phone" id="lab_phone" class="form-control">
+				<input type="text" name="lab_phone" id="lab_phone_insert" class="form-control" placeholder="ex)000-0000-0000">
 			</div>
 		</div>
+		<div class="form-group" style="text-align: center;">
+     		<div id="labInsertPhoneCheck"></div>
+     	</div>
 		</div>
       </form>
       

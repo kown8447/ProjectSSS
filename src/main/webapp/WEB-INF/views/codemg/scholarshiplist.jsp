@@ -21,15 +21,15 @@
       <tbody>
          <tr>
             <td>
-               <a href="detailScholarship.htm?scholarship_code=${ss.scholarship_code}">
                   ${ss.scholarship_code }
-               </a>
             </td>
             <td>
                ${ss.student_code }
             </td>
             <td>
+               <a href="detailScholarship.htm?scholarship_code=${ss.scholarship_code}">
                ${ss.code_name }
+               </a>
             </td>
             <td>
                ${ss.scholaship_name }

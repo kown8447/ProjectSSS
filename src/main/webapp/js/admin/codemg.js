@@ -1,5 +1,95 @@
 $(function() {
+	
+	//전화번호 유효성 검증
+	var reg_phone = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+	var phoneCheck=false;
+	
+	//사무실 전화번호 수정 유효성 검증
+	$('#office_phone').keyup(function() {
+		if(!reg_phone.test($('#office_phone').val())){
+			$("#officePoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#officePoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	$('#office_phone').change(function() {
+		if(!reg_phone.test($('#office_phone').val())){
+			$("#officePoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#officePoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	//사무실 전화번호 등록 유효성 검증
+	$('#office_phone_insert').keyup(function() {
+		if(!reg_phone.test($('#office_phone_insert').val())){
+			$("#officeInsertPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#officeInsertPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	$('#office_phone_insert').change(function() {
+		if(!reg_phone.test($('#office_phone_insert').val())){
+			$("#officeInsertPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#officeInsertPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	//연구실 전화번호 등록 유효성 검증
+	$('#lab_phone_insert').keyup(function() {
+		if(!reg_phone.test($('#lab_phone_insert').val())){
+			$("#labInsertPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#labInsertPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	$('#lab_phone_insert').change(function() {
+		if(!reg_phone.test($('#lab_phone_insert').val())){
+			$("#labInsertPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#labInsertPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
 
+	//연구실 전화번호 수정 유효성 검증
+	$('#lab_phone').keyup(function() {
+		if(!reg_phone.test($('#lab_phone').val())){
+			$("#labPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#labPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	$('#lab_phone').change(function() {
+		if(!reg_phone.test($('#lab_phone').val())){
+			$("#labPhoneCheck").html(
+			"<div style='color:red'>유효한 전화번호가 아닙니다</div>");
+			phoneCheck=false;
+		}else{
+			$("#labPhoneCheck").empty();
+			phoneCheck=true;
+		}
+	});
+	
 	   $('#classroomInbuildings').change(function() {
 		      $.ajax({
 		         url : "classroomBuildingSelect.htm",
@@ -91,14 +181,19 @@ $(function() {
 	});
 	//사무실 등록
 	$('#officereg').click(function() {
-		if ($('#office_phone').val().trim() == '') {
-			alert('전화번호를 입력하세요');
-			$('#office_phone').focus();
-			return false;
-		}
 		if ($('#office_name').val().trim() == '') {
 			alert('사무실 이름을 입력하세요');
 			$('#office_name').focus();
+			return false;
+		}
+		if ($('#office_phone_insert').val().trim() == '') {
+			alert('전화번호를 입력하세요');
+			$('#office_phone_insert').focus();
+			return false;
+		}
+		if(!phoneCheck){
+			alert('유효한 전화번호가 아닙니다');
+			$('#office_phone_insert').focus();
 			return false;
 		}
 		$('#insertOffice_form').submit();
@@ -110,11 +205,17 @@ $(function() {
 			$('#lab_name').focus();
 			return false;
 		}
-		if ($('#lab_phone').val().trim() == '') {
+		if ($('#lab_phone_insert').val().trim() == '') {
 			alert('연구실 전화번호를 입력하세요');
-			$('#lab_phone').focus();
+			$('#lab_phone_insert').focus();
 			return false;
 		}
+		if(!phoneCheck){
+			alert('유효한 전화번호가 아닙니다');
+			$('#labInsertPhoneCheck').focus();
+			return false;
+		}
+		/*$('#insertOffice_form').submit();*/
 		$('#insertLab_form').submit();
 	});
 	//단과대학 등록
@@ -335,14 +436,19 @@ $(function() {
 	});
 	//사무실 수정
 	$('#edit_office').click(function() {
+		if ($('#office_name').val().trim() == '') {
+			alert('사무실 이름을 입력하세요');
+			$('#office_name').focus();
+			return false;
+		}
 		if ($('#office_phone').val().trim() == '') {
 			alert('전화번호를 입력하세요');
 			$('#office_phone').focus();
 			return false;
 		}
-		if ($('#office_name').val().trim() == '') {
-			alert('사무실 이름을 입력하세요');
-			$('#office_name').focus();
+		if(!phoneCheck){
+			alert('유효한 전화번호가 아닙니다');
+			$('#office_phone').focus();
 			return false;
 		}
 		$('#updateOffice_form').submit();
@@ -356,6 +462,11 @@ $(function() {
 		}
 		if ($('#lab_phone').val().trim() == '') {
 			alert('연구실 전화번호를 입력하세요');
+			$('#lab_phone').focus();
+			return false;
+		}
+		if(!phoneCheck){
+			alert('유효한 전화번호가 아닙니다');
 			$('#lab_phone').focus();
 			return false;
 		}
