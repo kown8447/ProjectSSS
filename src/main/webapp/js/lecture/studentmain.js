@@ -27,7 +27,7 @@ var select = '';
 					
 							$("td").remove();
 							console.log("데이타는:"+data);
-							alert("성공");
+				
 							
 							$.each(data.student,function(index){
 								grade = data.student[index].record_level;
@@ -53,14 +53,14 @@ var select = '';
 								
 							$("#list").append("<tr><td id='student_code_"+index+"'>"+data.student[index].student_code+"</td>"
 							+"<td>"+data.student[index].member_name+"</td><td>"+data.student[index].member_email+"</td>"
-							+"<td><select id='grade_"+index+"'>"+select
+							+"<td><select class='form-control' style='width:100px; float:left' id='grade_"+index+"'>"+select
 							+"<option value='A+'>A+</option>" 
 							+"<option value='A'>A</option>"
 							+"<option value='B+'>B+</option><option value='B'>B</option><option value='C+'>C+</option>"
 							+"<option value='C'>C</option><option value='D+'>D+</option><option value='D'>D</option>"
 							+"<option value='F'>F</option>"
-							+"</select><button class='update' value='btn_"+index+"'>성적등록</button></td></tr>"
-							+"<input type='hidden' id='semester"+index+"' value='"+data.student[index].semester_code+"'>");
+							+"</select><button class='update btn btn-success' value='btn_"+index+"'>성적등록</button></td></tr>"
+							+"<input type='hidden ' id='semester"+index+"' value='"+data.student[index].semester_code+"'>");
 							
 							
 							})		
@@ -76,7 +76,6 @@ var select = '';
 		
 		function recordUpdateSetting() {
 			$('.update').click(function() {
-				alert("떳다업데이트버튼");
 				
 			var btnIndex=$(this).val().split('_')[1];
 			
@@ -91,7 +90,7 @@ var select = '';
 							
 						},
 						success : (function(data){
-							alert("성공스");
+							alert("성적입력이 완료됬습니다.")
 						})
 					}
 				);

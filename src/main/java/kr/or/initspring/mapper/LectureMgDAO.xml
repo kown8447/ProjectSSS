@@ -132,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 이거는 이미 들어가있는 건물,시간표 조회 -->
 	<select id="select_period_build" resultType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-		select * from ASK_TIME a join subject s on a.subject_code = s.subject_code where subject_code = #{param1}
+		select * from ASK_TIME a join subjectg s on a.subject_code = s.subject_code where subject_code = #{param1}
 	</select>
 	
 	<!-- 서브젝트코드넣을때 +1해서 넣어주기 -->
@@ -228,9 +228,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  select reject_reason from REJECTION where subject_code = #{param1}
 	</select>
 	
-	<select id="select_MyTime" resultType="String">
-		select period_code from PROFESSOR p join subject s on p.PROFESSOR_CODE = s.PROFESSOR_CODE
-		 join ASK_TIME a on s.subject_code = a.subject_code where p.professor_code = #{param1}
+	<select id="select_MyTime" resultType="kr.or.initspring.dto.commons.PeriodDTO">
+	   select pr.period_code,pr.period_day,pr.period_start,pr.period_end from PROFESSOR p join subject s 
+	   on p.PROFESSOR_CODE = s.PROFESSOR_CODE join ASK_TIME a on s.subject_code = a.subject_code 
+	   join PERIOD pr on a.PERIOD_CODE = pr.PERIOD_CODE where p.professor_code = #{param1}
 	</select>
 	
 	<select id="select_subjectname" resultType="String">

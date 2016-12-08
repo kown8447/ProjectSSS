@@ -140,7 +140,7 @@ public class LectureMgController {
 	public View getPeriod(Model model,String professor_code){
 		List<PeriodDTO> periodlist = lectureservice.getPeriodList();
 		List<BuildingDTO> buildinglist = lectureservice.getBuildingName();
-		List<String> myclass = lectureservice.selectMyTime(professor_code);
+		List<PeriodDTO> myclass = lectureservice.selectMyTime(professor_code);
 		
 		model.addAttribute("periodlist",periodlist);
 		model.addAttribute("buildinglist",buildinglist);
@@ -211,7 +211,6 @@ public class LectureMgController {
 		dto.setSemester_code(semester_code);
 		dto.setRecord_level(record_level);
 		dto = lectureservice.insertgrade(dto);
-		System.out.println("인쑤얼트그루에이드");
 		
 		return "lecture.studentmain";
 		
@@ -220,21 +219,17 @@ public class LectureMgController {
 	@RequestMapping(value="lectureRemoveTime.htm")
 	public View selectTimetable(String professor_code,String choice_code,Model model){
 		
-		System.out.println("폴페서코더드:"+professor_code);
-		System.out.println("선택한 코드:"+choice_code);
-		
 		String choice = "성공";
-		
-		List<String> mytime = lectureservice.selectMyTime(professor_code);
-		System.out.println("마타임:"+mytime.size());
+	
+		List<PeriodDTO> mytime = lectureservice.selectMyTime(professor_code);
+		System.out.println("이거야"+mytime.get(0).getPeriod_code());
 		
 		for(int i = 0; i < mytime.size() ; i++){
-			if(mytime.get(i).equals(choice_code)){
+			if(mytime.get(i).getPeriod_code().equals(choice_code)){
 				choice = "실패";
 			}
 		}
 		model.addAttribute("choice", choice);
-		System.out.println("초이스"+choice);
 		return jsonview;
 		
 	}

@@ -83,7 +83,7 @@ public interface LectureMgDAO {
 	public void update_RetakeCheck(String record_code);
 	public String select_Rejection(String subject_code);
 	public List<BuildingDTO> select_BuildingName();
-	public List<String> select_MyTime(String professor_code); 
+	public List<PeriodDTO> select_MyTime(String professor_code); 
 	public String select_subjectname(String subject_code);
 	public String select_recordlevel(String student_code ,String semester_code,String subject_code);
 }
