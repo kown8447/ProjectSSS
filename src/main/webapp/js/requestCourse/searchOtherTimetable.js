@@ -84,22 +84,12 @@ function loadOtherTimetable(e){
 				
 				$('#timetable_2').show();
 				$.each(data.otherTimetables, function(i, elt) {
-					var prev = 0;
-					var prevDay = "";
 					var color="skyblue";
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 
 					$.each(elt.period, function(i, obj) {
-						var str = obj.period_code.split("_");
-						if(str[1] == prevDay && str[2] - prev == 1 && obj.period_code.substr(7,1) != 1){
-							$('#'+obj.period_code+"_2").attr('style','background-color:'+color);
-							
-						}else{
-							$('#'+obj.period_code+"_2").html(text);
-							$('#'+obj.period_code+"_2").attr('style','background-color:'+color);
-						}
-						prev = str[2];
-						prevDay = str[1];
+						$('#'+obj.period_code+"_2").html(text);
+						$('#'+obj.period_code+"_2").attr('style','background-color:'+color);
 					});
 				});
 			}
