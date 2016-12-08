@@ -4,11 +4,11 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-<h4>▶&nbsp;부전공/ 전공 리스트 </h4>
-<br><br>
-<table class="table" style="text-align: center">
+<h4>▶&nbsp;부전공/ 전공 리스트 </h4><br><br>
+
+<table class="table table-bordered" style="text-align: center" >
       <thead>
-         <tr>
+         <tr class="active">
             <th style="text-align: center">코드</th>
             <th style="text-align: center">학과코드</th>
             <th style="text-align: center">전공구분</th>
@@ -36,6 +36,6 @@
          </tbody>
       </c:forEach>
    </table>
-   <a href="registermjrecord.htm"><button style="float:right;" class="btn btn-danger">되돌아가기</button></a>
+   <a href="registermjrecord.htm" style="float:right;" class="btn btn-danger">되돌아가기</a>
    </div>
 </div>

@@ -2,56 +2,50 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<div class="container" style="width:50%">
-   <h4>▶&nbsp;연구실 등록 </h4>
-      <br><br>   
-      <div  style="width:90%; margin: auto;">
+
+<div class="container" style="width:65%">
+   <h4>▶&nbsp;연구실 등록 </h4> <br><br>   
+   
       <form action="insertLab.htm" method="post" id="insertLab_form">
-         <table class="table">
-            <tr>
-               <td>건물코드</td>
-               <td>
-                  <div class="col-sm-6 ">      
-                     <select id="building_code" name="building_code" class="form-control">
+        <div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">건물코드</label>
+			<div class="col-sm-6">
+				<select id="building_code" name="building_code" class="form-control">
                         <c:forEach items="${building}" var="bd">
                            <option value="${bd.building_code}">${bd.building_name}(${bd.building_code})</option>
                         </c:forEach>
                      </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>연구실 이름</td>
-               <td>
-                  <div class="col-sm-6">   
-                     <input type="text" name="lab_name" id="lab_name" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>전화번호</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <input type="text" name="lab_phone" id="lab_phone" class="form-control">
-                  </div>
-               </td>
-            </tr>
-         </table>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">연구실 이름</label>
+			<div class="col-sm-6">
+				<input type="text" name="lab_name" id="lab_name" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">전화번호</label>
+			<div class="col-sm-6">
+				<input type="text" name="lab_phone" id="lab_phone" class="form-control">
+			</div>
+		</div>
+		</div>
       </form>
       
+      <br><br>
       <div align="center">
          <a href="showlablist.htm"><button class="btn btn-default">연구실 목록</button></a>
          <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
          <input type="button" value="등록" class="btn btn-success" id="labreg">
       </div>
-   </div>
-</div>   
-
-
-
+      <div style="height: 15%;"></div> 
+</div>
+  
 
 <div class="modal fade" id="layerpop">
    <div class="modal-dialog modal-sm">

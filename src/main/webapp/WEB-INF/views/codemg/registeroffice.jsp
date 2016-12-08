@@ -4,54 +4,46 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<div class="container" style="width:50%">
-   <h4>▶&nbsp;사무실 등록 </h4>
-      <br><br>   
-      <div  style="width:90%; margin: auto;">
+<div class="container" style="width:65%">
+   <h4>▶&nbsp;사무실 등록 </h4><br><br>   
+
       <form action="insertOffice.htm" method="post" id="insertOffice_form">
-         <table class="table ">
-            <tr>
-               <td>건물코드</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <select id="building_code" name="building_code" class="form-control">
+       <div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">건물코드</label>
+			<div class="col-sm-6">
+				<select id="building_code" name="building_code" class="form-control">
                         <c:forEach items="${building}" var="bd">
                            <option value="${bd.building_code}">${bd.building_name}(${bd.building_code})</option>
                         </c:forEach>
-                     </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>전화번호</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <input type="text" name="office_phone" id="office_phone" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>사무실 이름</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <input type="text" name="office_name" id="office_name" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            
-         </table>
-      </form>
-      
+                 </select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">전화번호</label>
+			<div class="col-sm-6">
+				<input type="text" name="office_phone" id="office_phone" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">사무실 이름</label>
+			<div class="col-sm-6">
+				<input type="text" name="office_name" id="office_name" class="form-control">
+			</div>
+		</div>
+	</div>
+	</form>
+    
+      <br><br>
       <div align="center">
          <a href="showofficelist.htm"><button class="btn btn-default">사무실 목록</button></a>
          <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
          <input type="button" value="등록" class="btn btn-success" id="officereg">
       </div>
-   </div>
-</div>
-
-
-
+      <div style="height:15%;"></div>
+ </div>
 
 
 <div class="modal fade" id="layerpop">

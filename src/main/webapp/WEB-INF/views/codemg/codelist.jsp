@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container" style="width: 75%">
-	<h4>▶&nbsp;리스트</h4>
-	<br>
-	<br>
-	<div class="container" style="width: 95%">
+
+
+<div class="row  col-sm-offset-2">
+	<h4>▶&nbsp;교수목록</h4><br><br>
+	
+	<div class="col-sm-10">
 		<form>
 		<input type="hidden" name="code_type" value="${typeofcode}">
 			<div class="form-inline">
@@ -18,14 +19,13 @@
 				<input type="submit" id="searchBtn" class="btn btn-success" value="찾기">
 			</div>
 		</form>
-		<table class="table" style="text-align: center">
+		<table class="table table-bordered" style="text-align: center" >
 			<thead>
-				<tr>
+				<tr class="active">
 					<th style="text-align: center">구분</th>
 					<th style="text-align: center">코드</th>
 					<th style="text-align: center">이름</th>
 					<th style="text-align: center">생년월일</th>
-
 				</tr>
 			</thead>
 			<c:forEach items="${codelist}" var="code" varStatus="index">
@@ -39,17 +39,15 @@
 							</c:choose>
 						</td>
 						<td id="code${index.count}">${code.code}</td>
-						<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a>
-						</td>
+						<td><a href="codedetail.htm?code=${code.code}">${code.code_name}</a></td>
 						<td>${code.code_birth}</td>
-
-						<td><input value="${code.code_type}" type="hidden"></td>
 					</tr>
 				</tbody>
-
 			</c:forEach>
 		</table>
 
+		<input value="${code.code_type}" type="hidden">
+	
 		<c:if test="${typeofcode==0}">
 			<a href="registerstudent.htm"><button style="float: right;" class="btn btn-danger">되돌아가기</button></a>
 		</c:if>

@@ -4,44 +4,40 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 
-<div class="container" style="width:50%">
-   <h4>▶&nbsp;관리자 등록 </h4>
-      <br><br>
-      <div  style="width:90%; margin: auto;">
+ <div class="container" style="width:65%">
+   <h4>▶&nbsp;관리자 등록 </h4><br><br>
+
 		<form action="adminCodeRegister.htm" method="post" id="adminCodeRegister_form" name="adminCodeRegister_form">
-			<table class="table">
-				<tr>
-					<td>코드</td>
-					<td>
-						<div class="col-sm-6 ">
-							<input type="text" name="code" id="code" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td>
-						<div class="col-sm-6 ">
-							<input type="text" name="code_name" id="code_name" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td>
-						<div class="col-sm-6 ">
-							<input type="text" name="code_birth" id="code_birth" class="form-control">
-						</div>
-					</td>
-				</tr>
-				
-			</table>
+		 <div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">코드</label>
+				<div class="col-sm-6">
+					<input type="text" name="code" id="code" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">이름</label>
+				<div class="col-sm-6">
+					<input type="text" name="code_name" id="code_name" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">이름</label>
+				<div class="col-sm-6">
+					<input type="text" name="code_birth" id="code_birth" class="form-control" placeholder="ex)1993-01-15">
+				</div>
+			</div>
+			</div>
 		</form>
-		</div>
+
+	<br><br>
 		<div align="center">
-			<a href="typeofcodelist.htm?code_type=2"><button class="btn btn-default">관리자 목록</button></a>
+			<a href="typeofcodelist.htm?code_type=2"class="btn btn-default">관리자 목록</a>
 			<input type="button" value="등록" class="btn btn-success" id="adminreg">
 		</div>
-		<hr>
-	</div>		
+		<div style="height: 15%;"></div>
+	</div>
+	
 
