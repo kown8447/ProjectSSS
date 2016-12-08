@@ -17,9 +17,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/lecture/postsubject.js"></script>
 </head>
-<style>
 
-</style>
 <body>
 
 <div class="container">
@@ -90,14 +88,14 @@
 					<th style="text-align: center">목</th>
 					<th style="text-align: center">금</th>
 				</tr>
-				<c:forEach var="i" begin="1" end="20">
+				<c:forEach var="i" begin="0" end="19" varStatus="idx">
 					<tr bordercolor="black" style="font-size:small; text-align: center; border: 1px" height="20px">
-						<th id="PERIOD_START_${i}" style="word-break: break-all; text-align: center"></td>
-						<td id="PR_MON_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_MON_${i}")></td>
-						<td id="PR_TUE_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_TUE_${i}")></td>
-						<td id="PR_WEN_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_WEN_${i}")></td>
-						<td id="PR_THU_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_THU_${i}")></td>
-						<td id="PR_FRI_${i}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${i}")></td>
+						<th id="PERIOD_START_${idx.count}" style="word-break: break-all; text-align: center"></td>
+						<td id="PR_MON_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_MON_${idx.count}")></td>
+						<td id="PR_TUE_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_TUE_${idx.count}")></td>
+						<td id="PR_WEN_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_WEN_${idx.count}")></td>
+						<td id="PR_THU_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_THU_${idx.count}")></td>
+						<td id="PR_FRI_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${idx.count}")></td>
 					</tr>
 				</c:forEach>
 			

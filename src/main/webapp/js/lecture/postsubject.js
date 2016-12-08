@@ -25,11 +25,14 @@ $(function() {
 						"<option value='" + value.building_code + "'>" + value.building_name+ "</option>");
 			})
 			$.each(data.periodlist, function(index, value) {
-				$('#PERIOD_START_' + index).html(value.period_start);
+				console.log(value);
+				$('#PERIOD_START_' + (index+1)).html(value.period_start);
 			})
 
 			$(data.myclass).each(function(index, elt) {
-				$("#mytime").append("<ul>" + elt + "</ul>");
+				$("#mytime").append("<ul>" + elt.period_day + "&nbsp;&nbsp;"
+												+ elt.period_start +"  ~  "
+												+ elt.period_end+"</ul>");
 			})
 
 		}
@@ -117,18 +120,14 @@ $(function() {
 });
 
 
-
 function getvalue(i) {
-
+	var ven=true;
 	var credit = $("#credit").val();
 
-	if (insertcount >= credit) {
-		alert("신청할 수 있는 시간을 초과했습니다.");
-		return false;
-	}
 
 	if ($("#" + i).css("background-color") == "rgb(135, 206, 235)") {
 		alert("다른 과목이 있습니다.");
+		ven=false;
 		return false;
 	}
 
@@ -145,7 +144,16 @@ function getvalue(i) {
 				insertcount -= 1;
 			}
 		}
-	} else {
+		ven=false;
+		return false;
+	} 
+
+	if (insertcount >= credit) {
+		alert("신청할 수 있는 시간을 초과했습니다.");
+		ven=false;
+		return false;
+	}
+	if(ven) {
 
 		$.ajax({
 					url : "lectureRemoveTime.htm",
@@ -162,7 +170,6 @@ function getvalue(i) {
 							alert("강의실을 선택해주세요");
 							return false;
 						} else {
-							console.log("성공");
 							if (data.choice == "성공") {
 								$("#period")
 										.append(
@@ -176,7 +183,8 @@ function getvalue(i) {
 								$("#" + i).text($('#subject_name').val());
 								$("#" + i).css("background", "#47C83E");
 								insertcount += 1;
-							} else {
+								ben = true;
+							} else { 
 								alert("이미 다른 강의가 있는 시간입니다.");
 								return false;
 							}

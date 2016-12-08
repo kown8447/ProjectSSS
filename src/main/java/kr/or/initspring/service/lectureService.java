@@ -468,12 +468,12 @@ public class lectureService {
 	public void deleteForReSubject(String subject_code) {
 
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
+		lecturedao.delete_Ask_Time(subject_code);
 		lecturedao.delete_Rejection(subject_code);
 		lecturedao.delete_Plan(subject_code);
 		lecturedao.delete_Oprequest(subject_code);
-		lecturedao.delete_Ask_Time(subject_code);
-
 	}
+
 
 	/*
 	 * @method Name : selectMyTime
@@ -483,12 +483,14 @@ public class lectureService {
 	 * @description : 교수가 강의하는 전체 시간 조회
 	 */
 
-	public List<String> selectMyTime(String professor_code) {
-
+	
+		public List<PeriodDTO> selectMyTime(String professor_code){
+		
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		List<String> myclass = lecturedao.select_MyTime(professor_code);
-
+		List<PeriodDTO> myclass = lecturedao.select_MyTime(professor_code);
+		
 		return myclass;
+		
 
 	}
 

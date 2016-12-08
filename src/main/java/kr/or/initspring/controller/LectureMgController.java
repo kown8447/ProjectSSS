@@ -131,7 +131,7 @@ public class LectureMgController {
 	public View getPeriod(Model model,String professor_code){
 		List<PeriodDTO> periodlist = lectureservice.getPeriodList();
 		List<BuildingDTO> buildinglist = lectureservice.getBuildingName();
-		List<String> myclass = lectureservice.selectMyTime(professor_code);
+		List<PeriodDTO> myclass = lectureservice.selectMyTime(professor_code);
 		
 		model.addAttribute("periodlist",periodlist);
 		model.addAttribute("buildinglist",buildinglist);
@@ -201,11 +201,10 @@ public class LectureMgController {
 	public View selectTimetable(String professor_code,String choice_code,Model model){
 		
 		String choice = "성공";
-		
-		List<String> mytime = lectureservice.selectMyTime(professor_code);
+		List<PeriodDTO> mytime = lectureservice.selectMyTime(professor_code);
 		
 		for(int i = 0; i < mytime.size() ; i++){
-			if(mytime.get(i).equals(choice_code)){
+			if(mytime.get(i).getPeriod_code().equals(choice_code)){
 				choice = "실패";
 			}
 		}

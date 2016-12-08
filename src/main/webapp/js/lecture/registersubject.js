@@ -11,8 +11,25 @@ $(function(){
 			$("#grade_limit").focus();
 			return false;
 		}
+	});
+	
+	$("#subject_credit").change(function(){
+		if($("#subject_credit").val() < 1){
+			alert("학점은 0보다 커야합니다");
+			$("#subject_credit").val(0);
+			return false;
+		}
+		
 	})
 	
+	$("#subject_seats").change(function(){
+		if($("#subject_seats").val() < 1){
+			alert("정원은 0보다 많아야합니다");
+			$("#subject_seats").val(0);
+			return false;
+		}
+		
+	})
 	$("#cancel").click(function(){
 		history.go(-1)();
 	})
