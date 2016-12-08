@@ -324,4 +324,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="copyToTimeTable">
 		insert into timetable select student_code, subject_code from enrollment
 	</insert>
+	
 </mapper>
