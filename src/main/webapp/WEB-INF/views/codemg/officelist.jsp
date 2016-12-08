@@ -8,9 +8,9 @@
 <div class="col-sm-10">
 	<a href="registeroffice.htm" style="float:right;" class="btn btn-success">사무실 등록</a>
 	<br><br><br>
-   <table class="table table-hover" style="text-align: center">
+   <table class="table table-bordered" style="text-align: center" >
       <thead>
-         <tr>
+         <tr class="active">
             <th style="text-align: center">사무실코드</th>
             <th style="text-align: center">건물코드</th>
             <th style="text-align: center">전화번호</th>

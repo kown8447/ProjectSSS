@@ -7,10 +7,10 @@
 	<h4>▶&nbsp;건물목록</h4><br> <br>
 	
 	<div class="col-sm-10">
-		<a href="registerbuilding.htm" style="float: right;" class="btn btn-success">건물등록</a>
-		<table class="table table-hover" style="text-align: center" >
+		<a href="registerbuilding.htm" style="float: right;" class="btn btn-success">건물등록</a><br><br>
+		<table class="table table-bordered" style="text-align: center" >
 			<thead>
-				<tr>
+				<tr class="active">
 					<th style="text-align: center">건물코드</th>
 					<th style="text-align: center">건물명</th>
 					<th style="text-align: center">주소</th>

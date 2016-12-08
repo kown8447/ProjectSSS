@@ -16,9 +16,9 @@
 	</div>
 	<br><br><br>
 	<div class="col-sm-10">
-		<table class="table table-hover" style="text-align: center">
+		<table class="table table-bordered" style="text-align: center" >
 			<thead>
-				<tr>
+				<tr class="active">
 					<th style="text-align: center">강의실코드</th>
 					<th style="text-align: center">건물코드</th>
 					<th style="text-align: center">강의실 이름</th>

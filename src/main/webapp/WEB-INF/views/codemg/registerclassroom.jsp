@@ -47,6 +47,7 @@
 		</div>
 		</div>
       </form>
+     </div>
       
       <br><br>
       <div align="center">
@@ -54,8 +55,7 @@
          <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
          <input type="button" value="등록" class="btn btn-success" id="classreg">
       </div>
-      <div style="height:15%;"></div>
-   </div>   
+      <div style="height:15%;"></div>  
 
 
 <div class="modal fade" id="layerpop">

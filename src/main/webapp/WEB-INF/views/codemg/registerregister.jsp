@@ -5,70 +5,64 @@
 <div class = "row">
 <div class = "col-sm-3"></div>
    <div class="col-sm-6"  >
-   <h4>▶&nbsp;등록 </h4>
-   <br><br>
+   <h4>▶&nbsp;등록 </h4><br><br>
+   
    <div id="register">
       <form action="insertRegister.htm" method="post" id="insertRegister_form">
-         <table class="table" style="text-align: center">
-            <tr>
-               <td>학번</td>
-               <td>
-                  <div class="col-sm-6"  > 
-                     <input type="text" name="student_code" id=student_code class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>학기코드</td>
-               <td>
-                  <div class="col-sm-6"  > 
-                  <select id="semester_code " name="semester_code" class="form-control">
+          <div class="form-horizontal">
+            <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학번</label>
+				<div class="col-sm-6">
+					<input type="text" name="student_code" id=student_code class="form-control">
+				</div>
+		 	</div>
+		 	
+		 	
+		 	 <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">학기코드</label>
+				<div class="col-sm-6">
+					<select id="semester_code " name="semester_code" class="form-control">
                      <c:forEach items="${semester}" var="sm">
                         <option value="${sm.semester_code}">${sm.semester_name}( ${sm.semester_code})</option>
                      </c:forEach>
                   </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>등록금</td>
-               <td>
-                  <div class="col-sm-6"  > 
-                     <input type="text" id="tuition" name="tuition" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>등록구분</td>
-               <td>
-               <div class="col-sm-6"  > 
-                  <div class="form-group">   
-                             등록&nbsp;&nbsp;&nbsp;<input type="radio" value="0" id="register_state" name="register_state">&nbsp;&nbsp;
-                             취소&nbsp;&nbsp;&nbsp;<input type="radio" value="1" id="register_state" name="register_state">
-                        </div>
-               </div>
-               </td>
-            </tr>
-            <tr>
-               <td>등록여부</td>
-               <td>
-               <div class="col-sm-9"  > 
-                  <div class="form-group">   
-                             일반학기&nbsp;&nbsp;&nbsp;<input type="radio" value="0" id="register_type" name="register_type">
-                             계절학기&nbsp;&nbsp;&nbsp;<input type="radio" value="1" id="register_type" name="register_type">
-                           졸업연기&nbsp;&nbsp;&nbsp;<input type="radio" value="2" id="register_type" name="register_type">
-                        </div>
-               </div>
-               </td>
-            </tr>
-         </table>
+				</div>
+		 	</div>
+            
+            
+             <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">등록금</label>
+				<div class="col-sm-6">
+					  <input type="text" id="tuition" name="tuition" class="form-control">
+				</div>
+		 	</div>
+		 	
+		 	<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">등록구분</label>
+				<div class="col-sm-6">
+					  등록&nbsp;&nbsp;&nbsp;<input type="radio" value="0" id="register_state" name="register_state">&nbsp;&nbsp;
+                                              취소&nbsp;&nbsp;&nbsp;<input type="radio" value="1" id="register_state" name="register_state">
+				</div>
+		 	</div>
+		 	
+		 	<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">등록여부</label>
+				<div class="col-sm-6">
+				 	일반학기&nbsp;&nbsp;&nbsp;<input type="radio" value="0" id="register_type" name="register_type">
+					계절학기&nbsp;&nbsp;&nbsp;<input type="radio" value="1" id="register_type" name="register_type">
+					졸업연기&nbsp;&nbsp;&nbsp;<input type="radio" value="2" id="register_type" name="register_type">
+				</div>
+		 	</div>   
+          </div>
       </form>
       
+      <br><br>
       <div align="center">
                <a href="registerlist.htm"><button class="btn btn-default">등록 목록</button></a>
                <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
               <input type="button" value="등록" class="btn btn-success" id="register_reg">
          </div>
+         <div style="height: 15%;"></div> 
    </div>
 </div>
 </div>
