@@ -150,12 +150,9 @@ public class OpRequestService {
 		OpRequestDAO dao = sqlsession.getMapper(OpRequestDAO.class);
 		int result = 0;
 		
-		System.out.println("서비스에서의 과목코드" + subject_code);
 		try {
 			dao.insertIntoOpened(subject_code);
 			dao.insertIntoLecture(subject_code);
-			System.out.println("insert");
-			System.out.println("승인");
 			dao.UpdateSuccess(subject_code);
 			result = dao.updateSubjectState(subject_code);
 			
@@ -180,7 +177,6 @@ public class OpRequestService {
 		if(reject_reason==null || reject_reason.equals("")){
 			reject_reason="no reason";
 		}
-		System.out.println("거절 사유 : " + reject_reason);
 		try {
 			dao.UpdateReject(subject_code);
 			dao.insertRejection(subject_code, reject_reason);

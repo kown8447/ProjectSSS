@@ -88,4 +88,5 @@ public interface RequestCourseDAO {
 	//수강 정정
 	
 	public void copyToTimeTable();	//수강 정정 끝난 이후 재학시간 테이블로 Enrollment Table 복사
+	public void deleteTimeTable();	//수강 정정 끝난 후, Timetable 비우기
 }

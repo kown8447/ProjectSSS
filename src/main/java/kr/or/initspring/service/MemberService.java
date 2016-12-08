@@ -61,7 +61,6 @@ public class MemberService {
 		MemberDAO memberdao = sqlsession.getMapper(MemberDAO.class);
 		String member_role = memberdao.getRole(member_id);
 		MemberDTO member;
-		System.out.println("member_role : "+ member_role);
 		if(member_role.equals("ROLE_STUDENT")){
 			member=memberdao.getStudent(member_id);
 		}else if(member_role.equals("ROLE_PROFESSOR")){

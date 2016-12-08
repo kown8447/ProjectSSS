@@ -72,7 +72,6 @@ public class OpRequestController {
 	public String updateCheck(@RequestParam("code") String subject_code) throws Exception{
 		
 		String view = "";
-		System.out.println("승인버튼 누를시 컨트롤러 " + subject_code);
 	
 		int result = oprequestservice.updateSuccess(subject_code);
 		
@@ -89,7 +88,6 @@ public class OpRequestController {
 	*/
 	@RequestMapping("UpdateReject.htm")
 	public String UpdateReject(@RequestParam("code") String subject_code, @RequestParam("rejectReason") String reject_reason) throws Exception{
-		System.out.println(subject_code);
 		String view = "";
 		boolean result = oprequestservice.UpdateReject(subject_code, reject_reason);
 		

@@ -236,6 +236,8 @@ $(function() {
 	 * @Desc
 	 * 유효성 검증
 	 */
+	var pwCheck=false;
+	var phoneCheck=false;
 	$(function() {
 		var idcheck = 1;
 		var reg_pw = /^.*(?=.{6,15})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
@@ -247,8 +249,10 @@ $(function() {
 					if (!reg_pw.test($('#member_pwd').val())) {
 						$("#p-error").html(
 								"<div style='color:red'>비밀번호 형식을 맞춰주세요</div>");
+						pwCheck=false;
 					} else {
 						$("#p-error").empty();
+						pwCheck=true;
 					}
 				});
 
@@ -272,8 +276,10 @@ $(function() {
 								$("#ph-error")
 										.html(
 												"<div style='color:red'>핸드폰번호 형식을 맞춰주세요</div>");
+								phoneCheck=false;
 							} else {
 								$("#ph-error").empty();
+								phoneCheck=true;
 							}
 						});
 	});
@@ -294,13 +300,13 @@ $(function() {
 					return false;
 				}
 
-				if ($("#member_pwd").val() == "") {
-					alert('비밀번호를 입력해주세요');
+				if ($("#member_pwd").val() == ""||!pwCheck) {
+					alert('비밀번호가 입력이 안되어 있거나 유효하지 않습니다');
 					$('#member_pwd').focus();
 					return false;
 				}
 
-				if ($('#member_pwd_confirm').val() != $('#member_pwd_confirm')
+				if ($('#member_pwd').val() != $('#member_pwd_confirm')
 						.val()) {
 					$('#member_pwd_confirm').focus();
 					return false;
@@ -312,8 +318,8 @@ $(function() {
 					return false;
 				}
 
-				if ($("#member_phone").val() == "") {
-					alert('핸드폰을 입력해주세요');
+				if ($("#member_phone").val() == ""||!phoneCheck) {
+					alert('핸드폰번호를 제대로 입력해주세요');
 					$('#member_phone').focus();
 					return false;
 				}

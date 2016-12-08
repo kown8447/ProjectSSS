@@ -26,10 +26,13 @@
 
 
 	<div class="col-md-7" style="overflow:auto;">
-		<div class="row" style="text-align: left">
-			<p>
+		<div class="form-group" style="text-align: center">
+			<div style="text-align: center">
 				현재까지의 신청 학점 : <span style="color: blue" id="sum_grade"></span>
-			</p>
+			</div>
+			<div style="text-align: right; color:red; font-size: x-small;">
+				[재수강은 빨간색으로 표시됩니다]
+			</div>			
 		</div>
 		<form action="" method="post">
 			<table id="real_timetable" class="table table-condensed" style="table-layout: fixed;font-size: 7pt;" cellpadding="5" cellspacing="5" align="center">

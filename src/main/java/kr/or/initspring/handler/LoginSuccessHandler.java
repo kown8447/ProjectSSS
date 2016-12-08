@@ -42,7 +42,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
 		String url = getReturnUrl(request,response);
 		String member_id = request.getParameter("member_id");
-		System.out.println("핸들러 url 주소 : " + url);
 		if(logindao.getMemberTempByUserid(member_id) == 1){
 			response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/member/edit.htm");
 		}else{

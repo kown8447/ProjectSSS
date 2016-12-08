@@ -151,7 +151,7 @@ public class RequestCourseController {
 			throws IOException {
 		String fname = new String(f.getBytes("euc-kr"), "8859_1");
 		response.setHeader("Content-Disposition", "attachment;filename=" + fname + ";");
-		String fullpath = request.getServletContext().getRealPath("/files/lecturePlan/" + f);
+		String fullpath = request.getServletContext().getRealPath("/files/lecture/" + f);
 		FileInputStream fin = new FileInputStream(fullpath);
 		ServletOutputStream sout = response.getOutputStream();
 		byte[] buf = new byte[1024];

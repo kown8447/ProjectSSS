@@ -7,7 +7,7 @@
 	left:-250px;
 	top:70px;
 	transition:left 0.3s linear;
-	z-index: 200;
+	z-index: 220;
 }
 
 #sidebar.visible{

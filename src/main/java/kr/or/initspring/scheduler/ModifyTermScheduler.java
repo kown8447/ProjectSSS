@@ -140,6 +140,7 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${mid.firstGrade.endDate}")
 	public void firstGradeMidEnd() throws Exception { 
 		setEnrollActive(1,1, 0);	
+		copyToTimeTable();
 		System.out.println("1학년 끝");
 	}
 	
@@ -152,30 +153,33 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${mid.secondGrade.endDate}")
 	public void secondGradeMidEnd() throws Exception { 
 		setEnrollActive(2,1, 0);	
+		copyToTimeTable();
 		System.out.println("2학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.thirdGrade.startDate}")
 	public void thirdGradeMidStart() throws Exception { 
-		setEnrollActive(3,1, 1);	
+		setEnrollActive(3,1, 1);
 		System.out.println("3학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.thirdGrade.endDate}")
 	public void thirdGradeMidEnd() throws Exception { 
 		setEnrollActive(3,1, 0);
+		copyToTimeTable();
 		System.out.println("3학년 끝");
 	}
 	
 	@Scheduled(cron="${mid.fourthGrade.startDate}")
 	public void fourthGradeMidStart() throws Exception { 
-		setEnrollActive(4,1, 1);	
+		setEnrollActive(4,1, 1);
 		System.out.println("4학년 시작");
 	}
 	
 	@Scheduled(cron="${mid.fourthGrade.endDate}")
 	public void fourthGradeMidEnd() throws Exception { 
 		setEnrollActive(4,1, 0);	
+		copyToTimeTable();
 		System.out.println("4학년 끝");
 	}
 	
@@ -188,6 +192,7 @@ public class ModifyTermScheduler {
 	@Scheduled(cron="${mid.AllGrade.endDate}")
 	public void AllGradeMidEnd() throws Exception { 
 		setEnrollActive(0,1, 0);
+		copyToTimeTable();
 		System.out.println("전학년 끝");
 	}
 	
@@ -208,9 +213,15 @@ public class ModifyTermScheduler {
 	}
 	
 	@Scheduled(cron="${correction.AllGrade.endDate}")
+	@Transactional(rollbackFor={Exception.class, NullPointerException.class,SQLException.class,RuntimeException.class})
 	public void correctionEnd() throws Exception { 
 		setEnrollActive(0,2, 0);
-		copyToTimeTable();
+		try{
+			deleteTimeTable();
+			copyToTimeTable();
+		}catch(Exception e){
+			throw e;
+		}
 		System.out.println("전학년 끝");
 	}
 	
@@ -254,5 +265,10 @@ public class ModifyTermScheduler {
 	public void copyToTimeTable(){
 		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
 		dao.copyToTimeTable();
+	}
+	
+	public void deleteTimeTable(){
+		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
+		dao.deleteTimeTable();
 	}
 }

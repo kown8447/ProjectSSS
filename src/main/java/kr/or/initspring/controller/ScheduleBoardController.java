@@ -123,7 +123,6 @@ public class ScheduleBoardController {
    */  
    @RequestMapping(value = "compExcelUpload.htm", method=RequestMethod.POST)
    public View excelUpload(MultipartHttpServletRequest request, Model model){
-      System.out.println("exceForm 실행후 컨트롤러 실험");   
       scheduleBoardService.insertExcelList(request, model);
       return jsonview;
    }
@@ -136,7 +135,6 @@ public class ScheduleBoardController {
    @SuppressWarnings("deprecation")
    @RequestMapping("excel.htm")
    public ModelAndView download(HttpServletRequest request, HttpServletResponse response ){
-      System.out.println("액셀컨트롤러");
       String baseDir = request.getRealPath("/WEB-INF/Template");
       File downloadFile = new File(baseDir,"Schedule.xlsx");
       

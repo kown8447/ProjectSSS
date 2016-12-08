@@ -2,65 +2,60 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class = "row">
 <div class = "col-sm-3"></div>
 <div class="col-sm-6"  >
-   <h4>▶&nbsp;장학제도 등록 </h4>
-   <br><br>
-   <div  style="width:90%; margin: auto;">
+   <h4>▶&nbsp;장학제도 등록 </h4><br><br>
+   
       <form action="insertScSystem.htm" method="post" id="insertScSystem_form">
-         <table class="table">
-            <tr>
-               <td>장학명</td>
-               <td>
-                  <div class="col-sm-6"  >   
-                  <input type="text" name="scholaship_name" id="scholaship_name" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>선발기준</td>
-               <td>
-                  <div class="col-sm-6">   
-                     <input type="text" class="form-control" name="scholaship_standard" id="scholaship_standard">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>수혜인원</td>
-               <td>
-                  <div class="col-sm-6 "> 
-                     <input type="text" name="scholaship_member" id="scholaship_member" class="form-control">
-                  </div>   
-               </td>
-            </tr>
-            <tr>
-               <td>장학금액</td>
-               <td>
-                  <div class="col-sm-6"  >
-                     <input type="text" name="scholaship_amount" id="scholaship_amount" class="form-control">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>비고</td>
-               <td>
-                  <div class="col-sm-12">
-                     <textarea name="scholaship_note" id="scholaship_note" class="form-control">-</textarea>
-                  </div>
-               </td>
-            </tr>
-         </table>
+        <div class="form-horizontal">
+            <div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">장학명</label>
+				<div class="col-sm-6">
+					<input type="text" name="scholaship_name" id="scholaship_name" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">선발기준</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="scholaship_standard" id="scholaship_standard">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">수혜인원</label>
+				<div class="col-sm-6">
+					<input type="text" name="scholaship_member" id="scholaship_member" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">장학금액</label>
+				<div class="col-sm-6">
+					 <input type="text" name="scholaship_amount" id="scholaship_amount" class="form-control">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">비고</label>
+				<div class="col-sm-6">
+					 <textarea name="scholaship_note" rows="5" id="scholaship_note" class="form-control"></textarea>
+				</div>
+			</div>
+         </div>
       </form>
+      
+      <br><br>
          <div align="center">
-               <a href="scSystemList.htm"><button class="btn btn-default">장학금 목록</button></a>
+               <a href="scSystemList.htm" class="btn btn-default">장학금 목록</a>
                <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
               <input type="button" value="등록" class="btn btn-success" id="sc_reg">
-            </div>
-   
+         </div>
    </div>
 </div>
-</div>
+
 <div class = "col-sm-3"></div>
 
 <div class="modal fade" id="layerpop">

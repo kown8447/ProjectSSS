@@ -50,15 +50,20 @@ public class IndexController {
 	   */
 	@RequestMapping("/index.htm")
 	public String goLoginHome(Principal principal) {
-		String member_id = principal.getName();
-		if (memberservice.getRole(member_id).equals("ROLE_STUDENT")) {
-			return "home.student_Main";
-		} else if (memberservice.getRole(member_id).equals("ROLE_PROFESSOR")) {
-			return "home.professor_Main";
-		} else if (memberservice.getRole(member_id).equals("ROLE_ADMIN")) {
-			return "home.admin_Main";
-		} else{
-			return  "login.login";
+		
+		try{
+			String member_id = principal.getName();
+			if (memberservice.getRole(member_id).equals("ROLE_STUDENT")) {
+				return "home.student_Main";
+			} else if (memberservice.getRole(member_id).equals("ROLE_PROFESSOR")) {
+				return "home.professor_Main";
+			} else if (memberservice.getRole(member_id).equals("ROLE_ADMIN")) {
+				return "home.admin_Main";
+			} else{
+				return  "login.login";
+			}
+		}catch(NullPointerException e){
+			return "login.login";
 		}
 	}
 	
@@ -67,8 +72,6 @@ public class IndexController {
 	 * @Author : 권기엽
 	 * @description 시간표 형태 출력을 위한 페이지 이동
 	 */
-	/*@RequestMapping(value={"goTimetableForm.htm","/member/goTimetableForm.htm","/collegeregister/goTimetableForm.htm",
-			"/favorite/goTimetableForm.htm","/notice/goTimetableForm.htm","/requestcourse/goTimetableForm.htm"})*/
 	@RequestMapping(value={"goTimetableForm.htm","*/goTimetableForm.htm"})
 	@Secured({"ROLE_STUDENT"})
 	public String goTimetableForm(){

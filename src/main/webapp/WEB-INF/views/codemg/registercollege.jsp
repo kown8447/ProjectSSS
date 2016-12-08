@@ -2,52 +2,48 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<div class="container" style="width:60%">
-   <h4>▶&nbsp;단대 등록 </h4>
-   <br><br>
-   <div id="classroomRegister" style="width:90%; margin: auto;">
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<div class = "row">
+<div class = "col-sm-2"></div>
+   <div class="col-sm-7"  >
+   <h4>▶&nbsp;단대 등록 </h4><br><br>
       <form action="insertCollege.htm" method="post" id="insertCollege_form">
-         <table class="table">
-            <tr>
-               <td>사무실코드</td>
-               <td>
-                  <div class="col-sm-6 ">   
-                     <select id="office_code" name="office_code" class="form-control">
-                        <c:forEach items="${officelist}" var="of">
-                           <option value="${of.office_code}">${of.office_name}/(${of.office_code})</option>
-                        </c:forEach>
-                     </select>
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td>이름</td>
-               <td>
-                  <div class="col-sm-6 "> 
-                     <input type="text" name="college_name" id="college_name" class="form-control">
-                  </div>   
-               </td>
-            </tr>
-            <tr>
-               <td>설명</td>
-               <td>
-                  <div class="col-sm-12 "> 
-                     <textarea id="college_description" name="college_description" class="form-control"></textarea>
-                  </div>
-               </td>
-            </tr>
-         </table>
-         
+          <div class="form-horizontal">
+            <div class="form-group">
+			<label class="col-sm-2 control-label col-sm-offset-2">사무실 코드</label>
+				<div class="col-sm-6">
+					<select id="office_code" name="office_code" class="form-control">
+                    	<c:forEach items="${officelist}" var="of">
+                       	<option value="${of.office_code}">${of.office_name}/(${of.office_code})</option>
+                    	</c:forEach>
+                	</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">이름</label>
+				<div class="col-sm-6">
+					<input type="text" name="college_name" id="college_name" class="form-control">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label col-sm-offset-2">설명</label>
+				<div class="col-sm-6">
+					 <textarea id="college_description" rows="7" name="college_description" class="form-control"></textarea>
+				</div>
+			</div>
+         </div>        
       </form>
-      <br>
+      <br><br>
       <div align="center">
             <a href="collegeList.htm"><button class="btn btn-default">단과대학 목록</button></a>
             <button class="btn btn-warning" data-target="#layerpop" data-toggle="modal">엑셀일괄등록</button>
            <input type="button" value="등록" class="btn btn-success" id="college_reg">
-         </div>
+       </div>
+       <div style="height: 15%;"></div> 
    </div>
 </div>
-
 
 <div class="modal fade" id="layerpop">
    <div class="modal-dialog modal-sm">

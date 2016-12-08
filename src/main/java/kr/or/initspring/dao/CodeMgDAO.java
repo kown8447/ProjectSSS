@@ -157,4 +157,7 @@ public interface CodeMgDAO {
 	public List<OfficeDTO> possibleOffice();
 	public ArrayList<ClassBuildingDTO> classroomBuildinSelect(String buildingCode);
 	public List<CodeMgDTO> typeofcodelistSearch(int code_type, String keyword, String searchType);
+	public int officepossibleChange(String before_office_code);
+	
+	public Integer checkStudentCode(String student_code);	//입력받은 학번이 유효한지 확인
 }

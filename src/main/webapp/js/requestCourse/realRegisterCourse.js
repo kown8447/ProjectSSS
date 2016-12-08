@@ -185,7 +185,9 @@ function realInsertTimeTable(e){
 					realGradeSum+=data.subject_info.subject_credit;
 					if(realGradeSum > 21){
 						alert('21학점 초과 등록할 수 없습니다.');
+						flag=false;
 						realGradeSum-=data.subject_info.subject_credit;
+						flag=false;
 					}else{
 						$.each(data.subject_info.period, function(i, elt) {
 							if($('#'+elt.period_code+'_3').html() != ''){
@@ -216,7 +218,7 @@ function insertRealDbSubject(e,c){
 	var subject_code = e;
 	var subject_credit = c;
 
-	socket1 = new WebSocket("ws://192.168.0.105:8090/initspring/wait.htm");
+	socket1 = new WebSocket("ws://192.168.0.238:8090/initspring/wait.htm");
 	
 	socket1.onmessage = function(evt) {
 		$('#waitlist').empty();
