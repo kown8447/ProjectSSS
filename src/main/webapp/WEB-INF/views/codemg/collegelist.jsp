@@ -10,22 +10,22 @@
          <thead>
             <tr class="active">
                <th style="text-align: center">단대코드</th>
-               <th style="text-align: center">사무실코드</th>
                <th style="text-align: center">이름</th>
-               <th style="text-align: center">설명</th>
+               <th style="text-align: center">사무실 이름</th>
+               <th style="text-align: center">사무실 코드</th>
             </tr>
          </thead>
          <c:forEach items="${college}" var="cl">
             <tbody>
                <tr>
                   <td>${cl.college_code}</td>
-                  <td>${cl.office_code}</td>
                   <td>
                      <a href="selectCollege.htm?college_code=${cl.college_code}">
                         ${cl.college_name}
                      </a>
                   </td>
-                  <td>${cl.college_description }</td>
+                  <td>${cl.office_name}</td>
+                  <td>${cl.office_code}</td>
                </tr>
             </tbody>
          </c:forEach>

@@ -20,7 +20,14 @@
             <div class="col-sm-6">
                <select id="building_code" name="building_code" class="form-control">
                   <c:forEach items="${building}" var="bd">
-                     <option value="${bd.building_code}">${bd.building_name}</option>
+                    <c:choose>
+                     	<c:when test="${bd.building_code==lab.building_code}">
+                     		<option selected="selected" value="${bd.building_code}">${bd.building_name}</option>
+                     	</c:when>
+                     	<c:otherwise>
+                     		<option value="${bd.building_code}">${bd.building_name}</option>
+                     	</c:otherwise>
+                     </c:choose>
                   </c:forEach>
                </select>
             </div>
@@ -38,9 +45,12 @@
          <div class="form-group">
          <label class="col-sm-3 control-label col-sm-offset-1">전화번호</label>
             <div class="col-sm-6">
-               <input type="text" value="${lab.lab_phone }" id="lab_phone" name="lab_phone" class="form-control">
+               <input type="text" value="${lab.lab_phone }" id="lab_phone" name="lab_phone" class="form-control" placeholder="ex)000-0000-0000">
             </div>
          </div>
+      </div>
+      <div class="form-group" style="text-align: center;">
+     		<div id="labPhoneCheck"></div>
       </div>
       <div class="form-horizontal">
          <div class="form-group">

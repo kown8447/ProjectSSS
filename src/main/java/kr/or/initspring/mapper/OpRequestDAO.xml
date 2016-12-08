@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.initspring.dao.OpRequestDAO">
 	<select id="OpRequestList" resultType="kr.or.initspring.dto.oprequest.OpRequsetCheckDTO">
 		SELECT sj.GRADE_LIMIT, sj.SUBJECT_NAME, cd.CODE_NAME ,op.SUCCESS_CHECK, sj.SUBJECT_CODE, sj.SUBJECT_TYPE, sj.PROFESSOR_CODE 
-		FROM OP_REQUEST op join SUBJECT sj on op.SUBJECT_CODE = sj.SUBJECT_CODE join CODE_MG cd on sj.PROFESSOR_CODE = cd.CODE
+		FROM OP_REQUEST op join SUBJECT sj on op.SUBJECT_CODE = sj.SUBJECT_CODE join CODE_MG cd on sj.PROFESSOR_CODE = cd.CODE order by op.SUCCESS_CHECK desc
 	</select>
 	<select id="Liberal" resultType="kr.or.initspring.dto.commons.LiberalDTO">
 		SELECT subject_code, required_choice FROM LIBERAL where SUBJECT_CODE = #{param1}

@@ -1228,8 +1228,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("insertScholarship.htm")
-	public String insertScholarship(ScholarshipDTO scholarship) {
-
+	public String insertScholarship(ScholarshipDTO scholarship){
 		String view = "";
 		int result = codeservice.insertScholarship(scholarship);
 

@@ -8,13 +8,13 @@ package kr.or.initspring.dto.collegeRegister;
 * 
 */
 public class StudentScholarshipDTO {
-	private int scholashipIndex; //장학번호
-	private String semester_code; //학기코드
-	private String scholaship_name; //장학제도명
-	private int scholaship_amount; //장학 금액
-	private String scholaship_standard; //선발기준
-	private String semesterYear; //학기 년도
-	private String semesterType; //학기 구분
+	private int scholashipIndex; // 장학번호
+	private String semester_code; // 학기코드
+	private String scholaship_name; // 장학제도명
+	private String scholaship_amount; // 장학 금액
+	private String scholaship_standard; // 선발기준
+	private String semesterYear; // 학기 년도
+	private String semesterType; // 학기 구분
 
 	public int getScholashipIndex() {
 		return scholashipIndex;
@@ -40,11 +40,11 @@ public class StudentScholarshipDTO {
 		this.scholaship_name = scholaship_name;
 	}
 
-	public int getScholaship_amount() {
+	public String getScholaship_amount() {
 		return scholaship_amount;
 	}
 
-	public void setScholaship_amount(int scholaship_amount) {
+	public void setScholaship_amount(String scholaship_amount) {
 		this.scholaship_amount = scholaship_amount;
 	}
 

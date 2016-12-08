@@ -29,7 +29,7 @@
 			</div>
                   
               <div class="form-group">
-				<label class="col-sm-2 control-label col-sm-offset-2">학번</label>
+				<label class="col-sm-2 control-label col-sm-offset-2">학생 이름</label>
 				<div class="col-sm-6">
 					<input type="text" name="code_name" id="code_name" class="form-control">
 				</div>

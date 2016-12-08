@@ -39,7 +39,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label class="col-sm-2 control-label col-sm-offset-2">장학금액</label>
+				<label class="col-sm-2 control-label col-sm-offset-2">비고</label>
 				<div class="col-sm-6">
 					 <textarea name="scholaship_note" rows="5" id="scholaship_note" class="form-control"></textarea>
 				</div>

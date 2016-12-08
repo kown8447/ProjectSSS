@@ -20,7 +20,14 @@
             <div class="col-sm-6">
                <select id="building_code" name="building_code" class="form-control">
                   <c:forEach items="${building}" var="bd">
-                     <option value="${bd.building_code}">${bd.building_name}</option>
+                    <c:choose>
+                     	<c:when test="${bd.building_code==classroom.building_code}">
+                     		<option selected="selected" value="${bd.building_code}">${bd.building_name}</option>
+                     	</c:when>
+                     	<c:otherwise>
+                     		<option value="${bd.building_code}">${bd.building_name}</option>
+                     	</c:otherwise>
+                     </c:choose>
                   </c:forEach>
                </select>
             </div>
