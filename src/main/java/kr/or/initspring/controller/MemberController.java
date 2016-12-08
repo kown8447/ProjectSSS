@@ -1278,10 +1278,10 @@ public class MemberController{
 	}
 	
 	@RequestMapping("updateColleage.htm")
-	public String updateCollege(CollegeDTO college, Model model){
+	public String updateCollege(CollegeDTO college,String before_office_code, Model model){
 		
 		String view = "";
-		int result = codeservice.updateCollege(college);
+		int result = codeservice.updateCollege(college,before_office_code);
 		
 		List<OfficeDTO> officelist = codeservice.possibleOffice();
 		model.addAttribute("officelist", officelist);
@@ -1298,10 +1298,9 @@ public class MemberController{
 		
 		CollegeDTO college = codeservice.collegeDetail(college_code);
 		List<OfficeDTO> officelist = codeservice.possibleOffice();
+		officelist.add(codeservice.selectOffice(college.getOffice_code()));
 		model.addAttribute("college", college);
 		model.addAttribute("officelist", officelist);
-		System.out.println(college.toString());
-		
 		return "codemg.collegedetail";
 	}
 	
@@ -1335,6 +1334,7 @@ public class MemberController{
 		
 		DepartmentDTO department = codeservice.selectDepartment(department_code);
 		List<OfficeDTO> officeslist = codeservice.possibleOffice();
+		officeslist.add(codeservice.selectOffice(department.getOffice_code()));
 		System.out.println(department.toString());
 		model.addAttribute("department", department);
 		model.addAttribute("office", officeslist);
@@ -1343,10 +1343,10 @@ public class MemberController{
 	}
 	
 	@RequestMapping("updateDepartment.htm")
-	public String updateDepartment(DepartmentDTO department){
+	public String updateDepartment(DepartmentDTO department,String before_office_code){
 		
 		String view = "";
-		int result = codeservice.updateDepartment(department);
+		int result = codeservice.updateDepartment(department,before_office_code);
 		
 		if(result == 1){
 			view = "redirect:departmentlist.htm";

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <c:set value="${department}" var="dp"></c:set>
 <h4>▶&nbsp;학과 상세정보 </h4>
 <br><br>   
 <form action="updateDepartment.htm" id="updateDepartment_form">
+<input type="hidden" name="before_office_code" value="${dp.office_code}">
    <div style="width:60%; margin: auto;">
       <table class="table">
          <tr>
@@ -34,7 +36,14 @@
                <div class="col-sm-6">
                	  	<select id="office_code" name="office_code" class="form-control">
                         <c:forEach items="${office}" var="of">
-                           <option value="${of.office_code}">${of.office_name}(${of.office_code})</option>
+                         <c:choose>
+                   			<c:when test="${of.office_code==dp.office_code}">
+                   				<option selected="selected" value="${of.office_code}">${of.office_name}/(${of.office_code})</option>
+                   			</c:when>
+                   			<c:otherwise>
+                   				<option value="${of.office_code}">${of.office_name}/(${of.office_code})</option>
+                   			</c:otherwise>
+                   		</c:choose>
                         </c:forEach>
                      </select>
                </div>

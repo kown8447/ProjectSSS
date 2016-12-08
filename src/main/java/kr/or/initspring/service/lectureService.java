@@ -247,9 +247,9 @@ public class lectureService {
 		//재신청 할 경우
 		if(success_check.equals("2")){
 			lecturedao.delete_Ask_Time(dto.getSubject_code());
-			lecturedao.delete_Oprequest(dto.getSubject_code());
 			lecturedao.delete_Rejection(dto.getSubject_code());
 			lecturedao.delete_Plan(dto.getSubject_code());
+			lecturedao.delete_Oprequest(dto.getSubject_code());
 		}
 		
 		String period_code = dto.getPeriod_code();

@@ -2,8 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="container" style="width:50%">
    <h4>▶&nbsp;사무실 등록 </h4>
       <br><br>   

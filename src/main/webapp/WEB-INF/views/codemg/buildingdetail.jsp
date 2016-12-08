@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="container" style="width:60%">
 <h4>▶&nbsp;빌딩 상세정보 </h4>
 <br><br>

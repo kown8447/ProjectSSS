@@ -72,6 +72,7 @@ public class IndexController {
 	@RequestMapping(value={"goTimetableForm.htm","*/goTimetableForm.htm"})
 	@Secured({"ROLE_STUDENT"})
 	public String goTimetableForm(){
+		System.out.println("시간표 에러체크");
 		return "member/viewTimetable";
 	}
 	

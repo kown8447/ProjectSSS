@@ -33,7 +33,15 @@ $(function() {
     * 일정 추가 이벤트
     */
    $('#insert').click(function() {
-	   
+	   var sd =$("#startdate").val();
+       var startDateArr = sd.split('/');
+        
+       var ed =  $("#enddate").val();
+       var endDateArr = ed.split('/');
+       console.log("시작"+startDateArr[2]+","+ startDateArr[0]+","+ startDateArr[1]);
+       console.log("끝"+endDateArr[2]+","+ endDateArr[0]+","+ endDateArr[1]);
+       var startDateCompare = new Date(startDateArr[2], startDateArr[0], startDateArr[1]);
+       var endDateCompare = new Date(endDateArr[2], endDateArr[0], endDateArr[1]);
       if ($("#title").val() == "") {
          alert("제목을  입력하세요.");
             $("#title").focus();
@@ -46,10 +54,10 @@ $(function() {
       }else if ($("#enddate").val() == "") {
          alert("종료일을 입력하세요.");
             $("#enddate").focus();
-      }else if($("#startdate").val() > $("#enddate").val()){
-         alert("시작일보다 종료일이 이릅니다 ");
-         $("#enddate").focus();
-      }else{
+      }else if(startDateCompare.getTime() > endDateCompare.getTime()){
+          alert("시작날짜와 종료날짜를 확인해 주세요.");
+          $("#enddate").focus();
+       }else{
          $.ajax({
                   url : "scinsert.htm",
                   method : "post",
@@ -129,7 +137,15 @@ $(function() {
     * 일정 수정 이벤틍 
     */
    $('#up').click(function() {
-	  
+	   var sd =$("#startdate").val();
+       var startDateArr = sd.split('/');
+        
+       var ed =  $("#enddate").val();
+       var endDateArr = ed.split('/');
+       console.log("시작"+startDateArr[2]+","+ startDateArr[0]+","+ startDateArr[1]);
+       console.log("끝"+endDateArr[2]+","+ endDateArr[0]+","+ endDateArr[1]);
+       var startDateCompare = new Date(startDateArr[2], startDateArr[0], startDateArr[1]);
+       var endDateCompare = new Date(endDateArr[2], endDateArr[0], endDateArr[1]);
       if ($("#title1").val() == "") {
          alert("제목을 입력하세요.");
             $("#title1").focus();
@@ -142,10 +158,10 @@ $(function() {
       }else if ($("#enddate1").val() == "") {
          alert("종료일을 입력하세요.");
             $("#enddate1").focus();
-      }else if($("#startdate1").val() > $("#enddate1").val()){
-         alert("날짜를 정확히 선택해 주세요.");
-         $("#enddate1").focus();
-      }else{
+      }else if(startDateCompare.getTime() > endDateCompare.getTime()){
+          alert("시작날짜와 종료날짜를 확인해 주세요.");
+          $("#enddate").focus();
+       }else{
          $.ajax({
             url : "scupdate.htm",
             method : "post",

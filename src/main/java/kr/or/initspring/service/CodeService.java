@@ -140,11 +140,11 @@ public class CodeService {
 
 		System.out.println("서비스에서의 코드 타입" + code_type);
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-		List<CodeMgDTO> codelist= new ArrayList<CodeMgDTO>();
-		if(keyword==null||searchType==null){
+		List<CodeMgDTO> codelist = new ArrayList<CodeMgDTO>();
+		if (keyword == null || searchType == null) {
 			codelist = dao.typeofcodelist(code_type);
-		}else{
-			codelist = dao.typeofcodelistSearch(code_type,keyword,searchType);
+		} else {
+			codelist = dao.typeofcodelistSearch(code_type, keyword, searchType);
 		}
 		return codelist;
 	}
@@ -393,7 +393,7 @@ public class CodeService {
 	public int insertAdmin(CodeMgDTO admin) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-
+		admin.setCode_type(2);
 		int result = dao.insertAdmin(admin);
 
 		return result;
@@ -1172,10 +1172,13 @@ public class CodeService {
 
 		return result;
 	}
-
-	public int updateCollege(CollegeDTO college) {
+	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
+			RuntimeException.class })
+	public int updateCollege(CollegeDTO college, String before_office_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		dao.officepossibleChange(before_office_code);
+		dao.updateofficepossible(college.getOffice_code());
 		int result = dao.updateCollege(college);
 
 		return result;
@@ -1229,9 +1232,13 @@ public class CodeService {
 		return department;
 	}
 
-	public int updateDepartment(DepartmentDTO department) {
+	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
+			RuntimeException.class })
+	public int updateDepartment(DepartmentDTO department, String before_office_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		dao.officepossibleChange(before_office_code);
+		dao.updateofficepossible(department.getOffice_code());
 		int result = dao.updateDepartment(department);
 
 		return result;
@@ -1482,6 +1489,5 @@ public class CodeService {
 		}
 		return list;
 	}
-
 
 }

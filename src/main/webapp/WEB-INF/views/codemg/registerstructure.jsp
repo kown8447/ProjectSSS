@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery-ui.js"/>
-<script src="${pageContext.request.contextPath}/js/admin/codemg.js"/>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript">

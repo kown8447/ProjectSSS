@@ -387,15 +387,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getGetCreditBystudentCode" resultType="int">
 		select
-		nvl(sum(s.subject_credit),0) as get_credit
-		from timetable t join record
-		r on t.subject_code = r.subject_code
-		join subject s on
-		r.subject_code=s.subject_code
-		where t.student_code = #{student_code}
-		and r.record_level != 'F' and
-		r.semester_code = (select
-		max(semester_code) from semester)
+      nvl(sum(s.subject_credit),0) as get_credit
+      from record   r join subject s on r.subject_code = s.subject_code
+      where r.student_code = #{student_code}
+      and r.record_level != 'F' and
+      r.semester_code = (select
+      max(semester_code) from semester)
 	</select>
 
 	<select id="getCurrentCreditByStudentCode" resultType="int">
@@ -509,4 +506,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="typeofcodelistSearch" resultType="kr.or.initspring.dto.commons.CodeMgDTO">
 			SELECT * FROM CODE_MG where CODE_TYPE = #{param1} and ${param3} like '%${param2}%'
 	</select>
+	<update id="officepossibleChange">
+		update OFFICE set OFFICE_POSSIBLE = 0 where
+		OFFICE_CODE = #{param1}
+	</update>
 </mapper>
