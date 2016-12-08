@@ -428,15 +428,16 @@ public class lectureService {
 	public CustomLectureMgDTO insertgrade(CustomLectureMgDTO dto) {
 
 		LectureMgDAO lecturedao = sqlsession.getMapper(LectureMgDAO.class);
-		String record_code = lecturedao.maxRecord_code();
+		String max_record_code = lecturedao.maxRecord_code();
 		String subject_name = lecturedao.select_subjectname(dto.getSubject_code());
 
-		dto.setRecord_code(record_code);
+		dto.setRecord_code(max_record_code);
+		dto.setSemester_code(lecturedao.getMaxSemesterCode());
 		CustomLectureMgDTO state = lecturedao.select_stState(dto.getStudent_code());
 
-		String inselectlevel = lecturedao.select_Recordlevel(dto.getStudent_code(), subject_name);
+		String record_code = lecturedao.select_Recordlevel(dto.getStudent_code(), lecturedao.getMaxSemesterCode(), dto.getSubject_code());
 
-		if (inselectlevel == null || inselectlevel.equals("")) { // 현재 성적이 없다면
+		if (record_code == null || record_code.equals("")) { // 현재 성적이 없다면(레코드 코드가 없다면)
 			List<String> secondsubject = lecturedao.select_reStudy(subject_name, dto.getStudent_code());
 
 			dto.setRecord_grade(state.getGrade());
@@ -449,6 +450,7 @@ public class lectureService {
 			}
 			lecturedao.insert_record(dto);
 		} else {
+			dto.setRecord_code(record_code);
 			lecturedao.update_record(dto);
 		}
 

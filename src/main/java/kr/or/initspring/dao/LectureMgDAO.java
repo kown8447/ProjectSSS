@@ -78,7 +78,7 @@ public interface LectureMgDAO {
 	public RecordDTO select_record(String student_code);
 	public String maxRecord_code(); 
 	public void update_record(CustomLectureMgDTO dto);
-	public String select_Recordlevel(String student_code,String subject_name);
+	public String select_Recordlevel(String student_code,String semester_code, String subject_code);
 	public List<String> select_reStudy(String subject_name,String student_code);
 	public void update_RetakeCheck(String record_code);
 	public String select_Rejection(String subject_code);
@@ -86,4 +86,6 @@ public interface LectureMgDAO {
 	public List<String> select_MyTime(String professor_code); 
 	public String select_subjectname(String subject_code);
 	public String select_recordlevel(String student_code ,String semester_code,String subject_code);
+	
+	public String getMaxSemesterCode();	//가장 최근 학기 가져오기
 }

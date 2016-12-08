@@ -208,11 +208,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="update_record" parameterType="kr.or.initspring.dto.lectureMg.CustomLectureMgDTO">
-	 UPDATE record SET record_level = #{record_level} where student_code = #{student_code} AND subject_code = #{subject_code}
+	 UPDATE record SET record_level = #{record_level} where record_code = #{record_code}
 	</update>
 	
 	<select id="select_Recordlevel" resultType="String">
-		 select record_level from record r join subject s on r.SUBJECT_CODE = s.SUBJECT_CODE where student_code = #{param1} AND subject_name = #{param2}
+		select record_code from record where student_code = #{param1} and semester_code=#{param2} and subject_code = #{param3}
 	</select>
 	
 	<select id="select_reStudy" resultType="String">
@@ -241,4 +241,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select record_level from record where student_code = #{param1} AND semester_code = #{param2} AND subject_code= #{param3}
 	</select>
 	
+	<select id="getMaxSemesterCode" resultType="String">
+		select nvl(max(semester_code),0) from semester
+	</select>
 </mapper>
