@@ -56,7 +56,7 @@
 					<td>${record.subject_credit}</td>
 					<td>${record.record_level}</td>
 					<td><c:choose>
-							<c:when test="${record.retake_check==1}">재수강</c:when>
+							<c:when test="${record.retake_check==1}">재수강(학점 무효)</c:when>
 							<c:otherwise></c:otherwise>
 						</c:choose></td>
 				</tr>

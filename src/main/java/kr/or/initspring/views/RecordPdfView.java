@@ -111,7 +111,7 @@ public class RecordPdfView extends AbstractPdfView {
 			if (recordList.get(i).getRetake_check() == 0) {
 				recordtable.addCell(new Cell(new Paragraph("", font)));
 			} else {
-				recordtable.addCell(new Cell(new Paragraph("재수강", font)));
+				recordtable.addCell(new Cell(new Paragraph("재수강(학점 무효)", font)));
 			}
 
 		}

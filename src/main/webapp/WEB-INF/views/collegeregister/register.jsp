@@ -58,13 +58,13 @@
 						<td>${regist.semester_start}~${regist.semester_end}</td>
 						<td><c:choose>
 								<c:when test="${regist.register_type==1}"> 계절학기 </c:when>
-								<c:when test="${regist.register_type==2}">  졸업연기 </c:when>
+								<c:when test="${regist.register_type==2}"> 졸업연기 </c:when>
 								<c:otherwise> 일반 </c:otherwise>
 							</c:choose></td>
 						<td>${regist.tuition}</td>
 						<td><c:choose>
-								<c:when test="${regist.register_state==1}">  등록 </c:when>
-								<c:otherwise>미납</c:otherwise>
+								<c:when test="${regist.register_state==1}">미납</c:when>
+								<c:otherwise>등록</c:otherwise>
 							</c:choose></td>
 					</tr>
 				</c:forEach>
