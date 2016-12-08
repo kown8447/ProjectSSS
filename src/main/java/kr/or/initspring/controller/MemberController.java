@@ -1478,4 +1478,15 @@ public class MemberController {
 		model.addAttribute("classroomList", classroomList);
 		return jsonview;
 	}
+	
+	@RequestMapping("check_student_code.htm")
+	public View checkStudentCode(Model model, String student_code){
+		
+		boolean result = codeservice.checkStudentCode(student_code);
+		
+		if(result)	model.addAttribute("result", "success");
+		else	model.addAttribute("result", "fail");
+		
+		return jsonview;
+	}
 }

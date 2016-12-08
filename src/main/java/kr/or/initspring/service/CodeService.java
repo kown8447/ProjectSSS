@@ -1449,5 +1449,16 @@ public class CodeService {
 		}
 		return list;
 	}
+	
+	public boolean checkStudentCode(String student_code){
+		boolean result = false;
+		
+		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
+		int count = dao.checkStudentCode(student_code);
+		
+		if(count > 0)	result = true;
+		
+		return result;
+	}
 
 }

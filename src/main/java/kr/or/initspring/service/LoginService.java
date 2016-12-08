@@ -65,7 +65,6 @@ public class LoginService {
 		boolean result = false;
 		int count = 0;
 		LoginDAO logindao = sqlsession.getMapper(LoginDAO.class);
-		System.out.println("서비스 안에서의 아이디 비번 : " + member_id +"/"+member_pwd);
 		try{
 			count = logindao.updatePwd(member_id, member_pwd);
 		}catch(Exception e){

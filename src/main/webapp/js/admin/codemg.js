@@ -1,31 +1,51 @@
 $(function() {
-
-	   $('#classroomInbuildings').change(function() {
-		      $.ajax({
-		         url : "classroomBuildingSelect.htm",
-		         method : "post",
-		         dataType : "json",
-		         data: {buildingCode :  $('#classroomInbuildings').val()},
-		         success : function(data) {
-		            $('#classRooms').empty();
-		            $(data.classroomList).each(function(idx,classroom) {
-		               var room='<tr><td>'+classroom.classroom_code+'</td><td>'+classroom.building_name
-		               +'</td><td><a href="classroomUpdate.htm?classroom_code='+classroom.classroom_code
-		               +'">'+classroom.classroom_name+'</a></td><td>'+classroom.seat
-		               +'</td><td>';
-		               if(classroom.classroom_type==0){
-		                  room+="일반강의실";
-		               }else if(classroom.classroom_type==1){
-		                  room+="실습실";
-		               }else{
-		                  room+="에러데이터";
-		               }
-		               room+='</td></tr>'
-		               $('#classRooms').append(room);
-		            });
-		         }
-		      });
-		   });
+	var student_check = false;
+	$('#check_student_code').click(function() {
+		$.ajax(
+			{
+				url:"check_student_code.htm",
+				data:{student_code : $('#student_code').val()},
+				dataType:"json",
+				success:function(data){
+					if(data.result=='success'){
+						alert('유효한 학번입니다.');
+						student_check=true;
+					}else{
+						alert('유효하지 않은 학번입니다.');
+						student_check=false;
+					}
+				}
+			}
+		);
+	});
+	
+	
+   $('#classroomInbuildings').change(function() {
+      $.ajax({
+         url : "classroomBuildingSelect.htm",
+         method : "post",
+         dataType : "json",
+         data: {buildingCode :  $('#classroomInbuildings').val()},
+         success : function(data) {
+            $('#classRooms').empty();
+            $(data.classroomList).each(function(idx,classroom) {
+               var room='<tr><td>'+classroom.classroom_code+'</td><td>'+classroom.building_name
+               +'</td><td><a href="classroomUpdate.htm?classroom_code='+classroom.classroom_code
+               +'">'+classroom.classroom_name+'</a></td><td>'+classroom.seat
+               +'</td><td>';
+               if(classroom.classroom_type==0){
+                  room+="일반강의실";
+               }else if(classroom.classroom_type==1){
+                  room+="실습실";
+               }else{
+                  room+="에러데이터";
+               }
+               room+='</td></tr>'
+               $('#classRooms').append(room);
+            });
+         }
+      });
+   });
 	
 	
 	
@@ -208,6 +228,10 @@ $(function() {
 		if ($('#scholarship_payday').val().trim() == "") {
 			alert('지급일을 입력하세요');
 			$('#scholarship_payday').focus();
+			return false;
+		}
+		if(student_check==false){
+			alert('학번 유효성 검증을 진행해 주세요.');
 			return false;
 		}
 		$('#insertScholarship_form').submit();

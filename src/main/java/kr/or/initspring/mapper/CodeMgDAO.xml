@@ -510,4 +510,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update OFFICE set OFFICE_POSSIBLE = 0 where
 		OFFICE_CODE = #{param1}
 	</update>
+	
+	<select id="checkStudentCode" resultType="int">
+		select count(*) from student where student_code=#{student_code}
+	</select>
 </mapper>
