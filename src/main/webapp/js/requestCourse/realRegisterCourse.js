@@ -124,7 +124,6 @@ function onloadRealtable(){
 						$('#'+obj.period_code+'_3').attr('style','background-color:'+color);
 					});
 				});
-				console.log('첫 로딩시 가져오는 학점 : ' + realGradeSum);
 				$('#sum_grade').text(realGradeSum+' 학점');
 			}
 		}
