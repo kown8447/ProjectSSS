@@ -14,7 +14,6 @@ var select = '';
 			
 		$("#subject").change(function(){
 			subject_code = $("#subject").val();
-			console.log(subject_code);
 			$.ajax(
 					{
 						url : "selectStudent.htm",
@@ -26,8 +25,6 @@ var select = '';
 						success : function(data){
 					
 							$("td").remove();
-							console.log("데이타는:"+data);
-				
 							
 							$.each(data.student,function(index){
 								grade = data.student[index].record_level;

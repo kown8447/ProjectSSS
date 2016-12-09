@@ -26,9 +26,9 @@
 <body>
 <h4>▶&nbsp;학생조회</h4><br><br>
 
-<div class="row">
+<div class="row col-sm-offset-1">
 
-	<div class="col-sm-offset-1 col-sm-2">
+	<div class="col-sm-3">
 	<select id="subject" class="form-control">
 		<option value="0">과목을 선택하세요</option>
 		<c:forEach items="${myclass}" var="i">
@@ -37,20 +37,21 @@
 	</select>
 	</div>
 
-	<c:forEach items="${myclass }" var="y">
+	<c:forEach items="${myclass}" var="y">
 		<input type="hidden" id="d" value="${y.subject_code }">
 		<input type="hidden" id="f" value="${y.student_code }">
 	</c:forEach>
 	<br><br>
-		<div class="container">
+	
+	<div class="col-sm-9">
 	<table id="list" class="table table-bordered" style="text-align:center">
-	<tr class="active"><th>학번</th><th>학생명</th><th>학생이메일</th><th>성적</th></tr>
-		<c:if test="${empty myclass}">
-            <tr>
-               <td colspan="3" style="text-align: center">등록된 정보가 없습니다.</td>
-            </tr>
-   	</c:if>
-		</table>
+		<tr class="active">
+			<th>학번</th>
+			<th>학생명</th>
+			<th>학생이메일</th>
+			<th>성적</th>
+		</tr>
+	</table>
 		</div>
 
 </div>

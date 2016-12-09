@@ -25,14 +25,13 @@ $(function() {
 						"<option value='" + value.building_code + "'>" + value.building_name+ "</option>");
 			})
 			$.each(data.periodlist, function(index, value) {
-				console.log(value);
 				$('#PERIOD_START_' + (index+1)).html(value.period_start);
 			})
 
 			$(data.myclass).each(function(index, elt) {
-				$("#mytime").append("<ul>" + elt.period_day + "&nbsp;&nbsp;"
-												+ elt.period_start +"  ~  "
-												+ elt.period_end+"</ul>");
+				$("#mytime").append("<tr><th>" + elt.period_day + "</th><th>"
+												+ elt.period_start +" </th><th> "
+												+ elt.period_end+"</th></tr>");
 			})
 
 		}
@@ -51,7 +50,6 @@ $(function() {
 						var content = "<option>없음</option>";
 
 						$.each(data.classroom, function(index) {
-							console.log(data.classroom[index].classroom_name);
 							content += "<option value='"
 									+ data.classroom[index].classroom_code
 									+ "'>"
@@ -77,11 +75,9 @@ $(function() {
 					success : function(data) {
 						$("td").empty();
 						$("td").css("background", "white");
-						console.log(data);
-
+					
 						$.each(data.time, function(index) {
-							console.log(data.time[index].period_code);
-							console.log(data.time[index].classroom_code);
+							
 							if (data.time[index].period_code != ""
 									|| data.time[index].period_code != null) {
 								$('#' + data.time[index].period_code).html(
@@ -173,13 +169,12 @@ function getvalue(i) {
 							if (data.choice == "성공") {
 								$("#period")
 										.append(
-												"<input type=text id=period"
+												"<input type=hidden id=period"
 														+ i
 														+ " class=myclass name=period_code value="
 														+ i + ">");
 								array.push(i);
 
-								console.log("배열:" + array);
 								$("#" + i).text($('#subject_name').val());
 								$("#" + i).css("background", "#47C83E");
 								insertcount += 1;

@@ -23,9 +23,14 @@
 <div class="container">
 
 <h4>▶&nbsp;과목 신청</h4><br><br>
-	<table border=1px class="table">
-		<tr>
-		<th>구분</th><th>선수과목</th><th>과목명</th><th>학점</th><th>정원</th><th>수강대상</th>
+	 <table class="table table-bordered">
+		<tr class="active">
+			<th style="text-align: center">구분</th>
+			<th style="text-align: center">선수과목</th>
+			<th style="text-align: center">과목명</th>
+			<th style="text-align: center">학점</th>
+			<th style="text-align: center">정원</th>
+			<th style="text-align: center">수강대상</th>
 		</tr>
 		<tr>
 		<th>	
@@ -45,17 +50,17 @@
 		<th>${list.grade_limit }</th>
 		</tr>
 		</table>
-		<br>
 		</div>
+		<hr>
 		<input type="hidden" id="credit" value=${list.subject_credit }>
 		<input type="hidden" id="subject_name" value=${list.subject_name }>
 	<form action="postRequestSubject.htm" enctype="multipart/form-data" method="post">
-	
+		
 	<input type="hidden" id="professor_code" value=${list.professor_code }>
 	<input type="hidden" value="${list.subject_code }" name="subject_code">
 	<input type="hidden" value="${list.success_check }" name="success_check">
 
-	
+
 	<div class="row">
 		<!-- 건물  -->
 		<div class="col-sm-3">
@@ -63,10 +68,14 @@
 			<option>없음</option>
 
 		</select>
-		<label>선택한 강의 시간</label> <div id="period" name="period"></div>
-		<label>전체 강의 시간 </label> <div id="mytime" name="mytime"></div>
-		<label class="label label-primary">강의계획서</label> <input type="file" id="subject_filesrc" name="subject_filename"><br>
-			
+		<div id="period" name="period"></div>
+	    <table class="table" style="border:1px" id="mytime" name="mytime"><tr><th>요일</th><th>시작시간</th><th>종료시간</th></table>
+		
+		<div class="form-group">
+			<p style="color:blue">강의계획서</p> 
+			<input type="file" id="subject_filesrc" name="subject_filename"><br>
+		</div>	
+		
 		</div>
 		<div class="col-sm-3">
 		<select class="form-control" id="classroom" name="classroom_code">없음
@@ -95,7 +104,7 @@
 						<td id="PR_TUE_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_TUE_${idx.count}")></td>
 						<td id="PR_WEN_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_WEN_${idx.count}")></td>
 						<td id="PR_THU_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_THU_${idx.count}")></td>
-						<td id="PR_FRI_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${idx.count}")></td>
+						<td id="PR_FRI_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${i}")></td>
 					</tr>
 				</c:forEach>
 			
