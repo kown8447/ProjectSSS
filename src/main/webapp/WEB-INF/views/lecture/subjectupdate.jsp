@@ -68,7 +68,7 @@
 					<td>
 						<input type="number" name="subject_seats" value="${list.subject_seats}" class="form-control"></td>
 				</tr>
-				<input type="hidden" name="subject_code" value="${list.subject_code }">
+					<input type="hidden" name="subject_code" value="${list.subject_code }">
 				<tr>
 			</table>
 		</div>
