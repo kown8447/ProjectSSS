@@ -36,7 +36,6 @@ function validCheckStudentCode(e){
 			dataType:"json",
 			success:function(data){
 				if(data.check_code=='yes'){
-					console.log('이제 타학생이 허용했는지 확인');
 					checkOthersShare(student_code);
 				}else{
 					alert('조회하고자 하는 학번이 없습니다.');
@@ -76,8 +75,6 @@ function loadOtherTimetable(e){
 			data:{student_code:student_code},
 			dataType:"json",
 			success:function(data){
-				console.log(data);
-				
 				$.each(data.periodList, function(i, elt) {
 					$('#PERIOD_START_'+(i+1)+'_2').html(elt.period_start);
 				});

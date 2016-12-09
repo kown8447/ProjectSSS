@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 
+   @Project : InitSpring
+   @File name : preRegisterCourse.jsp
+   @Author : 권기엽, 송아름
+   @Data : 2016.12.09
+   @Desc : 예비 수강 신청 view page. 과목 검색 / 상세정보 / 시간표 삽입,삭제
+-->
+
 <script src="${pageContext.request.contextPath}/js/requestCourse/preRegisterCourse.js"></script>
 <h4>▶&nbsp;예비수강신청</h4><br><br>
 

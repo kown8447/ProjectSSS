@@ -1,19 +1,18 @@
+/*
+ * @Class : WebSocketHandler
+ * @Date : 2016.12.09
+ * @Author : 권기엽
+ * @Desc
+ * 수강 신청 대기열 표시를 위한 WebSocketHandler. 스케쥴러를 사용하여 클라이언트에게 지속적으로 메시지를 송신함
+*/
 package kr.or.initspring.handler;
 
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import javax.websocket.OnClose;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
@@ -27,8 +26,6 @@ import kr.or.initspring.service.RequestCourseService;
 
 public class WebSocketHandler extends TextWebSocketHandler {
 
-	//private ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
-
 	private ScheduledExecutorService timer = Executors.newScheduledThreadPool(10);
 	
 	private static Map<String, Object> allSessions;
@@ -36,6 +33,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	@Autowired
 	private RequestCourseService requestCourseService;
 
+	/*
+	 * @method Name : afterConnectionEstablished
+	 * @Author : 권기엽
+	 * @description
+	 * 클라이언트가 서버에 접속된 이후, SendData 함수를 스케줄러를 사용하여 주기적으로 송신하는 함수
+	*/
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("클라이언트 접속 완료");
@@ -76,6 +79,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		super.handleTextMessage(session, message);
 	}
 
+	/*
+	 * @method Name : sendData
+	 * @Author : 권기엽
+	 * @description
+	 * 자신의 대기 순번을 가져와서 클라이언트에게 송신하는 함수
+	*/
 	private void sendData(WebSocketSession session, String member_id) {
 		List<String> data = null;
 

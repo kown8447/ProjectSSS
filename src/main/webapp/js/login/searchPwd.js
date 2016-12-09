@@ -8,8 +8,6 @@
 */
 $(function(){
 	$('#searchPwdBtn').click(function() {
-		console.log('버튼 클릭되었다!!!');
-		console.log($('#modal_member_id').val()+' / ' + $('#modal_member_email').val());
 		$.ajax(
 			{
 				url : "login/searchPwd.htm",

@@ -33,9 +33,9 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 
 	/*
 	 * @method Name : onAuthenticationFailure
-	 * @Author : 권기엽
+	 * @Author : 권기엽, 김영빈
 	 * @description
-	 * 로그인 실패의 경우의 수에 따라, loginFail.jsp 에서 뿌려질 메시지를 지정하는 함수
+	 * 로그인 실패의 경우의 수에 따라, 뿌려질 메시지를 지정하는 함수
 	*/
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException auth)
@@ -63,6 +63,12 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 		forward(request,response,url);
 	}
 
+	/*
+	 * @method Name : forward
+	 * @Author : 권기엽, 김영빈
+	 * @description
+	 * 지정한 Url 로 forward 하는 함수
+	*/
 	public void forward(HttpServletRequest request, HttpServletResponse response, String url)
 			throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);

@@ -405,6 +405,13 @@ public class RequestCourseService {
 		}
 	}
 
+	/*
+	 * @method Name : searchByKeyword
+	 * 
+	 * @Author : 권기엽
+	 * 
+	 * @description : 검색 키워드를 통한 과목 정보를 가져오는 함수
+	 */
 	public List<OpenedLectureDTO> searchByKeyword(HashMap<String, String> map) {
 		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
@@ -723,10 +730,8 @@ public class RequestCourseService {
 	 * 
 	 * @Author : 권기엽
 	 * 
-	 * @description : 본 수강 신청 과목 등록 처리. 동기화 처리(synchronized)하여 정원 이상의 경우에는 DB에
-	 * Insert 할 수 없게 한다. + Transaction 처리
+	 * @description : 신청자의 대기 순번을 만들고, DB 삽입 작업을 한 이후 신청자의 대기를 삭제하는 함수
 	 */
-
 	public HashMap<String, String> insertRealDbSubject(String member_id, String subject_code) throws Exception {
 		HashMap<String, String> map = null;
 
@@ -745,6 +750,14 @@ public class RequestCourseService {
 		return map;
 	}
 
+	/*
+	 * @method Name : RealDbSubject
+	 * 
+	 * @Author : 권기엽
+	 * 
+	 * @description : 본 수강 신청 과목 등록 처리. 동기화 처리(synchronized)하여 정원 이상의 경우에는 DB에
+	 * Insert 할 수 없게 한다. + Transaction 처리
+	 */
 	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
 			RuntimeException.class })
 	public synchronized HashMap<String, String> RealDbSubject(String member_id, String subject_code) throws Exception {
@@ -761,16 +774,7 @@ public class RequestCourseService {
 				map.put("result", "over");
 				return map;
 			} else {
-				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code()); // 예비
-																												// 수강
-																												// 신청에서
-																												// 실패한
-																												// 과목
-																												// 성공
-																												// 시,
-																												// 목록에서
-																												// 안보이게
-																												// 함
+				count = requestCourseDao.checkAlreadyExistSubject(subject_code, studentDto.getStudent_code()); 
 				if (count > 0) {
 					HashMap<String, Object> temp = new HashMap<String, Object>();
 					temp.put("subject_code", subject_code);

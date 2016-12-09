@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 
+   @Project : InitSpring
+   @File name : correctRegisterCourse.jsp
+   @Author : 권기엽
+   @Data : 2016.12.09
+   @Desc : 수강 정정 View 페이지. 과목 검색, 시간표 출력, 시간표 삽입 / 삭제
+-->
 <script src="${pageContext.request.contextPath}/js/requestCourse/correctRegisterCourse.js"></script>
 <h4>▶&nbsp;수강정정</h4><br><br> 
 

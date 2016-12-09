@@ -1,3 +1,11 @@
+/*
+ * @Class : ModifyTermScheduler
+ * @Date : 2016.12.09
+ * @Author : 권기엽
+ * @Desc
+ * 수강 신청 기간을 설정하는 클래스
+ * 스케줄러가 미리 설정되어 있는 properties 파일의 cron 형식을 읽어와서 해당 시간대에 맞는 함수를 동작시킴
+*/
 package kr.or.initspring.scheduler;
 
 import java.sql.SQLException;
@@ -225,7 +233,12 @@ public class ModifyTermScheduler {
 		System.out.println("전학년 끝");
 	}
 	
-	
+	/*
+	 * @method Name : setEnrollActive
+	 * @Author : 권기엽
+	 * @description
+	 * 매개 변수의 값에 따라, DB 내의 수강 신청 가능 여부를 설정하는 함수
+	*/
 	public void setEnrollActive(int enroll_grade, int enroll_type, int enroll_active){
 		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -235,6 +248,12 @@ public class ModifyTermScheduler {
 		dao.setErollStatus(map);
 	}
 	
+	/*
+	 * @method Name : setReserveCheck
+	 * @Author : 권기엽
+	 * @description
+	 * 예비 수강 신청이 종료되면, 예비 수강 신청 시의 정원 대비 신청인원을 계산하여 그 인원이 초과될 경우 예비 수강 신청 실패 처리를 하고 reserve table을 enrollment table에 복사함
+	*/
 	@Transactional(rollbackFor={Exception.class, NullPointerException.class, SQLException.class, RuntimeException.class})
 	public void setReserveCheck() throws Exception{
 		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
@@ -262,11 +281,23 @@ public class ModifyTermScheduler {
 		}
 	}
 	
+	/*
+	 * @method Name : copyToTimeTable
+	 * @Author : 권기엽
+	 * @description
+	 * enrollment table을 timetable table로 복사하는 함수
+	*/
 	public void copyToTimeTable(){
 		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
 		dao.copyToTimeTable();
 	}
 	
+	/*
+	 * @method Name : deleteTimeTable
+	 * @Author : 권기엽
+	 * @description
+	 * timetable table을 삭제하는 함수
+	*/
 	public void deleteTimeTable(){
 		RequestCourseDAO dao = sqlsession.getMapper(RequestCourseDAO.class);
 		dao.deleteTimeTable();

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 
+   @Project : InitSpring
+   @File name : realRegisterCourse.jsp
+   @Author : 권기엽, 송아름
+   @Data : 2016.12.09
+   @Desc : 본 수강 신청 view page. 예비 수강 신청 실패 목록 / 과목 검색 / 시간표 삽입, 삭제
+-->
 <script src="${pageContext.request.contextPath}/js/requestCourse/realRegisterCourse.js"></script>
 <link href="${pageContext.request.contextPath}/css/requestCourse/realRegisterCourse.css" rel="stylesheet">
 <h4>▶&nbsp;수강신청</h4><br><br>

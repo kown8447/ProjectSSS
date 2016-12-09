@@ -8,7 +8,6 @@
 */
 $(function(){
 	$('#searchIdBtn').click(function() {
-		console.log('버튼 클릭되었다!!!');
 		var name = $('#member_name').val();
 		$.ajax(
 				{
@@ -19,7 +18,6 @@ $(function(){
 					},
 					dataType:"json",
 					success:function(data){
-						console.log(data);
 						if(data.member_id != "" && data.member_id != null){
 							$('#result').empty();
 							var length = (data.member_id).length;

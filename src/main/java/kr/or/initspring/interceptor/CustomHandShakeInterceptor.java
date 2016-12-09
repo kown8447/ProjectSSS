@@ -1,3 +1,10 @@
+/*
+ * @Class : CustomHandShakeInterceptor
+ * @Date : 2016.12.09
+ * @Author : 권기엽
+ * @Desc
+ * Security 를 통해 접속한 클라이언트의 Session 정보를 가져오기 위해 사용되는 클래스
+*/
 package kr.or.initspring.interceptor;
 
 import java.util.Map;
@@ -17,6 +24,12 @@ public class CustomHandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 			Exception ex) {
 	}
 
+	/*
+	 * @method Name : beforeHandshake
+	 * @Author : 권기엽
+	 * @description
+	 * 사용자가 로그인 한 이후, Security를 타기 이전 request 객체를 사용하여 session 정보를 가져옴
+	*/
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {

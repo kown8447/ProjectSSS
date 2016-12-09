@@ -38,7 +38,6 @@ $(function(){
 					var text=elt.subject_code+"<br>"+elt.subject_name+"<br>"+elt.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+elt.subject_code+"'/>";
 					$.each(elt.period, function(i, obj) {
-						console.log(elt.subject_name+" /  "+obj.period_code);
 						if(elt.retake_check == 1){color="red";}
 						else{color="skyblue";}
 						$('#'+obj.period_code).html(text+hidden);
@@ -171,7 +170,6 @@ function insertTimeTable(e){
 				data:{subject_code:e},
 				dataType:"json",
 				success:function(data){
-					console.log(data);
 					var color="";
 					var text=data.subject_info.subject_code+"<br>"+data.subject_info.subject_name+"<br>"+data.subject_info.professor_name+"<br>";
 					var hidden = "<input type='hidden' class='sub' id='subject_code' name='subject_code' value='"+data.subject_info.subject_code+"'/>";
@@ -183,7 +181,6 @@ function insertTimeTable(e){
 					}else{
 						var periodDraw=true;
 						$.each(data.subject_info.period, function(i, elt) {
-							console.log(data.subject_info.subject_name+" / "+elt.period_code);
 							if($('#'+elt.period_code).html() != ''){
 								alert('먼저 등록된 시간표를 제거해 주세요.');
 								preGradeSum-=data.subject_info.subject_credit;
@@ -306,5 +303,4 @@ $(document).on("click","#requestBtn",function(){
 		}
 	);
 	
-	console.log('총학점 : ' + preGradeSum);
 });

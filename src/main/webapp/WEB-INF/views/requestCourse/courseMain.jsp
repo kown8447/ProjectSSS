@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!-- 
+   @Project : InitSpring
+   @File name : courseMain.jsp
+   @Author : 권기엽, 송아름
+   @Data : 2016.12.09
+   @Desc : 수강 안내 View 페이지, 수강 신청에 필요한 사전 정보 표시
+-->
 <img src="${pageContext.request.contextPath}/images/registerGuide.jpg"/><br><br>
 	
 <div class="row" style="width: 75%; margin: auto;">	

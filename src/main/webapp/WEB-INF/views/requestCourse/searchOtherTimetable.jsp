@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 
+   @Project : InitSpring
+   @File name : searchOtherTimetable.jsp
+   @Author : 권기엽, 송아름
+   @Data : 2016.12.09
+   @Desc : 타학생 예비 수강 신청 시간표 확인 view. 학생 학번 조회 / 시간표 출력
+-->
 <script src="${pageContext.request.contextPath}/js/requestCourse/searchOtherTimetable.js"></script>
 
 <h4>▶&nbsp;타학생 시간표 조회</h4><br><br>

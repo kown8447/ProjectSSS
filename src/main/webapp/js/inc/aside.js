@@ -1,3 +1,11 @@
+/*
+ * @JavaScript : aside.js
+ * @Date : 2016.12.09
+ * @Author : 권기엽, 최준호
+ * @Desc
+ * side menu를 관여하는 javascript
+ * 개인정보 비동기 요청 및 시간표 출력
+*/
 $(function() {
 	$('#viewTimetable').click(function() {
 		$('#tableviewer').modal({
