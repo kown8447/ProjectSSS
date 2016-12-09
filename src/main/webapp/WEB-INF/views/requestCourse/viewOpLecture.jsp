@@ -22,12 +22,20 @@
 	<table class="table table-hover" style="text-align: center;">
 		<tr style="text-align: center;" class="active">
 			<th style="text-align: center">구분</th>
-			<th style="text-align: center" id="order_subject_name" class="asc">강의이름</th>
+			<th style="text-align: center" id="order_subject_name" class="asc">
+				강의이름<img src="${pageContext.request.contextPath}/images/mouse.png"></th>
 			<th style="text-align: center">시간</th>
-			<th style="text-align: center" id="order_professor_name" class="asc">지도 교수</th>
+			<th style="text-align: center" id="order_professor_name" class="asc">
+				지도 교수<img src="${pageContext.request.contextPath}/images/mouse.png"></th>
 			<th style="text-align: center">강의 계획서</th>
 			<th style="text-align: center">모집 인원</th>
 		</tr>
+			<c:if test="${empty lists}">
+				<tr>
+					<td colspan="6" style="text-align: center">등록된 강의가 없습니다.</td>
+				</tr>
+			</c:if>
+		
 		<c:forEach items="${lists}" var="subject">
 			<tr>
 				<c:choose>

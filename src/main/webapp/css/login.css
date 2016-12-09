@@ -1,11 +1,11 @@
 body {
 	position: relative;
 	font-family: 'Roboto', helvetica, arial, sans-serif;
-	background-image: url("../images/back.jpg");
+	background-image: url("../images/mainlogin.jpg");
 	background-repeat: no-repeat;
-	background-size: 90% 50%;
-	background-position: bottom center;
-
+	background-size: cover;
+/* //	background-position: bottom center;
+ */
 }
 
 .wrapper {

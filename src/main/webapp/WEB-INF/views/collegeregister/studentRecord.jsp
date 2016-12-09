@@ -31,7 +31,7 @@
 	</div>
 	<br>
 
-	<table id="recordView" class="table table-bordered" style="text-align: center;">
+	<table class="table table-bordered" style="text-align: center;">
 		<thead>
 			<tr>
 				<th style="text-align: center; width: 15%;">구분</th>
@@ -42,7 +42,7 @@
 				<th style="text-align: center">재수강</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="recordView">
 			<c:if test="${empty recordList}">
 				<tr>
 					<td colspan="6" style="text-align: center">등록된 정보가 없습니다.</td>

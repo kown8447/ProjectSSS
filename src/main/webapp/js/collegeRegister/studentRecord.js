@@ -39,7 +39,7 @@ $(function() {
 							success:function(data){
 								console.log(data);
 								$('#recordView').empty();
-								var rows='<tr><th>구분</th><th>과목코드</th><th>과목명</th><th>학점</th><th>성적</th><th>재수강</th></tr>'
+								var rows=''
 								$(data.recordList).each(function(index,record) {
 									 rows+='<tr><td>'+record.stringtype+'</td><td>'+record.subject_code+'</td><td>'+record.subject_name+'</td><td>'+record.subject_credit+'</td><td>'+record.record_level+'</td><td>';
 									 if(record.retake_check!=0){
@@ -47,8 +47,8 @@ $(function() {
 									 }
 									 rows+='</td></tr>'; 
 								});
-								 rows+='<tr><td colspan="4">전공: '+data.majorCredit+'&nbsp; &nbsp; 교양:'+data.liberalCredit+' &nbsp; &nbsp; 복수전공:'+ data.doubleCredit+' &nbsp; &nbsp; 총이수학점:'+data.totalCredit+' &nbsp;</td><td>평점(F포함 계산):'+data.inF+'</td><td>평점(F제외):'+data.outF+'</td></tr>';
-						        $('#recordView').append(rows);
+								 rows+='<tr><td colspan="6">전공:'+data.majorCredit+'&nbsp;&nbsp;&nbsp; 교양:'+data.liberalCredit+'&nbsp;&nbsp;&nbsp; 복수전공: '+ data.doubleCredit+'&nbsp;&nbsp;&nbsp; 총 이수학점:'+data.totalCredit+'&nbsp;&nbsp;&nbsp;평점(F포함 계산):'+data.inF+'&nbsp;&nbsp;&nbsp; 평점(F제외):'+data.outF+'</td></tr>';
+								 $('#recordView').append(rows);
 						        
 						        $('#pdfDownLoader').attr("href","recordPdfRequest.htm?grade="+grade+"&semester="+semester);
 							}

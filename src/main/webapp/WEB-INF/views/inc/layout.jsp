@@ -9,21 +9,19 @@
 <link href="${pageContext.request.contextPath}/css/commons.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/visual.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/css/mainmenu.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
 <link href="${pageContext.request.contextPath}/css/inc/aside.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/js/inc/aside.js"></script>
 
 <title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
+<%-- 	<tiles:insertAttribute name="header" /> --%>
 	<tiles:insertAttribute name="aside" />
 	<tiles:insertAttribute name="content" />
-	<tiles:insertAttribute name="footer"/>
 	<div class="modal fade" id="tableviewer">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
