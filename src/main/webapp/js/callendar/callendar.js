@@ -136,10 +136,10 @@ $(function() {
     * 일정 수정 이벤틍 
     */
    $('#up').click(function() {
-	   var sd =$("#startdate").val();
+	   var sd =$("#startdate1").val();
        var startDateArr = sd.split('/');
         
-       var ed =  $("#enddate").val();
+       var ed =  $("#enddate1").val();
        var endDateArr = ed.split('/');
    
        var startDateCompare = new Date(startDateArr[2], startDateArr[0], startDateArr[1]);
