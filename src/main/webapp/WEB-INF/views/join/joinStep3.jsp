@@ -111,15 +111,20 @@
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label col-sm-offset-2">사진</label>
-				<div class="col-sm-6">
-					<span class="filetype"> <input type="text" class="file-text" />
-						<span class="file-btn">찾아보기</span> <span class="file-select">
-							<input type="file" class="input-file" name="file" id="files"
-							accept=".jpg,.png"><br>
-					</span>
-					</span>
+				<div class="col-sm-18">
+					<div class="row-fluid">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="filetype span6">
+							<input type="text" class="file-text" />
+							 <span class="file-btn">찾아보기</span>
+							 <span class="file-select span6 "> 
+							<input type="file" class="input-file form-control" name="file" id="files" accept=".jpg,.png"><br>
+						</span>
+						</span>
+					</div>
 				</div>
 			</div>
+			
 			<div class="form-group">
             	<div id="list" class="col-sm-2 col-sm-offset-4"></div>
          	</div>
