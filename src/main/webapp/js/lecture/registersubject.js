@@ -8,9 +8,10 @@ $(function(){
 		
 		if($("#grade_limit").val() >= 5){
 			alert("학년은 4학년까지 등록가능합니다");
-			$("#grade_limit").focus();
+			$("#grade_limit").val(1);
 			return false;
 		}
+		
 	});
 	
 	$("#subject_credit").change(function(){
@@ -20,6 +21,14 @@ $(function(){
 			return false;
 		}
 		
+	})
+	
+	$("#grade_limit").change(function(){
+		if($("#grade_limit").val() < 1){
+			alert("학년은 1학년 이상 등록 가능합니다.");
+			$("#grade_limit").val(1);
+			return false;
+		}
 	})
 	
 	$("#subject_seats").change(function(){

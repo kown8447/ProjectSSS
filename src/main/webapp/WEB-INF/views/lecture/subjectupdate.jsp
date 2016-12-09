@@ -59,7 +59,7 @@
 		<td>과목명</td><td colspan="3"><input type="text" name="subject_name"value="${list.subject_name}"></td></tr>
 		<tr>
 		<td>학점</td><td><input type="number" id="subject_credit" name="subject_credit" value="${list.subject_credit}"></td>
-		<td>정원</td><td><input type="number" name="subject_seats" value="${list.subject_seats}"></td></tr>
+		<td>정원</td><td><input type="number" id="subject_seats" name="subject_seats" value="${list.subject_seats}"></td></tr>
 		<input type="hidden" name="subject_code" value="${list.subject_code }">
 		<tr>
 		
