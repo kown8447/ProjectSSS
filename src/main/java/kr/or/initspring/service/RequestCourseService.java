@@ -139,6 +139,8 @@ public class RequestCourseService {
 			dto.setSubject_filesrc(requestCourseDao.getLecturePlanBySubjectCode(dto.getSubject_code()));
 			dto.setRequired_choice(requestCourseDao.getRequiredChoice(dto.getSubject_code(), dto.getSubject_type()));
 		}
+		
+		System.out.println(lists.toString());
 		return lists;
 	}
 
@@ -150,7 +152,7 @@ public class RequestCourseService {
 	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 과목명 기준에 따라 정렬
 	 */
 	public List<OpenedLectureDTO> searchOpLectureOrderbySubjectName(HashMap<String, String> keyword) {
-		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		List<OpenedLectureDTO> lists = null;
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		lists = requestCourseDao.searchOpLectureOrderbySubjectName(keyword);
 		for (OpenedLectureDTO dto : lists) {
@@ -170,7 +172,7 @@ public class RequestCourseService {
 	 * @description : 구분(과목명 / 과목코드)과 키워드에 따른 검색 결과 출력 + 교수명 기준에 따라 정렬
 	 */
 	public List<OpenedLectureDTO> searchOpLectureOrderbyProfessorName(HashMap<String, String> keyword) {
-		List<OpenedLectureDTO> lists = new ArrayList<OpenedLectureDTO>();
+		List<OpenedLectureDTO> lists = null;
 		RequestCourseDAO requestCourseDao = sqlsession.getMapper(RequestCourseDAO.class);
 		lists = requestCourseDao.searchOpLectureOrderbyProfessorName(keyword);
 		for (OpenedLectureDTO dto : lists) {
