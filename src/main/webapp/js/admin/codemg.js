@@ -1,5 +1,15 @@
+/*
+ * @JavaScript : codemg.js
+ * @Date : 2016.11.21
+ * @Author : 성홍모
+ * @Desc
+ * 관리자 기능의 유효성 검증 
+ * 
+*/
+
 $(function() {
 	
+	//장학등록시 학번 유효성 검증
 	var student_check = false;
 	$('#check_student_code').click(function() {
 		$.ajax(
@@ -19,8 +29,27 @@ $(function() {
 			}
 		);
 	});
+	//학생을 등록시킬시 학번 유효성 검증
+	$('#check_student_code_register').click(function() {
+		$.ajax(
+			{
+				url:"check_student_code.htm",
+				data:{student_code : $('#student_code').val()},
+				dataType:"json",
+				success:function(data){
+					if(data.result=='success'){
+						alert('유효한 학번입니다.');
+						student_check=true;
+					}else{
+						alert('유효하지 않은 학번입니다.');
+						student_check=false;
+					}
+				}
+			}
+		);
+	});
 	
-	
+	//강의실 목록 보기에서 건물별로 강의실 목록을 출력
    $('#classroomInbuildings').change(function() {
       $.ajax({
          url : "classroomBuildingSelect.htm",
@@ -165,7 +194,7 @@ $(function() {
 						yearRange : '1950:2020'
 					});
 
-	//빌딩 등록
+	//건물 등록시 유효성 검증
 	$('#buildingreg').click(function() {
 		if ($('#building_name').val().trim() == '') {
 			alert("빌딩 이름을 입력해주세요");
@@ -180,7 +209,7 @@ $(function() {
 		$('#registerBuilding_form').submit();
 	});
 
-	//강의실 등록
+	//강의실 등록시 유효성 검증
 	$('#classreg').click(function() {
 		if ($('#classroom_name').val().trim() == '') {
 			alert("강의실 이름을 입력해주세요");
@@ -198,7 +227,7 @@ $(function() {
 			$('#registerClassroom_form').submit();
 		}
 	});
-	//사무실 등록
+	//사무실 등록시 유효성 검증
 	$('#officereg').click(function() {
 		if ($('#office_name').val().trim() == '') {
 			alert('사무실 이름을 입력하세요');
@@ -217,7 +246,7 @@ $(function() {
 		}
 		$('#insertOffice_form').submit();
 	});
-	//연구실 등록
+	//연구실 등록시 유효성 검증
 	$('#labreg').click(function() {
 		if ($('#lab_name').val().trim() == '') {
 			alert('연구실 이름을 입력하세요');
@@ -234,10 +263,9 @@ $(function() {
 			$('#labInsertPhoneCheck').focus();
 			return false;
 		}
-		/*$('#insertOffice_form').submit();*/
 		$('#insertLab_form').submit();
 	});
-	//단과대학 등록
+	//단과대학 등록시 유효성 검증
 	$('#college_reg').click(function() {
 		if ($('#college_name').val().trim() == "") {
 			alert('대학 이름을 입력하세요');
@@ -251,7 +279,7 @@ $(function() {
 		}
 		$('#insertCollege_form').submit();
 	});
-	//학과등록
+	//학과 등록시 유효성 검증
 	$('#departmentreg').click(function() {
 		if ($('#department_name').val().trim() == "") {
 			alert('학과명을 입력하세요');
@@ -275,7 +303,7 @@ $(function() {
 		}
 		$('#insertDepartment_form').submit();
 	});
-	//관리자 등록
+	//관리자 등록시 유효성 검증
 	$('#adminreg').click(function() {
 		if ($('#code').val().trim() == "") {
 			alert('코드를 입력하세요');
@@ -294,7 +322,7 @@ $(function() {
 		}
 		$('#adminCodeRegister_form').submit();
 	});
-	//장학제도 등록
+	//장학제도 등록시 유효성 검증
 	$('#sc_reg').click(function() {
 		if ($('#scholaship_name').val().trim() == "") {
 			alert('장학 제도 이름을 입력하세요');
@@ -318,7 +346,7 @@ $(function() {
 		}
 		$('#insertScSystem_form').submit();
 	});
-	//장학생 등록
+	//장학생 등록시 유효성 검증
 	$('#scholar_reg').click(function() {
 		if ($('#student_code').val().trim() == "") {
 			alert('학생코드를 입력하세요');
@@ -336,7 +364,7 @@ $(function() {
 		}
 		$('#insertScholarship_form').submit();
 	});
-	//학생 등록
+	//학생 등록시 유효성 검증
 	$('#student_reg').click(function() {
 		if ($('#code').val().trim() == "") {
 			alert('코드를 입력하세요');
@@ -355,7 +383,7 @@ $(function() {
 		}
 		$('#studentRegister_form').submit();
 	});
-	//학기 등록
+	//학기 등록시 유효성 검증
 	$('#semester_reg').click(function() {
 		if ($('#semester_code').val().trim() == "") {
 			alert('학기 코드를 입력하세요');
@@ -379,7 +407,7 @@ $(function() {
 		}
 		$('#insertSemester_form').submit();
 	});
-	//교수 등록 
+	//교수 등록시 유효성 검증
 	$('#professor_reg').click(function() {
 
 		if ($('#code').val().trim() == "") {
@@ -405,7 +433,7 @@ $(function() {
 		$('#professorCodeRegister_form').submit();
 	});
 
-	//등록 등록
+	//등록 등록시 유효성 검증
 	$('#register_reg').click(function() {
 
 		if ($('#student_code').val().trim() == "") {
@@ -426,7 +454,7 @@ $(function() {
 		$('#insertRegister_form').submit();
 	});
 
-	//건물 수정
+	//건물 수정시 유효성 검증
 	$('#edit_building').click(function() {
 		if ($('#building_name').val().trim() == '') {
 			alert("빌딩 이름을 입력해주세요");
@@ -440,11 +468,26 @@ $(function() {
 		}
 		$('#updateBuilbilding_form').submit();
 	});
-	//학기 수정
+	//학기 수정시 유효성 검증
 	$('#edit_semester').click(function() {
+		if ($('#semester_name').val().trim() == '') {
+			alert("학기 이름을 입력해주세요");
+			$('#semester_name').focus();
+			return false;
+		}
+		if ($('#semester_start').val().trim() == '') {
+			alert("학기 시작일을	 입력해주세요");
+			$('#semester_start').focus();
+			return false;
+		}
+		if ($('#semester_end').val().trim() == '') {
+			alert("학기 종료일을 입력해주세요");
+			$('#semester_end').focus();
+			return false;
+		}
 		$('#updateSemester_form').submit();
 	});
-	//강의실 수정
+	//강의실 수정시 유효성 검증
 	$('#edit_classroom').click(function() {
 		if ($('#classroom_name').val().trim() == '') {
 			alert("강의실 이름을 입력해주세요");
@@ -457,7 +500,7 @@ $(function() {
 		}
 		$('#updateClassroom_form').submit();
 	});
-	//사무실 수정
+	//사무실 수정시 유효성 검증
 	$('#edit_office').click(function() {
 		if ($('#office_name').val().trim() == '') {
 			alert('사무실 이름을 입력하세요');
@@ -476,7 +519,7 @@ $(function() {
 		}
 		$('#updateOffice_form').submit();
 	});
-	//연구실 수정
+	//연구실 수정시 유효성 검증
 	$('#edit_lab').click(function() {
 		if ($('#lab_name').val().trim() == '') {
 			alert('연구실 이름을 입력하세요');
@@ -495,7 +538,7 @@ $(function() {
 		}
 		$('#updateLab_form').submit();
 	});
-	//단대 수정
+	//단대 수정시 유효성 검증
 	$('#edit_college').click(function() {
 		if ($('#college_name').val().trim() == '') {
 			alert('대학 이름을 입력하세요');
@@ -509,7 +552,7 @@ $(function() {
 		}
 		$('#updateColleage_form').submit();
 	});
-	//학과 수정
+	//학과 수정시 유효성 검증
 	$('#edit_depart').click(function() {
 		if ($('#department_name').val().trim() == "") {
 			alert('학과명을 입력하세요');
@@ -533,7 +576,7 @@ $(function() {
 		}
 		$('#updateDepartment_form').submit();
 	});
-	//장학생 수정
+	//장학생 수정시 유효성 검증
 	$('#edit_scholarship').click(function() {
 		if ($('#scholarship_payday').val().trim() == "") {
 			alert('지급일을 입력하세요');
@@ -556,7 +599,7 @@ $(function() {
 		}
 		$('#updateCode_form').submit();
 	});
-	//장학제도 수정
+	//장학제도 수정시 유효성 검증
 	$('#edit_scsystem').click(function() {
 		if ($('#scholaship_name').val().trim() == "") {
 			alert('장학 제도 이름을 입력하세요');
@@ -580,7 +623,7 @@ $(function() {
 		}
 		$('#scsytemUpdate_form').submit();
 	});
-	//신청 거절
+	//신청 거절시 유효성 검증
 	$('#rejectbtn').click(function() {
 		if ($('#rejectReason').val().trim() == "") {
 			alert('거절사유를 입력하세요');
@@ -590,7 +633,7 @@ $(function() {
 		$('#rejectForm').submit();
 	});
 
-	//빌딩
+	//빌딩 수정시 유효성 검증
 	$('#bdexcelUp').click(function() {
 		var file = $("#bdexcel").val();
 		if (file == "" || file == null) {
@@ -627,7 +670,7 @@ $(function() {
 
 	});
 
-	//강의실
+	//강의실 엘셀파일 등록시 유효성 검증
 	$('#clexcelUp').click(function() {
 		var file = $("#clexcel").val();
 		if (file == "" || file == null) {
@@ -664,7 +707,7 @@ $(function() {
 
 	});
 
-	//사무실
+	//사무실 엘셀파일 등록시 유효성 검증
 	$('#ofexcelUp').click(function() {
 		var file = $("#ofexcel").val();
 		if (file == "" || file == null) {
@@ -700,7 +743,7 @@ $(function() {
 		}
 
 	});
-	//연구실
+	//연구실 엘셀파일 등록시 유효성 검증
 	$('#lbexcelUp').click(function() {
 		var file = $("#lbexcel").val();
 		if (file == "" || file == null) {
@@ -736,7 +779,7 @@ $(function() {
 		}
 
 	});
-	//장학제도
+	//장학제도 엘셀파일 등록시 유효성 검증
 	$('#scsexcelUp').click(function() {
 		var file = $("#scsexcel").val();
 		if (file == "" || file == null) {
@@ -773,7 +816,7 @@ $(function() {
 
 	});
 
-	//장학금
+	//장학금 엘셀파일 등록시 유효성 검증
 	$('#sclexcelUp').click(function() {
 		var file = $("#sclexcel").val();
 		if (file == "" || file == null) {
@@ -809,8 +852,7 @@ $(function() {
 		}
 
 	});
-
-	//단과대학
+	//단과대학 엘셀파일 등록시 유효성 검증
 	$('#colexcelUp').click(function() {
 		var file = $("#colexcel").val();
 		if (file == "" || file == null) {
@@ -846,8 +888,7 @@ $(function() {
 		}
 
 	});
-
-	//학부
+	//학부 엘셀파일 등록시 유효성 검증
 	$('#depexcelUp').click(function() {
 		var file = $("#depexcel").val();
 		if (file == "" || file == null) {
@@ -883,8 +924,7 @@ $(function() {
 		}
 
 	});
-
-	//전공
+	//전공 엘셀파일 등록시 유효성 검증
 	$('#mjexcelUp').click(function() {
 		var file = $("#mjexcel").val();
 		if (file == "" || file == null) {
@@ -920,8 +960,7 @@ $(function() {
 		}
 
 	});
-
-	//등록
+	//등록 엘셀파일 등록시 유효성 검증
 	$('#regexcelUp').click(function() {
 		var file = $("#regexcel").val();
 		if (file == "" || file == null) {
@@ -950,15 +989,12 @@ $(function() {
 						location.href = "mjRecordList.htm";
 					}
 				},
-
 				type : "POST"
 			};
 			$('#regexcelForm').ajaxSubmit(options);
 		}
-
 	});
-
-	//교수등록
+	//교수등록 엘셀파일 등록시 유효성 검증
 	$('#professorexcelUp').click(function() {
 		var file = $("#professorexcel").val();
 		if (file == "" || file == null) {
@@ -992,9 +1028,8 @@ $(function() {
 			};
 			$('#professorexcelForm').ajaxSubmit(options);
 		}
-
 	});
-
+	//학기 초기화 버튼 클릭
 	$('#initBtn')
 			.click(
 					function() {
@@ -1015,7 +1050,7 @@ $(function() {
 							});
 						}
 					});
-
+	//교수 검색기능
 	$('#levelChangeTargetDepartment').change(
 			function() {
 				$.ajax({
@@ -1035,7 +1070,7 @@ $(function() {
 					}
 				});
 			});
-
+	//학과장 등록시 유효성 검증
 	$('#departmentLeaderButton').click(
 			function() {
 
@@ -1051,6 +1086,14 @@ $(function() {
 			})
 
 });
+/*
+ * @JavaScript : codemg.js
+ * @Date : 2016.11.21
+ * @Author : 성홍모
+ * @Desc
+ * 앨셀등록시 파일형식 유효성 검증
+ * 
+*/
 function checkFileType(filepath) {
 	var fileForamt = filepath.split(".");
 	if (fileForamt.indexOf("xlsx") > -1) {
@@ -1059,8 +1102,14 @@ function checkFileType(filepath) {
 		return false;
 	}
 }
-
-//학생코드
+/*
+ * @JavaScript : codemg.js
+ * @Date : 2016.11.21
+ * @Author : 성홍모
+ * @Desc
+ * 학생코드 엑셀파일 일괄등록시 유효성 검증
+ * 
+*/
 function check() {
 	var file = $("#excel").val();
 	if (file == "" || file == null) {

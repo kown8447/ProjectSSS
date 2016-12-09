@@ -1,13 +1,20 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : OfiiceBuildingDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 사무실에 따른 건물 정보를 얻기 위한 DTO
+*/
+
 public class OfiiceBuildingDTO {
 	
-	private String building_code;
-	private String building_name;
-	private String office_code;
-	private String office_phone;
-	private String office_name;
-	private int office_possible;
+	private String building_code;		//건물 코드
+	private String building_name;		//건물 이름
+	private String office_code;			//사무실 코드
+	private String office_phone;		//사무실 전화번호
+	private String office_name;			//사무실 이름
+	private int office_possible;		//사무실 사용가능 여부
 	public String getBuilding_code() {
 		return building_code;
 	}

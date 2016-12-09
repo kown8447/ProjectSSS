@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : registeropen.jsp
+   @Author : 성홍모
+   @Data : 2016.11.09
+   @Desc : 개설된 과목 리스트를 보기위한 pageView
+-->        
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="row  col-sm-offset-2">

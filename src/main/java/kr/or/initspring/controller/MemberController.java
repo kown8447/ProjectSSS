@@ -225,7 +225,7 @@ public class MemberController {
 	 * 
 	 * @Author : 성홍모
 	 * 
-	 * @description 관리자가 코드 관리뷰로 이동
+	 * @description : 관리자가 코드 관리뷰로 이동
 	 */
 	@RequestMapping("code.htm")
 	public String codeMg(Model model) {
@@ -254,10 +254,8 @@ public class MemberController {
 	 * 
 	 * @Author : 성홍모
 	 * 
-	 * @description 관리자가 건물 등록 뷰로 이동
+	 * @description : 관리자가 건물 등록 뷰로 이동
 	 */
-
-	// 건물등록
 	@RequestMapping("registerstructure.htm")
 	public String registerStructure(Model model) {
 
@@ -285,7 +283,7 @@ public class MemberController {
 	 * 
 	 * @Author : 성홍모
 	 * 
-	 * @description 관리자가 빌딩 등록 뷰로 이동
+	 * @description : 관리자가 빌딩 등록 뷰로 이동
 	 */
 	@RequestMapping("registerbuilding.htm")
 	public String registerBuilding(Model model) {
@@ -301,7 +299,7 @@ public class MemberController {
 	 * 
 	 * @Author : 성홍모
 	 * 
-	 * @description 관리자가 강의실 등록 뷰로 이동
+	 * @description : 관리자가 강의실 등록 뷰로 이동
 	 */
 	@RequestMapping("registerclassroom.htm")
 	public String registerClassroom(Model model) {
@@ -311,8 +309,13 @@ public class MemberController {
 
 		return "codemg.registerclassroom";
 	}
-
-	// 사무실
+	/*
+	 * @method Name : registerOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 사무실 등록 뷰로 이동
+	 */
 	@RequestMapping("registeroffice.htm")
 	public String registerOffice(Model model) {
 
@@ -321,8 +324,13 @@ public class MemberController {
 
 		return "codemg.registeroffice";
 	}
-
-	// 연구실
+	/*
+	 * @method Name : registerLaboratory
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 연구실 등록 뷰로 이동
+	 */
 	@RequestMapping("registerlaboratory.htm")
 	public String registerLaboratory(Model model) {
 
@@ -331,8 +339,13 @@ public class MemberController {
 
 		return "codemg.registerlaboratory";
 	}
-
-	// 학생등록
+	/*
+	 * @method Name : registerStudent
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 학생 등록 뷰로 이동
+	 */
 	@RequestMapping("registerstudent.htm")
 	public String registerStudent(Model model) {
 
@@ -341,8 +354,13 @@ public class MemberController {
 
 		return "codemg.registerstudent";
 	}
-
-	// 등록
+	/*
+	 * @method Name : registerRegister
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 등록하는 등록 뷰로 이동
+	 */
 	@RequestMapping("registerregister.htm")
 	public String registerRegister(Model model) {
 
@@ -351,8 +369,13 @@ public class MemberController {
 
 		return "codemg.registerregister";
 	}
-
-	// 대학등록
+	/*
+	 * @method Name : registerCollege
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 대학 등록 뷰로 이동
+	 */
 	@RequestMapping("registercollege.htm")
 	public String registerCollege(Model model) {
 
@@ -361,8 +384,13 @@ public class MemberController {
 
 		return "codemg.registercollege";
 	}
-
-	// 학부등록
+	/*
+	 * @method Name : registerDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 학과 등록 뷰로 이동
+	 */
 	@RequestMapping("registerdepartment.htm")
 	public String registerDepartment(Model model) {
 
@@ -373,8 +401,13 @@ public class MemberController {
 
 		return "codemg.registerdepartment";
 	}
-
-	// 장학등록
+	/*
+	 * @method Name : registerScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 장학 등록 뷰로 이동
+	 */
 	@RequestMapping("registerscholarship.htm")
 	public String registerScholarship(Model model) {
 
@@ -385,8 +418,13 @@ public class MemberController {
 
 		return "codemg.registerscholarship";
 	}
-
-	// 장학등록
+	/*
+	 * @method Name : registerMjRecord
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 전공 등록 뷰로 이동
+	 */
 	@RequestMapping("registermjrecord.htm")
 	public String registerMjRecord(Model model) {
 
@@ -395,15 +433,25 @@ public class MemberController {
 
 		return "codemg.registermjrecord";
 	}
-
-	// 장학제도등록
+	/*
+	 * @method Name : registerScsystem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 장학제도 등록 뷰로 이동
+	 */
 	@RequestMapping("registerscsystem.htm")
 	public String registerScsystem(Model model) {
 
 		return "codemg.registerscsystem";
 	}
-
-	// 교수등록
+	/*
+	 * @method Name : registerProfessor
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 교수 등록 뷰로 이동
+	 */
 	@RequestMapping("registerprofessor.htm")
 	public String registerProfessor(Model model) {
 
@@ -412,8 +460,13 @@ public class MemberController {
 
 		return "codemg.registerprofessor";
 	}
-
-	// 개설신청현황
+	/*
+	 * @method Name : registerOpen
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 개설승인 등록 뷰로 이동
+	 */
 	@RequestMapping("registeropen.htm")
 	public String registerOpen(Model model) {
 
@@ -435,27 +488,36 @@ public class MemberController {
 
 		return "codemg.registeropen";
 	}
-
-	// 관리자등록
+	/*
+	 * @method Name : registerAdmin
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 관리자 등록 뷰로 이동
+	 */
 	@RequestMapping("registeradmin.htm")
 	public String registerAdmin(Model model) {
 
 		return "codemg.registeradmin";
 	}
-
-	// 학기등록
+	/*
+	 * @method Name : registerSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description : 관리자가 학기 등록 뷰로 이동
+	 */
 	@RequestMapping("registersemester.htm")
 	public String registerSemester(Model model) {
 
 		return "codemg.registersemester";
 	}
-
 	/*
 	 * @method Name : registerCode
 	 * 
 	 * @Author : 성홍모
 	 * 
-	 * @description 관리자가 코드 등록
+	 * @description 관리자가 학생 등록하는 컨트롤러
 	 */
 	@RequestMapping(value = "studentRegister.htm", method = RequestMethod.POST)
 	public String registerCode(StudentCodeRegDTO student, Model model) throws Exception {
@@ -471,7 +533,13 @@ public class MemberController {
 
 		return viewpage;
 	}
-
+	/*
+	 * @method Name : registerProfessorCode
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 교수 등록하는 컨트롤러
+	 */
 	@RequestMapping(value = "professorCodeRegister.htm", method = RequestMethod.POST)
 	public String registerProfessorCode(ProfessorCodeRegDTO professor) {
 
@@ -485,7 +553,6 @@ public class MemberController {
 
 		return viewpage;
 	}
-
 	/*
 	 * @method Name : viewCodeList
 	 * 
@@ -500,7 +567,13 @@ public class MemberController {
 		model.addAttribute("codelist", codelist);
 		return "codemg.codelist";
 	}
-
+	/*
+	 * @method Name : viewtypecodelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 코드 리스트 출력
+	 */
 	@RequestMapping("typeofcodelist.htm")
 	public String viewtypecodelist(String code_type, String keyword, String searchType, Model model) {
 		List<CodeMgDTO> codelist = codeservice.conditioncodelist(Integer.parseInt(code_type), keyword, searchType);
@@ -523,7 +596,6 @@ public class MemberController {
 		model.addAttribute("code", codeDTO);
 		return "codemg.codedetail";
 	}
-
 	/*
 	 * @method Name : updateCode
 	 * 
@@ -569,8 +641,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	//
+	/*
+	 * @method Name : professordownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 교수등록 기본 액셀 양식을 받는 컨트롤러
+	 */
 	@RequestMapping("professorexcel.htm")
 	public ModelAndView professordownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -580,7 +657,6 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
 	/*
 	 * @method Name : excelUpload
 	 * 
@@ -595,8 +671,13 @@ public class MemberController {
 
 		return jsonview;
 	}
-
-	// 교수 일괄처리
+	/*
+	 * @method Name : professorexcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 엑셀파일을 등록하여 교수를 일괄등록하는 매소드
+	 */
 	@RequestMapping(value = "professorExcelUpload.htm", method = RequestMethod.POST)
 	public View professorexcelUpload(MultipartHttpServletRequest request, Model model) throws Exception {
 
@@ -604,7 +685,6 @@ public class MemberController {
 
 		return jsonview;
 	}
-
 	/*
 	 * @method Name : deleteCode
 	 * 
@@ -673,21 +753,39 @@ public class MemberController {
 		asideservice.persnalDataCall(principal.getName(), model);
 		return jsonview;
 	}
-
+	/*
+	 * @method Name : registerBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물을 등록하게 해주는 매소드
+	 */
 	@RequestMapping(value = "registerBuilding.htm", method = RequestMethod.POST)
 	public String registerBuilding(BuildingDTO building) {
 
 		codeservice.insertBuilding(building);
 		return "redirect:buildingList.htm";
 	}
-
+	/*
+	 * @method Name : adminRegister
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 관리자 코드를 등록하게 해주는 매소드
+	 */
 	@RequestMapping(value = "adminCodeRegister.htm", method = RequestMethod.POST)
 	public String adminRegister(CodeMgDTO admin) {
 
 		codeservice.insertAdmin(admin);
 		return "redirect:typeofcodelist.htm?code_type=2";
 	}
-
+	/*
+	 * @method Name : buildingList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물 목록을 보게 해주는 매소드
+	 */
 	@RequestMapping("buildingList.htm")
 	public String buildingList(Model model) {
 
@@ -695,7 +793,13 @@ public class MemberController {
 		model.addAttribute("building", buildingList);
 		return "codemg.buildinglist";
 	}
-
+	/*
+	 * @method Name : deleteBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물을 삭제 해주는 매소드
+	 */
 	@RequestMapping("buildingDelete.htm")
 	public View deleteBuilding(String building_code, Model model) {
 
@@ -712,8 +816,13 @@ public class MemberController {
 
 		return jsonview;
 	}
-
-	// 빌딩 기본양식
+	/*
+	 * @method Name : buildingdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("buildingexcel.htm")
 	public ModelAndView buildingdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -723,8 +832,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 강의실 기본양식
+	/*
+	 * @method Name : classroomdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("classroomexcel.htm")
 	public ModelAndView classroomdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -734,8 +848,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 사무실 기본양식
+	/*
+	 * @method Name : officedownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("ofexcel.htm")
 	public ModelAndView officedownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -745,8 +864,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 연구실 기본양식
+	/*
+	 * @method Name : laboratorydownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 연구실등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("lbexcel.htm")
 	public ModelAndView laboratorydownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -756,8 +880,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 연구실 기본양식
+	/*
+	 * @method Name : scSystemdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("scsexcel.htm")
 	public ModelAndView scSystemdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -767,8 +896,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 연구실 기본양식
+	/*
+	 * @method Name : scholarshipdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("sclexcel.htm")
 	public ModelAndView scholarshipdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -778,8 +912,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 단과대학 기본양식
+	/*
+	 * @method Name : collegedownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("colexcel.htm")
 	public ModelAndView collegedownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -788,8 +927,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 학부 기본양식
+	/*
+	 * @method Name : departmentdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학과 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("depexcel.htm")
 	public ModelAndView departmentdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -799,8 +943,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 학부 기본양식
+	/*
+	 * @method Name : mjrecorddownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 전공 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("mjexcel.htm")
 	public ModelAndView mjrecorddownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -810,8 +959,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 등록 기본양식
+	/*
+	 * @method Name : registerdownload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 등록 액셀 기본 양식을 다운받게 해주는 매소드
+	 */
 	@RequestMapping("regexcel.htm")
 	public ModelAndView registerdownload(HttpServletRequest request, HttpServletResponse response) {
 
@@ -821,8 +975,13 @@ public class MemberController {
 
 		return new ModelAndView("pageView", "downloadFile", downloadFile);
 	}
-
-	// 빌딩 일괄등록
+	/*
+	 * @method Name : buildingExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물등록 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "buildingExcelUpload.htm", method = RequestMethod.POST)
 	public View buildingExcelUpload(MultipartHttpServletRequest request, Model model) {
 
@@ -833,8 +992,13 @@ public class MemberController {
 
 		return jsonview;
 	}
-
-	// 강의실 일괄등록
+	/*
+	 * @method Name : classroomExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "classroomExcelUpload.htm", method = RequestMethod.POST)
 	public View classroomExcelUpload(MultipartHttpServletRequest request, Model model) {
 
@@ -846,63 +1010,109 @@ public class MemberController {
 
 		return jsonview;
 	}
-
-	// 사무실 일괄등록
+	/*
+	 * @method Name : officeExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "ofExcelUpload.htm", method = RequestMethod.POST)
 	public View officeExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.officeExcelList(request, model);
 		return jsonview;
 	}
-
-	// 연구실 일괄등록
+	/*
+	 * @method Name : laboratoryExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 연구실 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "lbExcelUpload.htm", method = RequestMethod.POST)
 	public View laboratoryExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.laboratoryExcelList(request, model);
 		return jsonview;
 	}
-
-	// 장학제도 일괄등록
+	/*
+	 * @method Name : scSystemExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "scsExcelUpload.htm", method = RequestMethod.POST)
 	public View scSystemExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.scSystemExcelList(request, model);
 		return jsonview;
 	}
-
-	// 장학금 일괄등록
+	/*
+	 * @method Name : scholarshipExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "sclExcelUpload.htm", method = RequestMethod.POST)
 	public View scholarshipExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.scholarshipExcelList(request, model);
 		return jsonview;
 	}
-
-	// 단과대학 일괄등록
+	/*
+	 * @method Name : collegeExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "colExcelUpload.htm", method = RequestMethod.POST)
 	public View collegeExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.collegeExcelList(request, model);
 		return jsonview;
 	}
-
-	// 학부 일괄등록
+	/*
+	 * @method Name : departmentExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학과 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "depExcelUpload.htm", method = RequestMethod.POST)
 	public View departmentExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.departmentExcelList(request, model);
 		return jsonview;
 	}
-
-	// 학부 일괄등록
+	/*
+	 * @method Name : mjrecordExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 전공 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "mjExcelUpload.htm", method = RequestMethod.POST)
 	public View mjrecordExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.mjrecordExcelList(request, model);
 		return jsonview;
 	}
-
-	// 학부 일괄등록
+	/*
+	 * @method Name : mjrecordExcelUpload
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 등록 액셀일괄 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "regExcelUpload.htm", method = RequestMethod.POST)
 	public View registerExcelUpload(MultipartHttpServletRequest request, Model model) {
 		codeservice.registerExcelList(request, model);
 		return jsonview;
 	}
-
+	/*
+	 * @method Name : buildingDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물 상세 정보보기 해주는 매소드
+	 */
 	@RequestMapping("buildingDetail.htm")
 	public String buildingDetail(String building_code, Model model) {
 
@@ -911,7 +1121,13 @@ public class MemberController {
 
 		return "codemg.buildingdetail";
 	}
-
+	/*
+	 * @method Name : updateBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물 수정하게 해주는 매소드
+	 */
 	@RequestMapping("updateBuilbilding.htm")
 	public String updateBuilding(String building_code, String building_name, String building_addr) {
 
@@ -924,7 +1140,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : classroomList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실 리스트를 보게 해주는 매소드
+	 */
 	@RequestMapping("classroomList.htm")
 	public String classroomList(Model model) {
 
@@ -933,7 +1155,13 @@ public class MemberController {
 
 		return "codemg.classroomlist";
 	}
-
+	/*
+	 * @method Name : classroomList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실 수정을 하게 해주는 매소드
+	 */
 	@RequestMapping("classroomUpdate.htm")
 	public String classroomDetail(String classroom_code, Model model) {
 
@@ -947,7 +1175,13 @@ public class MemberController {
 
 		return "codemg.classroomdetail";
 	}
-
+	/*
+	 * @method Name : classroomList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실 등록 하게 해주는 매소드
+	 */
 	@RequestMapping(value = "registerClassroom.htm", method = RequestMethod.POST)
 	public String insertClassroom(ClassroomDTO classroom) throws Exception {
 
@@ -960,7 +1194,13 @@ public class MemberController {
 
 		return view;
 	}
-
+	/*
+	 * @method Name : updateClassroom
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 강의실 수정 하게 해주는 매소드
+	 */
 	@RequestMapping("updateClassroom.htm")
 	public String updateClassroom(ClassroomDTO classroom) {
 
@@ -973,7 +1213,13 @@ public class MemberController {
 
 		return view;
 	}
-
+	/*
+	 * @method Name : insertOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실 등록 하게 해주는 매소드
+	 */
 	@RequestMapping(value = "insertOffice.htm", method = RequestMethod.POST)
 	public String insertOffice(OfficeDTO office) {
 		String view = "";
@@ -984,7 +1230,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : officeList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실 리스트를 보게 해주는 매소드
+	 */
 	@RequestMapping("officeList.htm")
 	public String officeList(Model model) {
 
@@ -996,13 +1248,25 @@ public class MemberController {
 
 		return "codemg.officelist";
 	}
-
+	/*
+	 * @method Name : detailOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실 상세보기 해주는 매소드
+	 */
 	@RequestMapping("detailOffice.htm")
 	public String detailOffice(String office_code) {
 
 		return null;
 	}
-
+	/*
+	 * @method Name : labList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실 상세보기 해주는 매소드
+	 */
 	@RequestMapping("labList.htm")
 	public String labList(Model model) {
 
@@ -1011,7 +1275,13 @@ public class MemberController {
 		model.addAttribute("lablist", lablist);
 		return "codemg.lablist";
 	}
-
+	/*
+	 * @method Name : insertLab
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 연구실 등록 해주는 매소드
+	 */
 	@RequestMapping(value = "insertLab.htm", method = RequestMethod.POST)
 	public String insertLab(LaboratoryDTO lab) {
 
@@ -1024,7 +1294,13 @@ public class MemberController {
 
 		return view;
 	}
-
+	/*
+	 * @method Name : labDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 연구실 상세 보기 해주는 매소드
+	 */
 	@RequestMapping(value = "labDetail.htm")
 	public String labDetail(String lab_code, Model model) {
 
@@ -1036,7 +1312,13 @@ public class MemberController {
 
 		return "codemg.labdetail";
 	}
-
+	/*
+	 * @method Name : scSystemList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도 리스트 보기 해주는 매소드
+	 */
 	@RequestMapping("scSystemList.htm")
 	public String scSystemList(Model model) {
 
@@ -1045,7 +1327,13 @@ public class MemberController {
 
 		return "codemg.scsystemlist";
 	}
-
+	/*
+	 * @method Name : detailScSystem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도 상세보기 해주는 매소드
+	 */
 	@RequestMapping("detailScSystem.htm")
 	public String detailScSystem(String sys_code, Model model) {
 
@@ -1054,7 +1342,13 @@ public class MemberController {
 
 		return "codemg.scsystemdetail";
 	}
-
+	/*
+	 * @method Name : insertScSystem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도 등록 해주는 매소드
+	 */
 	@RequestMapping("insertScSystem.htm")
 	public String insertScSystem(ScSystemDTO scsystem) {
 
@@ -1066,21 +1360,28 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : scholarshipList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학 리스트 보게 해주는 매소드
+	 */
 	@RequestMapping("scholarshipList.htm")
 	public String scholarshipList(Model model) {
-
-		/*
-		 * List<ScholarshipDTO> scholarshipList = codeservice.scholarshipList();
-		 * model.addAttribute("scholarshipList", scholarshipList);
-		 */
 
 		List<ScholarshipInfoDTO> scholarshipinfolist = codeservice.scholarshipInfoList();
 		model.addAttribute("scholarshipList", scholarshipinfolist);
 
 		return "codemg.scholarshiplist";
 	}
-
+	/*
+	 * @method Name : detailScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학 상세보기를 해주는 매소드
+	 */
 	@RequestMapping("detailScholarship.htm")
 	public String detailScholarship(String scholarship_code, Model model) {
 
@@ -1094,7 +1395,13 @@ public class MemberController {
 
 		return "codemg.detailscholarship";
 	}
-
+	/*
+	 * @method Name : semesterList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학기 리스트를 보게 해주는 매소드
+	 */
 	@RequestMapping("semesterList.htm")
 	public String semesterList(Model model) {
 
@@ -1103,7 +1410,13 @@ public class MemberController {
 
 		return "codemg.semesterlist";
 	}
-
+	/*
+	 * @method Name : insertSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학기 등록을 해주는 매소드
+	 */
 	@RequestMapping(value = "insertSemester.htm", method = RequestMethod.POST)
 	public String insertSemester(SemesterDTO semester) {
 
@@ -1115,7 +1428,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : detailSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학기 상세보기 해주는 매소드
+	 */
 	@RequestMapping("detailSemester.htm")
 	public String detailSemester(String semester_code, Model model) {
 
@@ -1124,7 +1443,13 @@ public class MemberController {
 
 		return "codemg.semesterdetail";
 	}
-
+	/*
+	 * @method Name : academicCalendarList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정 리스트를 보게 해주는 매소드
+	 */
 	@RequestMapping("academicCalendarList.htm")
 	public String academicCalendarList(Model model) {
 
@@ -1133,7 +1458,13 @@ public class MemberController {
 
 		return "codemg.academiccalendarlist";
 	}
-
+	/*
+	 * @method Name : insertAcademicCalendar
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정 등록을 해주는 매소드
+	 */
 	@RequestMapping(value = "insertAcademicCalendar.htm", method = RequestMethod.POST)
 	public String insertAcademicCalendar(Academic_CalendarDTO academic) {
 		String view = "";
@@ -1144,7 +1475,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : academicCalendarDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정 상세보기를 해주는 매소드
+	 */
 	@RequestMapping("academicCalendarDetail.htm")
 	public String academicCalendarDetail(String calendar_code, Model model) {
 
@@ -1153,7 +1490,13 @@ public class MemberController {
 
 		return "codemg.academicCalendarDetail";
 	}
-
+	/*
+	 * @method Name : selectOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사무실 코드번호를 가져와서 사무실을 선택하는 매소드
+	 */
 	@RequestMapping("selectOffice.htm")
 	public String selectOffice(String office_code, Model model) {
 
@@ -1166,7 +1509,13 @@ public class MemberController {
 		return "codemg.officedetail";
 
 	}
-
+	/*
+	 * @method Name : updateOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사무실 정보를 수정해주는 매소드
+	 */
 	@RequestMapping("updateOffice.htm")
 	public String updateOffice(OfficeDTO office) {
 
@@ -1178,7 +1527,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : updateLab
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 연구실 정보를 수정해주는 매소드
+	 */
 	@RequestMapping("updateLab.htm")
 	public String updateLab(LaboratoryDTO lab) {
 
@@ -1190,7 +1545,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : updateAcademic
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정 정보를 수정해주는 매소드
+	 */
 	@RequestMapping("updateAcademic.htm")
 	public String updateAcademic(Academic_CalendarDTO academic) {
 
@@ -1202,7 +1563,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : updateScSystemUpdate
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학제도 정보를 수정해주는 매소드
+	 */
 	@RequestMapping("scsytemUpdate.htm")
 	public String updateScSystemUpdate(ScSystemDTO scsytem) {
 
@@ -1214,7 +1581,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : updateScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학 정보를 수정해주는 매소드
+	 */
 	@RequestMapping("updateScholarship.htm")
 	public String updateScholarship(ScholarshipDTO scholarship) {
 
@@ -1226,7 +1599,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : insertScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학을 등록하게 해주는 매소드
+	 */
 	@RequestMapping("insertScholarship.htm")
 	public String insertScholarship(ScholarshipDTO scholarship){
 		String view = "";
@@ -1237,7 +1616,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : insertScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학기정보를 수정하게 해주는 매소드
+	 */
 	@RequestMapping("updateSemester.htm")
 	public String updateSemester(SemesterDTO semester) {
 
@@ -1249,17 +1634,28 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : colleageList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 단과대학 정보를 뿌려주는 매소드
+	 */
 	@RequestMapping("collegeList.htm")
 	public String colleageList(Model model) {
-
-		/* List<CollegeDTO> collegelsit = codeservice.collegelist(); */
+		
 		List<CollegeInfoDTO> collegeinfolist = codeservice.collegeInfoList();
 		model.addAttribute("college", collegeinfolist);
 
 		return "codemg.collegelist";
 	}
-
+	/*
+	 * @method Name : insertCollege
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 단과대학을 등록하게 해주는 매소드
+	 */
 	@RequestMapping(value = "insertCollege.htm", method = RequestMethod.POST)
 	public String insertCollege(CollegeDTO college) {
 
@@ -1272,7 +1668,13 @@ public class MemberController {
 
 		return view;
 	}
-
+	/*
+	 * @method Name : updateCollege
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 단과대학을 수정하게 해주는 매소드
+	 */
 	@RequestMapping("updateColleage.htm")
 	public String updateCollege(CollegeDTO college, String before_office_code, Model model) {
 
@@ -1288,7 +1690,13 @@ public class MemberController {
 
 		return view;
 	}
-
+	/*
+	 * @method Name : collegeDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 단과대학 정보를 상세보기 하게 해주는 매소드
+	 */
 	@RequestMapping("selectCollege.htm")
 	public String collegeDetail(String college_code, Model model) {
 
@@ -1299,7 +1707,13 @@ public class MemberController {
 		model.addAttribute("officelist", officelist);
 		return "codemg.collegedetail";
 	}
-
+	/*
+	 * @method Name : departmentList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과 리스트를 뿌려주게 하는 매소드
+	 */
 	@RequestMapping("departmentlist.htm")
 	public String departmentList(Model model) {
 
@@ -1310,7 +1724,13 @@ public class MemberController {
 
 		return "codemg.departmentlist";
 	}
-
+	/*
+	 * @method Name : inesrtDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과를 등록하게 해주는 매소드
+	 */
 	@RequestMapping(value = "insertDepartment.htm", method = RequestMethod.POST)
 	public String inesrtDepartment(DepartmentDTO department) {
 		String view = "";
@@ -1321,7 +1741,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : selectDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사용가능한 사무실 리스트를 뿌려줘서 사무실 코드를 가져와 사무실을 선택할수 있게 해주는 매소드
+	 */
 	@RequestMapping("departmentDetail.htm")
 	public String selectDepartment(String department_code, Model model) {
 
@@ -1333,7 +1759,13 @@ public class MemberController {
 
 		return "codemg.departmentdetail";
 	}
-
+	/*
+	 * @method Name : updateDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과 정보를 수정하게 해주는 매소드
+	 */
 	@RequestMapping("updateDepartment.htm")
 	public String updateDepartment(DepartmentDTO department, String before_office_code) {
 
@@ -1345,7 +1777,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : mjRecordList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 전공 정보 리스트를 출력하게 해주는 매소드
+	 */
 	@RequestMapping("mjRecordList.htm")
 	public String mjRecordList(Model model) {
 
@@ -1354,7 +1792,13 @@ public class MemberController {
 
 		return "codemg.mjrecordlist";
 	}
-
+	/*
+	 * @method Name : insertMjRecord
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학생에게 전공 또는 부전공을 등록해주는 매소드
+	 */
 	@RequestMapping(value = "insertMjRecord.htm", method = RequestMethod.POST)
 	public String insertMjRecord(MjRecordDTO mjrecord) {
 
@@ -1388,7 +1832,13 @@ public class MemberController {
 
 		return jsonview;
 	}
-
+	/*
+	 * @method Name : registerlist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 등록 리스트를 출력하게 해주는 매소드 
+	 */
 	@RequestMapping("registerlist.htm")
 	public String registerlist(Model model) {
 
@@ -1397,7 +1847,13 @@ public class MemberController {
 
 		return "codemg.registerlist";
 	}
-
+	/*
+	 * @method Name : insertRegister
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 등록을 삽입할수 있게 해주는 매소드 
+	 */
 	@RequestMapping("insertRegister.htm")
 	public String insertRegister(RegisterDTO register) {
 
@@ -1409,7 +1865,13 @@ public class MemberController {
 		}
 		return view;
 	}
-
+	/*
+	 * @method Name : showclasslist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "ClassBuildingDTO" 커스텀 DTO를 사용하여 강의실 정보와 건물 정보를 같이 출력해주는 매소드 
+	 */
 	@RequestMapping("showclasslist.htm")
 	public String showclasslist(Model model) {
 		List<ClassBuildingDTO> classlist = codeservice.showclasslist();
@@ -1418,7 +1880,13 @@ public class MemberController {
 		model.addAttribute("buildingList", buildingList);
 		return "codemg.classroomlist";
 	}
-
+	/*
+	 * @method Name : showlablist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "LabBuildingDTO" 커스텀 DTO를 사용하여 연구실 정보와 건물 정보를 같이 출력해주는 매소드 
+	 */
 	@RequestMapping("showlablist.htm")
 	public String showlablist(Model model) {
 
@@ -1426,9 +1894,14 @@ public class MemberController {
 		model.addAttribute("lablist", lablist);
 
 		return "codemg.lablist";
-
 	}
-
+	/*
+	 * @method Name : showofficelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "OfiiceBuildingDTO" 커스텀 DTO를 사용하여 사무실 정보와 건물 정보를 같이 출력해주는 매소드 
+	 */
 	@RequestMapping("showofficelist.htm")
 	public String showofficelist(Model model) {
 
@@ -1437,7 +1910,13 @@ public class MemberController {
 
 		return "codemg.officelist";
 	}
-
+	/*
+	 * @method Name : getProfessorList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "ProfessorCodeRegDTO" 커스텀 DTO를 사용하여 교수 정보와 코드 정보를 같이 출력해주는 매소드 
+	 */
 	@RequestMapping("getProfessorList.htm")
 	public View getProfessorList(Model model, String department_code) {
 
@@ -1447,7 +1926,13 @@ public class MemberController {
 
 		return jsonview;
 	}
-
+	/*
+	 * @method Name : departmentLeaderRegist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 교수중에서 학과장을 선택하게 해주는 매소드  
+	 */
 	@RequestMapping("departmentLeaderRegist.htm")
 	public String departmentLeaderRegist(DepartmentLeaderDTO leader) {
 		String viewPage = "redirect:code.htm";
@@ -1458,7 +1943,13 @@ public class MemberController {
 		}
 		return viewPage;
 	}
-
+	/*
+	 * @method Name : callDepartmentLeaderList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 교수중에서 학과장 리스트를 출력하게 해주는 매소드 
+	 */
 	@RequestMapping("departmentLeaderList.htm")
 	public String callDepartmentLeaderList(Model model) {
 
@@ -1466,7 +1957,13 @@ public class MemberController {
 		model.addAttribute("departmentLeaderList", list);
 		return "codemg.departmentLeaderList";
 	}
-
+	/*
+	 * @method Name : classroomBuildingSelect
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 건물 리스트를 출력하여 건물 코드를 가져와서 원하는 건물을 선택하게 해주는 매소드 
+	 */
 	@RequestMapping("classroomBuildingSelect.htm")
 	public View classroomBuildingSelect(String buildingCode, Model model) {
 		List<ClassBuildingDTO> classroomList = new ArrayList<ClassBuildingDTO>();
@@ -1477,7 +1974,13 @@ public class MemberController {
 		model.addAttribute("classroomList", classroomList);
 		return jsonview;
 	}
-	
+	/*
+	 * @method Name : checkStudentCode
+	 * 
+	 * @Author : 권기엽
+	 * 
+	 * @description 학생코드를 가져와서 유효한 학생 코드인지를 판별하게 해주는 매소드 
+	 */
 	@RequestMapping("check_student_code.htm")
 	public View checkStudentCode(Model model, String student_code){
 		

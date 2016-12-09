@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : semesterdetail.jsp
+   @Author : 성홍모
+   @Data : 2016.11.09
+   @Desc : 학기코드 상세보기 pageView
+-->        
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class = "row">
 <div class = "col-sm-3"></div>
-<div class="col-sm-6"  >
+<div class="col-sm-6">
 <h4>▶&nbsp;학기 상세정보 </h4>
 <br><br>
 <c:set value="${semester}" var="sm"/>

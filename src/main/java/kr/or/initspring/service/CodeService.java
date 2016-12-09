@@ -76,8 +76,13 @@ public class CodeService {
 
 		return result;
 	}
-
-	// 학생코드등록
+	/*
+	 * @method Name : insertStudent
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학생코드, 전공, 현재학적상태를 삽입하는 함수 하나의 Query가 실패할 시 모든 Query는 Rollback 됨
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public int insertStudent(StudentCodeRegDTO student) {
 
@@ -97,8 +102,13 @@ public class CodeService {
 		}
 		return result;
 	}
-
-	// 교수코드 등록
+	/*
+	 * @method Name : insertProfessor
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 교수코드, 전공을 삽입하는 함수 하나의 Query가 실패할 시 모든 Query는 Rollback 됨
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public int insertProfessor(ProfessorCodeRegDTO professor) {
 
@@ -133,7 +143,13 @@ public class CodeService {
 
 		return codelist;
 	}
-
+	/*
+	 * @method Name : conditioncodelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 code_type으로 코드리스트를 불러오기 위한 함수(code_type이 0 = 학생, 1 = 교수, 2 = 관리자)
+	 */
 	public List<CodeMgDTO> conditioncodelist(int code_type, String keyword, String searchType) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -273,8 +289,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 교수 일괄등록
+	/*
+	 * @method Name : professorinsertExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀을 사용하여 코드를 교수를 일괄 등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void professorinsertExcelList(MultipartHttpServletRequest request, Model model) throws Exception {
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
@@ -358,7 +379,13 @@ public class CodeService {
 		}
 		return result;
 	}
-
+	/*
+	 * @method Name : insertBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물을 수기 등록하기 위한 매소드
+	 */
 	public int insertBuilding(BuildingDTO building) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -375,7 +402,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : buildingList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 건물리스트를 출력해주기 위한 매소드
+	 */
 	public List<BuildingDTO> buildingList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -383,7 +416,13 @@ public class CodeService {
 
 		return buildingList;
 	}
-
+	/*
+	 * @method Name : deleteBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 건물을 삭제하기 위한 매소드
+	 */
 	public int deleteBuilding(String building_code, Model model) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -397,8 +436,13 @@ public class CodeService {
 
 		return result;
 	}
-
-	// 빌딩 일괄등록
+	/*
+	 * @method Name : buildingExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 건물을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public boolean buildingExcelList(MultipartHttpServletRequest request, Model model) {
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
@@ -435,8 +479,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 		return result;
 	}
-
-	// 강의실 일괄등록
+	/*
+	 * @method Name : classroomExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 강의실을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public boolean classroomExcelList(MultipartHttpServletRequest request, Model model) {
 		CodeMgDAO codedao = sqlsession.getMapper(CodeMgDAO.class);
@@ -478,8 +527,13 @@ public class CodeService {
 		return result;
 
 	}
-
-	// 사무실 일괄등록
+	/*
+	 * @method Name : officeExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 사무실을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void officeExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -520,8 +574,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 연구실 일괄등록
+	/*
+	 * @method Name : laboratoryExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 연구실을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void laboratoryExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -562,8 +621,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 장학제도 일괄등록
+	/*
+	 * @method Name : scSystemExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 장학제도를 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void scSystemExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -608,8 +672,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 장학금 일괄등록
+	/*
+	 * @method Name : scholarshipExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 장학을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void scholarshipExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -664,8 +733,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 단과대학 일괄등록
+	/*
+	 * @method Name : collegeExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 단과대학을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void collegeExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -706,8 +780,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 학부 일괄등록
+	/*
+	 * @method Name : departmentExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 학과를 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void departmentExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -760,8 +839,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 전공 일괄등록
+	/*
+	 * @method Name : mjrecordExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 전공을 일괄등록하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void mjrecordExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -800,8 +884,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
-	// 등록 일괄등록
+	/*
+	 * @method Name : registerExcelList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 액셀파일을 사용하여 학생을 등록 일괄처리 하기 위한 매소드
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public void registerExcelList(MultipartHttpServletRequest request, Model model) {
 
@@ -847,7 +936,13 @@ public class CodeService {
 		model.addAttribute("result", result);
 
 	}
-
+	/*
+	 * @method Name : selectBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 건물 코드를 통하여 건물을 선택하는 매소드
+	 */
 	public BuildingDTO selectBuilding(String building_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -855,7 +950,13 @@ public class CodeService {
 
 		return building;
 	}
-
+	/*
+	 * @method Name : updateBuilding
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 building_code, building_name, building_addr를 파라미터로 건물정보를 수정하는 매소드
+	 */
 	public int updateBuilding(String building_code, String building_name, String building_addr) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -863,20 +964,38 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : classList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 강의실 목록을 출력하기 위한 매소드 
+	 */
 	public List<ClassroomDTO> classList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ClassroomDTO> classroomlist = dao.classlist();
 		return classroomlist;
 	}
-
+	/*
+	 * @method Name : selectClassroom
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 강의실 코드를 이용해서 강의실을 선택하는 매소드
+	 */
 	public ClassroomDTO selectClassroom(String classroom_code) {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		ClassroomDTO classroom = dao.selectClassroom(classroom_code);
 
 		return classroom;
 	}
-
+	/*
+	 * @method Name : insertClassroom
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 강의실을 등록하는 매소드 
+	 */
 	public int insertClassroom(ClassroomDTO classroom) throws Exception {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 
@@ -884,7 +1003,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : updateClassroom
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 강의실을 수정하는 매소드 
+	 */
 	public int updateClassroom(ClassroomDTO classroom) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -892,7 +1017,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : insertOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사무실을 등록하는 매소드 
+	 */
 	public int insertOffice(OfficeDTO office) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -900,7 +1031,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : officelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사무실 목록을 출력하기 위한 매소드 
+	 */
 	public List<OfficeDTO> officelist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -908,7 +1045,13 @@ public class CodeService {
 
 		return officelist;
 	}
-
+	/*
+	 * @method Name : lablist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 연구실 목록을 출력하기 위한 매소드 
+	 */
 	public List<LaboratoryDTO> lablist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -916,7 +1059,13 @@ public class CodeService {
 
 		return lablist;
 	}
-
+	/*
+	 * @method Name : insertLab
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 연구실 등록하기 위한 매소드 
+	 */
 	public int insertLab(LaboratoryDTO lab) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -925,7 +1074,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : labDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 연구실 상세보기를 위한 매소드 
+	 */
 	public LaboratoryDTO labDetail(String lab_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -933,7 +1088,13 @@ public class CodeService {
 
 		return lab;
 	}
-
+	/*
+	 * @method Name : scSystemList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학제도 목록을 출력하기 위한 매소드
+	 */
 	public List<ScSystemDTO> scSystemList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -941,7 +1102,13 @@ public class CodeService {
 
 		return scsystemlist;
 	}
-
+	/*
+	 * @method Name : detailScSystem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학제도 상세보기 위한 매소드
+	 */
 	public ScSystemDTO detailScSystem(String sys_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -949,7 +1116,13 @@ public class CodeService {
 
 		return dto;
 	}
-
+	/*
+	 * @method Name : insertScSystem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학제도 등록을 위한 매소드
+	 */
 	public int insertScSystem(ScSystemDTO scsystem) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -958,7 +1131,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : scholarshipList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학 목록을 위한 매소드
+	 */
 	public List<ScholarshipDTO> scholarshipList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -966,7 +1145,13 @@ public class CodeService {
 
 		return scholarshipList;
 	}
-
+	/*
+	 * @method Name : detailScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학 상세보기를 위한 매소드
+	 */
 	public ScholarshipDTO detailScholarship(String scholarship_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -974,7 +1159,13 @@ public class CodeService {
 
 		return dto;
 	}
-
+	/*
+	 * @method Name : semesterList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학기 목록을 출력하기 위한 매소드 
+	 */
 	public List<SemesterDTO> semesterList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -982,7 +1173,13 @@ public class CodeService {
 
 		return semesterList;
 	}
-
+	/*
+	 * @method Name : insertSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학기 등록을 위한 매소드 
+	 */
 	public int insertSemester(SemesterDTO semester) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -990,7 +1187,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : detailSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학기 상세보기를 위한 매소드 
+	 */
 	public SemesterDTO detailSemester(String semester_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -998,7 +1201,13 @@ public class CodeService {
 
 		return dto;
 	}
-
+	/*
+	 * @method Name : academicCalendarList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정을 출력해주기 위한 매소드 
+	 */
 	public List<Academic_CalendarDTO> academicCalendarList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1006,19 +1215,16 @@ public class CodeService {
 
 		return academiclist;
 	}
-
+	/*
+	 * @method Name : insertAcademicCalendar
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정을 등록해주기 위한 매소드 
+	 */
 	public int insertAcademicCalendar(Academic_CalendarDTO academic) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-
-		/*
-		 * String office_code = dao.getMaxOfficeCode();
-		 * 
-		 * String[] number = office_code.split("_"); int conver_no =
-		 * Integer.parseInt(number[1]); conver_no += 1;
-		 * office.setOffice_code(number[0] + "_" + Integer.toString(conver_no));
-		 */
-
 		String calendar_code = dao.getMaxCalendarCode();
 
 		String[] number = calendar_code.split("_");
@@ -1030,7 +1236,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : academicCalendarDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학사일정을 상세보기를 위한 매소드 
+	 */
 	public Academic_CalendarDTO academicCalendarDetail(String calendar_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1038,7 +1250,13 @@ public class CodeService {
 
 		return academic;
 	}
-
+	/*
+	 * @method Name : selectOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 office_code를 파라미터로 사무실을 선택하기 위한 매소드 
+	 */
 	public OfficeDTO selectOffice(String office_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1046,7 +1264,13 @@ public class CodeService {
 
 		return office;
 	}
-
+	/*
+	 * @method Name : updateOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 사무실을 수정하기 위한 매소드 
+	 */
 	public int updateOffice(OfficeDTO office) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1054,7 +1278,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : updateLab
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 연구실을 수정하기 위한 매소드 
+	 */
 	public int updateLab(LaboratoryDTO lab) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1062,7 +1292,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : updateAcademic
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학사일정을 수정하기 위한 매소드 
+	 */
 	public int updateAcademic(Academic_CalendarDTO academic) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1070,7 +1306,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : updateScSytem
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학제도를 수정하기 위한 매소드
+	 */
 	public int updateScSytem(ScSystemDTO scsytem) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1078,7 +1320,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : insertScholarship
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학을 등록하기 위한 매소드 
+	 */
 	public int insertScholarship(ScholarshipDTO scholarship) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1087,7 +1335,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : scholarshipUpdate
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 장학을 수정하기 위한 매소드 
+	 */
 	public int scholarshipUpdate(ScholarshipDTO scholarship) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1095,7 +1349,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : updateSemester
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학기를 수정하기 위한 매소드 
+	 */
 	public int updateSemester(SemesterDTO semester) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1103,7 +1363,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : collegelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학 리스트를 출력하기 위한 매소드 
+	 */
 	public List<CollegeDTO> collegelist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1111,7 +1377,13 @@ public class CodeService {
 
 		return collegelist;
 	}
-
+	/*
+	 * @method Name : insertCollege
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학을 등록하기 위한 매소드 (등록한 강의실은 사용불가로 바뀐다)
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public synchronized int insertCollege(CollegeDTO college) {
 
@@ -1133,6 +1405,13 @@ public class CodeService {
 
 		return result;
 	}
+	/*
+	 * @method Name : updateCollege
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학을 등록하기 위한 매소드 (등록한 강의실은 사용불가로 바뀐다, 그리고 이전에 등록 되었던 강의실은 사용가능으로 바뀐다.)
+	 */
 	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
 			RuntimeException.class })
 	public int updateCollege(CollegeDTO college, String before_office_code) {
@@ -1144,7 +1423,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : collegeDetail
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 단과대학 상세보기를 위한 매소드
+	 */
 	public CollegeDTO collegeDetail(String college_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1152,7 +1437,13 @@ public class CodeService {
 
 		return college;
 	}
-
+	/*
+	 * @method Name : departmentList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학과 목록을 출력하는 매소드 
+	 */
 	public List<DepartmentDTO> departmentList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1160,8 +1451,13 @@ public class CodeService {
 
 		return departmentlist;
 	}
-
-	// 학부 등록 서비스
+	/*
+	 * @method Name : insertDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 관리자가 학과를 등록하게 해주는 매소드 (등록한 사무실은 사용가능에서 불가능으로 바꿔준다)
+	 */
 	@Transactional(rollbackFor = { Exception.class, SQLException.class })
 	public synchronized int insertDepartment(DepartmentDTO department) {
 
@@ -1184,7 +1480,13 @@ public class CodeService {
 		return result;
 
 	}
-
+	/*
+	 * @method Name : selectDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과를 department_code를 파라미터로 학과를 선택하게 해주는 매소드
+	 */
 	public DepartmentDTO selectDepartment(String department_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1192,7 +1494,13 @@ public class CodeService {
 
 		return department;
 	}
-
+	/*
+	 * @method Name : updateDepartment
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과를 수정해주는 매소드(before_office_code를 파라미터로 사무실의 사용여부를 수정해준다)
+	 */
 	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
 			RuntimeException.class })
 	public int updateDepartment(DepartmentDTO department, String before_office_code) {
@@ -1204,7 +1512,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : mjRecordList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 전공, 부전공 등록 목록을 출력해주는 매소드
+	 */
 	public List<MjRecordDTO> mjRecordList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1212,7 +1526,13 @@ public class CodeService {
 
 		return mjrecordlist;
 	}
-
+	/*
+	 * @method Name : insertMjRecord
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 전공, 부전공을 등록해주는 매소드
+	 */
 	public int insertMjRecord(MjRecordDTO mjrecord) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1220,7 +1540,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : openedList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 개설된 과목 목록을 출력해주는 매소드 
+	 */
 	public List<OpenedDTO> openedList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1228,7 +1554,13 @@ public class CodeService {
 
 		return opendedlist;
 	}
-
+	/*
+	 * @method Name : openedInfoList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 개설된 과목 목록을 "OpenedInfoDTO"커스텀 DTO를 사용하여 출력해주는 매소드 
+	 */
 	public List<OpenedInfoDTO> openedInfoList() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1326,7 +1658,13 @@ public class CodeService {
 
 		return result;
 	}
-
+	/*
+	 * @method Name : registerlist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학생의 등록 히스토리를 출력하게 해주는 매소드 
+	 */
 	public List<RegisterDTO> registerlist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1334,14 +1672,26 @@ public class CodeService {
 
 		return registerlist;
 	}
-
+	/*
+	 * @method Name : insertRegister
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학생을 등록하게 해주는 매소드 
+	 */
 	public int insertRegister(RegisterDTO register) {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		int result = dao.insertRegister(register);
 
 		return result;
 	}
-
+	/*
+	 * @method Name : showclasslist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 강의실 목록을 "ClassBuildingDTO" 커스텀 DTO로 출력해주는 매소드 
+	 */
 	public List<ClassBuildingDTO> showclasslist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1350,7 +1700,13 @@ public class CodeService {
 		return classroomlsit;
 
 	}
-
+	/*
+	 * @method Name : showclasslist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 건물 목록을 "ClassBuildingDTO" 커스텀 DTO로 출력해주는 매소드 
+	 */
 	public List<LabBuildingDTO> showlablist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1358,7 +1714,13 @@ public class CodeService {
 
 		return lablist;
 	}
-
+	/*
+	 * @method Name : showofficelist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사무실 목록을 "OfiiceBuildingDTO" 커스텀 DTO로 출력해주는 매소드 
+	 */
 	public List<OfiiceBuildingDTO> showofficelist() {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
@@ -1366,14 +1728,26 @@ public class CodeService {
 
 		return officelist;
 	}
-
+	/*
+	 * @method Name : getProfessorList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 교수 목록을 "ProfessorCodeRegDTO" 커스텀 DTO로 출력해주는 매소드 
+	 */
 	public List<ProfessorCodeRegDTO> getProfessorList(String department_code) {
 
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ProfessorCodeRegDTO> pf_list = dao.getProfessorListByDepartmentCode(department_code);
 		return pf_list;
 	}
-
+	/*
+	 * @method Name : setDepartmentLeader
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 교수중에서 학과장을 등록하고 이전 학과장을 RESET해주는 매소드 
+	 */
 	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
 			RuntimeException.class })
 	public boolean setDepartmentLeader(DepartmentLeaderDTO leader) {
@@ -1393,52 +1767,90 @@ public class CodeService {
 			return true;
 		}
 	}
-
+	/*
+	 * @method Name : getDepartmentLeaderList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학과장 목록을 출력해주는 매소드 
+	 */
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentLeaderDTO> list = dao.getDepartmentLeaderList();
 		return list;
 	}
-
+	/*
+	 * @method Name : doubleDepartmentlist
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 부전공 목록을 출력해주는 매소드 
+	 */
 	public List<DepartmentDTO> doubleDepartmentlist() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentDTO> doublistdepartmentlist = dao.doubleDepartment();
 		return doublistdepartmentlist;
 
 	}
-
-	// 학부리스트를 뿌려주기 위한 매소드
+	/*
+	 * @method Name : departmentInfoList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 학부 목록을 출력해주기 위한 매소드
+	 */
 	public List<DepartmentInfoDTO> departmentInfoList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<DepartmentInfoDTO> departmentinfolist = dao.departmentinfolist();
 
 		return departmentinfolist;
 	}
-
-	// 장학정보 리스트 뿌려주기 위한 매소드
+	/*
+	 * @method Name : scholarshipInfoList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 장학정보 목록을 출력해주기 위한 매소드
+	 */
 	public List<ScholarshipInfoDTO> scholarshipInfoList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ScholarshipInfoDTO> scholarshipinfolist = dao.scholarshipinfolist();
 
 		return scholarshipinfolist;
 	}
-
-	// 단대 정보 리스트를 뿌려주기 위한 매소드
+	/*
+	 * @method Name : collegeInfoList
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 단대 정보 목록을 출력해주기 위한 매소드
+	 */
 	public List<CollegeInfoDTO> collegeInfoList() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<CollegeInfoDTO> collegeinfolist = dao.collegeinfolist();
 
 		return collegeinfolist;
 	}
-
-	// 사용가능 강의실
+	/*
+	 * @method Name : possibleOffice
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description 사용가능 강의실 목록을 출력해주기 위한 매소드
+	 */
 	public List<OfficeDTO> possibleOffice() {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<OfficeDTO> officelist = dao.possibleOffice();
 
 		return officelist;
 	}
-
+	/*
+	 * @method Name : classroomBuildinSelect
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "buildingCode"를 파라미터로 "ClassBuildingDTO" 커스텀 DTO를 사용하여 강의실 목록을 출력해주는 매소드 
+	 */
 	public List<ClassBuildingDTO> classroomBuildinSelect(String buildingCode) {
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
 		List<ClassBuildingDTO> list = null;
@@ -1449,7 +1861,13 @@ public class CodeService {
 		}
 		return list;
 	}
-	
+	/*
+	 * @method Name : checkStudentCode
+	 * 
+	 * @Author : 성홍모
+	 * 
+	 * @description "student_code"를 파라미터로 학생코드의 유효성을 판단해주는 매소드 
+	 */
 	public boolean checkStudentCode(String student_code){
 		boolean result = false;
 		

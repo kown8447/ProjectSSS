@@ -1,20 +1,27 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : DepartmentInfoDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 학과 정보와 그에 따른 단대 정보, 사무실정보, 건물 정보를 얻기 위한 DTO
+*/
+
 public class DepartmentInfoDTO {
-	
-	private String department_code;	//학과 학부 코드
-	private String professor_code;	//교수 번호
-	private String office_code;		//사무실 번호
-	private String department_name;	//학과 학부 이름
+		
+	private String department_code;			//학과 학부 코드
+	private String professor_code;			//교수 번호
+	private String office_code;				//사무실 번호
+	private String department_name;			//학과 학부 이름
 	private String department_description;	//학과 학부 설명
-	private int department_seat;	//학과 학부 정원
-	private int graduation_credit;	//졸업 학점(전공, 교양)
-	private int double_possible;	//복수전공 가능 여부
-	private int department_exist;	//학과 존재 여부
-	private String college_code;
-	private String college_name;
-	private String office_name;
-	private String building_name;
+	private int department_seat;			//학과 학부 정원
+	private int graduation_credit;			//졸업 학점(전공, 교양)
+	private int double_possible;			//복수전공 가능 여부
+	private int department_exist;			//학과 존재 여부
+	private String college_code;			//단대 코드
+	private String college_name;			//단대 이름
+	private String office_name;				//사무실이름
+	private String building_name;			//건물 이름
 	public String getBuilding_name() {
 		return building_name;
 	}

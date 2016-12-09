@@ -118,10 +118,8 @@ public class OpRequestService {
 			result = true;
 		}
 		String beforeName = "";
-		//선수강 과목
 		try {
 			BeforeSubjectDTO before = dao.Before(subject_code);
-			//선수과목이 없음
 			if(before == null){
 				beforeName = "없음";
 			}

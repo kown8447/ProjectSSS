@@ -1,5 +1,12 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : CollegeInfoDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 단과대학 정보와 그에 따른 건물 정보, 사무실 정보를 얻기 위한 DTO
+*/
+
 public class CollegeInfoDTO {
 	
 	private String college_code;	//단과대학 코드

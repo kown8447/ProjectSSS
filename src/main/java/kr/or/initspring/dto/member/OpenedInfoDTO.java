@@ -1,10 +1,17 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : OpenedInfoDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 개설된 과목에 따른 과목 정보를 얻기 위한 DTO
+*/
+
 public class OpenedInfoDTO {
 	
-	private String subject_name;
-	private String semester_name;
-	private int registed_seat;
+	private String subject_name;		//과목 이름
+	private String semester_name;		//학기이름
+	private int registed_seat;			//수강인원
 	public String getSubject_name() {
 		return subject_name;
 	}
