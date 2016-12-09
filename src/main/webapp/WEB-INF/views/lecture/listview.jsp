@@ -23,7 +23,10 @@
    <div class="container" style="width:70%">
    <table id="list" class="table table-bordered" style="text-align: center">
       <tr>
-         <td style="width:20%">구분</td><td style="width:10%">학년</td><td>과목명</td><td style="width:20%">상태</td>
+         <td style="width:20%">구분</td>
+         <td style="width:10%">학년</td>
+         <td>과목명</td>
+         <td style="width:20%">상태</td>
       </tr>
       <c:forEach items="${subjectlist}" var="subject">
       	<tr>
@@ -51,9 +54,10 @@
       	</tr>
    	</c:forEach>
    </table>
-   <button class="btn btn-danger btn-sm" id="back"  style="float:right;">돌아가기</button>
-   <a href="lectureRegister.htm"><button class="btn btn-success btn-sm"  style="float:right;">등록하기</button></a>
-   
+   <div align="right">
+   <button class="btn btn-danger btn-sm" id="back" align="center">돌아가기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a href="lectureRegister.htm"><button class="btn btn-success btn-sm">등록하기</button></a>
+   </div>
 	</div>
 
 </body>
