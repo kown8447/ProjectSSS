@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : registerdepartment.jsp
+   @Author : 성홍모
+   @Data : 2016.11.09
+   @Desc : 학과 등록 pageView
+-->       
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>

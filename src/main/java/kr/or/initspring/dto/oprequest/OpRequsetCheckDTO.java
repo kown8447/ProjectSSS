@@ -1,15 +1,22 @@
 package kr.or.initspring.dto.oprequest;
 
+/*
+ * @Class : OpRequestPeriodDTO
+ * @Date : 2016.11.27
+ * @Author : 성홍모
+ * @Desc : 신청과목에 따른 과목, 코드정보를 출력하기 위한 DTO
+*/
+
 public class OpRequsetCheckDTO {
 	
-	private String subject_code; 
-	private int success_check;
-	private String professor_code;
-	private String subject_name;
-	private int subject_type;
-	private int grade_limit;
-	private String code_name;
-	private String required_choice;
+	private String subject_code; 		//과목코드
+	private int success_check;			//승인 여부
+	private String professor_code;		//교수코드
+	private String subject_name;		//과목 이름
+	private int subject_type;			//과목 유형
+	private int grade_limit;			//수강 대상
+	private String code_name;			//코드 이름
+	private String required_choice;		//필수 or 선택
 	
 	public String getSubject_code() {
 		return subject_code;

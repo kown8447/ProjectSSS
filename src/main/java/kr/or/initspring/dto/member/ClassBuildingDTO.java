@@ -1,5 +1,12 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : ClassBuildingDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 강의실 정보와 강의실에 따른 건물 정보를 출력하기 위한 DTO
+*/
+
 public class ClassBuildingDTO {
 	
 	private String classroom_code;

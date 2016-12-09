@@ -1,11 +1,18 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : DepartmentLeaderDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 학과장의 정보를 출력하기위해 교수정보, 단대정보, 학과 정보를 얻기 위한 DTO
+*/
+
 public class DepartmentLeaderDTO {
-	private String professor_code;
-	private String member_name;
-	private String department_code;
-	private String department_name;
-	private String college_name;
+	private String professor_code;		//교수 코드
+	private String member_name;			//회원 이름
+	private String department_code;		//학과 코드
+	private String department_name;		//학과 이름
+	private String college_name;		//단대 이름
 
 	public String getProfessor_code() {
 		return professor_code;

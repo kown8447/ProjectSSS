@@ -1,13 +1,20 @@
 package kr.or.initspring.dto.oprequest;
 
+/*
+ * @Class : OpClassRoomDTO
+ * @Date : 2016.11.27
+ * @Author : 성홍모
+ * @Desc : 강의실 정보와 강의실에 따른 건물 정보를 출력하기 위한 DTO
+*/
+
 public class OpClassRoomDTO {
 	
-	private String building_code;	//건물코드
-	private String building_name;	//건물명
-	private String classroom_code;
-	private String classroom_name;
-	private int seat;
-	private int classroom_type;
+	private String building_code;		//건물코드
+	private String building_name;		//건물명
+	private String classroom_code;		//강의실 코드
+	private String classroom_name;		//강의실 이름
+	private int seat;					//정원
+	private int classroom_type;			//강의실 형태
 	public String getBuilding_code() {
 		return building_code;
 	}

@@ -1,12 +1,19 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : ProfessorCodeRegDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 교수코드 등록과 교수 전공등록을 위한 DTO
+*/
+
 public class ProfessorCodeRegDTO {
 	
-	private String code;
-	private int code_type;
-	private String code_name;
-	private String code_birth;
-	private String department_code;
+	private String code;					//코드
+	private int code_type;					//구분
+	private String code_name;				//이름
+	private String code_birth;				//생년월일
+	private String department_code;			//학과 코드
 	
 	public String getCode() {
 		return code;

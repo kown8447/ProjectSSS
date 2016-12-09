@@ -1,5 +1,12 @@
 package kr.or.initspring.dto.oprequest;
 
+/*
+ * @Class : OpRequestDetailDTO
+ * @Date : 2016.11.27
+ * @Author : 성홍모
+ * @Desc : 신청과목에 따른 과목 정보를 출력하기 위한 DTO
+*/
+
 public class OpRequestDetailDTO {
 	
 	private String subject_code;	// 과목코드
@@ -9,8 +16,8 @@ public class OpRequestDetailDTO {
 	private int subject_seats; 		// 과목 정원
 	private String subject_name;	// 과목명
 	private String subject_Filesrc;	// 첨부파일명
-	private int subject_state; // 과목 상태
-	private int success_check;	//관리자 개설 승인_거부 상태
+	private int subject_state; 		// 과목 상태
+	private int success_check;		//관리자 개설 승인_거부 상태
 	
 	
 	public int getSuccess_check() {

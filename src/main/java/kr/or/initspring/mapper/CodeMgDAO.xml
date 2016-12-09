@@ -251,9 +251,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		register_type, tuition, register_state) values(#{student_code},
 		#{semester_code}, #{register_type}, #{tuition}, #{register_state})
 	</insert>
-
-
-
 	<select id="getMaxBuildingCode" resultType="String">
 		SELECT
 		nvl(max(building_code),'SJ_0') FROM building s ORDER BY
@@ -332,9 +329,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="kr.or.initspring.dto.commons.CodeMgDTO">
 		SELECT * FROM CODE_MG where CODE_TYPE = #{param1}
 	</select>
-
-
-
 	<delete id="deleteTimetalbe">
 		delete from timetable
 	</delete>
@@ -359,8 +353,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteEnrollment">
 		delete from enrollment
 	</delete>
-
-
 	<select id="classbuilding" resultType="kr.or.initspring.dto.member.ClassBuildingDTO">
 		SELECT * FROM CLASSROOM cl
 		join building bd on cl.building_code = bd.BUILDING_CODE order by classroom_Code
@@ -373,18 +365,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM OFFICE o
 		join BUILDING bd on o.BUILDING_CODE = bd.BUILDING_CODE
 	</select>
-
 	<select id="getRegister" resultType="kr.or.initspring.dto.commons.RegisterDTO">
 		select * from register where
 		register_type=0 and semester_code = (select max(semester_code) from
 		semester)
 	</select>
-
 	<select id="getStState" resultType="kr.or.initspring.dto.commons.StStateDTO">
 		select * from st_state where
 		student_code = #{student_code}
 	</select>
-
 	<select id="getGetCreditBystudentCode" resultType="int">
 		select
       nvl(sum(s.subject_credit),0) as get_credit
@@ -394,7 +383,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       r.semester_code = (select
       max(semester_code) from semester)
 	</select>
-
 	<select id="getCurrentCreditByStudentCode" resultType="int">
 		select
 		nvl(sum(s.subject_credit),0) as subject_credit
@@ -403,13 +391,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		t.student_code=#{student_code}
 	</select>
-
 	<insert id="insertIntoSmstate" parameterType="kr.or.initspring.dto.commons.SmStateDTO">
 		insert into
 		sm_state
 		values(#{student_code},#{semester_code},#{student_grade},#{student_semester},#{get_credit},#{request_credit})
 	</insert>
-
 	<select id="getTotalCreditByStudentCode" resultType="int">
 		select
 		nvl(sum(s.subject_credit),0)
@@ -419,18 +405,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		record_level != 'F' and retake_check
 		= 0
 	</select>
-
 	<update id="updateStstate" parameterType="kr.or.initspring.dto.commons.StStateDTO">
 		update st_state set
 		grade=#{grade}, personal_semester=#{personal_semester},
 		total_credit=#{total_credit}
 		where student_code=#{student_code}
 	</update>
-
 	<insert id="insertIntoStState">
 		insert into ST_STATE VALUES(#{student_code},1,1,0)
 	</insert>
-
 	<select id="getProfessorListByDepartmentCode" resultType="kr.or.initspring.dto.member.ProfessorCodeRegDTO">
 		select
 		pf.professor_code as code, m.member_name as code_name from pf_major pf
@@ -440,7 +423,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pf.DEPARTMENT_CODE =
 		#{department_code}
 	</select>
-
 	<update id="departmentLeaderReset">
 		UPDATE PF_MAJOR set professor_level =0 where
 		DEPARTMENT_CODE =#{param1}
@@ -460,7 +442,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p.MEMBER_ID=m.MEMBER_ID join COLLEGE c on d.COLLEGE_CODE=
 		c.COLLEGE_CODE where pm.professor_level=1
 	</select>
-
 	<delete id="deletePlan">
 		delete from plan
 	</delete>
@@ -510,7 +491,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update OFFICE set OFFICE_POSSIBLE = 0 where
 		OFFICE_CODE = #{param1}
 	</update>
-	
 	<select id="checkStudentCode" resultType="int">
 		select count(*) from student where student_code=#{student_code}
 	</select>

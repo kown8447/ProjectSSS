@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : oprequestlist.jsp
+   @Author : 성홍모
+   @Data : 2016.11.22
+   @Desc : 개설신청과목 목록보기 view 
+-->       
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <div class="container" style="width:65%">

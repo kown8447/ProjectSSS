@@ -40,18 +40,12 @@ import kr.or.initspring.dto.member.StudentCodeRegDTO;
 public interface CodeMgDAO {
 	
 	public int insertCode(CodeMgDTO code);
-	/*public int insertStudentCode(String code, int code_type, String code_name, String code_birth);*/
 	public int insertStudentCode(StudentCodeRegDTO student);
-	/*public int insertstudentmj(String code, String department_code, int mj_type);*/
 	public int insertProfessorCode(ProfessorCodeRegDTO professor);
-	
 	public int insertstudentmj(StudentCodeRegDTO student);
 	public int insertpfmajor(ProfessorCodeRegDTO professor);
-	
 	public int insertProfessorMajor(PfMajorDTO pfmajor);
-	
 	public int insertAdmin(CodeMgDTO admin);
-	
 	public List<CodeMgDTO> codelist();
 	public CodeMgDTO codeDetail(String code);
 	public int editCode(String code, int code_type, String code_name, Date code_birth);
@@ -113,7 +107,6 @@ public interface CodeMgDAO {
 	public List<CollegeInfoDTO> collegeinfolist();
 	public int updateofficepossible(String office_code);
 	
-	
 	//최대 코드번호 가져오기
 	public String getMaxBuildingCode();	
 	public String getMaxClassroomCode();
@@ -147,8 +140,7 @@ public interface CodeMgDAO {
 	public Integer updateStstate(StStateDTO dto);	//현재 학적 상태 학년, 이수학점, 개인 학기 업데이트 
 	
 	public Integer insertIntoStState(String student_code);	//학생의 최초 현재 학적 상태 입력
-	public List<ProfessorCodeRegDTO> getProfessorListByDepartmentCode(String department_code);	//학과 코드로 교수 리스트 가져오기
-	
+	public List<ProfessorCodeRegDTO> getProfessorListByDepartmentCode(String department_code);	//학과 코드로 교수 리스트 가져오기\
 	public int departmentLeaderReset(String department_code)throws Exception;
 	public int departmentLeaderSet(DepartmentLeaderDTO leader)throws Exception;
 	public List<DepartmentLeaderDTO> getDepartmentLeaderList();
@@ -158,6 +150,5 @@ public interface CodeMgDAO {
 	public ArrayList<ClassBuildingDTO> classroomBuildinSelect(String buildingCode);
 	public List<CodeMgDTO> typeofcodelistSearch(int code_type, String keyword, String searchType);
 	public int officepossibleChange(String before_office_code);
-	
 	public Integer checkStudentCode(String student_code);	//입력받은 학번이 유효한지 확인
 }

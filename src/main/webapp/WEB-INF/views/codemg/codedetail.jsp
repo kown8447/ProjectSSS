@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 
+   @Project : InitSpring
+   @File name : codedetail.jsp
+   @Author : 성홍모
+   @Data : 2016.11.09
+   @Desc :  c.code_type==0/학생
+   			c.code_type==1/교수
+   			c.code_type==2/관리자
+   			일시에 보여주는 코드 상세보기 view
+-->    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class = "row">

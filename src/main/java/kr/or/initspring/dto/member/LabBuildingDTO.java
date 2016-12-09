@@ -1,13 +1,20 @@
 package kr.or.initspring.dto.member;
 
+/*
+ * @Class : LabBuildingDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 연구실에 따른 건물 정보를 얻기 위한 DTO
+*/
+
 public class LabBuildingDTO {
 
-	private String building_name;
-	private String building_code;
-	private String lab_code;
-	private String lab_name;
-	private String lab_phone;
-	private int lab_possible;
+	private String building_name;		//건물 이름
+	private String building_code;		//건물 코드
+	private String lab_code;			//연구실 코드
+	private String lab_name;			//연구실 이름
+	private String lab_phone;			//연구실 전화번호
+	private int lab_possible;			//연구실 사용가능 여부
 	public String getBuilding_name() {
 		return building_name;
 	}

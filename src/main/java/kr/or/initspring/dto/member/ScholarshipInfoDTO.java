@@ -2,27 +2,34 @@ package kr.or.initspring.dto.member;
 
 import java.sql.Date;
 
+/*
+ * @Class : ScholarshipInfoDTO
+ * @Date : 2016.11.22
+ * @Author : 성홍모
+ * @Desc : 장학생에 따른 장학 제도, 학기, 코드 정보를 얻기 위한 DTO
+*/
+
 public class ScholarshipInfoDTO {
 	
-	private String scholarship_code;	//장학수혜코드
-	private String student_code;		//student_Code
-	private String sys_code;			//장학코드
-	private String semester_code;		//학기코드
-	private int scholarship_rcordavg;	//평점
-	private Date scholarship_payday;	//지급일
-	private String semester_name;//학기이름
-	private Date semester_start; //학기시작일
-	private Date semester_end; //학기 종료일 
-	private String code;
-	private int code_type;
-	private String code_name;
-	private Date code_birth;
-	private String scholaship_name;//장학명
-	private String scholaship_standard; //선발기준
-	private String scholaship_member; //수혜인원
-	private String scholaship_amount; //장학금액
-	private String scholaship_note; //비고
-	private int scholaship_use; //시행
+	private String scholarship_code;			//장학수혜코드
+	private String student_code;				//student_Code
+	private String sys_code;					//장학코드
+	private String semester_code;				//학기코드
+	private int scholarship_rcordavg;			//평점
+	private Date scholarship_payday;			//지급일
+	private String semester_name;				//학기이름
+	private Date semester_start; 				//학기시작일
+	private Date semester_end; 					//학기 종료일 
+	private String code;						//코드
+	private int code_type;						//구분
+	private String code_name;					//이름
+	private Date code_birth;					//생년월일
+	private String scholaship_name;				//장학명
+	private String scholaship_standard; 		//선발기준
+	private String scholaship_member; 			//수혜인원
+	private String scholaship_amount; 			//장학금액
+	private String scholaship_note; 			//비고
+	private int scholaship_use; 				//시행
 	public String getScholarship_code() {
 		return scholarship_code;
 	}

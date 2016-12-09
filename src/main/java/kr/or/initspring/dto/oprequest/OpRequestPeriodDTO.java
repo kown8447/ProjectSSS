@@ -1,5 +1,12 @@
 package kr.or.initspring.dto.oprequest;
 
+/*
+ * @Class : OpRequestPeriodDTO
+ * @Date : 2016.11.27
+ * @Author : 성홍모
+ * @Desc : 신청과목시간표에 따른 교시 정보를 출력하기 위한 DTO
+*/
+
 public class OpRequestPeriodDTO {
 	
 	private String classroom_code; 	//강의실코드
