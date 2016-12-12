@@ -35,13 +35,20 @@
            </div>
            
            <div class="form-group">
-         		<label class="col-sm-3 control-label col-sm-offset-1">장학코드</label>
+         		<label class="col-sm-3 control-label col-sm-offset-1">장학제도</label>
             	<div class="col-sm-6">
                		<select id="sys_code" name="sys_code" class="form-control">
 							<c:forEach items="${scsystem}" var="sclsit">
-							<option value="${sclsit.sys_code }">${sclsit.scholaship_name }</option>
+								<c:choose>
+									<c:when test="${sclsit.sys_code==sl.sys_code }">
+										<option selected="selected" value="${sclsit.sys_code }">${sclsit.scholaship_name }</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${sclsit.sys_code }">${sclsit.scholaship_name }</option>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
-						</select>
+					</select>
             	</div>
            </div>
            

@@ -770,6 +770,7 @@ public class CodeService {
 					college.setCollege_description(college_description);
 
 					codedao.insertCollege(college);
+					codedao.updateofficepossible(office_code);
 				}
 			} catch (Exception e) {
 				result = false;
@@ -828,6 +829,7 @@ public class CodeService {
 					department.setDouble_possible(double_possible);
 
 					codedao.insertDepartment(department);
+					codedao.updateofficepossible(office_code);
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -1504,10 +1506,16 @@ public class CodeService {
 	@Transactional(rollbackFor = { Exception.class, NullPointerException.class, SQLException.class,
 			RuntimeException.class })
 	public int updateDepartment(DepartmentDTO department, String before_office_code) {
-
 		CodeMgDAO dao = sqlsession.getMapper(CodeMgDAO.class);
-		dao.officepossibleChange(before_office_code);
-		dao.updateofficepossible(department.getOffice_code());
+		
+		try {
+			if(department.getOffice_code() != before_office_code){
+				dao.officepossibleChange(before_office_code);
+				dao.updateofficepossible(department.getOffice_code());
+			}
+		} catch (Exception e) {
+			
+		}
 		int result = dao.updateDepartment(department);
 
 		return result;

@@ -84,7 +84,7 @@
       <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
-            <h5 class="modal-title">학부 일괄 등록</h5>
+            <h5 class="modal-title">학과 일괄 등록</h5>
          </div>
          <div class="modal-body">
             <form id="depexcelForm" action="depExcelUpload.htm">

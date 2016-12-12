@@ -15,6 +15,7 @@
 <h4>▶&nbsp;학과 상세정보 </h4><br><br>   
 
 <form action="updateDepartment.htm" id="updateDepartment_form">
+	<input type="hidden" id="before_office_code" name="before_office_code" value="${dp.office_code}">
      <div class="form-horizontal">
         <div class="form-group">
          <label class="col-sm-2 control-label col-sm-offset-2">단대코드</label>
