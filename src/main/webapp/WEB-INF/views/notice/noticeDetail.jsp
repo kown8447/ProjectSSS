@@ -7,7 +7,7 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
@@ -17,7 +17,7 @@
    <form method="post">
       <table class="table table-bordered">
          <tr>
-            <th style="text-align: center;background-color: #F8F4EC;" >글번호</th>
+            <th style="text-align: center;background-color: #F8F4EC; width:20%">글번호</th>
             <td style="text-align: center; width:30%;">${notice.notice_index}</td>
             <th style="text-align: center;background-color: #F8F4EC;">작성일</th>
             <td>${notice.notice_date}</td>
@@ -46,13 +46,12 @@
       <br>
       
       <div class="col-md-offset-8">
-      	<se:authorize access="hasAnyRole('ROLE_ADMIN')">
-      		<a  href="noticeDel.htm?notice_index=${notice.notice_index}" class="btn btn-warning btn-sm" >삭제</a>
-      		<a  href="noticeEdit.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm" >수정</a>
-      		<a  href="replyWrite.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm">답글</a>
-      	</se:authorize>
-      		<a  href="notice.htm" class="btn btn-success btn-sm" >목록</a> 
+         <se:authorize access="hasAnyRole('ROLE_ADMIN')">
+            <a  href="noticeDel.htm?notice_index=${notice.notice_index}" class="btn btn-warning btn-sm" >삭제</a>
+            <a  href="noticeEdit.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm" >수정</a>
+            <a  href="replyWrite.htm?notice_index=${notice.notice_index}" class="btn btn-success btn-sm">답글</a>
+         </se:authorize>
+            <a  href="notice.htm" class="btn btn-success btn-sm" >목록</a> 
       </div>
    </form>
 </div>
-
