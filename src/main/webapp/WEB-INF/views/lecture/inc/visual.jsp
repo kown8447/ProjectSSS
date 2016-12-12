@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="nav-side-menu">
-    <div class="brand">게 시 판</div>
+    <div class="brand">교수 메뉴</div>
     <i class="toggle-btn" data-toggle="collapse" data-target="#menu-content">▼</i>
         <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out" align="center">

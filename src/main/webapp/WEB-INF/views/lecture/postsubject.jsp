@@ -104,7 +104,7 @@
 						<td id="PR_TUE_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_TUE_${idx.count}")></td>
 						<td id="PR_WEN_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_WEN_${idx.count}")></td>
 						<td id="PR_THU_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_THU_${idx.count}")></td>
-						<td id="PR_FRI_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${i}")></td>
+						<td id="PR_FRI_${idx.count}" height="auto" style="word-break: break-all;" class="cd_delete" onclick=getvalue("PR_FRI_${idx.count}")></td>
 					</tr>
 				</c:forEach>
 			
