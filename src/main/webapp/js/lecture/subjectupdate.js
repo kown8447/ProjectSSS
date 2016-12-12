@@ -16,9 +16,9 @@ $(function(){
 			alert("학년은 4학년까지 등록가능합니다");
 			$("#grade_limit").focus();
 			return false;
-		}else if($("#grade_limit").val < 1){
-			alert("학년은 1학년 이상 등록가능합니다.");
-			$("#grade_limit").val(1);
+		}else if($("#grade_limit").val < 0){
+			alert("학년은 0부터 등록이 가능합니다.");
+			$("#grade_limit").val(0);
 			return false;
 		}
 		
