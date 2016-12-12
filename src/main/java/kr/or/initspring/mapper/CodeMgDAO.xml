@@ -219,13 +219,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from
 		department where department_code = #{param1}
 	</select>
-	<update id="updateDepartment">
+	<update id="updateDepartment" parameterType="kr.or.initspring.dto.commons.DepartmentDTO">
 		UPDATE DEPARTMENT set COLLEGE_CODE = #{college_code},
 		office_Code = #{office_code}, department_Name = #{department_name},
 		department_Description = #{department_description}, department_Seat =
 		${department_seat}, graduation_Credit = ${graduation_credit},
-		double_Possible = ${double_possible}, department_Exist =
-		${department_exist} where DEPARTMENT_CODE = #{department_code}
+		double_Possible = ${double_possible}, department_Exist =${department_exist} 
+		where DEPARTMENT_CODE = #{department_code}
 	</update>
 	<select id="mjRecordList" resultType="kr.or.initspring.dto.commons.MjRecordDTO">
 		SELECT * FROM MJ_RECORD
